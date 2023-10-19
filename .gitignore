@@ -1,0 +1,18 @@
+.DS_Store
+node_modules
+.wireit
+.env
+.env.*
+!.env.example
+.eslintcache
+dist
+**/*.tgz
+types
+*.tsbuildinfo
+
+# Sites
+.svelte-kit
+build
+package
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*

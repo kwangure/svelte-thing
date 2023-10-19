@@ -1,0 +1,77 @@
+{
+	"name": "svelte-thing-monorepo",
+	"private": true,
+	"scripts": {
+		"build": "wireit",
+		"check": "wireit",
+		"dev": "wireit",
+		"format": "wireit",
+		"lint": "wireit",
+		"package": "wireit",
+		"pre-commit": "wireit",
+		"prepare": "husky install",
+		"release": "wireit",
+		"version": "wireit"
+	},
+	"wireit": {
+		"build": {
+			"dependencies": [
+				"./packages/components:build"
+			]
+		},
+		"check": {
+			"dependencies": [
+				"./packages/components:check"
+			]
+		},
+		"dev": {
+			"dependencies": [
+				"./packages/components:dev"
+			]
+		},
+		"format": {
+			"dependencies": [
+				"./packages/components:format"
+			]
+		},
+		"lint": {
+			"dependencies": [
+				"./packages/components:lint"
+			]
+		},
+		"package": {
+			"dependencies": [
+				"./packages/components:package"
+			]
+		},
+		"pre-commit": {
+			"dependencies": [
+				"./packages/components:pre-commit"
+			]
+		},
+		"release": {
+			"command": "npx changeset publish",
+			"dependencies": [
+				"./packages/components:release"
+			]
+		},
+		"version": {
+			"#comment": [
+				"Changesets doesn't bump package-lock.json so we run `pnpm install`",
+				"to do it for us"
+			],
+			"command": "changeset version && pnpm install",
+			"files": [
+				"./changeset/*.md",
+				"./packages/**/package.json",
+				"./packages/**/CHANGELOG.md"
+			]
+		}
+	},
+	"devDependencies": {
+		"@changesets/cli": "^2.26.2",
+		"husky": "^8.0.3",
+		"wireit": "^0.10.0"
+	},
+	"type": "module"
+}
