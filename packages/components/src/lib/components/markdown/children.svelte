@@ -1,10 +1,14 @@
 <script>
 	import Code from './code.svelte';
+	import Emphasis from './emphasis.svelte';
 	import Heading from './heading.svelte';
+	import Html from './html.svelte';
+	import Image from './image.svelte';
 	import InlineCode from './inline-code.svelte';
 	import List from './list.svelte';
 	import ListItem from './list-item.svelte';
 	import Paragraph from './paragraph.svelte';
+	import Strong from './strong.svelte';
 	import ThematicBreak from './thematic-break.svelte';
 	import Text from './text.svelte';
 
@@ -27,8 +31,14 @@
 {#each node.children as child}
 	{#if child.type === 'code'}
 		<Code node={child} />
+	{:else if child.type === 'emphasis'}
+		<Emphasis node={child} />
 	{:else if child.type === 'heading'}
 		<Heading node={child} />
+	{:else if child.type === 'html'}
+		<Html node={child} />
+	{:else if child.type === 'image'}
+		<Image node={child} />
 	{:else if child.type === 'inlineCode'}
 		<InlineCode node={child} />
 	{:else if child.type === 'list'}
@@ -37,6 +47,8 @@
 		<ListItem node={child} />
 	{:else if child.type === 'paragraph'}
 		<Paragraph node={child} />
+	{:else if child.type === 'strong'}
+		<Strong node={child} />
 	{:else if child.type === 'text'}
 		<Text node={child} />
 	{:else if child.type === 'thematicBreak'}
