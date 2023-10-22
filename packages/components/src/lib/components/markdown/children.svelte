@@ -1,4 +1,5 @@
 <script>
+	import Blockquote from './blockquote.svelte';
 	import Code from './code.svelte';
 	import Emphasis from './emphasis.svelte';
 	import Heading from './heading.svelte';
@@ -29,7 +30,9 @@
 </script>
 
 {#each node.children as child}
-	{#if child.type === 'code'}
+	{#if child.type === 'blockquote'}
+		<Blockquote node={child} />
+	{:else if child.type === 'code'}
 		<Code node={child} />
 	{:else if child.type === 'emphasis'}
 		<Emphasis node={child} />
