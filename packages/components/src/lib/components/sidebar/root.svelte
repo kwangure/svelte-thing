@@ -9,7 +9,7 @@
 </script>
 
 <aside
-	class="sticky top-0 z-40 col-start-[page-start] col-end-[page-end] row-start-1 row-end-3 max-h-screen overflow-y-auto lg:top-[calc(var(--svui-navbar-height)+var(--svui-navbar-y-gap))] lg:col-start-[nav-start] lg:col-end-[content-start] lg:row-start-2 lg:block lg:self-start"
+	class="sticky top-0 z-40 col-start-[page-start] col-end-[page-end] row-start-1 row-end-3 max-h-screen overflow-y-auto lg:top-[calc(var(--st-navbar-height)+var(--st-navbar-y-gap))] lg:col-start-[nav-start] lg:col-end-[content-start] lg:row-start-2 lg:block lg:self-start"
 	class:hidden={$visibility === 'hidden'}
 	class:flex={$visibility === 'shown'}
 >
