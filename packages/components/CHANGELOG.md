@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.2
+
+### Patch Changes
+
+- 3337822: Make content-width and navbar button configurable
+
 ## 0.0.1
 
 ### Patch Changes
