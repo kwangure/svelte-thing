@@ -1,6 +1,8 @@
 <script>
 	import Icon from './simple.svelte';
 
+	/** @type {(node: HTMLElement) => any} */
+	export let action = () => {};
 	/** @type {string} */
 	export let href;
 	/** @type {string} */
@@ -15,7 +17,7 @@
 	$: rel = target === '_blank' ? 'noopener' : undefined;
 </script>
 
-<a {...props} class="p-2 block rounded hover:bg-neutral-200 dark:hover:bg-neutral-700" {href} title={label} {target} {rel}>
+<a {...props} use:action class="p-2 block rounded hover:bg-neutral-200 dark:hover:bg-neutral-700" {href} title={label} {target} {rel}>
 	<Icon path={path} />
 	<span class="sr-only">{label}</span>
 </a>
