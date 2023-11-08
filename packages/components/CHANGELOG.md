@@ -1,5 +1,12 @@
 # @svelte-thing/components
 
+## 0.0.3
+
+### Patch Changes
+
+- dba96ff: Implement markdown link
+- dba96ff: Add props and Svelte actions to icons
+
 ## 0.0.2
 
 ### Patch Changes
