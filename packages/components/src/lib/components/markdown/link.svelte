@@ -4,6 +4,6 @@
 	export let node;
 </script>
 
-<a href={node.url} title={node.title}>
+<a class="underline underline-offset-2 hover:decoration-2 text-blue-500" href={node.url} title={node.title}>
 	<Children {node} />
 </a>
