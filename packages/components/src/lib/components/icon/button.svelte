@@ -6,7 +6,7 @@
 	/** @type {string} */
 	export let label;
 	/** @type {any} */
-	export let props;
+	export let props = undefined;
 	/** @type {string} */
 	export let path;
 </script>
