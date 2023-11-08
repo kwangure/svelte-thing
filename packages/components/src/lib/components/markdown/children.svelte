@@ -6,6 +6,7 @@
 	import Html from './html.svelte';
 	import Image from './image.svelte';
 	import InlineCode from './inline-code.svelte';
+	import Link from './link.svelte';
 	import List from './list.svelte';
 	import ListItem from './list-item.svelte';
 	import Paragraph from './paragraph.svelte';
@@ -46,6 +47,8 @@
 		<InlineCode node={child} />
 	{:else if child.type === 'list'}
 		<List node={child} />
+	{:else if child.type === 'link'}
+		<Link node={child} />
 	{:else if child.type === 'listItem'}
 		<ListItem node={child} />
 	{:else if child.type === 'paragraph'}
