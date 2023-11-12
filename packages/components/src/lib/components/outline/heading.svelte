@@ -1,5 +1,6 @@
 <script>
-	import { Sidebar } from '../../index.js';
+	import { Item } from '../sidebar/index.js';
+	import Link from './link.svelte';
 	import List from './list.svelte';
 
 	/** @type {import('./types.js').TocEntry} */
@@ -8,15 +9,11 @@
 	export let activeTarget;
 </script>
 
-<Sidebar.Item>
+<Item>
 	<div class:pl-5={self.depth == 3}>
-		<Sidebar.Link
-			secondary
-			href={self.hash}
-			ariaCurrent={self.id === activeTarget}
-		>
+		<Link href={self.hash} ariaCurrent={self.id === activeTarget}>
 			{self.value}
-		</Sidebar.Link>
+		</Link>
 	</div>
 	<List {activeTarget} toc={self.children} />
-</Sidebar.Item>
+</Item>

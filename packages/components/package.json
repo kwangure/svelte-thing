@@ -138,6 +138,11 @@
 			"svelte": "./src/lib/components/navbar/index.js",
 			"default": "./src/lib/components/navbar/index.js"
 		},
+		"./outline": {
+			"types": "./dist/components/outline/index.d.ts",
+			"svelte": "./src/lib/components/outline/index.js",
+			"default": "./src/lib/components/outline/index.js"
+		},
 		"./shell": {
 			"types": "./dist/components/shell/index.d.ts",
 			"svelte": "./src/lib/components/shell/index.js",

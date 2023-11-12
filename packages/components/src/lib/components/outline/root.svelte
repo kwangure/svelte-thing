@@ -1,7 +1,7 @@
 <script>
 	import { afterNavigate } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import { isPartiallyHidden } from '../../../dom/dom.js';
+	import { isPartiallyHidden } from '../../dom/dom.js';
 	import List from './list.svelte';
 	import { page } from '$app/stores';
 

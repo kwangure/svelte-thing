@@ -14,7 +14,7 @@
 <a
 	{...props}
 	use:action
-	class="flex items-center gap-3 px-2 sm:px-3 py-1 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700"
+	class="flex items-center gap-3 px-2 py-1 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700"
 	href={href}
 	rel={rel}
 	target={target}>
