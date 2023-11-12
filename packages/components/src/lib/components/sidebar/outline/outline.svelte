@@ -31,13 +31,29 @@
 			if (activeTargetFound) return true;
 		}
 
-		// Assume the last heading was scrolled up and out of the viewport
-		const lastChild = tree.at(-1);
-		const deepestLeaf = lastChild?.children.at(-1) || lastChild;
-		if (deepestLeaf) {
-			activeTarget = deepestLeaf.id;
-			return true;
+		let closestDistance = Infinity;
+		/**
+		 * @param {import("./types.js").TocEntry[]} nodes
+		 */
+		function findClosestAboveViewport(nodes) {
+			for (const node of nodes) {
+				const element = document.getElementById(node.id);
+				if (element) {
+					const bounding = element.getBoundingClientRect();
+					// Check if the element is above the viewport and closer to the top than the previous one
+					if (bounding.top < 0 && Math.abs(bounding.top) < closestDistance) {
+						closestDistance = Math.abs(bounding.top);
+						activeTarget = node.id;
+					}
+				}
+
+				findClosestAboveViewport(node.children);
+			}
 		}
+
+		findClosestAboveViewport(tree);
+
+		return true;
 	}
 
 	afterNavigate(() => updateActiveSlug(toc));
