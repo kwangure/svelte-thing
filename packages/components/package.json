@@ -133,6 +133,11 @@
 			"svelte": "./src/lib/components/markdown/index.js",
 			"default": "./src/lib/components/markdown/index.js"
 		},
+		"./navbar": {
+			"types": "./dist/components/navbar/index.d.ts",
+			"svelte": "./src/lib/components/navbar/index.js",
+			"default": "./src/lib/components/navbar/index.js"
+		},
 		"./shell": {
 			"types": "./dist/components/shell/index.d.ts",
 			"svelte": "./src/lib/components/shell/index.js",
