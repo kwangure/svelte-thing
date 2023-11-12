@@ -1,5 +1,12 @@
 # @svelte-thing/components
 
+## 0.0.4
+
+### Patch Changes
+
+- bdc99f4: Add individual components to package `exports`.
+- bdc99f4: Center button and link icon content
+
 ## 0.0.3
 
 ### Patch Changes
