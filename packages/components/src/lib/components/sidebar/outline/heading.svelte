@@ -9,7 +9,7 @@
 </script>
 
 <Sidebar.Item>
-	<div class:pl-5={self.depth == 2} class:pl-10={self.depth == 3}>
+	<div class:pl-5={self.depth == 3}>
 		<Sidebar.Link
 			secondary
 			href={self.hash}

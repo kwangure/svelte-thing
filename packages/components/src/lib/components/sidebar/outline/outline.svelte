@@ -71,4 +71,11 @@
 	on:hashchange={() => preferHashchangeTarget($page.url)}
 />
 
-<List {activeTarget} {toc} />
+<aside class="sticky top-[calc(var(--st-navbar-height)+var(--st-navbar-y-gap))] self-start col-start-[outline-start] col-end-[outline-end]">
+	<nav class='hidden xl:flex flex-col w-72'>
+		<h5 class="whitespace-nowrap pb-1 pt-2 pl-5 text-xs font-semibold uppercase text-neutral-900 dark:text-neutral-400">
+			On this page
+		</h5>
+		<List {activeTarget} {toc} />
+	</nav>
+</aside>
