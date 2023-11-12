@@ -1,7 +1,7 @@
 <script>
 	import { afterNavigate } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import { isPartiallyHidden } from '../../../dom/dom.js';
+	import { isPartiallyHidden } from '../../dom/dom.js';
 	import List from './list.svelte';
 	import { page } from '$app/stores';
 
@@ -31,13 +31,29 @@
 			if (activeTargetFound) return true;
 		}
 
-		// Assume the last heading was scrolled up and out of the viewport
-		const lastChild = tree.at(-1);
-		const deepestLeaf = lastChild?.children.at(-1) || lastChild;
-		if (deepestLeaf) {
-			activeTarget = deepestLeaf.id;
-			return true;
+		let closestDistance = Infinity;
+		/**
+		 * @param {import("./types.js").TocEntry[]} nodes
+		 */
+		function findClosestAboveViewport(nodes) {
+			for (const node of nodes) {
+				const element = document.getElementById(node.id);
+				if (element) {
+					const bounding = element.getBoundingClientRect();
+					// Check if the element is above the viewport and closer to the top than the previous one
+					if (bounding.top < 0 && Math.abs(bounding.top) < closestDistance) {
+						closestDistance = Math.abs(bounding.top);
+						activeTarget = node.id;
+					}
+				}
+
+				findClosestAboveViewport(node.children);
+			}
 		}
+
+		findClosestAboveViewport(tree);
+
+		return true;
 	}
 
 	afterNavigate(() => updateActiveSlug(toc));
@@ -71,4 +87,11 @@
 	on:hashchange={() => preferHashchangeTarget($page.url)}
 />
 
-<List {activeTarget} {toc} />
+<aside class="sticky top-[calc(var(--st-navbar-height)+var(--st-navbar-y-gap))] self-start col-start-[outline-start] col-end-[outline-end]">
+	<nav class='hidden xl:flex flex-col w-72'>
+		<h5 class="whitespace-nowrap pb-1 pt-2 pl-5 text-xs font-semibold uppercase text-neutral-900 dark:text-neutral-400">
+			On this page
+		</h5>
+		<List {activeTarget} {toc} />
+	</nav>
+</aside>

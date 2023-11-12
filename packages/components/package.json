@@ -122,6 +122,36 @@
 		"./dom": {
 			"types": "./dist/dom/dom.d.ts",
 			"default": "./src/lib/dom/dom.js"
+		},
+		"./icon": {
+			"types": "./dist/components/icon/index.d.ts",
+			"svelte": "./src/lib/components/icon/index.js",
+			"default": "./src/lib/components/icon/index.js"
+		},
+		"./markdown": {
+			"types": "./dist/components/markdown/index.d.ts",
+			"svelte": "./src/lib/components/markdown/index.js",
+			"default": "./src/lib/components/markdown/index.js"
+		},
+		"./navbar": {
+			"types": "./dist/components/navbar/index.d.ts",
+			"svelte": "./src/lib/components/navbar/index.js",
+			"default": "./src/lib/components/navbar/index.js"
+		},
+		"./outline": {
+			"types": "./dist/components/outline/index.d.ts",
+			"svelte": "./src/lib/components/outline/index.js",
+			"default": "./src/lib/components/outline/index.js"
+		},
+		"./shell": {
+			"types": "./dist/components/shell/index.d.ts",
+			"svelte": "./src/lib/components/shell/index.js",
+			"default": "./src/lib/components/shell/index.js"
+		},
+		"./sidebar": {
+			"types": "./dist/components/sidebar/index.d.ts",
+			"svelte": "./src/lib/components/sidebar/index.js",
+			"default": "./src/lib/components/sidebar/index.js"
 		}
 	},
 	"files": [
