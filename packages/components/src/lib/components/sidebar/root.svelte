@@ -9,12 +9,12 @@
 </script>
 
 <aside
-	class="sticky top-0 z-40 col-start-[page-start] col-end-[page-end] row-start-1 row-end-3 max-h-screen overflow-y-auto lg:top-[calc(var(--st-navbar-height)+var(--st-navbar-y-gap))] lg:col-start-[nav-start] lg:col-end-[content-start] lg:row-start-2 lg:block lg:self-start"
+	class="sticky top-0 z-40 col-start-[page-start] col-end-[page-end] row-start-1 row-end-3 max-h-full overflow-y-auto lg:top-[calc(var(--st-navbar-height)+var(--st-navbar-y-gap))] lg:col-start-[nav-start] lg:col-end-[content-start] lg:row-start-2 lg:block lg:self-start"
 	class:hidden={$visibility === 'hidden'}
 	class:flex={$visibility === 'shown'}
 >
 	<nav
-		class="flex w-72 flex-col overflow-y-auto overscroll-contain bg-white px-2 dark:bg-neutral-800"
+		class="flex w-72 flex-col overflow-y-auto overscroll-contain bg-white px-2 dark:bg-neutral-800 mb-24"
 		use:panel={{ shouldTrapFocus: () => window.innerWidth < 1024 }}
 	>
 		<button
