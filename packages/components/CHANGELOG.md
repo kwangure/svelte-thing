@@ -1,5 +1,12 @@
 # @svelte-thing/components
 
+## 0.0.5
+
+### Patch Changes
+
+- 446f5a9: Add list item indentation
+- 446f5a9: Improve scrolling behaviour
+
 ## 0.0.4
 
 ### Patch Changes
