@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.6
+
+### Patch Changes
+
+- 54f5474: Scroll overflowing content in shell root
+
 ## 0.0.5
 
 ### Patch Changes
