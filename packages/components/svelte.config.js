@@ -14,6 +14,16 @@ const config = {
 			 */
 			lib: '/see-svelte-config',
 		},
+		typescript: {
+			config(config) {
+				config.extends = '../../../config/tsconfig.base.json';
+				config.compilerOptions.moduleResolution = 'bundler';
+				config.compilerOptions.noEmit = true;
+				delete config.compilerOptions.ignoreDeprecations;
+				delete config.compilerOptions.importsNotUsedAsValues;
+				delete config.compilerOptions.preserveValueImports;
+			},
+		},
 	},
 	preprocess: vitePreprocess(),
 };

@@ -7,9 +7,7 @@
 		"dev": "wireit",
 		"format": "wireit",
 		"lint": "wireit",
-		"package": "wireit",
 		"pre-commit": "wireit",
-		"prepare": "husky install",
 		"release": "wireit",
 		"version": "wireit"
 	},
@@ -30,19 +28,25 @@
 			]
 		},
 		"format": {
-			"dependencies": [
-				"./packages/components:format"
-			]
+			"command": "prettier . --write --cache --config ./config/prettier.config.mjs --ignore-path ./config/.prettierignore",
+			"files": [
+				"**/*.{css,html,js,json,md,ts,svelte}",
+				"!packages/*/dist/**",
+				"!packages/*/types/**",
+				"./config/prettier.config.mjs",
+				"./config/.prettierignore"
+			],
+			"output": []
 		},
 		"lint": {
-			"dependencies": [
-				"./packages/components:lint"
-			]
-		},
-		"package": {
-			"dependencies": [
-				"./packages/components:package"
-			]
+			"command": "eslint \"**/*.{js,svelte}\" --color --cache --fix",
+			"files": [
+				"**/*.{js,svelte}",
+				"!packages/*/dist/**",
+				"!packages/*/types/**",
+				"./config/eslint.config.js"
+			],
+			"output": []
 		},
 		"pre-commit": {
 			"dependencies": [
@@ -70,7 +74,8 @@
 	},
 	"devDependencies": {
 		"@changesets/cli": "^2.26.2",
-		"husky": "^8.0.3",
+		"eslint": "^8.55.0",
+		"prettier": "^3.1.0",
 		"wireit": "^0.10.0"
 	},
 	"type": "module"
