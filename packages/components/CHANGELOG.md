@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.7
+
+### Patch Changes
+
+- Upgrade to SvelteKit 2.0
+
 ## 0.0.6
 
 ### Patch Changes

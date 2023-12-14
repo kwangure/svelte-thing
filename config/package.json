@@ -1,4 +1,5 @@
 {
+	"name": "config",
 	"private": true,
 	"dependencies": {
 		"eslint-config-prettier": "^9.1.0",

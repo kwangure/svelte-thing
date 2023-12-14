@@ -54,7 +54,7 @@
 			]
 		},
 		"release": {
-			"command": "npx changeset publish",
+			"command": "changeset publish",
 			"dependencies": [
 				"./packages/components:release"
 			]
