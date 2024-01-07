@@ -19,11 +19,9 @@
 }
 .tok-bool,
 .tok-definition-keyword,
-.tok-operator-keyword {
-	color: #569cd6;
-}
+.tok-operator-keyword,
 .tok-atom {
-	color: #d69d85;
+	color: #569cd6;
 }
 .tok-variable-name {
 	color: #9cdcfe;
