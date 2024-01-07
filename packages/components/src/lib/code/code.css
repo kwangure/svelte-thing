@@ -1,8 +1,5 @@
-.tok-string {
-	color: #d69d85;
-}
-/* Literals with backticks */
-.tok-string2 {
+.tok-string,
+.tok-string2 /* Literals with backticks */ {
 	color: #d69d85;
 }
 .tok-property-name {
@@ -20,6 +17,7 @@
 .tok-keyword {
 	color: #c586c0;
 }
+.tok-bool,
 .tok-definition-keyword,
 .tok-operator-keyword {
 	color: #569cd6;
