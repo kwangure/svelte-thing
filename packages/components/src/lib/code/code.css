@@ -17,7 +17,7 @@
 .tok-keyword {
 	color: #c586c0;
 }
-.tok-bool,
+.tok-boolean,
 .tok-definition-keyword,
 .tok-operator-keyword,
 .tok-atom {
