@@ -9,7 +9,7 @@ const colors = tagHighlighter([
 	{ tag: tags.definitionKeyword, class: 'tok-definition-keyword' },
 	{ tag: tags.operatorKeyword, class: 'tok-operator-keyword' },
 	{ tag: tags.atom, class: 'tok-atom' },
-	{ tag: tags.bool, class: 'tok-bool' },
+	{ tag: tags.bool, class: 'tok-boolean' },
 	{ tag: tags.url, class: 'tok-url' },
 	{ tag: tags.labelName, class: 'tok-label-name' },
 	{ tag: tags.inserted, class: 'tok-inserted' },

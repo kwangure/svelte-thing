@@ -3,6 +3,8 @@
 	"version": "0.0.7",
 	"scripts": {
 		"build": "wireit",
+		"build:package": "wireit",
+		"build:site": "wireit",
 		"check": "wireit",
 		"dev": "vite dev",
 		"publint": "wireit",

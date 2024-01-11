@@ -37,8 +37,13 @@ function setLocalStorageItem(key, value) {
  */
 function toggleDarkClass(to) {
 	try {
-		const op = to === 'dark' ? 'add' : 'remove';
-		document.documentElement.classList[op]('dark');
+		if (to === 'dark') {
+			document.documentElement.classList.add('dark');
+			document.documentElement.classList.remove('light');
+		} else if (to == 'light') {
+			document.documentElement.classList.add('light');
+			document.documentElement.classList.remove('dark');
+		}
 	} catch (error) {
 		if (/** @type {any} */ (error).message.includes('document is not defined'))
 			return;
