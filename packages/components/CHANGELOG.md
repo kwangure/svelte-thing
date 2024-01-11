@@ -1,5 +1,12 @@
 # @svelte-thing/components
 
+## 0.0.8
+
+### Patch Changes
+
+- 5e9797c: Expose Lezer JS highlighters
+- 5e9797c: Add light mode support
+
 ## 0.0.7
 
 ### Patch Changes
