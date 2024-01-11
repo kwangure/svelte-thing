@@ -1,41 +1,61 @@
-.tok-string {
-	color: #d69d85;
+@media (prefers-color-scheme: light) {
+	:root {
+		--st-dark: ;
+		--st-light: initial;
+	}
 }
-/* Literals with backticks */
-.tok-string2 {
-	color: #d69d85;
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--st-light: ;
+		--st-dark: initial;
+	}
+}
+
+.light {
+	--st-dark: ;
+	--st-light: initial;
+}
+
+.dark {
+	--st-light: ;
+	--st-dark: initial;
+}
+
+.tok-string,
+.tok-string2 /* Literals with backticks */ {
+	color: var(--st-dark, #d69d85) var(--st-light, #312212);
 }
 .tok-property-name {
-	color: #9cdcfe;
+	color: var(--st-dark, #9cdcfe) var(--st-light, #037e0b);
 }
 .tok-comment {
-	color: #6a9955;
+	color: var(--st-dark, #6a9955) var(--st-light, #2f9d62);
 }
 .tok-classname {
-	color: #d7ba7d;
+	color: var(--st-dark, #d7ba7d) var(--st-light, #c79e09);
 }
 .tok-number {
-	color: #b5cea8;
+	color: var(--st-dark, #b5cea8) var(--st-light, #085ad6);
 }
 .tok-keyword {
-	color: #c586c0;
+	color: var(--st-dark, #c586c0) var(--st-light, #c123b4);
 }
+.tok-boolean,
 .tok-definition-keyword,
-.tok-operator-keyword {
-	color: #569cd6;
-}
+.tok-operator-keyword,
 .tok-atom {
-	color: #d69d85;
+	color: var(--st-dark, #569cd6) var(--st-light, #0021b3);
 }
 .tok-variable-name {
-	color: #9cdcfe;
+	color: var(--st-dark, #9cdcfe) var(--st-light, #037e0b);
 }
 .tok-variable-definition-name {
-	color: #4ec9b0;
+	color: var(--st-dark, #4ec9b0) var(--st-light, #cf222e);
 }
 .tok-function-name {
 	color: #dcdcaa;
 }
 .tok-type-name {
-	color: #569cd6;
+	color: var(--st-dark, #569cd6) var(--st-light, #0021b3);
 }

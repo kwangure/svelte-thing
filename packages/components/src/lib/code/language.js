@@ -11,7 +11,13 @@ import { parser as rustParser } from '@lezer/rust';
 import { svelteLanguage } from '@replit/codemirror-lang-svelte';
 
 /**
- * @typedef {typeof bash} Highlighter
+ * @typedef {(code: string, options?: {
+ *     from?: number;
+ *     to?: number;
+ * } | undefined) => {
+ *     color: string;
+ *     segment: string;
+ *  }[]} Highlighter
  */
 
 export const bash = highlight.bind(null, bashParser);
