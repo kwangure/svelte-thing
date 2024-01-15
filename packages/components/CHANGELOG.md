@@ -1,5 +1,12 @@
 # @svelte-thing/components
 
+## 0.0.9
+
+### Patch Changes
+
+- be6d22d: Hide sidebar toggle when sidebar is not on the page
+- be6d22d: Initialize darkmode in head
+
 ## 0.0.8
 
 ### Patch Changes
