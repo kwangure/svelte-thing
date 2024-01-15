@@ -12,7 +12,7 @@
 </script>
 
 <code
-	class="inline rounded border border-neutral-300 bg-neutral-100 px-1 py-0.5 text-sm text-neutral-200 dark:border-neutral-600 dark:bg-neutral-900 dark:text-neutral-200"
+	class="inline rounded border border-neutral-300 bg-neutral-100 px-1 py-0.5 text-sm dark:border-neutral-600 dark:bg-neutral-900"
 >
 	{#each segments as { color, segment }}
 		<span class={color}>{segment}</span>
