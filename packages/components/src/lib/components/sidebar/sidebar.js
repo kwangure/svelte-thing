@@ -5,10 +5,10 @@ import { writable } from 'svelte/store';
 export function createSidebar() {
 	/** @typedef {'hidden' | 'hiding' | 'shown' | 'showing'} Status */
 	const visibility = writable(/** @type {Status} */ ('hidden'));
-	const { set, subscribe } = visibility;
+	const shouldShowToggle = writable(false);
 
-	const setHidden = () => set('hidden');
-	const setShown = () => set('shown');
+	const setHidden = () => visibility.set('hidden');
+	const setShown = () => visibility.set('shown');
 
 	/**
 	 * @param {HTMLElement} node
@@ -69,7 +69,8 @@ export function createSidebar() {
 	return {
 		elements: { hide, show, panel: focustrap },
 		state: {
-			visibility: { subscribe },
+			shouldShowToggle,
+			visibility: { subscribe: visibility.subscribe },
 		},
 	};
 }
