@@ -143,7 +143,7 @@
 </script>
 
 <code
-	class="mb-2 mt-4 grid grid-cols-[1fr_max-content] overflow-auto whitespace-pre rounded border border-neutral-600 bg-neutral-100 py-4 pl-3 pr-5 text-sm leading-6 text-neutral-200 dark:border-neutral-600 dark:bg-neutral-900"
+	class="mb-2 mt-4 grid grid-cols-[1fr_max-content] overflow-auto whitespace-pre rounded border border-neutral-300 bg-neutral-100 py-4 pl-3 pr-5 text-sm leading-6 dark:border-neutral-600 dark:bg-neutral-900"
 	use:overflowFocusable
 	on:mouseleave={() => (hoverRange = undefined)}
 >

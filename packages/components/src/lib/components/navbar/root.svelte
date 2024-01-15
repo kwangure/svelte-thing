@@ -5,20 +5,21 @@
 
 	export let showOpen = true;
 
-	const { elements } = getSidebarContext();
+	const { elements, state } = getSidebarContext();
 	const { show } = elements;
+	const { shouldShowToggle } = state;
 </script>
 
 <nav
-	class="sticky top-0 z-40 col-start-[nav-start] col-end-[nav-end] row-start-1 gap-1 row-end-2 flex items-center bg-white dark:bg-neutral-800"
+	class="sticky top-0 z-40 col-start-[nav-start] col-end-[nav-end] row-start-1 row-end-2 flex items-center gap-1 bg-white dark:bg-neutral-800"
 >
-	{#if showOpen}
+	{#if showOpen && $shouldShowToggle}
 		<button
 			class="-ms-4 flex h-12 w-12 touch-manipulation select-none items-center justify-center rounded p-2 lg:hidden"
 			title="Open Menu"
 			aria-label="Open Menu"
 			use:show={{ focus: true }}
-			>
+		>
 			<Icon class="w-full" path={mdiMenu} />
 		</button>
 	{/if}

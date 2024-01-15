@@ -5,7 +5,9 @@
 
 	const { elements, state } = getSidebarContext();
 	const { hide, panel } = elements;
-	const { visibility } = state;
+	const { shouldShowToggle, visibility } = state;
+
+	shouldShowToggle.set(true);
 </script>
 
 <aside
@@ -14,7 +16,7 @@
 	class:flex={$visibility === 'shown'}
 >
 	<nav
-		class="flex w-72 flex-col overflow-y-auto overscroll-contain bg-white px-2 dark:bg-neutral-800 mb-24"
+		class="mb-24 flex w-72 flex-col overflow-y-auto overscroll-contain bg-white px-2 dark:bg-neutral-800"
 		use:panel={{ shouldTrapFocus: () => window.innerWidth < 1024 }}
 	>
 		<button

@@ -1,4 +1,5 @@
 export { default as Copy } from './copy.svelte';
+export { default as Darkmode } from './darkmode.svelte';
 export * as Icon from './icon/index.js';
 export * as Markdown from './markdown/index.js';
 export * as Navbar from './navbar/index.js';

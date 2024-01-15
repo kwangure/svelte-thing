@@ -35,7 +35,7 @@ function setLocalStorageItem(key, value) {
 /**
  * @param {'light' | 'dark'} to
  */
-function toggleDarkClass(to) {
+function setThemeClassName(to) {
 	try {
 		if (to === 'dark') {
 			document.documentElement.classList.add('dark');
@@ -52,22 +52,29 @@ function toggleDarkClass(to) {
 }
 
 const THEME_LOCAL_STORAGE_KEY = 'theme';
+const DEFAULT_THEME = /** @type {'light' | 'dark'} */ ('dark');
+
+export function createDarkmodeScriptTag() {
+	return [
+		'<script>',
+		`    ${getLocalStorageItem.toString()};`,
+		`    ${setThemeClassName.toString()};`,
+		`    var currentTheme = getLocalStorageItem("${THEME_LOCAL_STORAGE_KEY}", "${DEFAULT_THEME}");`,
+		`    setThemeClassName(currentTheme);`,
+		'</script>',
+	].join('\n');
+}
 
 export function createDarkModeButton() {
-	const defaultTheme = /** @type {'light' | 'dark'} */ ('dark');
-	const store = writable(defaultTheme, (set) => {
-		const theme = getLocalStorageItem(THEME_LOCAL_STORAGE_KEY, defaultTheme);
-		set(theme);
-		toggleDarkClass(theme);
-	});
-	const { set, subscribe } = store;
+	const theme = writable(
+		getLocalStorageItem(THEME_LOCAL_STORAGE_KEY, DEFAULT_THEME),
+	);
 
 	function handleClick() {
-		const currentMode = get(store);
-		const newMode = currentMode === 'dark' ? 'light' : 'dark';
-		set(newMode);
+		const newMode = get(theme) === 'dark' ? 'light' : 'dark';
+		theme.set(newMode);
 		setLocalStorageItem(THEME_LOCAL_STORAGE_KEY, newMode);
-		toggleDarkClass(newMode);
+		setThemeClassName(newMode);
 	}
 
 	/**
@@ -85,6 +92,6 @@ export function createDarkModeButton() {
 
 	return {
 		elements: { button },
-		state: { mode: { subscribe } },
+		state: { mode: { subscribe: theme.subscribe } },
 	};
 }
