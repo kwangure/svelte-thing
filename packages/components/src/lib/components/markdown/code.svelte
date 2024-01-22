@@ -8,6 +8,8 @@
 	/** @type {import('mdast').Code} */
 	export let node;
 
+	$: attributes = node.data?.attributes ?? {};
+
 	/** @type {number | undefined} */
 	let hoverRange = undefined;
 
@@ -144,6 +146,7 @@
 
 <code
 	class="mb-2 mt-4 grid grid-cols-[1fr_max-content] overflow-auto whitespace-pre rounded border border-neutral-300 bg-neutral-100 py-4 pl-3 pr-5 text-sm leading-6 dark:border-neutral-600 dark:bg-neutral-900"
+	{...attributes}
 	use:overflowFocusable
 	on:mouseleave={() => (hoverRange = undefined)}
 >
