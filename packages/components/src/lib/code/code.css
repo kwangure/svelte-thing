@@ -22,40 +22,127 @@
 	--st-dark: initial;
 }
 
-.tok-string,
-.tok-string2 /* Literals with backticks */ {
-	color: var(--st-dark, #d69d85) var(--st-light, #312212);
-}
-.tok-property-name {
-	color: var(--st-dark, #9cdcfe) var(--st-light, #037e0b);
-}
-.tok-comment {
-	color: var(--st-dark, #6a9955) var(--st-light, #2f9d62);
-}
-.tok-classname {
-	color: var(--st-dark, #d7ba7d) var(--st-light, #c79e09);
-}
-.tok-number {
-	color: var(--st-dark, #b5cea8) var(--st-light, #085ad6);
-}
-.tok-keyword {
-	color: var(--st-dark, #c586c0) var(--st-light, #c123b4);
-}
-.tok-boolean,
-.tok-definition-keyword,
-.tok-operator-keyword,
+/*
+    JavaScript: "super"
+ */
 .tok-atom {
+	color: var(--st-dark, #569cd6) var(--st-light, #0000ff);
+}
+
+/*
+    JavaScript: "true false"
+ */
+.tok-boolean {
+	color: var(--st-dark, #569cd6) var(--st-light, #0000ff);
+}
+
+/*
+	JavaScript: "Foo"
+ */
+.tok-class {
+	color: var(--st-dark, #4ec9b0) var(--st-light, #267f99);
+}
+
+.tok-comment {
+	color: var(--st-dark, #6a9955) var(--st-light, #008000);
+}
+
+/*
+    JavaScript: "for while do if else switch try catch finally return throw break continue default case"
+ */
+.tok-control-keyword {
+	color: var(--st-dark, #c586c0) var(--st-light, #af00db);
+}
+
+/*
+    JavaScript: "let var const using function class extends"
+ */
+.tok-definition-keyword {
+	color: var(--st-dark, #569cd6) var(--st-light, #0000ff);
+}
+
+.tok-definition-class-name {
+	color: var(--st-dark, #4fc1ff) var(--st-light, #0070c1);
+}
+
+.tok-function-definition-name,
+.tok-function-property-name,
+.tok-function-variable-name {
+	color: var(--st-dark, #dcdcaa) var(--st-light, #795e26);
+}
+
+/*
+    JavaScript: "with debugger as new"
+ */
+.tok-keyword {
+	color: var(--st-dark, #569cd6) var(--st-light, #0000ff);
+}
+
+/*
+    JavaScript: "get set async static *"
+ */
+.tok-modifier {
+	color: var(--st-dark, #569cd6) var(--st-light, #0000ff);
+}
+
+/*
+    JavaScript: "import export from"
+ */
+.tok-module-keyword {
+	color: var(--st-dark, #c586c0) var(--st-light, #af00db);
+}
+
+.tok-number {
+	color: var(--st-dark, #b5cea8) var(--st-light, #098658);
+}
+
+/*
+    JavaScript: "null"
+ */
+.tok-null {
 	color: var(--st-dark, #569cd6) var(--st-light, #0021b3);
 }
-.tok-variable-name {
-	color: var(--st-dark, #9cdcfe) var(--st-light, #037e0b);
+
+/*
+    JavaScript: "in of await yield void typeof delete instanceof"
+ */
+.tok-operator-keyword {
+	color: var(--st-dark, #569cd6) var(--st-light, #0000ff);
 }
+
+.tok-property-name {
+	color: var(--st-dark, #9cdcfe) var(--st-light, #001080);
+}
+
+/*
+    JavaScript: "this"
+ */
+.tok-self {
+	color: var(--st-dark, #569cd6) var(--st-light, #0000ff);
+}
+
+/*
+    JavaScript: "`foo`"
+ */
+.tok-special-string {
+	color: var(--st-dark, #d69d85) var(--st-light, #a31515);
+}
+
+/*
+    JavaScript: "'foo'"
+ */
+.tok-string {
+	color: var(--st-dark, #d69d85) var(--st-light, #a31515);
+}
+
+.tok-type-name {
+	color: var(--st-dark, #4ec9b0) var(--st-light, #267f99);
+}
+
+.tok-variable-name {
+	color: var(--st-dark, #9cdcfe) var(--st-light, #001080);
+}
+
 .tok-variable-definition-name {
 	color: var(--st-dark, #4ec9b0) var(--st-light, #cf222e);
-}
-.tok-function-name {
-	color: #dcdcaa;
-}
-.tok-type-name {
-	color: var(--st-dark, #569cd6) var(--st-light, #0021b3);
 }

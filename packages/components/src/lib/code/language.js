@@ -26,6 +26,9 @@ export const css = highlight.bind(null, cssParser);
 
 export const javascript = highlight.bind(null, jsParser);
 
+const tsParser = jsParser.configure({ dialect: 'ts' });
+export const typescript = highlight.bind(null, tsParser);
+
 const mixedHTMLParser = htmlParser.configure({
 	wrap: parseMixed((/** @type {{ name: string; }} */ node) => {
 		if (node.name == 'ScriptText') {

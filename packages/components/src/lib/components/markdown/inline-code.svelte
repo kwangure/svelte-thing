@@ -5,6 +5,7 @@
 	/** @type {import('mdast').InlineCode} */
 	export let node;
 
+	$: attributes = node.data?.attributes ?? {};
 	$: segments = multiHighlight(
 		node.value,
 		/** @type {{ lang: string | undefined }} */ (node.data?.attributes)?.lang,
@@ -13,6 +14,7 @@
 
 <code
 	class="inline rounded border border-neutral-300 bg-neutral-100 px-1 py-0.5 text-sm dark:border-neutral-600 dark:bg-neutral-900"
+	{...attributes}
 >
 	{#each segments as { color, segment }}
 		<span class={color}>{segment}</span>

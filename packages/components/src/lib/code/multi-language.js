@@ -1,4 +1,4 @@
-import { bash, css, javascript, json, svelte } from './language.js';
+import { bash, css, javascript, json, svelte, typescript } from './language.js';
 
 const SUPPORTED_LANGUAGES = {
 	bash,
@@ -6,8 +6,8 @@ const SUPPORTED_LANGUAGES = {
 	javascript,
 	js: javascript,
 	json,
-	typescript: javascript,
-	ts: javascript,
+	typescript,
+	ts: typescript,
 	svelte,
 };
 
