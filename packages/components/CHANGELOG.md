@@ -1,5 +1,13 @@
 # @svelte-thing/components
 
+## 0.0.10
+
+### Patch Changes
+
+- b8fccf6: Improve JS & TS syntax highlighting
+- 6099461: Fix sidebar scroll
+- b8fccf6: Propagate markdown attributes down to code elements
+
 ## 0.0.9
 
 ### Patch Changes
