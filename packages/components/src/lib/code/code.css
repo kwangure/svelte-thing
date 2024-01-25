@@ -65,6 +65,7 @@
 	color: var(--st-dark, #4fc1ff) var(--st-light, #0070c1);
 }
 
+.tok-function-definition-name,
 .tok-function-property-name,
 .tok-function-variable-name {
 	color: var(--st-dark, #dcdcaa) var(--st-light, #795e26);
