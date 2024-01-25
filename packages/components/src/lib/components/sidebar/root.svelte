@@ -1,4 +1,6 @@
 <script>
+	import '../../css/color.css';
+	import '../../css/size.css';
 	import { getSidebarContext } from './sidebar.js';
 	import Icon from '../icon/simple.svelte';
 	import { mdiClose } from '@mdi/js';
@@ -10,19 +12,12 @@
 	shouldShowToggle.set(true);
 </script>
 
-<aside
-	class="sticky top-0 z-40 col-start-[page-start] col-end-[page-end] row-start-1 row-end-3 max-h-full overflow-y-auto lg:top-[calc(var(--st-navbar-height)+var(--st-navbar-y-gap))] lg:col-start-[nav-start] lg:col-end-[content-start] lg:row-start-2 lg:block lg:self-start"
-	class:hidden={$visibility === 'hidden'}
-	class:flex={$visibility === 'shown'}
->
-	<nav
-		class="mb-24 flex w-72 flex-col overflow-y-auto overscroll-contain bg-white px-2 dark:bg-neutral-800"
-		use:panel={{ shouldTrapFocus: () => window.innerWidth < 1024 }}
-	>
+<aside class:hidden={$visibility === 'hidden'}>
+	<nav use:panel={{ shouldTrapFocus: () => window.innerWidth < 1024 }}>
 		<button
 			title="Close Menu"
 			aria-label="Close Menu"
-			class="flex h-12 w-12 touch-manipulation select-none items-center justify-center rounded p-2 lg:hidden"
+			class="times-close"
 			use:hide={{ focus: true }}
 		>
 			<Icon class="w-full" path={mdiClose} />
@@ -33,6 +28,89 @@
 		title="Close Menu"
 		aria-label="Close Menu"
 		use:hide
-		class="flex-1 touch-manipulation bg-black/10 dark:bg-neutral-700/40 lg:hidden"
+		class="overlay-close"
 	/>
 </aside>
+
+<style>
+	aside {
+		display: flex;
+		grid-column-start: page-start;
+		grid-column-end: page-end;
+		grid-row-start: 1;
+		grid-row-end: 3;
+		height: 100vh;
+		position: sticky;
+		top: 0;
+		z-index: 40;
+	}
+	@media (max-width: 1024px) {
+		aside.hidden {
+			display: none;
+		}
+	}
+	@media (min-width: 1024px) {
+		aside {
+			align-self: flex-start;
+			grid-column-start: nav-start;
+			grid-column-end: content-start;
+			grid-row-start: 2;
+			height: calc(100vh - var(--st-navbar-height) - var(--st-navbar-y-gap));
+			top: calc(var(--st-navbar-height) + var(--st-navbar-y-gap));
+		}
+	}
+	nav {
+		background-color: var(--st-white);
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		margin-bottom: var(--st-size-24);
+		overflow: hidden;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		padding-inline: var(--st-size-2);
+		width: var(--st-size-72);
+	}
+	:global(.dark) nav {
+		background-color: var(--st-neutral-800);
+	}
+	@media (prefers-color-scheme: dark) {
+		nav {
+			background-color: var(--st-neutral-800);
+		}
+	}
+	.times-close {
+		align-items: center;
+		display: flex;
+		border-radius: var(--st-size-1);
+		justify-content: center;
+		height: var(--st-size-12);
+		padding: var(--st-size-2);
+		width: var(--st-size-12);
+		touch-action: manipulation;
+		user-select: none;
+	}
+	@media (min-width: 1024px) {
+		.times-close {
+			display: none;
+		}
+	}
+	.overlay-close {
+		background-color: rgb(0 0 0 / 0.1);
+		flex: 1 1 0%;
+		touch-action: manipulation;
+	}
+	:global(.dark) .overlay-close {
+		background-color: rgb(64 64 64 / 0.4);
+	}
+	@media (prefers-color-scheme: dark) {
+		.overlay-close {
+			background-color: rgb(64 64 64 / 0.4);
+		}
+	}
+	@media (min-width: 1024px) {
+		.overlay-close {
+			display: none;
+		}
+	}
+</style>

@@ -4,6 +4,7 @@
 	"scripts": {
 		"build": "wireit",
 		"build:package": "wireit",
+		"build:package:watch": "wireit",
 		"build:site": "wireit",
 		"check": "wireit",
 		"dev": "vite dev",
@@ -19,6 +20,26 @@
 		},
 		"build:package": {
 			"command": "svelte-package -i ./src/lib",
+			"files": [
+				"src/**/*.{js,ts,svelte}",
+				"svelte.config.js",
+				"vite.config.js",
+				"tsconfig.json",
+				"../../config/tsconfig.base.json"
+			],
+			"#comment": [
+				"svelte-package delays emptying the dist folder until all the",
+				"files are compiled. Which means the dist/ output is in a bad",
+				"state only for a very tiny amount of time. This means HMR",
+				"apps testing a local build are not in a broken state.",
+				"See https://github.com/sveltejs/kit/pull/10514.",
+				"So we leave wireit `output` empty since svelte-package",
+				"will take care of emptying it."
+			],
+			"output": []
+		},
+		"build:package:watch": {
+			"command": "svelte-package -i ./src/lib --watch",
 			"files": [
 				"src/**/*.{js,ts,svelte}",
 				"svelte.config.js",
