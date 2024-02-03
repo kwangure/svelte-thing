@@ -1,4 +1,5 @@
 import { highlightTree, tagHighlighter, tags } from '@lezer/highlight';
+import type { LRParser } from '@lezer/lr';
 
 const colors = tagHighlighter([
 	{ tag: tags.atom, class: 'tok-atom' },
@@ -50,14 +51,25 @@ const colors = tagHighlighter([
 	{ tag: tags.punctuation, class: 'tok-punctuation' },
 ]);
 
-/**
- * @param {import('@lezer/lr').LRParser} parser
- * @param {string} code
- * @param {Object} [options]
- * @param {number} [options.from]
- * @param {number} [options.to]
- */
-export function highlight(parser, code, options = {}) {
+export interface HighlightOptions {
+	from?: number;
+	to?: number;
+}
+
+export interface HighlightResult {
+	color: string;
+	segment: string;
+}
+
+export interface Highlighter {
+	(code: string, options?: HighlightOptions): HighlightResult[];
+}
+
+export function highlight(
+	parser: LRParser,
+	code: string,
+	options: HighlightOptions = {},
+) {
 	const parsed = parser.parse(code);
 	const { from = 0, to = parsed.length } = options;
 	let lastEnd = from;
@@ -79,11 +91,7 @@ export function highlight(parser, code, options = {}) {
 	return highlighted.filter(({ segment }) => segment);
 }
 
-/**
- * @param {string} code
- * @param {import('./language.js').Highlighter} [highlighLanguage]
- */
-export function highlightLines(code, highlighLanguage) {
+export function highlightLines(code: string, highlighLanguage: Highlighter) {
 	const sourceLines = code.split('\n');
 	if (!highlighLanguage)
 		return sourceLines.map((line) => {
@@ -99,4 +107,40 @@ export function highlightLines(code, highlighLanguage) {
 		pos += line.length + 1;
 		return highlighted;
 	});
+}
+
+const highlighters = import.meta.glob('./highlighter/*.js') as Record<
+	string,
+	() => Promise<Record<string, Highlighter>>
+>;
+
+const SUPPORTED_LANGUAGES = {
+	bash: 'bash',
+	cpp: 'cpp',
+	css: 'css',
+	html: 'html',
+	javascript: 'typescript',
+	js: 'typescript',
+	typescript: 'typescript',
+	ts: 'typescript',
+	json: 'json',
+	python: 'python',
+	rust: 'rust',
+	svelte: 'svelte',
+} as const;
+
+export type HighlightLanguage = keyof typeof SUPPORTED_LANGUAGES;
+
+export function isSupportedLanguage(
+	language: any,
+): language is HighlightLanguage {
+	if (typeof language !== 'string') return false;
+	return Object.hasOwn(SUPPORTED_LANGUAGES, language);
+}
+
+export async function getHighlighter(language: HighlightLanguage) {
+	const name = SUPPORTED_LANGUAGES[language];
+	const path = `./highlighter/${name}.js`;
+	const module = await highlighters[path]?.();
+	return module?.[name];
 }

@@ -1,9 +1,12 @@
 <script>
 	import '../../code/code.css';
 	import { isScrollableX, isScrollableY } from '../../dom/dom.js';
-	import { highlightLines } from '../../code/index.js';
+	import {
+		getHighlighter,
+		highlightLines,
+		isSupportedLanguage,
+	} from '../../code/index.js';
 	import Copy from '../../components/copy.svelte';
-	import { multiHighlight } from '../../code/multi-language.js';
 
 	/** @type {import('mdast').Code} */
 	export let node;
@@ -13,10 +16,24 @@
 	/** @type {number | undefined} */
 	let hoverRange = undefined;
 
+	/** @type {import('../../code/highlight').Highlighter} */
+	const NOOP_HIGHLIGHTER = (code, options) => {
+		const from = options?.from ?? 0;
+		const to = options?.to ?? code.length;
+
+		return [{ segment: code.slice(from, to), color: '' }];
+	};
+	let highlighter = NOOP_HIGHLIGHTER;
+
 	$: language = node.lang ?? undefined;
-	$: highlightedLines = highlightLines(node.value, (code, options) =>
-		multiHighlight(code, language, options),
-	);
+	$: {
+		if (isSupportedLanguage(language)) {
+			getHighlighter(language).then((h) => (highlighter = h));
+		} else {
+			highlighter = NOOP_HIGHLIGHTER;
+		}
+	}
+	$: highlightedLines = highlightLines(node.value, highlighter);
 	$: copyRanges = parseRanges(
 		typeof (/** @type {any} */ (node.data?.attributes?.copy)) === 'string'
 			? /** @type {{ copy: string }} */ (node.data?.attributes)?.copy
