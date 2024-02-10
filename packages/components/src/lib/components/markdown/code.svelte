@@ -162,7 +162,7 @@
 </script>
 
 <code
-	class="mb-2 mt-4 grid grid-cols-[1fr_max-content] overflow-auto whitespace-pre rounded border border-neutral-300 bg-neutral-100 py-4 pl-3 pr-5 text-sm leading-6 dark:border-neutral-600 dark:bg-neutral-900"
+	class="mb-2 mt-4 grid grid-cols-[1fr_max-content] overflow-auto rounded border border-neutral-300 bg-neutral-100 py-4 pl-3 pr-5 text-sm leading-6 dark:border-neutral-600 dark:bg-neutral-900"
 	{...attributes}
 	use:overflowFocusable
 	on:mouseleave={() => (hoverRange = undefined)}
@@ -197,6 +197,9 @@
 </code>
 
 <style>
+	code {
+		white-space: pre-wrap;
+	}
 	@media (prefers-color-scheme: light) {
 		.to-copy {
 			background-color: rgba(0, 0, 0, 0.1);
