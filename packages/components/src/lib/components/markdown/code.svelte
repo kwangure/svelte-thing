@@ -1,5 +1,6 @@
 <script>
 	import '../../code/code.css';
+	import '../../css/color-preference.css';
 	import { isScrollableX, isScrollableY } from '../../dom/dom.js';
 	import {
 		getHighlighter,
@@ -200,14 +201,8 @@
 	code {
 		white-space: pre-wrap;
 	}
-	@media (prefers-color-scheme: light) {
-		.to-copy {
-			background-color: rgba(0, 0, 0, 0.1);
-		}
-	}
-	@media (prefers-color-scheme: dark) {
-		.to-copy {
-			background-color: rgba(255, 255, 255, 0.1);
-		}
+	.to-copy {
+		background-color: var(--st-light, rgba(0, 0, 0, 0.1))
+			var(--st-dark, rgba(255, 255, 255, 0.1));
 	}
 </style>

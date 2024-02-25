@@ -1,5 +1,6 @@
 <script>
 	import '../../css/color.css';
+	import '../../css/color-preference.css';
 	import '../../css/size.css';
 	import { getSidebarContext } from './sidebar.js';
 	import Icon from '../icon/simple.svelte';
@@ -60,7 +61,8 @@
 		}
 	}
 	nav {
-		background-color: var(--st-white);
+		background-color: var(--st-light, var(--st-white))
+			var(--st-dark, var(--st-neutral-800));
 		display: flex;
 		flex-direction: column;
 		height: 100%;
@@ -70,14 +72,6 @@
 		overscroll-behavior: contain;
 		padding-inline: var(--st-size-2);
 		width: var(--st-size-72);
-	}
-	:global(.dark) nav {
-		background-color: var(--st-neutral-800);
-	}
-	@media (prefers-color-scheme: dark) {
-		nav {
-			background-color: var(--st-neutral-800);
-		}
 	}
 	.times-close {
 		align-items: center;
@@ -96,17 +90,10 @@
 		}
 	}
 	.overlay-close {
-		background-color: rgb(0 0 0 / 0.1);
+		background-color: var(--st-light, rgb(0 0 0 / 0.1))
+			var(--st-dark, rgb(64 64 64 / 0.4));
 		flex: 1 1 0%;
 		touch-action: manipulation;
-	}
-	:global(.dark) .overlay-close {
-		background-color: rgb(64 64 64 / 0.4);
-	}
-	@media (prefers-color-scheme: dark) {
-		.overlay-close {
-			background-color: rgb(64 64 64 / 0.4);
-		}
 	}
 	@media (min-width: 1024px) {
 		.overlay-close {
