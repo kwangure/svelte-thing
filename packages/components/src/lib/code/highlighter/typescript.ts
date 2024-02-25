@@ -1,5 +1,5 @@
 import { highlight } from '../highlight.js';
-import { parser } from '@lezer/javascript';
+import { parser as jsParser } from '@lezer/javascript';
 
-const tsParser = parser.configure({ dialect: 'ts jsx' });
+const tsParser = jsParser.configure({ dialect: 'ts jsx' });
 export const typescript = highlight.bind(null, tsParser);
