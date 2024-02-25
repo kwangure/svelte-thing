@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.11
+
+### Patch Changes
+
+- 4975573: Make syntax highlighters async
+
 ## 0.0.10
 
 ### Patch Changes
