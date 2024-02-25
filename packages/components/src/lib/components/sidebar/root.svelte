@@ -64,7 +64,7 @@
 		display: flex;
 		flex-direction: column;
 		height: 100%;
-		margin-bottom: var(--st-size-24);
+		padding-bottom: var(--st-size-24);
 		overflow: hidden;
 		overflow-y: auto;
 		overscroll-behavior: contain;

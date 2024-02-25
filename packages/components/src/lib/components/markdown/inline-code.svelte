@@ -1,15 +1,29 @@
 <script>
 	import '../../code/code.css';
-	import { multiHighlight } from '../../code/multi-language.js';
+	import { getHighlighter, isSupportedLanguage } from '../../code/index.js';
 
 	/** @type {import('mdast').InlineCode} */
 	export let node;
 
+	/** @type {import('../../code/highlight').Highlighter} */
+	const NOOP_HIGHLIGHTER = (code, options) => {
+		const from = options?.from ?? 0;
+		const to = options?.to ?? code.length;
+
+		return [{ segment: code.slice(from, to), color: '' }];
+	};
+	let highlighter = NOOP_HIGHLIGHTER;
+
 	$: attributes = node.data?.attributes ?? {};
-	$: segments = multiHighlight(
-		node.value,
-		/** @type {{ lang: string | undefined }} */ (node.data?.attributes)?.lang,
-	);
+	$: language = attributes?.lang;
+	$: {
+		if (isSupportedLanguage(language)) {
+			getHighlighter(language).then((h) => (highlighter = h));
+		} else {
+			highlighter = NOOP_HIGHLIGHTER;
+		}
+	}
+	$: segments = highlighter(node.value);
 </script>
 
 <code
