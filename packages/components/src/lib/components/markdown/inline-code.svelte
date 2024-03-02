@@ -1,5 +1,6 @@
 <script>
 	import '../../code/code.css';
+	import '../../css/color-preference.css';
 	import { getHighlighter, isSupportedLanguage } from '../../code/index.js';
 
 	/** @type {import('mdast').InlineCode} */

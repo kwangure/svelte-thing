@@ -109,11 +109,6 @@ export function highlightLines(code: string, highlighLanguage: Highlighter) {
 	});
 }
 
-const highlighters = import.meta.glob('./highlighter/*.js') as Record<
-	string,
-	() => Promise<Record<string, Highlighter>>
->;
-
 const SUPPORTED_LANGUAGES = {
 	bash: 'bash',
 	cpp: 'cpp',
@@ -142,7 +137,6 @@ export function isSupportedLanguage(
 
 export async function getHighlighter(language: HighlightLanguage) {
 	const name = SUPPORTED_LANGUAGES[language];
-	const path = `./highlighter/${name}.js`;
-	const module = await highlighters[path]?.();
+	const module = await import(`./highlighter/${name}.js`);
 	return module?.[name];
 }
