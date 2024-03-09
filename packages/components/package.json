@@ -1,6 +1,6 @@
 {
 	"name": "@svelte-thing/components",
-	"version": "0.0.11",
+	"version": "0.0.12",
 	"scripts": {
 		"build": "wireit",
 		"build:package": "wireit",
