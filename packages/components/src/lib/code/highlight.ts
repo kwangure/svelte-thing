@@ -93,22 +93,22 @@ export function highlight(
 	return highlighted.filter(({ segment }) => segment);
 }
 
-export function highlightLines(code: string, highlighLanguage: Highlighter) {
-	const sourceLines = code.split('\n');
-	if (!highlighLanguage)
-		return sourceLines.map((line) => {
-			return [{ color: '', segment: line }];
-		});
+export function highlightLines(code: string, highlightLanguage: Highlighter) {
+	let highlightedLines = [];
+	let startOfLine = 0;
 
-	let pos = 0;
-	return sourceLines.map((line) => {
-		const highlighted = highlighLanguage(code, {
-			from: pos,
-			to: pos + line.length + 1, // add 1 to account for the removed \n
-		});
-		pos += line.length + 1;
-		return highlighted;
-	});
+	for (let i = 0; i <= code.length; i++) {
+		if (code[i] === '\n' || i === code.length) {
+			const highlighted = highlightLanguage(code, {
+				from: startOfLine,
+				to: i,
+			});
+			highlightedLines.push(highlighted);
+			startOfLine = i + 1;
+		}
+	}
+
+	return highlightedLines;
 }
 
 const SUPPORTED_LANGUAGES = {
