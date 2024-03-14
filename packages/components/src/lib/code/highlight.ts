@@ -114,16 +114,21 @@ const SUPPORTED_LANGUAGES = {
 	cpp: 'cpp',
 	css: 'css',
 	html: 'html',
+	json: 'json',
+	python: 'python',
+	rust: 'rust',
+	svelte: 'svelte',
+
+	noop: 'plaintext',
+	txt: 'plaintext',
+	text: 'plaintext',
+
 	javascript: 'typescript',
 	js: 'typescript',
 	jsx: 'typescript',
 	typescript: 'typescript',
 	ts: 'typescript',
 	tsx: 'typescript',
-	json: 'json',
-	python: 'python',
-	rust: 'rust',
-	svelte: 'svelte',
 } as const;
 
 export type HighlightLanguage = keyof typeof SUPPORTED_LANGUAGES;
