@@ -140,6 +140,10 @@
 			"svelte": "./dist/creators/index.js",
 			"default": "./dist/creators/index.js"
 		},
+		"./css/*": {
+			"svelte": "./dist/css/*.css",
+			"default": "./dist/css/*.css"
+		},
 		"./dom": {
 			"types": "./dist/dom/dom.d.ts",
 			"default": "./dist/dom/dom.js"
