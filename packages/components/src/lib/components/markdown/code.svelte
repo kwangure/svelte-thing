@@ -3,10 +3,10 @@
 	import '../../css/color-preference.css';
 	import { isScrollableX, isScrollableY } from '../../dom/dom.js';
 	import {
-		getHighlighter,
+		getSupportedHighlighter,
 		highlightLines,
-		isSupportedLanguage,
-	} from '../../code/index.js';
+	} from '../../code/highlight.js';
+	import { plaintext } from '../../code/highlighter/plaintext.js';
 	import Copy from '../../components/copy.svelte';
 
 	/** @type {import('mdast').Code} */
@@ -16,23 +16,11 @@
 
 	/** @type {number | undefined} */
 	let hoverRange = undefined;
-
-	/** @type {import('../../code/highlight').Highlighter} */
-	const NOOP_HIGHLIGHTER = (code, options) => {
-		const from = options?.from ?? 0;
-		const to = options?.to ?? code.length;
-
-		return [{ segment: code.slice(from, to), color: '' }];
-	};
-	let highlighter = NOOP_HIGHLIGHTER;
-
-	$: language = node.lang ?? undefined;
+	let highlighter = plaintext;
 	$: {
-		if (isSupportedLanguage(language)) {
-			getHighlighter(language).then((h) => (highlighter = h));
-		} else {
-			highlighter = NOOP_HIGHLIGHTER;
-		}
+		getSupportedHighlighter(node.lang).then((h) => {
+			highlighter = h;
+		});
 	}
 	$: highlightedLines = highlightLines(node.value, highlighter);
 	$: copyRanges = parseRanges(

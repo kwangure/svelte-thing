@@ -1,5 +1,7 @@
 import { highlightTree, tagHighlighter, tags } from '@lezer/highlight';
 import type { LRParser } from '@lezer/lr';
+import { plaintext } from './highlighter/plaintext';
+import { DEV } from 'esm-env';
 
 const colors = tagHighlighter([
 	{ tag: tags.atom, class: 'tok-atom' },
@@ -143,5 +145,20 @@ export function isSupportedLanguage(
 export async function getHighlighter(language: HighlightLanguage) {
 	const name = SUPPORTED_LANGUAGES[language];
 	const module = await import(`./highlighter/${name}.js`);
-	return module?.[name];
+	return module?.[name] as Highlighter;
+}
+
+export async function getSupportedHighlighter(language?: string | null) {
+	if (isSupportedLanguage(language)) {
+		return getHighlighter(language);
+	}
+	if (DEV && language) {
+		const supportedLanguages = [
+			...new Set(Object.keys(SUPPORTED_LANGUAGES)),
+		].join(', ');
+		console.warn(
+			`Unsupported language "${language}" in code block. Expected one of: ${supportedLanguages}`,
+		);
+	}
+	return plaintext;
 }

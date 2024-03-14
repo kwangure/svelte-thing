@@ -1,28 +1,18 @@
 <script>
 	import '../../code/code.css';
 	import '../../css/color-preference.css';
-	import { getHighlighter, isSupportedLanguage } from '../../code/index.js';
+	import { getSupportedHighlighter } from '../../code/index.js';
+	import { plaintext } from '../../code/highlighter/plaintext';
 
 	/** @type {import('mdast').InlineCode} */
 	export let node;
 
-	/** @type {import('../../code/highlight').Highlighter} */
-	const NOOP_HIGHLIGHTER = (code, options) => {
-		const from = options?.from ?? 0;
-		const to = options?.to ?? code.length;
-
-		return [{ segment: code.slice(from, to), color: '' }];
-	};
-	let highlighter = NOOP_HIGHLIGHTER;
-
 	$: attributes = node.data?.attributes ?? {};
-	$: language = attributes?.lang;
+	let highlighter = plaintext;
 	$: {
-		if (isSupportedLanguage(language)) {
-			getHighlighter(language).then((h) => (highlighter = h));
-		} else {
-			highlighter = NOOP_HIGHLIGHTER;
-		}
+		getSupportedHighlighter(attributes?.lang).then((h) => {
+			highlighter = h;
+		});
 	}
 	$: segments = highlighter(node.value);
 </script>
