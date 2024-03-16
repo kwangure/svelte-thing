@@ -1,5 +1,7 @@
 import { highlightTree, tagHighlighter, tags } from '@lezer/highlight';
 import type { LRParser } from '@lezer/lr';
+import { plaintext } from './highlighter/plaintext';
+import { DEV } from 'esm-env';
 
 const colors = tagHighlighter([
 	{ tag: tags.atom, class: 'tok-atom' },
@@ -91,22 +93,22 @@ export function highlight(
 	return highlighted.filter(({ segment }) => segment);
 }
 
-export function highlightLines(code: string, highlighLanguage: Highlighter) {
-	const sourceLines = code.split('\n');
-	if (!highlighLanguage)
-		return sourceLines.map((line) => {
-			return [{ color: '', segment: line }];
-		});
+export function highlightLines(code: string, highlightLanguage: Highlighter) {
+	let highlightedLines = [];
+	let startOfLine = 0;
 
-	let pos = 0;
-	return sourceLines.map((line) => {
-		const highlighted = highlighLanguage(code, {
-			from: pos,
-			to: pos + line.length + 1, // add 1 to account for the removed \n
-		});
-		pos += line.length + 1;
-		return highlighted;
-	});
+	for (let i = 0; i <= code.length; i++) {
+		if (code[i] === '\n' || i === code.length) {
+			const highlighted = highlightLanguage(code, {
+				from: startOfLine,
+				to: i,
+			});
+			highlightedLines.push(highlighted);
+			startOfLine = i + 1;
+		}
+	}
+
+	return highlightedLines;
 }
 
 const SUPPORTED_LANGUAGES = {
@@ -114,16 +116,21 @@ const SUPPORTED_LANGUAGES = {
 	cpp: 'cpp',
 	css: 'css',
 	html: 'html',
+	json: 'json',
+	python: 'python',
+	rust: 'rust',
+	svelte: 'svelte',
+
+	noop: 'plaintext',
+	txt: 'plaintext',
+	text: 'plaintext',
+
 	javascript: 'typescript',
 	js: 'typescript',
 	jsx: 'typescript',
 	typescript: 'typescript',
 	ts: 'typescript',
 	tsx: 'typescript',
-	json: 'json',
-	python: 'python',
-	rust: 'rust',
-	svelte: 'svelte',
 } as const;
 
 export type HighlightLanguage = keyof typeof SUPPORTED_LANGUAGES;
@@ -138,5 +145,20 @@ export function isSupportedLanguage(
 export async function getHighlighter(language: HighlightLanguage) {
 	const name = SUPPORTED_LANGUAGES[language];
 	const module = await import(`./highlighter/${name}.js`);
-	return module?.[name];
+	return module?.[name] as Highlighter;
+}
+
+export async function getSupportedHighlighter(language?: string | null) {
+	if (isSupportedLanguage(language)) {
+		return getHighlighter(language);
+	}
+	if (DEV && language) {
+		const supportedLanguages = [
+			...new Set(Object.keys(SUPPORTED_LANGUAGES)),
+		].join(', ');
+		console.warn(
+			`Unsupported language "${language}" in code block. Expected one of: ${supportedLanguages}`,
+		);
+	}
+	return plaintext;
 }

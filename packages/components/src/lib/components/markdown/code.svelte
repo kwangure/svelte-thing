@@ -1,13 +1,13 @@
 <script>
-	import '../../code/code.css';
 	import '../../css/color-preference.css';
 	import { isScrollableX, isScrollableY } from '../../dom/dom.js';
 	import {
-		getHighlighter,
+		getSupportedHighlighter,
 		highlightLines,
-		isSupportedLanguage,
-	} from '../../code/index.js';
+	} from '../../code/highlight.js';
+	import { plaintext } from '../../code/highlighter/plaintext.js';
 	import Copy from '../../components/copy.svelte';
+	import Token from '../token.svelte';
 
 	/** @type {import('mdast').Code} */
 	export let node;
@@ -16,23 +16,11 @@
 
 	/** @type {number | undefined} */
 	let hoverRange = undefined;
-
-	/** @type {import('../../code/highlight').Highlighter} */
-	const NOOP_HIGHLIGHTER = (code, options) => {
-		const from = options?.from ?? 0;
-		const to = options?.to ?? code.length;
-
-		return [{ segment: code.slice(from, to), color: '' }];
-	};
-	let highlighter = NOOP_HIGHLIGHTER;
-
-	$: language = node.lang ?? undefined;
+	let highlighter = plaintext;
 	$: {
-		if (isSupportedLanguage(language)) {
-			getHighlighter(language).then((h) => (highlighter = h));
-		} else {
-			highlighter = NOOP_HIGHLIGHTER;
-		}
+		getSupportedHighlighter(node.lang).then((h) => {
+			highlighter = h;
+		});
 	}
 	$: highlightedLines = highlightLines(node.value, highlighter);
 	$: copyRanges = parseRanges(
@@ -66,7 +54,7 @@
 			const lineNumber = index + 1; // line numbers are 1-indexed;
 			const segmentRanges = rangeMap.get(lineNumber);
 			const ranges = [...(segmentRanges || [])];
-			return { ranges, segments: line };
+			return { ranges, tokens: line };
 		});
 
 		return enrichedLines;
@@ -168,7 +156,7 @@
 	use:overflowFocusable
 	on:mouseleave={() => (hoverRange = undefined)}
 >
-	{#each lines as { ranges, segments }, i}
+	{#each lines as { ranges, tokens }, i}
 		{@const { isEnd, isInRange, isStart } = checkRange(hoverRange, i)}
 		<div
 			class="pl-2"
@@ -176,9 +164,7 @@
 			class:rounded-t={isStart}
 			class:rounded-b={isEnd}
 		>
-			{#each segments as { color, segment }}
-				<span class={color}>{segment}</span>
-			{/each}
+			{#each tokens as token}<Token {token} />{/each}
 		</div>
 		<div class="item-center flex px-1">
 			{#each ranges as range}

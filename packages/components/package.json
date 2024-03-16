@@ -140,6 +140,10 @@
 			"svelte": "./dist/creators/index.js",
 			"default": "./dist/creators/index.js"
 		},
+		"./css/*": {
+			"svelte": "./dist/css/*.css",
+			"default": "./dist/css/*.css"
+		},
 		"./dom": {
 			"types": "./dist/dom/dom.d.ts",
 			"default": "./dist/dom/dom.js"
@@ -181,7 +185,8 @@
 		"!**/*.spec.*"
 	],
 	"dependencies": {
-		"@mdi/js": "^7.2.96"
+		"@mdi/js": "^7.2.96",
+		"esm-env": "^1.0.0"
 	},
 	"peerDependencies": {
 		"@fig/lezer-bash": "^1.2.5",
