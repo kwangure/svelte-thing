@@ -1,5 +1,12 @@
 # @svelte-thing/components
 
+## 0.0.13
+
+### Patch Changes
+
+- 77c04cd: Add code Token component
+- 77c04cd: Add plaintext (i.e. noop) syntax highlighter
+
 ## 0.0.12
 
 ### Patch Changes
