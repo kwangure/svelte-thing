@@ -1,4 +1,5 @@
 <script>
+	import '../../css/size.css';
 	import { Item } from '../sidebar/index.js';
 	import Link from './link.svelte';
 	import List from './list.svelte';
@@ -10,10 +11,16 @@
 </script>
 
 <Item>
-	<div class:pl-5={self.depth == 3}>
+	<div class:nested={self.depth == 3}>
 		<Link href={self.hash} ariaCurrent={self.id === activeTarget}>
 			{self.value}
 		</Link>
 	</div>
 	<List {activeTarget} toc={self.children} />
 </Item>
+
+<style>
+	.nested {
+		padding-inline-start: var(--st-size-5);
+	}
+</style>

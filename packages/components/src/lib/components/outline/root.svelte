@@ -87,11 +87,39 @@
 	on:hashchange={() => preferHashchangeTarget($page.url)}
 />
 
-<aside class="sticky top-[calc(var(--st-navbar-height)+var(--st-navbar-y-gap))] self-start col-start-[outline-start] col-end-[outline-end]">
-	<nav class='hidden xl:flex flex-col w-72'>
-		<h5 class="whitespace-nowrap pb-1 pt-2 pl-5 text-xs font-semibold uppercase text-neutral-900 dark:text-neutral-400">
-			On this page
-		</h5>
+<aside>
+	<nav>
+		<h5>On this page</h5>
 		<List {activeTarget} {toc} />
 	</nav>
 </aside>
+
+<style>
+	aside {
+		align-self: flex-start;
+		grid-column-end: outline-end;
+		grid-column-start: outline-start;
+		position: sticky;
+		top: calc(var(--st-navbar-height) + var(--st-navbar-y-gap));
+	}
+	nav {
+		--_display: none;
+		--_display-xl: var(--st-breakpoint-xl) flex;
+		display: var(--_display-xl, var(--_display));
+		flex-direction: column;
+		width: var(--st-size-72);
+	}
+	h5 {
+		--_color: var(--st-color-neutral-900);
+		--_color-dark: var(--st-color-preference-dark) var(--st-color-neutral-400);
+		color: var(--_color-dark, var(--_color));
+		font-size: var(--st-size-3);
+		font-weight: 600;
+		line-height: var(--st-size-4);
+		padding-block-end: var(--st-size-1);
+		padding-block-start: var(--st-size-2);
+		padding-inline-start: var(--st-size-5);
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+</style>
