@@ -1,12 +1,11 @@
 <script>
+	import '../../css/breakpoint.css';
 	import { setSidebarContext } from '../sidebar/sidebar.js';
 
 	setSidebarContext();
 </script>
 
-<div
-	class="grid h-full overflow-y-auto grid-cols-[[page-start]_1fr_[nav-start]_min-content_[content-start]_var(--st-content-width,6fr)_[content-end_nav-end]_1fr_[page-end]] grid-rows-[var(--st-navbar-height)_1fr] gap-y-[var(--st-navbar-y-gap)] xl:grid-cols-[[page-start]_1fr_[nav-start]_min-content_[content-start]_var(--st-content-width,60rem)_[content-end_nav-end]_1fr_[page-end]]"
->
+<div>
 	<slot />
 </div>
 
@@ -14,5 +13,23 @@
 	:root {
 		--st-navbar-height: 4rem;
 		--st-navbar-y-gap: 0.5rem;
+	}
+	div {
+		display: grid;
+		--_grid-template-columns: [page-start] 1fr [nav-start] min-content
+			[content-start] var(--st-content-width, 6fr) [content-end nav-end] 1fr
+			[page-end];
+		--_grid-template-columns-xl: var(--st-breakpoint-xl) [page-start] 1fr
+			[nav-start] min-content [content-start]
+			var(--st-content-width, 60rem /* 960px */) [content-end nav-end] 1fr
+			[page-end];
+		grid-template-columns: var(
+			--_grid-template-columns-xl,
+			var(--_grid-template-columns)
+		);
+		grid-template-rows: var(--st-navbar-height) 1fr;
+		height: 100%;
+		overflow-y: auto;
+		row-gap: var(--st-navbar-y-gap);
 	}
 </style>

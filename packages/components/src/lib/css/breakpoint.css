@@ -1,0 +1,43 @@
+/* Base styles (applies to all devices by default, typically mobile phones) */
+:root {
+	--st-breakpoint-sm: initial;
+	--st-breakpoint-md: initial;
+	--st-breakpoint-lg: initial;
+	--st-breakpoint-xl: initial;
+	--st-breakpoint-2xl: initial;
+}
+
+/* Small devices (sm) - Tablets/portraits (e.g., tablets, large phones) */
+@media (min-width: 640px) {
+	:root {
+		--st-breakpoint-sm: ;
+	}
+}
+
+/* Medium devices (md) - Tablets/landscapes (e.g., tablets, small laptops) */
+@media (min-width: 768px) {
+	:root {
+		--st-breakpoint-md: ;
+	}
+}
+
+/* Large devices (lg) - Small laptops (e.g., laptops, large tablets) */
+@media (min-width: 1024px) {
+	:root {
+		--st-breakpoint-lg: ;
+	}
+}
+
+/* Extra large devices (xl) - Laptops/desktops (e.g., standard laptops, small desktops) */
+@media (min-width: 1280px) {
+	:root {
+		--st-breakpoint-xl: ;
+	}
+}
+
+/* 2x Extra large devices (2xl) - Large desktops (e.g., large desktops, high-res devices) */
+@media (min-width: 1536px) {
+	:root {
+		--st-breakpoint-2xl: ;
+	}
+}
