@@ -1,6 +1,7 @@
 <script>
 	import '../../css/color-preference.css';
 	import '../../css/color.css';
+	import '../../css/utilities.css';
 	import Icon from './simple.svelte';
 
 	/** @type {(node: HTMLElement) => any} */

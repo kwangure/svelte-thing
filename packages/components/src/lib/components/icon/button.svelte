@@ -1,5 +1,6 @@
 <script>
 	import '../../css/size.css';
+	import '../../css/utilities.css';
 	import Icon from './simple.svelte';
 
 	/** @type {(node: HTMLElement) => any} */
