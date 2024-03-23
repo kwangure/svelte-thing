@@ -1,15 +1,17 @@
 <script>
+	import '../../css/color.css';
 	import Children from './children.svelte';
 	/** @type {import('mdast').Link} */
 	export let node;
 </script>
 
-<a class="text-blue-500" href={node.url} title={node.title}>
+<a href={node.url} title={node.title}>
 	<Children {node} />
 </a>
 
 <style>
 	a {
+		color: var(--st-color-blue-500);
 		text-underline-offset: 4px;
 		text-decoration-line: underline;
 	}
