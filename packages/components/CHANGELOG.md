@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.14
+
+### Patch Changes
+
+- cd3ac7c: Replace Tailwind with vanilla CSS
+
 ## 0.0.13
 
 ### Patch Changes
