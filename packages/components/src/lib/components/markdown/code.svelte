@@ -1,5 +1,6 @@
 <script>
 	import '../../css/color-preference.css';
+	import '../../css/size.css';
 	import { isScrollableX, isScrollableY } from '../../dom/dom.js';
 	import {
 		getSupportedHighlighter,
@@ -151,7 +152,6 @@
 </script>
 
 <code
-	class="mb-2 mt-4 grid grid-cols-[1fr_max-content] overflow-auto rounded border border-neutral-300 bg-neutral-100 py-4 pl-3 pr-5 text-sm leading-6 dark:border-neutral-600 dark:bg-neutral-900"
 	{...attributes}
 	use:overflowFocusable
 	on:mouseleave={() => (hoverRange = undefined)}
@@ -159,14 +159,14 @@
 	{#each lines as { ranges, tokens }, i}
 		{@const { isEnd, isInRange, isStart } = checkRange(hoverRange, i)}
 		<div
-			class="pl-2"
+			class="line"
 			class:to-copy={isInRange}
 			class:rounded-t={isStart}
 			class:rounded-b={isEnd}
 		>
 			{#each tokens as token}<Token {token} />{/each}
 		</div>
-		<div class="item-center flex px-1">
+		<div class="actions">
 			{#each ranges as range}
 				{@const label =
 					copyRanges[range][0] === copyRanges[range][1]
@@ -185,10 +185,38 @@
 
 <style>
 	code {
+		--_background-color: var(--st-color-neutral-100);
+		--_background-color-dark: var(--st-color-preference-dark)
+			var(--st-color-neutral-900);
+		background-color: var(--_background-color-dark, var(--_background-color));
+		--_border-color: var(--st-color-neutral-300);
+		--_border-color-dark: var(--st-color-preference-dark)
+			var(--st-color-neutral-600);
+		border-color: var(--_border-color-dark, var(--_border-color));
+		border-width: 1px;
+		border-radius: var(--st-size-1);
+		display: grid;
+		font-size: var(--st-size-3_5);
+		grid-template-columns: 1fr max-content;
+		line-height: var(--st-size-6);
+		margin-block-end: var(--st-size-2);
+		margin-block-start: var(--st-size-4);
+		padding-block: var(--st-size-4);
+		padding-inline-start: var(--st-size-3);
+		padding-inline-end: var(--st-size-5);
+		overflow: auto;
 		white-space: pre-wrap;
 	}
 	.to-copy {
 		background-color: var(--st-light, rgba(0, 0, 0, 0.1))
 			var(--st-dark, rgba(255, 255, 255, 0.1));
+	}
+	.line {
+		padding-left: var(--st-size-2);
+	}
+	.actions {
+		align-items: center;
+		display: flex;
+		padding-inline: var(--st-size-1);
 	}
 </style>

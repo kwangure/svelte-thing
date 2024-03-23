@@ -1,4 +1,7 @@
 <script>
+	import '../../css/color-preference.css';
+	import '../../css/color.css';
+	import '../../css/utilities.css';
 	import Icon from './simple.svelte';
 
 	/** @type {(node: HTMLElement) => any} */
@@ -17,7 +20,23 @@
 	$: rel = target === '_blank' ? 'noopener' : undefined;
 </script>
 
-<a {...props} use:action class="p-2 flex items-center justify-center rounded hover:bg-neutral-200 dark:hover:bg-neutral-700" {href} title={label} {target} {rel}>
-	<Icon path={path} />
+<a {...props} use:action {href} title={label} {target} {rel}>
+	<Icon {path} />
 	<span class="sr-only">{label}</span>
 </a>
+
+<style>
+	a {
+		align-items: center;
+		border-radius: var(--st-size-1);
+		display: flex;
+		justify-content: center;
+		padding: var(--st-size-2);
+	}
+	a:hover {
+		--_background-color: var(--st-color-neutral-200);
+		--_background-color-dark: var(--st-color-preference-dark)
+			var(--st-color-neutral-700);
+		background-color: var(--_background-color-dark, var(--_background-color));
+	}
+</style>

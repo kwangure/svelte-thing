@@ -21,7 +21,7 @@
 		"build:package": {
 			"command": "svelte-package -i ./src/lib",
 			"files": [
-				"src/**/*.{js,ts,svelte}",
+				"src/**/*.{css,js,ts,svelte}",
 				"svelte.config.js",
 				"vite.config.js",
 				"tsconfig.json",

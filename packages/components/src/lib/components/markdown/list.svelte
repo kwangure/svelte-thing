@@ -1,4 +1,5 @@
 <script>
+	import '../../css/size.css';
 	import Children from './children.svelte';
 
 	/** @type {import('mdast').List} */
@@ -6,11 +7,20 @@
 </script>
 
 {#if node.ordered}
-	<ol class="list-decimal pl-6">
-		<Children {node} />
-	</ol>
+	<ol><Children {node} /></ol>
 {:else}
-	<ul class="list-disc pl-6">
-		<Children {node} />
-	</ul>
+	<ul><Children {node} /></ul>
 {/if}
+
+<style>
+	ol,
+	ul {
+		padding-inline-start: var(--st-size-6);
+	}
+	ol {
+		list-style-type: decimal;
+	}
+	ul {
+		list-style-type: disc;
+	}
+</style>

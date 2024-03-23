@@ -8,9 +8,17 @@
 </script>
 
 {#if toc.length}
-	<ul class="flex flex-col gap-1">
+	<ul>
 		{#each toc as heading}
 			<Heading {activeTarget} self={heading} />
 		{/each}
 	</ul>
 {/if}
+
+<style>
+	ul {
+		display: flex;
+		flex-direction: column;
+		gap: var(--st-size-1);
+	}
+</style>

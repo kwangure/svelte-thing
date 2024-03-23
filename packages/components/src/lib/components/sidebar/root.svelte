@@ -21,7 +21,7 @@
 			class="times-close"
 			use:hide={{ focus: true }}
 		>
-			<Icon class="w-full" path={mdiClose} />
+			<Icon --st-icon-width="100%" --st-icon-height=" " path={mdiClose} />
 		</button>
 		<slot />
 	</nav>
