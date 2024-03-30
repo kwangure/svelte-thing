@@ -65,10 +65,19 @@ export function createDarkmodeScriptTag() {
 	].join('\n');
 }
 
+/**
+ * Use shared theme store across all instances
+ *
+ * @type {import("svelte/store").Writable<typeof DEFAULT_THEME>}
+ */
+let theme;
+
 export function createDarkModeButton() {
-	const theme = writable(
-		getLocalStorageItem(THEME_LOCAL_STORAGE_KEY, DEFAULT_THEME),
-	);
+	if (!theme) {
+		theme = writable(
+			getLocalStorageItem(THEME_LOCAL_STORAGE_KEY, DEFAULT_THEME),
+		);
+	}
 
 	function handleClick() {
 		const newMode = get(theme) === 'dark' ? 'light' : 'dark';
