@@ -1,5 +1,12 @@
 # @svelte-thing/components
 
+## 0.0.15
+
+### Patch Changes
+
+- 9edbe22: Use shared theme store across all dark mode instances
+- 9edbe22: Remove legacy CSS
+
 ## 0.0.14
 
 ### Patch Changes
