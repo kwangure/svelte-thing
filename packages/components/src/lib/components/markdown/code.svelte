@@ -208,8 +208,10 @@
 		white-space: pre-wrap;
 	}
 	.to-copy {
-		background-color: var(--st-light, rgba(0, 0, 0, 0.1))
-			var(--st-dark, rgba(255, 255, 255, 0.1));
+		--_background-color: rgba(0, 0, 0, 0.1);
+		--_background-color-dark: var(--st-color-preference-dark)
+			rgba(255, 255, 255, 0.1);
+		background-color: var(--_background-color-dark, var(--_background-color));
 	}
 	.line {
 		padding-left: var(--st-size-2);

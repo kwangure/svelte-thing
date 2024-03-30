@@ -65,16 +65,43 @@ export function createDarkmodeScriptTag() {
 	].join('\n');
 }
 
+/**
+ * Use shared theme store across all instances
+ *
+ * @type {import("svelte/store").Writable<typeof DEFAULT_THEME>}
+ */
+let theme;
+
 export function createDarkModeButton() {
-	const theme = writable(
-		getLocalStorageItem(THEME_LOCAL_STORAGE_KEY, DEFAULT_THEME),
-	);
+	if (!theme) {
+		theme = writable(
+			getLocalStorageItem(THEME_LOCAL_STORAGE_KEY, DEFAULT_THEME),
+		);
+	}
+
+	/** @param {typeof DEFAULT_THEME} newTheme */
+	function updateTheme(newTheme) {
+		theme.set(newTheme);
+		setThemeClassName(newTheme);
+	}
+
+	/**
+	 * @param {StorageEvent} event
+	 */
+	function updateThemeFromLocalStorage(event) {
+		if (event?.key !== THEME_LOCAL_STORAGE_KEY) return;
+
+		const currentTheme = getLocalStorageItem(
+			THEME_LOCAL_STORAGE_KEY,
+			DEFAULT_THEME,
+		);
+		updateTheme(currentTheme);
+	}
 
 	function handleClick() {
 		const newMode = get(theme) === 'dark' ? 'light' : 'dark';
-		theme.set(newMode);
 		setLocalStorageItem(THEME_LOCAL_STORAGE_KEY, newMode);
-		setThemeClassName(newMode);
+		updateTheme(newMode);
 	}
 
 	/**
@@ -83,9 +110,12 @@ export function createDarkModeButton() {
 	function button(node) {
 		node.addEventListener('click', handleClick);
 
+		window.addEventListener('storage', updateThemeFromLocalStorage);
+
 		return {
 			destroy() {
 				node.removeEventListener('click', handleClick);
+				window.removeEventListener('storage', updateThemeFromLocalStorage);
 			},
 		};
 	}
