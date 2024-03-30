@@ -1,28 +1,4 @@
 @media (prefers-color-scheme: light) {
-	:root {
-		--st-dark: ;
-		--st-light: initial;
-	}
-}
-
-@media (prefers-color-scheme: dark) {
-	:root {
-		--st-light: ;
-		--st-dark: initial;
-	}
-}
-
-.light {
-	--st-dark: ;
-	--st-light: initial;
-}
-
-.dark {
-	--st-light: ;
-	--st-dark: initial;
-}
-
-@media (prefers-color-scheme: light) {
 	:where(:root) {
 		--st-color-preference-light: ;
 		--st-color-preference-dark: initial;

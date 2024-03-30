@@ -61,8 +61,10 @@
 		}
 	}
 	nav {
-		background-color: var(--st-light, var(--st-white))
-			var(--st-dark, var(--st-neutral-800));
+		--_background-color: var(--st-color-white);
+		--_background-color-dark: var(--st-color-preference-dark)
+			var(--st-color-neutral-800);
+		background-color: var(--_background-color-dark, var(--_background-color));
 		display: flex;
 		flex-direction: column;
 		height: 100%;
@@ -90,8 +92,10 @@
 		}
 	}
 	.overlay-close {
-		background-color: var(--st-light, rgb(0 0 0 / 0.1))
-			var(--st-dark, rgb(64 64 64 / 0.4));
+		--_background-color: rgb(0 0 0 / 0.1);
+		--_background-color-dark: var(--st-color-preference-dark)
+			rgb(64 64 64 / 0.4);
+		background-color: var(--_background-color-dark, var(--_background-color));
 		flex: 1 1 0%;
 		touch-action: manipulation;
 	}
