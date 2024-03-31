@@ -61,10 +61,9 @@
 		}
 	}
 	nav {
-		--_background-color: var(--st-color-white);
 		--_background-color-dark: var(--st-color-preference-dark)
 			var(--st-color-neutral-800);
-		background-color: var(--_background-color-dark, var(--_background-color));
+		background-color: var(--_background-color-dark, var(--st-color-white));
 		display: flex;
 		flex-direction: column;
 		height: 100%;
@@ -92,10 +91,9 @@
 		}
 	}
 	.overlay-close {
-		--_background-color: rgb(0 0 0 / 0.1);
 		--_background-color-dark: var(--st-color-preference-dark)
 			rgb(64 64 64 / 0.4);
-		background-color: var(--_background-color-dark, var(--_background-color));
+		background-color: var(--_background-color-dark, rgb(0 0 0 / 0.1));
 		flex: 1 1 0%;
 		touch-action: manipulation;
 	}

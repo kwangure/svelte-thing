@@ -103,16 +103,14 @@
 		top: calc(var(--st-navbar-height) + var(--st-navbar-y-gap));
 	}
 	nav {
-		--_display: none;
 		--_display-xl: var(--st-breakpoint-xl) flex;
-		display: var(--_display-xl, var(--_display));
+		display: var(--_display-xl, none);
 		flex-direction: column;
 		width: var(--st-size-72);
 	}
 	h5 {
-		--_color: var(--st-color-neutral-900);
 		--_color-dark: var(--st-color-preference-dark) var(--st-color-neutral-400);
-		color: var(--_color-dark, var(--_color));
+		color: var(--_color-dark, var(--st-color-neutral-900));
 		font-size: var(--st-size-3);
 		font-weight: 600;
 		line-height: var(--st-size-4);

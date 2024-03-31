@@ -11,13 +11,11 @@
 
 <style>
 	h5 {
-		--_background-color: var(--st-color-white);
-		--_background-color-dar: var(--st-color-preference-dark)
+		--_background-color-dark: var(--st-color-preference-dark)
 			var(--st-color-neutral-800);
-		background-color: var(--_background-color-dark, var(--_background-color));
-		--_color: var(--st-color-neutral-900);
+		background-color: var(--_background-color-dark, var(--st-color-white));
 		--_color-dark: var(--st-color-preference-dark) var(--st-color-neutral-400);
-		color: var(--_color-dark, var(--_color));
+		color: var(--_color-dark, var(--st-color-neutral-900));
 		font-size: var(--st-size-3);
 		font-weight: 600;
 		line-height: var(--st-size-4);

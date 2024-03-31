@@ -9,17 +9,12 @@
 				height: 100%;
 			}
 			body {
-				--_background-color: white;
 				--_background-color-dark: var(--st-color-preference-dark)
 					var(--st-color-neutral-800);
-				background-color: var(
-					--_background-color-dark,
-					var(--_background-color)
-				);
-				--_color: var(--st-neutral-700);
+				background-color: var(--_background-color-dark, white);
 				--_color-dark: var(--st-color-preference-dark)
 					var(--st-color-neutral-200);
-				color: var(--_color-dark, var(--_color));
+				color: var(--_color-dark, var(--st-neutral-700));
 				transition:
 					background-color 0.3s ease,
 					color 0.3s ease;

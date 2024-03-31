@@ -35,9 +35,8 @@
 	h4,
 	h5,
 	h6 {
-		--_color: var(--st-color-neutral-900);
 		--_color-dark: var(--st-color-preference-dark) var(--st-color-neutral-200);
-		color: var(--_color-dark, var(--_color));
+		color: var(--_color-dark, var(--st-color-neutral-900));
 		font-weight: 600;
 		scroll-margin-top: calc(var(--st-navbar-height) + var(--st-navbar-y-gap));
 	}
@@ -54,27 +53,21 @@
 		letter-spacing: -0.025em;
 	}
 	h1 {
-		--_font-size: var(--st-size-7_5);
 		--_font-size-sm: var(--st-breakpoint-sm) var(--st-size-9);
-		font-size: var(--_font-size-sm, var(--_font-size));
-		--_line-height: var(--st-size-9);
+		font-size: var(--_font-size-sm, var(--st-size-7_5));
 		--_line-height-sm: var(--st-breakpoint-sm) var(--st-size-10);
-		line-height: var(--_line-height-sm, var(--_line-height));
+		line-height: var(--_line-height-sm, var(--st-size-9));
 	}
 	h2 {
-		--_font-size: var(--st-size-6);
 		--_font-size-sm: var(--st-breakpoint-sm) var(--st-size-7_5);
-		font-size: var(--_font-size-sm, var(--_font-size));
-		--_line-height: var(--st-size-8);
+		font-size: var(--_font-size-sm, var(--st-size-6));
 		--_line-height-sm: var(--st-breakpoint-sm) var(--st-size-9);
-		line-height: var(--_line-height-sm, var(--_line-height));
+		line-height: var(--_line-height-sm, var(--st-size-8));
 	}
 	h3 {
-		--_font-size: var(--st-size-5);
 		--_font-size-sm: var(--st-breakpoint-sm) var(--st-size-6);
-		font-size: var(--_font-size-sm, var(--_font-size));
-		--_line-height: var(--st-size-7);
+		font-size: var(--_font-size-sm, var(--st-size-5));
 		--_line-height-sm: var(--st-breakpoint-sm) var(--st-size-8);
-		line-height: var(--_line-height-sm, var(--_line-height));
+		line-height: var(--_line-height-sm, var(--st-size-7));
 	}
 </style>
