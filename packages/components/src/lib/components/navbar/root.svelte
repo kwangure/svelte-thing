@@ -27,10 +27,9 @@
 <style>
 	nav {
 		align-items: center;
-		--_background-color: var(--st-color-white);
 		--_background-color-dark: var(--st-color-preference-dark)
 			var(--st-color-neutral-800);
-		background-color: var(--_background-color-dark, var(--_background-color));
+		background-color: var(--_background-color-dark, var(--st-color-white));
 		display: flex;
 		gap: var(--st-size-1);
 		grid-column-end: nav-end;
@@ -44,9 +43,8 @@
 	button {
 		align-items: center;
 		border-radius: var(--st-size-1);
-		--_display: flex;
 		--_display-lg: var(--st-breakpoint-lg) none;
-		display: var(--_display-lg, var(--_display));
+		display: var(--_display-lg, flex);
 		height: var(--st-size-12);
 		justify-content: center;
 		margin-inline-start: -1rem /* -16px */;
@@ -57,10 +55,9 @@
 	}
 	div {
 		align-self: flex-end;
-		--_border-color: var(--st-color-neutral-300);
 		--_border-color-dark: var(--st-color-preference-dark)
 			var(--st-color-neutral-600);
-		border-color: var(--_border-color-dark, var(--_border-color));
+		border-color: var(--_border-color-dark, var(--st-color-neutral-300));
 		border-bottom-width: 1px;
 		grid-column-end: page-end;
 		grid-column-start: page-start;

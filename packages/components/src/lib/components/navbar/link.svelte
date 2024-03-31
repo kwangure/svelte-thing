@@ -28,13 +28,15 @@
 		padding-block: var(--st-size-1);
 		padding-inline: var(--st-size-2);
 		transition:
-			color 0.25s ease-in,
-			background-color 0.25s ease-in;
+			color 0.125s ease-in,
+			background-color 0.125s ease-in-out;
 	}
 	a:hover {
-		--_background-color: var(--st-color-neutral-200);
 		--_background-color-dark: var(--st-color-preference-dark)
 			var(--st-color-neutral-700);
-		background-color: var(--_background-color-dark, var(--_background-color));
+		background-color: var(
+			--_background-color-dark,
+			var(--st-color-neutral-200)
+		);
 	}
 </style>

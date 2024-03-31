@@ -28,32 +28,31 @@
 		padding-block: var(--st-size-1);
 		padding-inline: var(--st-size-4);
 		transition:
-			color 0.25s ease-in,
-			background-color 0.25s ease-in;
+			color 0.125s ease-in,
+			background-color 0.125s ease-in-out;
 	}
 	a:hover {
-		--_background-color: var(--st-color-neutral-200);
 		--_background-color-dark: var(--st-color-preference-dark)
 			var(--st-color-neutral-700);
-		background-color: var(--_background-color-dark, var(--_background-color));
+		background-color: var(
+			--_background-color-dark,
+			var(--st-color-neutral-200)
+		);
 	}
 	[aria-current='true'],
 	[aria-current='location'],
 	[aria-current='page'] {
-		--_background-color: var(--st-color-blue-100);
 		--_background-color-dark: var(--st-color-preference-dark)
 			var(--st-color-blue-200);
-		background-color: var(--_background-color-dark, var(--_background-color));
-		--_color: var(--st-color-blue-600);
+		background-color: var(--_background-color-dark, var(--st-color-blue-100));
 		--_color-dark: var(--st-color-preference-dark) var(--st-color-blue-700);
-		color: var(--_color-dark, var(--_color));
+		color: var(--_color-dark, var(--st-color-blue-600));
 	}
 	[aria-current='true']:hover,
 	[aria-current='location']:hover,
 	[aria-current='page']:hover {
-		--_background-color: var(--st-color-blue-200);
 		--_background-color-dark: var(--st-color-preference-dark)
 			var(--st-color-blue-100);
-		background-color: var(--_background-color-dark, var(--_background-color));
+		background-color: var(--_background-color-dark, var(--st-color-blue-200));
 	}
 </style>
