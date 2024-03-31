@@ -22,8 +22,8 @@
 		--_padding-inline-sm: var(--st-breakpoint-sm) var(--st-size-3);
 		padding-inline: var(--_padding-inline-sm, var(--_padding-inline));
 		transition:
-			color 0.25s ease-in,
-			background-color 0.25s ease-in;
+			color 0.125s ease-in,
+			background-color 0.125s ease-in-out;
 	}
 	button:hover {
 		--_background-color: var(--st-color-neutral-200);

@@ -33,8 +33,8 @@
 		justify-content: center;
 		padding: var(--st-size-2);
 		transition:
-			color 0.25s ease-in,
-			background-color 0.25s ease-in;
+			color 0.125s ease-in,
+			background-color 0.125s ease-in-out;
 	}
 	a:hover {
 		--_background-color: var(--st-color-neutral-200);
