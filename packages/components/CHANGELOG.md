@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.16
+
+### Patch Changes
+
+- 8bb3da4: Add transitions to background color change on hover
+
 ## 0.0.15
 
 ### Patch Changes
