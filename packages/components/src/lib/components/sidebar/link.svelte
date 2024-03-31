@@ -1,9 +1,10 @@
 <script>
+	import '../../css/size.css';
 	import { getSidebarContext } from './sidebar.js';
 
 	/**
 	 * @typedef {'location' | 'page' | boolean | null | undefined} AriaCurrent
-	*/
+	 */
 
 	/** @type {AriaCurrent} */
 	export let ariaCurrent = undefined;
@@ -13,20 +14,46 @@
 	const sidebar = getSidebarContext();
 </script>
 
-<a
-	{href}
-	class="flex cursor-pointer items-center gap-2 rounded px-4 py-1"
-	class:bg-blue-100={ariaCurrent}
-	class:hover:bg-blue-200={ariaCurrent}
-	class:text-blue-600={ariaCurrent}
-	class:dark:bg-blue-200={ariaCurrent}
-	class:dark:hover:bg-blue-100={ariaCurrent}
-	class:dark:text-blue-700={ariaCurrent}
-	class:hover:bg-neutral-200={!ariaCurrent}
-	class:dark:hover:bg-neutral-700={!ariaCurrent}
-	class:dark:hover:text-inherit={!ariaCurrent}
-	aria-current={ariaCurrent}
-	use:sidebar.elements.hide
->
+<a {href} aria-current={ariaCurrent} use:sidebar.elements.hide>
 	<slot />
 </a>
+
+<style>
+	a {
+		align-items: center;
+		border-radius: var(--st-size-1);
+		cursor: pointer;
+		display: flex;
+		gap: var(--st-size-2);
+		padding-block: var(--st-size-1);
+		padding-inline: var(--st-size-4);
+		transition:
+			color 0.25s ease-in,
+			background-color 0.25s ease-in;
+	}
+	a:hover {
+		--_background-color: var(--st-color-neutral-200);
+		--_background-color-dark: var(--st-color-preference-dark)
+			var(--st-color-neutral-700);
+		background-color: var(--_background-color-dark, var(--_background-color));
+	}
+	[aria-current='true'],
+	[aria-current='location'],
+	[aria-current='page'] {
+		--_background-color: var(--st-color-blue-100);
+		--_background-color-dark: var(--st-color-preference-dark)
+			var(--st-color-blue-200);
+		background-color: var(--_background-color-dark, var(--_background-color));
+		--_color: var(--st-color-blue-600);
+		--_color-dark: var(--st-color-preference-dark) var(--st-color-blue-700);
+		color: var(--_color-dark, var(--_color));
+	}
+	[aria-current='true']:hover,
+	[aria-current='location']:hover,
+	[aria-current='page']:hover {
+		--_background-color: var(--st-color-blue-200);
+		--_background-color-dark: var(--st-color-preference-dark)
+			var(--st-color-blue-100);
+		background-color: var(--_background-color-dark, var(--_background-color));
+	}
+</style>
