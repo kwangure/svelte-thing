@@ -186,7 +186,8 @@
 	],
 	"dependencies": {
 		"@mdi/js": "^7.2.96",
-		"esm-env": "^1.0.0"
+		"esm-env": "^1.0.0",
+		"uid": "^2.0.2"
 	},
 	"peerDependencies": {
 		"@fig/lezer-bash": "^1.2.5",
