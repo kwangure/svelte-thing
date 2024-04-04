@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.17
+
+### Patch Changes
+
+- 09d008d: Refactor color fallbacks
+
 ## 0.0.16
 
 ### Patch Changes
