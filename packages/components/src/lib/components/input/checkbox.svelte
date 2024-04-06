@@ -7,7 +7,7 @@
 </script>
 
 <label>
-	<input type="radio" {checked} {name} {value} on:change={onchange} />
+	<input type="checkbox" {checked} {name} {value} on:change={onchange} />
 	{#if $$slots.label}
 		<slot name="label" />
 	{/if}
