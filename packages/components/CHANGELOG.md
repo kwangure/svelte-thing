@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.18
+
+### Patch Changes
+
+- 990a836: Add tab components & input name attributes
+
 ## 0.0.17
 
 ### Patch Changes
