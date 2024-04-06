@@ -4,6 +4,7 @@
 	export let id = uid();
 	export let max: number | undefined = undefined;
 	export let min: number | undefined = undefined;
+	export let name: string | undefined = undefined;
 	/* eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any */
 	export let onchange: ((...args: any[]) => any) | undefined = undefined;
 	/* eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any */
@@ -17,6 +18,7 @@
 		{id}
 		{max}
 		{min}
+		{name}
 		type="number"
 		{value}
 		on:change={onchange}
