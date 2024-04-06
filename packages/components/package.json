@@ -186,6 +186,7 @@
 	],
 	"dependencies": {
 		"@mdi/js": "^7.2.96",
+		"@melt-ui/svelte": "^0.76.3",
 		"esm-env": "^1.0.0",
 		"uid": "^2.0.2"
 	},
