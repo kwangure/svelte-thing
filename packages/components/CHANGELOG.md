@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.19
+
+### Patch Changes
+
+- 617c25f: Add checkbox component
+
 ## 0.0.18
 
 ### Patch Changes
