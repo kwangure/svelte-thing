@@ -13,7 +13,11 @@
 </script>
 
 <div>
-	<label for={id}><slot /></label>
+	{#if $$slots.label}
+		<label for={id}>
+			<slot name="label" />
+		</label>
+	{/if}
 	<input
 		{id}
 		{max}
