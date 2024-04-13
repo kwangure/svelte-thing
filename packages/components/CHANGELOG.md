@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.20
+
+### Patch Changes
+
+- Improve syntax highlighter lazy loading
+
 ## 0.0.19
 
 ### Patch Changes
