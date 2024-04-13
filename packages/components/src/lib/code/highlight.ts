@@ -1,6 +1,5 @@
 import { highlightTree, tagHighlighter, tags } from '@lezer/highlight';
 import type { LRParser } from '@lezer/lr';
-import { plaintext } from './highlighter/plaintext';
 import { DEV } from 'esm-env';
 
 const colors = tagHighlighter([
@@ -64,6 +63,7 @@ export interface HighlightResult {
 }
 
 export interface Highlighter {
+	/* eslint-disable-next-line no-unused-vars */
 	(code: string, options?: HighlightOptions): HighlightResult[];
 }
 
@@ -94,7 +94,7 @@ export function highlight(
 }
 
 export function highlightLines(code: string, highlightLanguage: Highlighter) {
-	let highlightedLines = [];
+	const highlightedLines = [];
 	let startOfLine = 0;
 
 	for (let i = 0; i <= code.length; i++) {
@@ -111,44 +111,48 @@ export function highlightLines(code: string, highlightLanguage: Highlighter) {
 	return highlightedLines;
 }
 
+const plaintext = async () =>
+	(await import('./highlighter/plaintext.js')).plaintext;
+const typescript = async () =>
+	(await import('./highlighter/typescript.js')).typescript;
+
 const SUPPORTED_LANGUAGES = {
-	bash: 'bash',
-	cpp: 'cpp',
-	css: 'css',
-	html: 'html',
-	json: 'json',
-	python: 'python',
-	rust: 'rust',
-	svelte: 'svelte',
+	bash: async () => (await import('./highlighter/bash.js')).bash,
+	cpp: async () => (await import('./highlighter/cpp.js')).cpp,
+	css: async () => (await import('./highlighter/css.js')).css,
+	html: async () => (await import('./highlighter/html.js')).html,
+	json: async () => (await import('./highlighter/json.js')).json,
+	python: async () => (await import('./highlighter/python.js')).python,
+	rust: async () => (await import('./highlighter/rust.js')).rust,
+	svelte: async () => (await import('./highlighter/svelte.js')).svelte,
 
-	noop: 'plaintext',
-	txt: 'plaintext',
-	text: 'plaintext',
+	noop: plaintext,
+	plaintext,
+	txt: plaintext,
+	text: plaintext,
 
-	javascript: 'typescript',
-	js: 'typescript',
-	jsx: 'typescript',
-	typescript: 'typescript',
-	ts: 'typescript',
-	tsx: 'typescript',
+	javascript: typescript,
+	js: typescript,
+	jsx: typescript,
+	typescript,
+	ts: typescript,
+	tsx: typescript,
 } as const;
 
 export type HighlightLanguage = keyof typeof SUPPORTED_LANGUAGES;
 
 export function isSupportedLanguage(
-	language: any,
+	language: unknown,
 ): language is HighlightLanguage {
 	if (typeof language !== 'string') return false;
 	return Object.hasOwn(SUPPORTED_LANGUAGES, language);
 }
 
-export async function getHighlighter(language: HighlightLanguage) {
-	const name = SUPPORTED_LANGUAGES[language];
-	const module = await import(`./highlighter/${name}.js`);
-	return module?.[name] as Highlighter;
+export function getHighlighter(language: HighlightLanguage) {
+	return SUPPORTED_LANGUAGES[language]();
 }
 
-export async function getSupportedHighlighter(language?: string | null) {
+export function getSupportedHighlighter(language?: string | null) {
 	if (isSupportedLanguage(language)) {
 		return getHighlighter(language);
 	}
@@ -160,5 +164,5 @@ export async function getSupportedHighlighter(language?: string | null) {
 			`Unsupported language "${language}" in code block. Expected one of: ${supportedLanguages}`,
 		);
 	}
-	return plaintext;
+	return plaintext();
 }

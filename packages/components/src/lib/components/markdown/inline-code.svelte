@@ -2,15 +2,15 @@
 	import '../../css/color-preference.css';
 	import '../../css/color.css';
 	import '../../css/size.css';
-	import { getSupportedHighlighter } from '../../code/highlight.js';
-	import { plaintext } from '../../code/highlighter/plaintext';
+	import { getSupportedHighlighter } from '../../code/highlight';
 	import Token from '../token.svelte';
 
 	/** @type {import('mdast').InlineCode} */
 	export let node;
 
 	$: attributes = node.data?.attributes ?? {};
-	let highlighter = plaintext;
+	/** @type {import('../../code').Highlighter} */
+	let highlighter = () => [{ segment: node.value, color: '' }];
 	$: {
 		getSupportedHighlighter(attributes?.lang).then((h) => {
 			highlighter = h;
