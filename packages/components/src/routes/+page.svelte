@@ -1,6 +1,6 @@
 <script>
 	import { codeToThemedTokens } from 'shikiji';
-	import { typescript } from '../lib/code/index.js';
+	import { typescript } from '../lib/code';
 	import { createDarkModeButton } from '../lib/creators/index.js';
 
 	let code = [

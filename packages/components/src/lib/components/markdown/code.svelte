@@ -5,8 +5,7 @@
 	import {
 		getSupportedHighlighter,
 		highlightLines,
-	} from '../../code/highlight.js';
-	import { plaintext } from '../../code/highlighter/plaintext.js';
+	} from '../../code/highlight';
 	import Copy from '../../components/copy.svelte';
 	import Token from '../token.svelte';
 
@@ -17,7 +16,8 @@
 
 	/** @type {number | undefined} */
 	let hoverRange = undefined;
-	let highlighter = plaintext;
+	/** @type {import('../../code').Highlighter} */
+	let highlighter = () => [{ segment: node.value, color: '' }];
 	$: {
 		getSupportedHighlighter(node.lang).then((h) => {
 			highlighter = h;
