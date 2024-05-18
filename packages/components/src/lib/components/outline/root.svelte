@@ -1,7 +1,7 @@
 <script>
 	import { afterNavigate } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import { isPartiallyHidden } from '../../dom/dom.js';
+	import { getScrollingElement, isPartiallyHidden } from '../../dom/dom.js';
 	import List from './list.svelte';
 	import { page } from '$app/stores';
 
@@ -80,14 +80,25 @@
 		// ...and braces
 		addEventListener('scroll', update, { once: true });
 	}
+
+	/** @param {HTMLElement} node */
+	function addScrollListener(node) {
+		const scrollingElement = getScrollingElement(node.parentElement);
+		if (!scrollingElement) return;
+
+		const update = () => updateActiveSlug(toc);
+		scrollingElement.addEventListener('scroll', update);
+		return {
+			destroy() {
+				scrollingElement.removeEventListener('scroll', update);
+			},
+		};
+	}
 </script>
 
-<svelte:window
-	on:scroll={() => updateActiveSlug(toc)}
-	on:hashchange={() => preferHashchangeTarget($page.url)}
-/>
+<svelte:window on:hashchange={() => preferHashchangeTarget($page.url)} />
 
-<aside>
+<aside use:addScrollListener>
 	<nav>
 		<h5>On this page</h5>
 		<List {activeTarget} {toc} />
