@@ -1,5 +1,12 @@
 # @svelte-thing/components
 
+## 0.0.21
+
+### Patch Changes
+
+- 5e68ec4: Give height to code lines with new line only
+- 5e68ec4: Get scrolling element dynamically in Outline
+
 ## 0.0.20
 
 ### Patch Changes
