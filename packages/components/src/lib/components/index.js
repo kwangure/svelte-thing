@@ -1,4 +1,3 @@
-export { default as Copy } from './copy.svelte';
 export { default as Darkmode } from './darkmode.svelte';
 export * as Form from './form/index.js';
 export * as Icon from './icon/index.js';
