@@ -95,8 +95,7 @@
 	}
 	.line {
 		padding-left: var(--st-size-2);
-		height: var(--st-size-6);
-		white-space: pre;
+		min-height: var(--st-size-6);
 	}
 	.actions {
 		align-items: center;
