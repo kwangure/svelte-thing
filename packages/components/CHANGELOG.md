@@ -1,5 +1,12 @@
 # @svelte-thing/components
 
+## 0.0.22
+
+### Patch Changes
+
+- 6f715ad: Style sidebar item correctly
+- 6f715ad: Rework copying in code blocks
+
 ## 0.0.21
 
 ### Patch Changes
