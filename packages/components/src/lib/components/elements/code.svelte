@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Icon, Token } from '@svelte-thing/components';
+	import { Icon, Token } from '../../components/index.js';
 	import { createCopier, type LineInterval } from '../../creators/copy.js';
 	import { mdiCheck, mdiContentCopy } from '@mdi/js';
 	import type { HighlightResult } from '../../code/highlight.js';
