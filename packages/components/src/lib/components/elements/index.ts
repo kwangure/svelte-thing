@@ -9,3 +9,4 @@ export { default as ListItem } from './list-item.svelte';
 export { default as List } from './list.svelte';
 export { default as Paragraph } from './paragraph.svelte';
 export { default as Strong } from './strong.svelte';
+export { default as ThematicBreak } from './thematic-break.svelte';
