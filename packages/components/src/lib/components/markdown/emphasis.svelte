@@ -1,8 +1,9 @@
-<script>
+<script lang="ts">
+	import { Emphasis } from '../elements/index.js';
+	import type { Emphasis as MdastEmphasis } from 'mdast';
 	import Children from './children.svelte';
-	/** @type {import('mdast').Emphasis} */
-	export let node;
+
+	export let node: MdastEmphasis;
 </script>
 
-<em><Children {node}/></em>
-
+<Emphasis><Children {node} /></Emphasis>
