@@ -1,8 +1,8 @@
 export { default as Darkmode } from './darkmode.svelte';
+export * as Elements from './elements/index.js';
 export * as Form from './form/index.js';
 export * as Icon from './icon/index.js';
 export * as Input from './input/index.js';
-export * as Markdown from './markdown/index.js';
 export * as Navbar from './navbar/index.js';
 export * as Outline from './outline/index.js';
 export * as Shell from './shell/index.js';
