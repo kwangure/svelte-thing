@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.24
+
+### Patch Changes
+
+- 9c87187: Move markdown components to content-thing
+
 ## 0.0.23
 
 ### Patch Changes
