@@ -1,8 +1,9 @@
-<script>
+<script lang="ts">
+	import { Strong } from '../elements/index.js';
+	import type { Strong as MdastStrong } from 'mdast';
 	import Children from './children.svelte';
-	/** @type {import('mdast').Strong} */
-	export let node;
+
+	export let node: MdastStrong;
 </script>
 
-<strong><Children {node}/></strong>
-
+<Strong><Children {node} /></Strong>
