@@ -7,3 +7,4 @@ export { default as InlineCode } from './inline-code.svelte';
 export { default as Link } from './link.svelte';
 export { default as ListItem } from './list-item.svelte';
 export { default as List } from './list.svelte';
+export { default as Paragraph } from './paragraph.svelte';

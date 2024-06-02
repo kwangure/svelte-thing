@@ -1,17 +1,9 @@
-<script>
-	import '../../css/size.css';
+<script lang="ts">
+	import { Paragraph } from '../elements/index.js';
+	import type { Paragraph as MdastParagraph } from 'mdast';
 	import Children from './children.svelte';
-	/** @type {import('mdast').Paragraph} */
-	export let node;
+
+	export let node: MdastParagraph;
 </script>
 
-<p class="mb-4 leading-7">
-	<Children {node} />
-</p>
-
-<style>
-	p {
-		line-height: var(--st-size-7);
-		margin-block-end: var(--st-size-4);
-	}
-</style>
+<Paragraph><Children {node} /></Paragraph>
