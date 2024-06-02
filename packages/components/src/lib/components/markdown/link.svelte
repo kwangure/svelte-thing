@@ -1,21 +1,11 @@
-<script>
-	import '../../css/color.css';
+<script lang="ts">
+	import { Link } from '../elements/index.js';
+	import type { Link as MdastLink } from 'mdast';
 	import Children from './children.svelte';
-	/** @type {import('mdast').Link} */
-	export let node;
+
+	export let node: MdastLink;
 </script>
 
-<a href={node.url} title={node.title}>
+<Link href={node.url} title={node.title}>
 	<Children {node} />
-</a>
-
-<style>
-	a {
-		color: var(--st-color-blue-500);
-		text-underline-offset: 4px;
-		text-decoration-line: underline;
-	}
-	a:hover {
-		text-decoration-thickness: 2px;
-	}
-</style>
+</Link>
