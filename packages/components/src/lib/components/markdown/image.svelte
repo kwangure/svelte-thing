@@ -1,7 +1,8 @@
-<script>
-	/** @type {import('mdast').Image} */
-	export let node;
+<script lang="ts">
+	import { Image } from '../elements/index.js';
+	import type { Image as MdastImage } from 'mdast';
+
+	export let node: MdastImage;
 </script>
 
-<img alt={node.alt} src={node.url}/>
-
+<Image alt={node.alt} src={node.url} />

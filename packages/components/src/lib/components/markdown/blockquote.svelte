@@ -1,8 +1,9 @@
-<script>
+<script lang="ts">
+	import { Blockquote } from '../elements/index.js';
+	import type { Blockquote as MdastBlockquote } from 'mdast';
 	import Children from './children.svelte';
 
-	/** @type {import('mdast').Blockquote} */
-	export let node;
+	export let node: MdastBlockquote;
 </script>
 
-<blockquote><Children {node}/></blockquote>
+<Blockquote><Children {node} /></Blockquote>

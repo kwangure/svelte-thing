@@ -1,10 +1,9 @@
-<script>
+<script lang="ts">
+	import { ListItem } from '../elements/index.js';
+	import type { ListItem as MdastListItem } from 'mdast';
 	import Children from './children.svelte';
 
-	/** @type {import('mdast').ListItem} */
-	export let node;
+	export let node: MdastListItem;
 </script>
 
-<li>
-	<Children {node} />
-</li>
+<ListItem><Children {node} /></ListItem>
