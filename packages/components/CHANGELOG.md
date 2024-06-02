@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.23
+
+### Patch Changes
+
+- ef31269: Separate elements and markdown components
+
 ## 0.0.22
 
 ### Patch Changes
