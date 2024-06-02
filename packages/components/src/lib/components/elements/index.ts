@@ -5,3 +5,4 @@ export { default as Heading } from './heading.svelte';
 export { default as Image } from './image.svelte';
 export { default as InlineCode } from './inline-code.svelte';
 export { default as Link } from './link.svelte';
+export { default as ListItem } from './list-item.svelte';
