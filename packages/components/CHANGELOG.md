@@ -1,5 +1,12 @@
 # @svelte-thing/components
 
+## 0.0.25
+
+### Patch Changes
+
+- 91b9cbc: Add max-width breakpoint counterparts
+- 91b9cbc: Fix [overflow issue](https://github.com/tailwindlabs/tailwindcss/discussions/12429) caused by sr-only.
+
 ## 0.0.24
 
 ### Patch Changes
