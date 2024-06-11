@@ -1,7 +1,11 @@
 <script lang="ts">
+	import '../../css/color-preference.css';
+	import '../../css/color.css';
+	import '../../css/size.css';
+
+	import { mdiCheck, mdiContentCopy } from '@mdi/js';
 	import { Icon, Token } from '../../components/index.js';
 	import { createCopier, type LineInterval } from '../../creators/copy.js';
-	import { mdiCheck, mdiContentCopy } from '@mdi/js';
 	import type { HighlightResult } from '../../code/highlight.js';
 
 	export let attributes: Record<string, unknown> | undefined = undefined;

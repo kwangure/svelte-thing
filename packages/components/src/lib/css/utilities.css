@@ -5,7 +5,8 @@
 	margin: -1px;
 	overflow: hidden;
 	padding: 0;
-	position: absolute;
+	/* https://github.com/tailwindlabs/tailwindcss/discussions/12429#discussioncomment-9354260 */
+	position: fixed;
 	white-space: nowrap;
 	width: 1px;
 }
