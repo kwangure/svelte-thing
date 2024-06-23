@@ -2,23 +2,11 @@
 	import '../../css/color-preference.css';
 	import '../../css/color.css';
 	import '../../css/size.css';
-	import {
-		getSupportedHighlighter,
-		type Highlighter,
-	} from '../../code/highlight.js';
+	import { type HighlightResult } from '../../code/highlight.js';
 	import Token from '../token.svelte';
 
 	export let attributes: Record<string, unknown> | undefined = undefined;
-	export let code: string;
-	export let language: string | undefined = undefined;
-
-	let highlighter: Highlighter = () => [{ segment: code, color: '' }];
-	$: {
-		getSupportedHighlighter(language).then((h) => {
-			highlighter = h;
-		});
-	}
-	$: tokens = highlighter(code);
+	export let tokens: HighlightResult[];
 </script>
 
 <code {...attributes}>
