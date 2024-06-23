@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.26
+
+### Patch Changes
+
+- d3f4514: Use static syntax highlighting InlineCode
+
 ## 0.0.25
 
 ### Patch Changes
