@@ -3,7 +3,7 @@
 	import '../../css/color.css';
 </script>
 
-<div />
+<div></div>
 
 <style>
 	div {

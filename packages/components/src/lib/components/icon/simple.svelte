@@ -1,13 +1,16 @@
-<script>
+<script lang="ts">
+	import type { SVGAttributes } from 'svelte/elements';
 	import '../../css/size.css';
 
-	/** @type {boolean} */
-	export let ariaHidden = true;
-	/** @type {string} */
-	export let path;
+	const {
+		'aria-hidden': ariaHidden = true,
+		path,
+		viewBox = '0 0 24 24',
+		...attributes
+	}: { path: string } & SVGAttributes<SVGElement> = $props();
 </script>
 
-<svg aria-hidden={ariaHidden} viewBox="0 0 24 24">
+<svg {...attributes} aria-hidden={ariaHidden} {viewBox}>
 	<path d={path} />
 </svg>
 

@@ -31,13 +31,7 @@ export default [
 			},
 		},
 		rules: {
-			'no-unused-vars': [
-				'error',
-				{
-					argsIgnorePattern: '^_',
-					args: 'all',
-				},
-			],
+			'no-unused-vars': 'off',
 			'@typescript-eslint/no-unused-vars': [
 				'error',
 				{

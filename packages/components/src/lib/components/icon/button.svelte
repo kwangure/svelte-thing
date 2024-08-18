@@ -1,19 +1,23 @@
-<script>
+<script lang="ts">
+	import type { HTMLButtonAttributes } from 'svelte/elements';
 	import '../../css/size.css';
 	import '../../css/utilities.css';
 	import Icon from './simple.svelte';
 
-	/** @type {(node: HTMLElement) => any} */
-	export let action = () => {};
-	/** @type {string} */
-	export let label;
-	/** @type {any} */
-	export let props = undefined;
-	/** @type {string} */
-	export let path;
+	const {
+		action = () => {},
+		label,
+		path,
+		...attributes
+	}: {
+		/* eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any */
+		action: (node: HTMLElement) => any;
+		label: string;
+		path: string;
+	} & HTMLButtonAttributes = $props();
 </script>
 
-<button {...props} use:action title={label}>
+<button {...attributes} use:action title={label}>
 	<Icon {path} />
 	<span class="sr-only">{label}</span>
 </button>

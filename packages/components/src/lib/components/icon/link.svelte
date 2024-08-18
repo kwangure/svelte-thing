@@ -1,26 +1,28 @@
-<script>
+<script lang="ts">
+	import type { HTMLAnchorAttributes } from 'svelte/elements';
 	import '../../css/color-preference.css';
 	import '../../css/color.css';
 	import '../../css/utilities.css';
 	import Icon from './simple.svelte';
 
-	/** @type {(node: HTMLElement) => any} */
-	export let action = () => {};
-	/** @type {string} */
-	export let href;
-	/** @type {string} */
-	export let label;
-	/** @type {any} */
-	export let props = undefined;
-	/** @type {string} */
-	export let path;
-	/** @type {'_blank' | '_parent' | '_self' | '_top' | undefined} */
-	export let target = undefined;
-
-	$: rel = target === '_blank' ? 'noopener' : undefined;
+	const {
+		action = () => {},
+		href,
+		label,
+		path,
+		target,
+		rel = target === '_blank' ? 'noopener' : undefined,
+		...attributes
+	}: {
+		/* eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any */
+		action: (node: HTMLElement) => any;
+		href: string;
+		label: string;
+		path: string;
+	} & HTMLAnchorAttributes = $props();
 </script>
 
-<a {...props} use:action {href} title={label} {target} {rel}>
+<a {...attributes} use:action {href} title={label} {target} {rel}>
 	<Icon {path} />
 	<span class="sr-only">{label}</span>
 </a>

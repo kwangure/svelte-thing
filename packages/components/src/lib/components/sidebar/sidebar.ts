@@ -1,20 +1,18 @@
 import { getContext, setContext, tick } from 'svelte';
 import { focustrap } from '../../actions/focustrap.js';
-import { writable } from 'svelte/store';
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+import { writable, type Writable } from 'svelte/store';
 
 export function createSidebar() {
-	/** @typedef {'hidden' | 'hiding' | 'shown' | 'showing'} Status */
-	const visibility = writable(/** @type {Status} */ ('hidden'));
+	const visibility = writable<'hidden' | 'hiding' | 'shown' | 'showing'>(
+		'hidden',
+	);
 	const shouldShowToggle = writable(false);
 
 	const setHidden = () => visibility.set('hidden');
 	const setShown = () => visibility.set('shown');
 
-	/**
-	 * @param {HTMLElement} node
-	 * @param {{ focus?: boolean }} [options]
-	 */
-	function show(node, options) {
+	function show(node: HTMLElement, options?: { focus?: boolean }) {
 		node.addEventListener('click', setShown);
 
 		let { focus = false } = options || {};
@@ -27,8 +25,7 @@ export function createSidebar() {
 		});
 
 		return {
-			/** @param {typeof options} _options */
-			update(_options) {
+			update(_options: typeof options) {
 				({ focus = false } = _options || {});
 			},
 			destroy() {
@@ -38,11 +35,7 @@ export function createSidebar() {
 		};
 	}
 
-	/**
-	 * @param {HTMLElement} node
-	 * @param {{ focus?: boolean }} [options]
-	 */
-	function hide(node, options) {
+	function hide(node: HTMLElement, options?: { focus?: boolean }) {
 		node.addEventListener('click', setHidden);
 
 		let { focus = false } = options || {};
@@ -55,8 +48,7 @@ export function createSidebar() {
 		});
 
 		return {
-			/** @param {typeof options} _options */
-			update(_options) {
+			update(_options: typeof options) {
 				({ focus = false } = _options || {});
 			},
 			destroy() {
@@ -78,9 +70,7 @@ export function createSidebar() {
 const CONTEXT_KEY = '__SIDEBAR__';
 
 export function getSidebarContext() {
-	return /** @type {ReturnType<typeof createSidebar>} */ (
-		getContext(CONTEXT_KEY)
-	);
+	return getContext(CONTEXT_KEY) as ReturnType<typeof createSidebar>;
 }
 
 export function setSidebarContext() {

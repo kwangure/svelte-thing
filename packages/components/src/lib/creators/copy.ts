@@ -1,4 +1,5 @@
-import { get, writable } from 'svelte/store';
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+import { get, writable, type Writable } from 'svelte/store';
 
 export type LineInterval = [number, number];
 
