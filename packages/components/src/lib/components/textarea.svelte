@@ -28,7 +28,7 @@
 		{value}
 		on:change={onchange}
 		on:input={oninput}
-	/>
+	></textarea>
 </div>
 
 <style>

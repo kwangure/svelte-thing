@@ -30,7 +30,7 @@
 		aria-label="Close Menu"
 		use:hide
 		class="overlay-close"
-	/>
+	></button>
 </aside>
 
 <style>

@@ -7,6 +7,5 @@ export * as Navbar from './navbar/index.js';
 export * as Outline from './outline/index.js';
 export * as Shell from './shell/index.js';
 export * as Sidebar from './sidebar/index.js';
-export * as Tab from './tab/index.js';
 export { default as Textarea } from './textarea.svelte';
 export { default as Token } from './token.svelte';

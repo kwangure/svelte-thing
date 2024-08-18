@@ -14,7 +14,7 @@
 	const { shouldShowToggle } = state;
 </script>
 
-<div />
+<div></div>
 <nav>
 	{#if showOpen && $shouldShowToggle}
 		<button title="Open Menu" aria-label="Open Menu" use:show={{ focus: true }}>
