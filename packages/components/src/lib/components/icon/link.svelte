@@ -15,7 +15,7 @@
 		...attributes
 	}: {
 		/* eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any */
-		action: (node: HTMLElement) => any;
+		action?: (node: HTMLElement) => any;
 		href: string;
 		label: string;
 		path: string;
