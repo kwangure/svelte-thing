@@ -1,0 +1,72 @@
+{
+	"name": "@svelte-thing/skinless-components",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"build": "wireit",
+		"pre-commit": "wireit",
+		"publint": "wireit"
+	},
+	"wireit": {
+		"build": {
+			"command": "svelte-package -i ./src",
+			"files": [
+				"src/**/*.{js,ts}",
+				"tsconfig.json",
+				"../../config/tsconfig.base.json"
+			],
+			"output": [
+				"types"
+			]
+		},
+		"publint": {
+			"command": "publint",
+			"dependencies": [
+				"build"
+			],
+			"files": [
+				"src/**",
+				"types/**",
+				"package.json"
+			],
+			"output": []
+		},
+		"pre-commit": {
+			"dependencies": [
+				"build",
+				"publint"
+			]
+		},
+		"release": {
+			"dependencies": [
+				"build",
+				"publint"
+			]
+		}
+	},
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		}
+	},
+	"files": [
+		"dist",
+		"!**/*.test.*",
+		"!**/*.spec.*"
+	],
+	"dependencies": {
+		"@svelte-thing/builders": "workspace:^"
+	},
+	"devDependencies": {
+		"@sveltejs/package": "^2.3.4",
+		"@types/node": "^20.10.5",
+		"publint": "^0.2.6",
+		"svelte": "^5.0.0-next.227",
+		"typescript": "^5.4.5"
+	},
+	"peerDependencies": {
+		"svelte": "^5.0.0-next.227"
+	},
+	"type": "module"
+}
