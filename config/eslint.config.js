@@ -74,6 +74,7 @@ export default [
 				sveltePlugin.configs.recommended.rules
 			),
 			'no-inner-declarations': 'off',
+			'no-unused-vars': 'off',
 		},
 	},
 ];

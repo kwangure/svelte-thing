@@ -1,0 +1,89 @@
+{
+	"name": "@svelte-thing/builders",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"build": "wireit",
+		"pre-commit": "wireit",
+		"publint": "wireit",
+		"test": "wireit"
+	},
+	"wireit": {
+		"build": {
+			"command": "tsc",
+			"files": [
+				"src/**/*.{js,ts}",
+				"tsconfig.json",
+				"../../config/tsconfig.base.json"
+			],
+			"output": [
+				"types"
+			]
+		},
+		"publint": {
+			"command": "publint",
+			"dependencies": [
+				"build"
+			],
+			"files": [
+				"src/**",
+				"types/**",
+				"package.json"
+			],
+			"output": []
+		},
+		"pre-commit": {
+			"dependencies": [
+				"build",
+				"publint",
+				"test"
+			]
+		},
+		"release": {
+			"dependencies": [
+				"build",
+				"publint",
+				"test"
+			]
+		},
+		"test": {
+			"command": "vitest run",
+			"files": [
+				"src/**/*.{js,ts}",
+				"tests/**/*.{js,ts}"
+			],
+			"output": []
+		}
+	},
+	"exports": {
+		".": {
+			"types": "./dist/src/index.d.ts",
+			"default": "./dist/src/index.js"
+		},
+		"./combobox": {
+			"types": "./dist/src/combobox/index.d.ts",
+			"default": "./dist/src/combobox/index.js"
+		}
+	},
+	"files": [
+		"dist",
+		"!**/*.test.*",
+		"!**/*.spec.*"
+	],
+	"dependencies": {
+		"@svelte-thing/dom-event": "workspace:^",
+		"@svelte-thing/state-event": "workspace:^",
+		"uid": "^2.0.2"
+	},
+	"devDependencies": {
+		"@sveltejs/vite-plugin-svelte": "^3.0.0",
+		"@types/node": "^20.10.5",
+		"jsdom": "^25.0.0",
+		"publint": "^0.2.6",
+		"svelte": "5.0.0-next.227",
+		"typescript": "^5.4.5",
+		"vite": "^5.0.0",
+		"vitest": "^1.6.0"
+	},
+	"type": "module"
+}
