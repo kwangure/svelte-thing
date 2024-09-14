@@ -1,7 +1,6 @@
 {
 	"name": "@svelte-thing/skinless-components",
 	"version": "0.0.0",
-	"private": true,
 	"scripts": {
 		"build": "wireit",
 		"pre-commit": "wireit",
