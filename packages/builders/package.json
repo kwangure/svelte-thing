@@ -58,10 +58,12 @@
 	"exports": {
 		".": {
 			"types": "./dist/src/index.d.ts",
+			"svelte": "./dist/src/index.js",
 			"default": "./dist/src/index.js"
 		},
 		"./combobox": {
 			"types": "./dist/src/combobox/index.d.ts",
+			"svelte": "./dist/src/combobox/index.js",
 			"default": "./dist/src/combobox/index.js"
 		}
 	},
@@ -71,8 +73,8 @@
 		"!**/*.spec.*"
 	],
 	"dependencies": {
-		"@svelte-thing/dom-event": "workspace:^",
-		"@svelte-thing/state-event": "workspace:^",
+		"@svelte-thing/dom-event": "^0.0.0",
+		"@svelte-thing/state-event": "^0.0.0",
 		"uid": "^2.0.2"
 	},
 	"devDependencies": {
