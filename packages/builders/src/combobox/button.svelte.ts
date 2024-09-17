@@ -1,4 +1,4 @@
-import type { ComboboxBuilder } from './root.svelte.js';
+import { rootEvent, type ComboboxBuilder } from './root.svelte.js';
 
 export interface CreateComboboxButtonConfig<TOption> {
 	combobox: ComboboxBuilder<TOption>;
@@ -22,9 +22,9 @@ export function createComboboxButton<TOption>(
 		},
 		onclick() {
 			if (combobox.isOpen) {
-				operations.close();
+				operations.emitEvent(rootEvent.close);
 			} else {
-				operations.open();
+				operations.emitEvent(rootEvent.open);
 			}
 		},
 		tabindex: -1,

@@ -1,5 +1,9 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { createCombobox, type ComboboxBuilder } from './root.svelte.js';
+import {
+	createCombobox,
+	rootEvent,
+	type ComboboxBuilder,
+} from './root.svelte.js';
 import { createComboboxInput } from './input.svelte.js';
 import { createListboxItem } from './listboxitem.svelte.js';
 
@@ -60,7 +64,7 @@ describe('combobox', () => {
 		});
 
 		it('Enter accepts the autocomplete suggestion if one is selected', () => {
-			combobox.operations.open();
+			combobox.operations.emitEvent(rootEvent.open);
 			expect(combobox.visualFocus).toBe('input');
 			const event = new KeyboardEvent('keydown', { key: 'Enter' });
 			input.properties.onkeydown(event);
@@ -82,7 +86,8 @@ describe('combobox', () => {
 		});
 
 		it('Alt+ArrowUp closes the popup and returns focus to the combobox', () => {
-			combobox.operations.openAndSetFirstItemActive();
+			combobox.operations.emitEvent(rootEvent.open);
+			combobox.operations.emitEvent(rootEvent.set.firstItemActive);
 			expect(combobox.visualFocus).toBe('listbox');
 			const event = new KeyboardEvent('keydown', {
 				key: 'ArrowUp',
@@ -96,7 +101,8 @@ describe('combobox', () => {
 
 	describe('When focus is on the listbox popup', () => {
 		beforeEach(() => {
-			combobox.operations.openAndSetFirstItemActive();
+			combobox.operations.emitEvent(rootEvent.open);
+			combobox.operations.emitEvent(rootEvent.set.firstItemActive);
 		});
 
 		it('Enter accepts the focused option', () => {
@@ -122,7 +128,7 @@ describe('combobox', () => {
 		});
 
 		it('ArrowUp moves focus to and selects the previous option', () => {
-			combobox.operations.setNextActiveItem();
+			combobox.operations.emitEvent(rootEvent.set.nextItemActive);
 			expect(combobox.activeItem).toEqual(options[1]);
 			const event = new KeyboardEvent('keydown', { key: 'ArrowUp' });
 			input.properties.onkeydown(event);

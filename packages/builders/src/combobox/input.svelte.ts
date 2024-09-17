@@ -1,4 +1,4 @@
-import { ROOT, type ComboboxBuilder } from './root.svelte.js';
+import { rootEvent, type ComboboxBuilder } from './root.svelte.js';
 import { Keys, Mod, eventToKeys, cancelEvent } from '@svelte-thing/dom-event';
 import { node } from '@svelte-thing/state-event';
 
@@ -9,22 +9,22 @@ export interface CreateComboboxInputConfig<TOption> {
 const createInputEvent = (...type: (string | number)[]) =>
 	`input.${type.join('.')}`;
 
-export const INPUT = {
-	INPUT: createInputEvent('input'),
-	KEYDOWN: {
-		ALT_ARROW_DOWN: createInputEvent('keydown', Mod.Alt | Keys.ArrowDown),
-		ARROW_DOWN: createInputEvent('keydown', Keys.ArrowDown),
-		ALT_ARROW_UP: createInputEvent('keydown', Mod.Alt | Keys.ArrowUp),
-		ARROW_UP: createInputEvent('keydown', Keys.ArrowUp),
-		END: createInputEvent('keydown', Keys.End),
-		ENTER: createInputEvent('keydown', Keys.Enter),
-		ESC: createInputEvent('keydown', Keys.Escape),
-		HOME: createInputEvent('keydown', Keys.Home),
-		TAB: createInputEvent('keydown', Keys.Tab),
+export const inputEvent = {
+	input: createInputEvent('input'),
+	keydown: {
+		AltArrowDown: createInputEvent('keydown', Mod.Alt | Keys.ArrowDown),
+		ArrowDown: createInputEvent('keydown', Keys.ArrowDown),
+		AltArrowUp: createInputEvent('keydown', Mod.Alt | Keys.ArrowUp),
+		ArrowUp: createInputEvent('keydown', Keys.ArrowUp),
+		End: createInputEvent('keydown', Keys.End),
+		Enter: createInputEvent('keydown', Keys.Enter),
+		Escape: createInputEvent('keydown', Keys.Escape),
+		Home: createInputEvent('keydown', Keys.Home),
+		Tab: createInputEvent('keydown', Keys.Tab),
 	},
-	KEYUP: {
-		BACKSPACE: createInputEvent('keyup', Keys.Backspace),
-		DELETE: createInputEvent('keyup', Keys.Delete),
+	keyup: {
+		Backspace: createInputEvent('keyup', Keys.Backspace),
+		Delete: createInputEvent('keyup', Keys.Delete),
 	},
 } as const;
 
@@ -38,78 +38,83 @@ export function createComboboxInput<TOption>({
 	operations.appendChild(
 		node({
 			on: {
-				[INPUT.INPUT]() {
-					operations.clearActiveItem();
+				[inputEvent.input]() {
+					operations.emitEvent(rootEvent.clear.activeItem);
 					if (!combobox.isOpen && element?.value.length) {
-						operations.open();
+						operations.emitEvent(rootEvent.open);
 					}
 				},
-				[INPUT.KEYDOWN.ALT_ARROW_DOWN](event: unknown) {
-					operations.open();
+				[inputEvent.keydown.AltArrowDown](event: unknown) {
+					operations.emitEvent(rootEvent.open);
 					cancelEvent(event as Event);
 				},
-				[INPUT.KEYDOWN.ARROW_DOWN](event: Event) {
+				[inputEvent.keydown.ArrowDown](event: Event) {
 					if (combobox.isOpen) {
-						operations.setNextActiveItem();
+						operations.emitEvent(rootEvent.set.nextItemActive);
 					} else {
-						operations.openAndSetFirstItemActive();
+						operations.emitEvent(rootEvent.open);
+						operations.emitEvent(rootEvent.set.firstItemActive);
 					}
 					cancelEvent(event);
 				},
-				[INPUT.KEYDOWN.ALT_ARROW_UP](event) {
-					operations.close();
+				[inputEvent.keydown.AltArrowUp](event) {
+					operations.emitEvent(rootEvent.close);
 					cancelEvent(event as Event);
 				},
-				[INPUT.KEYDOWN.ARROW_UP](event: Event) {
+				[inputEvent.keydown.ArrowUp](event: Event) {
 					if (combobox.isOpen) {
-						operations.setPreviousActiveItem();
+						operations.emitEvent(rootEvent.set.previousItemActive);
 					} else {
-						operations.openAndSetLastItemActive();
+						operations.emitEvent(rootEvent.open);
+						operations.emitEvent(rootEvent.set.lastItemActive);
 					}
 					cancelEvent(event);
 				},
-				[INPUT.KEYDOWN.END]() {
+				[inputEvent.keydown.End]() {
 					element?.setSelectionRange(
 						element.value.length,
 						element.value.length,
 					);
 				},
-				[INPUT.KEYDOWN.ENTER](event: Event) {
+				[inputEvent.keydown.Enter](event: Event) {
 					if (combobox.activeItem) {
-						operations.emitEvent(ROOT.SET.VALUE, combobox.activeItem);
+						operations.emitEvent(rootEvent.set.value, combobox.activeItem);
 					}
-					operations.close();
+					operations.emitEvent(rootEvent.close);
 					cancelEvent(event);
 				},
-				[INPUT.KEYDOWN.ESC](event: Event) {
+				[inputEvent.keydown.Escape](event: Event) {
+					console.log(
+						'received escape', 'isOpen:', combobox.isOpen,
+					)
 					if (combobox.isOpen) {
-						operations.close();
+						operations.emitEvent(rootEvent.close);
 					} else {
-						operations.clearActiveItem();
+						operations.emitEvent(rootEvent.clear.activeItem);
 						if (element) {
 							element.value = '';
 						}
 					}
 					cancelEvent(event);
 				},
-				[INPUT.KEYDOWN.HOME]() {
+				[inputEvent.keydown.Home]() {
 					element?.setSelectionRange(0, 0);
 				},
-				[INPUT.KEYDOWN.TAB]() {
+				[inputEvent.keydown.Tab]() {
 					if (combobox.activeItem) {
-						operations.emitEvent(ROOT.SET.VALUE, combobox.activeItem);
+						operations.emitEvent(rootEvent.set.value, combobox.activeItem);
 					}
-					operations.close();
+					operations.emitEvent(rootEvent.close);
 				},
-				[INPUT.KEYUP.BACKSPACE](event: Event) {
-					operations.clearActiveItem();
+				[inputEvent.keyup.Backspace](event: Event) {
+					operations.emitEvent(rootEvent.clear.activeItem);
 					cancelEvent(event);
 				},
-				[INPUT.KEYUP.DELETE](event: Event) {
-					operations.clearActiveItem();
+				[inputEvent.keyup.Delete](event: Event) {
+					operations.emitEvent(rootEvent.clear.activeItem);
 					cancelEvent(event);
 				},
-				[ROOT.SET.VALUE](value: TOption) {
+				[rootEvent.set.value](value: TOption) {
 					if (element && setInputValue) {
 						element.value = setInputValue(value);
 					}
@@ -142,13 +147,13 @@ export function createComboboxInput<TOption>({
 		id: combobox.ids.input,
 		onclick() {
 			if (combobox.isOpen) {
-				operations.close();
+				operations.emitEvent(rootEvent.close);
 			} else {
-				operations.open();
+				operations.emitEvent(rootEvent.open);
 			}
 		},
 		oninput(event: Event) {
-			operations.emitEvent(INPUT.INPUT, event);
+			operations.emitEvent(inputEvent.input, event);
 		},
 		onkeydown(event: KeyboardEvent) {
 			operations.emitEvent(

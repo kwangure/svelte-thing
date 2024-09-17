@@ -1,4 +1,4 @@
-import type { ComboboxBuilder } from './root.svelte.js';
+import { rootEvent, type ComboboxBuilder } from './root.svelte.js';
 import { cancelEvent } from '@svelte-thing/dom-event';
 
 interface CreateColorListPreviousConfig<TOption> {
@@ -23,7 +23,7 @@ export function createComboboxPrevious<TOption>(
 				cancelEvent(event);
 			},
 			onclick() {
-				combobox.operations.setPreviousActiveItem();
+				combobox.operations.emitEvent(rootEvent.set.previousItemActive);
 			},
 		},
 	};

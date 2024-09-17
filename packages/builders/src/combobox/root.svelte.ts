@@ -1,4 +1,4 @@
-import { INPUT } from './input.svelte.js';
+import { inputEvent } from './input.svelte.js';
 import {
 	appendChild,
 	emitEvent,
@@ -30,14 +30,24 @@ export type ComboboxBuilder<TOption> = ReturnType<
 	typeof createCombobox<TOption>
 >;
 
-const createRoot = (...type: (string | number)[]) => `root.${type.join('.')}`;
+const createRootEvent = (...type: (string | number)[]) =>
+	`root.${type.join('.')}`;
 
-export const ROOT = {
-	SET: {
-		ACTIVE_ITEM_INDEX: createRoot('set', 'activeItemIndex'),
-		ISOPEN: createRoot('set', 'isOpen'),
-		VALUE: createRoot('set', 'value'),
-		VISUAL_FOCUS: createRoot('set', 'visualFocus'),
+export const rootEvent = {
+	clear: {
+		activeItem: createRootEvent('clear', 'activeItem'),
+	},
+	close: createRootEvent('close'),
+	open: createRootEvent('open'),
+	set: {
+		activeItemIndex: createRootEvent('set', 'activeItemIndex'),
+		firstItemActive: createRootEvent('set', 'firstItemActive'),
+		lastItemActive: createRootEvent('set', 'lastItemActive'),
+		nextItemActive: createRootEvent('set', 'nextItemActive'),
+		previousItemActive: createRootEvent('set', 'previousItemActive'),
+		isOpen: createRootEvent('set', 'isOpen'),
+		value: createRootEvent('set', 'value'),
+		visualFocus: createRootEvent('set', 'visualFocus'),
 	},
 };
 
@@ -61,17 +71,65 @@ export function createCombobox<TOption>(config: CreateCombmboxConfig<TOption>) {
 	// TODO: validate event values in DEV mode
 	const state = node({
 		on: {
-			[INPUT.INPUT](event: unknown) {
+			[inputEvent.input](event: unknown) {
 				inputValue = (event as Event & { currentTarget: HTMLInputElement })
 					.currentTarget.value;
 			},
-			[ROOT.SET.ACTIVE_ITEM_INDEX](value: unknown) {
+			[rootEvent.clear.activeItem]() {
+				operations.emitEvent(rootEvent.set.activeItemIndex, -1);
+				operations.emitEvent(rootEvent.set.visualFocus, 'input');
+			},
+			[rootEvent.close]() {
+				operations.emitEvent(rootEvent.set.isOpen, false);
+				operations.emitEvent(rootEvent.set.activeItemIndex, -1);
+				operations.emitEvent(rootEvent.set.visualFocus, 'input');
+			},
+			[rootEvent.open]() {
+				operations.emitEvent(rootEvent.set.isOpen, true);
+			},
+			[rootEvent.set.activeItemIndex](value: unknown) {
 				activeItemIndex = value as number;
 			},
-			[ROOT.SET.VALUE](v: unknown) {
+			[rootEvent.set.firstItemActive]() {
+				operations.emitEvent(rootEvent.set.activeItemIndex, 0);
+				operations.emitEvent(rootEvent.set.visualFocus, 'listbox');
+			},
+			[rootEvent.set.isOpen](value: unknown) {
+				isOpen = value as boolean;
+			},
+			[rootEvent.set.lastItemActive]() {
+				operations.emitEvent(
+					rootEvent.set.activeItemIndex,
+					filteredOptions.length - 1,
+				);
+				operations.emitEvent(rootEvent.set.visualFocus, 'listbox');
+			},
+			[rootEvent.set.nextItemActive]() {
+				// - Set to: 0,...,activeCollection.length,0,...
+				// - For activeCollection[activeCollection.length] i.e. `undefined`, focus is set on the input
+				const length =
+					filteredOptions.length + +Boolean(config.includesBaseElement);
+				operations.emitEvent(
+					rootEvent.set.activeItemIndex,
+					(activeItemIndex + 1) % length,
+				);
+				operations.emitEvent(rootEvent.set.visualFocus, 'listbox');
+			},
+			[rootEvent.set.previousItemActive]() {
+				// - Set to: activeCollection.length,...,0,activeCollection.length,...
+				// - For activeCollection[activeCollection.length] i.e. `undefined`, focus is set on the input
+				const length =
+					filteredOptions.length + +Boolean(config.includesBaseElement);
+				operations.emitEvent(
+					rootEvent.set.activeItemIndex,
+					-(activeItemIndex - 1 + length) % length,
+				);
+				operations.emitEvent(rootEvent.set.visualFocus, 'listbox');
+			},
+			[rootEvent.set.value](v: unknown) {
 				value = v as TOption;
 			},
-			[ROOT.SET.VISUAL_FOCUS](v: unknown) {
+			[rootEvent.set.visualFocus](v: unknown) {
 				visualFocus = v as ComboboxVisualFocus;
 			},
 		},
@@ -81,63 +139,8 @@ export function createCombobox<TOption>(config: CreateCombmboxConfig<TOption>) {
 		appendChild(child: StateNode) {
 			appendChild(state, child);
 		},
-		clearActiveItem() {
-			operations.emitEvent(ROOT.SET.ACTIVE_ITEM_INDEX, -1);
-			operations.emitEvent(ROOT.SET.VISUAL_FOCUS, 'input');
-		},
-		close() {
-			isOpen = false;
-			operations.emitEvent(ROOT.SET.ACTIVE_ITEM_INDEX, -1);
-			visualFocus = 'input';
-		},
-		closeAndSetValueToItem(v: TOption) {
-			operations.emitEvent(ROOT.SET.VALUE, v);
-			operations.close();
-		},
-		emitEvent(type: string, value: unknown) {
+		emitEvent(type: string, value?: unknown) {
 			emitEvent(state, type, value);
-		},
-		open() {
-			isOpen = true;
-		},
-		openAndSetFirstItemActive() {
-			isOpen = true;
-			visualFocus = 'listbox';
-			operations.emitEvent(ROOT.SET.ACTIVE_ITEM_INDEX, 0);
-		},
-		openAndSetLastItemActive() {
-			isOpen = true;
-			visualFocus = 'listbox';
-			operations.emitEvent(
-				ROOT.SET.ACTIVE_ITEM_INDEX,
-				filteredOptions.length - 1,
-			);
-		},
-		setVisualFocusInputAndClearActiveItem() {
-			visualFocus = 'input';
-			operations.emitEvent(ROOT.SET.ACTIVE_ITEM_INDEX, -1);
-		},
-		setNextActiveItem() {
-			// - Set to: 0,...,activeCollection.length,0,...
-			// - For activeCollection[activeCollection.length] i.e. `undefined`, focus is set on the input
-			const length =
-				filteredOptions.length + +Boolean(config.includesBaseElement);
-			operations.emitEvent(
-				ROOT.SET.ACTIVE_ITEM_INDEX,
-				(activeItemIndex + 1) % length,
-			);
-			visualFocus = 'listbox';
-		},
-		setPreviousActiveItem() {
-			// - Set to: activeCollection.length,...,0,activeCollection.length,...
-			// - For activeCollection[activeCollection.length] i.e. `undefined`, focus is set on the input
-			const length =
-				filteredOptions.length + +Boolean(config.includesBaseElement);
-			operations.emitEvent(
-				ROOT.SET.ACTIVE_ITEM_INDEX,
-				-(activeItemIndex - 1 + length) % length,
-			);
-			visualFocus = 'listbox';
 		},
 	};
 
@@ -183,7 +186,7 @@ export function createCombobox<TOption>(config: CreateCombmboxConfig<TOption>) {
 		operations,
 		properties: {
 			onclickoutside() {
-				operations.close();
+				operations.emitEvent(rootEvent.close);
 			},
 		},
 	};
