@@ -8,7 +8,7 @@ export function createComboboxListbox<TOption>(
 	config: CreateComboboxListboxConfig<TOption>,
 ) {
 	const { combobox } = config;
-	const listbox = {
+	return {
 		properties: {
 			get ['aria-label']() {
 				return combobox.label;
@@ -17,6 +17,4 @@ export function createComboboxListbox<TOption>(
 			role: 'listbox',
 		},
 	};
-
-	return listbox;
 }

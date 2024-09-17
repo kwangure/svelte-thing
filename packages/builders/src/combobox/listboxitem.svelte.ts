@@ -1,4 +1,4 @@
-import { ROOT, type ComboboxBuilder } from './root.svelte.js';
+import { rootEvent, type ComboboxBuilder } from './root.svelte.js';
 
 export interface ComboboxListboxItemState<T> {
 	operations: {
@@ -18,26 +18,16 @@ export function createListboxItem<TOption>(
 	const { operations } = combobox;
 	const isActive = $derived(Object.is(config.value, combobox.activeItem));
 
-	let element: HTMLElement;
-
 	return {
-		action(node: HTMLElement) {
-			element = node;
-		},
-		get element() {
-			return element;
-		},
-		get isActive() {
-			return isActive;
-		},
+		action(_node: HTMLElement) {},
 		properties: {
 			get ['aria-selected']() {
 				return isActive;
 			},
 			role: 'option',
 			onclick() {
-				operations.emitEvent(ROOT.SET.VALUE, config.value);
-				operations.close();
+				operations.emitEvent(rootEvent.set.value, config.value);
+				operations.emitEvent(rootEvent.close);
 			},
 			get ['data-active-item']() {
 				return isActive || undefined;

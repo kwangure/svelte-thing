@@ -56,7 +56,7 @@
 		"!**/*.spec.*"
 	],
 	"dependencies": {
-		"@svelte-thing/builders": "workspace:^"
+		"@svelte-thing/builders": "^0.0.0"
 	},
 	"devDependencies": {
 		"@sveltejs/package": "^2.3.4",
