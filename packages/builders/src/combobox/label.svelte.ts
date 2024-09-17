@@ -8,13 +8,11 @@ export function createComboboxLabel<TOption>(
 	config: CreateComboboxLabelConfig<TOption>,
 ) {
 	const { combobox } = config;
-	const label = {
+	return {
 		properties: {
 			get for() {
 				return combobox.ids.input;
 			},
 		},
 	};
-
-	return label;
 }

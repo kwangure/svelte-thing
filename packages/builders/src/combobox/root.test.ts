@@ -15,8 +15,10 @@ describe('combobox', () => {
 	let input: ReturnType<typeof createComboboxInput>;
 	let listboxItems: Map<string, ReturnType<typeof createListboxItem>>;
 	let options: Fruit[];
+	let cleanup: (() => void)[];
 	const setInputValue = (fruit: Fruit) => fruit?.name;
 	beforeEach(() => {
+		cleanup = [];
 		options = [
 			{ name: 'Apple' },
 			{ name: 'Banana' },
@@ -36,9 +38,10 @@ describe('combobox', () => {
 			options,
 			setInputValue,
 		});
+		cleanup.push(combobox.action(document.createElement('div')).destroy);
+
 		input = createComboboxInput({ combobox });
-		const inputElement = document.createElement('input');
-		input.action(inputElement);
+		cleanup.push(input.action(document.createElement('input')).destroy);
 		listboxItems = new Map();
 		for (const option of options) {
 			const item = createListboxItem({ combobox, value: option });

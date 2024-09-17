@@ -10,30 +10,27 @@ export function createComboboxButton<TOption>(
 ) {
 	const { combobox } = config;
 	const { operations } = combobox;
-	const properties = {
-		get ['aria-controls']() {
-			return combobox.ids.listbox;
-		},
-		get ['aria-expanded']() {
-			return combobox.isOpen;
-		},
-		get ['aria-label']() {
-			return config.label;
-		},
-		onclick() {
-			if (combobox.isOpen) {
-				operations.emitEvent(rootEvent.close);
-			} else {
-				operations.emitEvent(rootEvent.open);
-			}
-		},
-		tabindex: -1,
-		type: 'button' as const,
-	};
 
-	const button = {
-		properties,
+	return {
+		properties: {
+			get ['aria-controls']() {
+				return combobox.ids.listbox;
+			},
+			get ['aria-expanded']() {
+				return combobox.isOpen;
+			},
+			get ['aria-label']() {
+				return config.label;
+			},
+			onclick() {
+				if (combobox.isOpen) {
+					operations.emitEvent(rootEvent.close);
+				} else {
+					operations.emitEvent(rootEvent.open);
+				}
+			},
+			tabindex: -1,
+			type: 'button' as const,
+		},
 	};
-
-	return button;
 }
