@@ -5,17 +5,23 @@
 		getComboboxContext,
 	} from '@svelte-thing/builders';
 
-	type ButtonProps = Omit<HTMLButtonAttributes, keyof typeof properties>;
+	type ComboboxButton = ReturnType<typeof createComboboxButton>;
+	type ButtonProps = Omit<
+		HTMLButtonAttributes,
+		keyof ComboboxButton['properties']
+	>;
 
-	const { ...attributes }: ButtonProps = $props();
+	const { label, ...attributes }: { label: string } & ButtonProps = $props();
 	const combobox = getComboboxContext();
-	const { properties } = createComboboxButton({
+	const button = createComboboxButton({
 		combobox,
-		label: 'Show suggestions',
+		get label() {
+			return label;
+		},
 	});
 </script>
 
-<button {...attributes} {...properties}>
+<button {...attributes} {...button.properties}>
 	<span aria-hidden="true" style="padding: 0 2px;">▼</span>
 </button>
 
