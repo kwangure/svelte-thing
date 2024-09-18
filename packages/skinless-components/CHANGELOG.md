@@ -1,5 +1,14 @@
 # @svelte-thing/skinless-components
 
+## 0.0.1
+
+### Patch Changes
+
+- de885f5: Use listbox item action
+- Updated dependencies [de885f5]
+- Updated dependencies [3c8deed]
+  - @svelte-thing/builders@0.0.1
+
 ## 0.0.0
 
 ### Patch Changes
