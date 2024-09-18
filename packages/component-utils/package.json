@@ -59,8 +59,9 @@
 	},
 	"files": [
 		"dist",
-		"!**/*.test.*",
-		"!**/*.spec.*"
+		"!**/*.test.js",
+		"!**/*.test.js.map",
+		"!**/*.test.d.ts"
 	],
 	"devDependencies": {
 		"@types/node": "^20.10.5",

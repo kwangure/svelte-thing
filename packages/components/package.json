@@ -181,8 +181,9 @@
 	},
 	"files": [
 		"dist",
-		"!**/*.test.*",
-		"!**/*.spec.*"
+		"!**/*.test.js",
+		"!**/*.test.js.map",
+		"!**/*.test.d.ts"
 	],
 	"dependencies": {
 		"@mdi/js": "^7.2.96",

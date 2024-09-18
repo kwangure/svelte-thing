@@ -69,6 +69,7 @@
 	"files": [
 		"dist",
 		"!**/*.test.js",
+		"!**/*.test.js.map",
 		"!**/*.test.d.ts"
 	],
 	"dependencies": {

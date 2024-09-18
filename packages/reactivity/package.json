@@ -60,8 +60,9 @@
 	},
 	"files": [
 		"dist",
-		"!**/*.test.*",
-		"!**/*.spec.*"
+		"!**/*.test.js",
+		"!**/*.test.js.map",
+		"!**/*.test.d.ts"
 	],
 	"dependencies": {
 		"uid": "^2.0.2"
