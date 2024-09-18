@@ -1,15 +1,23 @@
 <script lang="ts">
 	import type { HTMLButtonAttributes } from 'svelte/elements';
-	import { getComboboxContext } from './context';
-	import { createComboboxNext } from '@svelte-thing/builders';
+	import {
+		createComboboxNext,
+		getComboboxContext,
+	} from '@svelte-thing/builders';
 
-	type ButtonProps = Omit<HTMLButtonAttributes, keyof typeof properties>;
+	type ComboboxNext = ReturnType<typeof createComboboxNext>;
+	type ButtonProps = Omit<
+		HTMLButtonAttributes,
+		keyof ComboboxNext['properties']
+	>;
 
-	const { ...attributes }: ButtonProps = $props();
+	const { label, ...attributes }: { label: string } & ButtonProps = $props();
 	const combobox = getComboboxContext();
 	const { properties } = createComboboxNext({
 		combobox,
-		label: 'Next',
+		get label() {
+			return label;
+		},
 	});
 </script>
 
