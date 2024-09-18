@@ -186,6 +186,9 @@ export function createCombobox<TOption>(config: CreateCombmboxConfig<TOption>) {
 		get hasInputCompletion() {
 			return config.hasInputCompletion ?? false;
 		},
+		get inputValue() {
+			return inputValue;
+		},
 		get isOpen() {
 			return isOpen;
 		},
