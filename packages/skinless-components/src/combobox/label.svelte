@@ -14,6 +14,6 @@
 	{#if children}
 		{@render children()}
 	{:else}
-		{combobox.config.label}
+		{combobox.label}
 	{/if}
 </label>

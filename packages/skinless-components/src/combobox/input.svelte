@@ -5,7 +5,11 @@
 		getComboboxContext,
 	} from '@svelte-thing/builders';
 
-	type InputProps = Omit<HTMLInputAttributes, keyof typeof input.properties>;
+	type ComboboxInput = ReturnType<typeof createComboboxInput>;
+	type InputProps = Omit<
+		HTMLInputAttributes,
+		keyof ComboboxInput['properties']
+	>;
 
 	const { ...attributes }: InputProps = $props();
 	const combobox = getComboboxContext();

@@ -10,7 +10,7 @@
 
 	const { children, value }: { children?: Snippet; value: TOption } = $props();
 	const combobox = getComboboxContext<TOption>();
-	const { properties } = createListboxItem({
+	const listboxItem = createListboxItem({
 		combobox,
 		get value() {
 			return value;
@@ -18,7 +18,7 @@
 	});
 </script>
 
-<li {...properties}>
+<li {...listboxItem.properties} use:listboxItem.action>
 	{#if children}
 		{@render children()}
 	{/if}

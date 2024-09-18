@@ -15,7 +15,6 @@ export interface CreateCombmboxConfig<TOption> {
 	hasInputCompletion?: false;
 	includesBaseElement?: boolean;
 	label: string;
-	onchange?: (selectedValue: TOption) => void;
 	options?: TOption[];
 	setInputValue?: (selectedValue: TOption) => string;
 }
@@ -186,6 +185,9 @@ export function createCombobox<TOption>(config: CreateCombmboxConfig<TOption>) {
 		},
 		get hasInputCompletion() {
 			return config.hasInputCompletion ?? false;
+		},
+		get inputValue() {
+			return inputValue;
 		},
 		get isOpen() {
 			return isOpen;

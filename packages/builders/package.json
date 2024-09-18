@@ -9,7 +9,7 @@
 	},
 	"wireit": {
 		"build": {
-			"command": "tsc",
+			"command": "tsc --build",
 			"files": [
 				"src/**/*.{js,ts}",
 				"tsconfig.json",
@@ -56,20 +56,20 @@
 	},
 	"exports": {
 		".": {
-			"types": "./dist/src/index.d.ts",
-			"svelte": "./dist/src/index.js",
-			"default": "./dist/src/index.js"
+			"types": "./dist/index.d.ts",
+			"svelte": "./dist/index.js",
+			"default": "./dist/index.js"
 		},
 		"./combobox": {
-			"types": "./dist/src/combobox/index.d.ts",
-			"svelte": "./dist/src/combobox/index.js",
-			"default": "./dist/src/combobox/index.js"
+			"types": "./dist/combobox/index.d.ts",
+			"svelte": "./dist/combobox/index.js",
+			"default": "./dist/combobox/index.js"
 		}
 	},
 	"files": [
 		"dist",
-		"!**/*.test.*",
-		"!**/*.spec.*"
+		"!**/*.test.js",
+		"!**/*.test.d.ts"
 	],
 	"dependencies": {
 		"@svelte-thing/dom-event": "^0.0.0",

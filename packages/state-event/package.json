@@ -59,8 +59,8 @@
 	},
 	"files": [
 		"dist",
-		"!**/*.test.*",
-		"!**/*.spec.*"
+		"!**/*.test.js",
+		"!**/*.test.d.ts"
 	],
 	"dependencies": {
 		"uid": "^2.0.2"
