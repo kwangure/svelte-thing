@@ -15,7 +15,6 @@ export interface CreateCombmboxConfig<TOption> {
 	hasInputCompletion?: false;
 	includesBaseElement?: boolean;
 	label: string;
-	onchange?: (selectedValue: TOption) => void;
 	options?: TOption[];
 	setInputValue?: (selectedValue: TOption) => string;
 }

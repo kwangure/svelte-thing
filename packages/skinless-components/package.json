@@ -52,8 +52,8 @@
 	},
 	"files": [
 		"dist",
-		"!**/*.test.*",
-		"!**/*.spec.*"
+		"!**/*.test.js",
+		"!**/*.test.d.ts"
 	],
 	"dependencies": {
 		"@svelte-thing/builders": "^0.0.0"
