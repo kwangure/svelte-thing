@@ -5,8 +5,12 @@
 	import { type HighlightResult } from '../../code/highlight.js';
 	import Token from '../token.svelte';
 
-	export let attributes: Record<string, unknown> | undefined = undefined;
-	export let tokens: HighlightResult[];
+	interface Props {
+		attributes?: Record<string, unknown>;
+		tokens: HighlightResult[];
+	}
+
+	const { attributes, tokens }: Props = $props();
 </script>
 
 <code {...attributes}>

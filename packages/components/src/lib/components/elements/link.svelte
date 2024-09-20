@@ -1,12 +1,18 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import '../../css/color.css';
 	import '../../css/size.css';
 
-	export let href: string | undefined = undefined;
-	export let title: string | null | undefined = undefined;
+	interface Props {
+		children: Snippet;
+		href: string;
+		title?: string;
+	}
+
+	const { href, title, children }: Props = $props();
 </script>
 
-<a {href} {title}><slot /></a>
+<a {href} {title}>{@render children()}</a>
 
 <style>
 	a {

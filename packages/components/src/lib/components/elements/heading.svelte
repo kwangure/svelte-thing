@@ -1,25 +1,31 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import '../../css/breakpoint.css';
 	import '../../css/color-preference.css';
 	import '../../css/color.css';
 	import '../../css/size.css';
 
-	export let attributes: Record<string, unknown> = {};
-	export let rank: 1 | 2 | 3 | 4 | 5 | 6;
+	interface Props {
+		attributes?: Record<string, unknown>;
+		rank: 1 | 2 | 3 | 4 | 5 | 6;
+		children: Snippet;
+	}
+
+	const { attributes = {}, rank, children }: Props = $props();
 </script>
 
 {#if rank === 1}
-	<h1 {...attributes}><slot /></h1>
+	<h1 {...attributes}>{@render children()}</h1>
 {:else if rank === 2}
-	<h2 {...attributes}><slot /></h2>
+	<h2 {...attributes}>{@render children()}</h2>
 {:else if rank === 3}
-	<h3 {...attributes}><slot /></h3>
+	<h3 {...attributes}>{@render children()}</h3>
 {:else if rank === 4}
-	<h4 {...attributes}><slot /></h4>
+	<h4 {...attributes}>{@render children()}</h4>
 {:else if rank === 5}
-	<h5 {...attributes}><slot /></h5>
+	<h5 {...attributes}>{@render children()}</h5>
 {:else if rank === 6}
-	<h6 {...attributes}><slot /></h6>
+	<h6 {...attributes}>{@render children()}</h6>
 {/if}
 
 <style>

@@ -1,2 +1,2 @@
-export * from './copy.js';
+export * from './copy.svelte.js';
 export * from './darkmode.js';
