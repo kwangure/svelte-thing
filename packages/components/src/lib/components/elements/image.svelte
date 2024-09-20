@@ -1,6 +1,10 @@
 <script lang="ts">
-	export let alt: string | null | undefined = undefined;
-	export let src: string;
+	interface Props {
+		alt?: string;
+		src: string;
+	}
+
+	const { alt, src }: Props = $props();
 </script>
 
 <img {alt} {src} />

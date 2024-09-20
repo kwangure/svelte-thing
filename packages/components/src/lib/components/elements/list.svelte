@@ -1,13 +1,19 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
 	import '../../css/size.css';
 
-	export let ordered: boolean | null | undefined;
+	interface Props {
+		ordered?: boolean;
+		children: Snippet;
+	}
+
+	const { ordered, children }: Props = $props();
 </script>
 
 {#if ordered}
-	<ol><slot /></ol>
+	<ol>{@render children()}</ol>
 {:else}
-	<ul><slot /></ul>
+	<ul>{@render children()}</ul>
 {/if}
 
 <style>

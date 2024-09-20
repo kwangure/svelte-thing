@@ -5,20 +5,21 @@
 
 	import { mdiCheck, mdiContentCopy } from '@mdi/js';
 	import { Icon, Token } from '../../components/index.js';
-	import { createCopier, type LineInterval } from '../../creators/copy.js';
+	import {
+		createCopier,
+		type LineInterval,
+	} from '../../creators/copy.svelte.js';
 	import type { HighlightResult } from '../../code/highlight.js';
 
-	export let attributes: Record<string, unknown> | undefined = undefined;
-	export let lines: HighlightResult[][];
-	export let copyRanges: LineInterval[] | undefined = undefined;
-	export let copyText: string | undefined = undefined;
+	interface Props {
+		attributes?: Record<string, unknown> | undefined;
+		lines: HighlightResult[][];
+		copyRanges?: LineInterval[] | undefined;
+		copyText?: string | undefined;
+	}
 
+	const { attributes, lines, copyRanges, copyText }: Props = $props();
 	const copier = createCopier({ text: copyText });
-	const { elements, inputs, outputs } = copier;
-	const { isCopied } = outputs;
-
-	$: lineSet = rangeToSet(copyRanges ?? []);
-	$: inputs.textToCopy.set(copyText);
 
 	function rangeToSet(ranges: LineInterval[]) {
 		const resultSet = new Set<number>();
@@ -29,6 +30,11 @@
 		}
 		return resultSet;
 	}
+
+	let lineSet = $derived(rangeToSet(copyRanges ?? []));
+	$effect(() => {
+		copier.text = copyText;
+	});
 </script>
 
 <code {...attributes}>
@@ -36,8 +42,8 @@
 		<div class="button">
 			<Icon.Button
 				label="Copy"
-				path={$isCopied ? mdiCheck : mdiContentCopy}
-				action={elements.button}
+				path={copier.isCopied ? mdiCheck : mdiContentCopy}
+				{...copier.properties}
 			/>
 		</div>
 	{/if}
