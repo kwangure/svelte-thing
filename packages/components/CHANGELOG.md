@@ -1,5 +1,12 @@
 # @svelte-thing/components
 
+## 0.0.29
+
+### Patch Changes
+
+- 78fe4aa: Ignore test sourcemaps when publishing
+- c44d5dc: Migrate elements to Svelte 5
+
 ## 0.0.28
 
 ### Patch Changes

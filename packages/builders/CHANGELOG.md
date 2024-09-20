@@ -1,5 +1,14 @@
 # @svelte-thing/builders
 
+## 0.0.2
+
+### Patch Changes
+
+- 78fe4aa: Ignore test sourcemaps when publishing
+- Updated dependencies [78fe4aa]
+  - @svelte-thing/state-event@0.0.2
+  - @svelte-thing/dom-event@0.0.2
+
 ## 0.0.1
 
 ### Patch Changes
