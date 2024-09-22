@@ -1,10 +1,7 @@
-export const Mod = {
+export const Keys = {
 	Alt: 0,
 	Control: 1,
 	Shift: 2,
-} as const;
-
-export const Keys = {
 	ArrowDown: 3,
 	Down: 3, // Legacy alias for 'ArrowDown'
 	ArrowUp: 4,
@@ -20,27 +17,33 @@ export const Keys = {
 	// ... more keys can be added here up to 127
 } as const;
 
-export function eventToKeys(event: KeyboardEvent): string {
-	const result = new Uint32Array(4); // 4 * 32 = 128 bits
+/* eslint-disable-next-line @typescript-eslint/ban-types */
+export type KeyCode = (typeof Keys)[keyof typeof Keys] & {};
+export type KeyName = keyof typeof Keys;
 
-	result[0] |=
-		((event.altKey as unknown as number | 0) << Mod.Alt) |
-		((event.ctrlKey as unknown as number | 0) << Mod.Control) |
-		((event.shiftKey as unknown as number | 0) << Mod.Shift);
+export function keysFromEvent(event: KeyboardEvent) {
+	const keys: KeyCode[] = [];
+	if (event.altKey) keys.push(Keys.Alt);
+	if (event.ctrlKey) keys.push(Keys.Control);
+	if (event.shiftKey) keys.push(Keys.Shift);
+	if (event.key in Keys) keys.push(Keys[event.key as KeyName]);
+	return keys;
+}
 
-	const keyCode = Keys[event.key as keyof typeof Keys] | 0;
-	const index = keyCode >>> 5; // Divide by 32 to get the array index
-	const bitPosition = keyCode & 31; // Modulo 32 to get the bit position
-	result[index] |= 1 << bitPosition;
-
-	let str = '';
-	for (let i = 0; i < result.length; i++) {
-		if (result[i] !== 0 || str !== '') {
-			/* !(result[i] == 0 && str == '') */ str += result[i]
-				.toString(16)
-				.padStart(8, '0');
-		}
+export function encodeKeys(keyCodes: KeyCode[]) {
+	const bitset = new Uint32Array(4); // 4 * 32 = 128 bits
+	for (const keyCode of keyCodes) {
+		const index = keyCode >>> 5; // Divide by 32 to get the array index
+		const bitPosition = keyCode & 31; // Modulo 32 to get the bit position
+		bitset[index] |= 1 << bitPosition;
 	}
 
+	let str = '';
+	for (let i = bitset.length - 1; i >= 0; i--) {
+		if (bitset[i] !== 0 || str) {
+			const val = bitset[i].toString(16);
+			str = (str ? val.padStart(8, '0') : val) + str;
+		}
+	}
 	return str;
 }
