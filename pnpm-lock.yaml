@@ -48,11 +48,11 @@ importers:
   packages/builders:
     dependencies:
       '@svelte-thing/dom-event':
-        specifier: ^0.0.0
-        version: 0.0.0
+        specifier: ^0.0.2
+        version: 0.0.2
       '@svelte-thing/state-event':
-        specifier: ^0.0.0
-        version: 0.0.0
+        specifier: ^0.0.2
+        version: 0.0.2
       uid:
         specifier: ^2.0.2
         version: 2.0.2
@@ -247,8 +247,8 @@ importers:
   packages/skinless-components:
     dependencies:
       '@svelte-thing/builders':
-        specifier: ^0.0.0
-        version: 0.0.0
+        specifier: ^0.0.2
+        version: 0.0.2
     devDependencies:
       '@sveltejs/package':
         specifier: ^2.3.4
@@ -766,14 +766,14 @@ packages:
   '@sinclair/typebox@0.27.8':
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
 
-  '@svelte-thing/builders@0.0.0':
-    resolution: {integrity: sha512-KtPcJsudQVCT8yKim5aDpq2dYfzF8csfeCJV2u+RloreUnLU89dfEu3WxsLIBwOXcR8jHnvNe/FUTYNw9mxlYQ==}
+  '@svelte-thing/builders@0.0.2':
+    resolution: {integrity: sha512-/v3YbSzEDTunK2hJfxzSBvw7Q4nYHIGEryZ6INUDp2BpycpDe4WWyCyIi0kmO9JX+Y3zCoqcgq54DNYXFWlL9w==}
 
-  '@svelte-thing/dom-event@0.0.0':
-    resolution: {integrity: sha512-YXGgyD9buS95iDYiStKq8jfNgmM0IjpOlsS2PPbhTs35rHMg7E9rce43wN+BM6P7PAtz18YwmPKaC/gyHw0yqw==}
+  '@svelte-thing/dom-event@0.0.2':
+    resolution: {integrity: sha512-p/mMEQRzSl1X6vClE4UHE6LWClvn+rCz6GBRXTIG8+Igw/a5BXdUSXs11poeiz0+cPpYkjfjGwGmLJqkIvxYNw==}
 
-  '@svelte-thing/state-event@0.0.0':
-    resolution: {integrity: sha512-Q7Pa9tsEp8fiIRizPmTxY1mDzxnu40BGKRtUi3BZKpiCnaxZVi6H8PqYTdIKZ2o10CxLq1um30C6/3wsyxmClg==}
+  '@svelte-thing/state-event@0.0.2':
+    resolution: {integrity: sha512-BEaG0QFkowJwWikFBvM+b/VSyJf+bjLOqMDjehFNS+pJ2MDYeZ9++x0kzvtzAuD+R6+ErDnsX5XNenP7HiwJvg==}
 
   '@sveltejs/adapter-auto@3.0.0':
     resolution: {integrity: sha512-UNWSs/rOReBRfI/xFwSO2WYF1a7PT74SrWOHJmSNLY3Lq+zbH0uuvnlP+TmrTUBvOTkou3WJDjL6lK3n6aOUgQ==}
@@ -3406,17 +3406,17 @@ snapshots:
 
   '@sinclair/typebox@0.27.8': {}
 
-  '@svelte-thing/builders@0.0.0':
+  '@svelte-thing/builders@0.0.2':
     dependencies:
-      '@svelte-thing/dom-event': 0.0.0
-      '@svelte-thing/state-event': 0.0.0
+      '@svelte-thing/dom-event': 0.0.2
+      '@svelte-thing/state-event': 0.0.2
       uid: 2.0.2
 
-  '@svelte-thing/dom-event@0.0.0':
+  '@svelte-thing/dom-event@0.0.2':
     dependencies:
       uid: 2.0.2
 
-  '@svelte-thing/state-event@0.0.0':
+  '@svelte-thing/state-event@0.0.2':
     dependencies:
       uid: 2.0.2
 

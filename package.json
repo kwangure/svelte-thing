@@ -55,6 +55,7 @@
 			"output": []
 		},
 		"pre-commit": {
+			"command": "pnpm install",
 			"dependencies": [
 				"./packages/builders:pre-commit",
 				"./packages/components:pre-commit",
