@@ -48,8 +48,8 @@ importers:
   packages/builders:
     dependencies:
       '@svelte-thing/dom-event':
-        specifier: ^0.0.2
-        version: 0.0.2
+        specifier: ^0.0.3
+        version: 0.0.3
       '@svelte-thing/state-event':
         specifier: ^0.0.2
         version: 0.0.2
@@ -247,8 +247,8 @@ importers:
   packages/skinless-components:
     dependencies:
       '@svelte-thing/builders':
-        specifier: ^0.0.2
-        version: 0.0.2
+        specifier: ^0.0.3
+        version: 0.0.3
     devDependencies:
       '@sveltejs/package':
         specifier: ^2.3.4
@@ -766,11 +766,11 @@ packages:
   '@sinclair/typebox@0.27.8':
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
 
-  '@svelte-thing/builders@0.0.2':
-    resolution: {integrity: sha512-/v3YbSzEDTunK2hJfxzSBvw7Q4nYHIGEryZ6INUDp2BpycpDe4WWyCyIi0kmO9JX+Y3zCoqcgq54DNYXFWlL9w==}
+  '@svelte-thing/builders@0.0.3':
+    resolution: {integrity: sha512-t4+eoNxkQMsO/5lEAwBhZywloqqQPKgnAnJkz69ZWrmgurKF5nm3RCogGSJkaxYaCmqrPJFdzoo+N/yU3oACLw==}
 
-  '@svelte-thing/dom-event@0.0.2':
-    resolution: {integrity: sha512-p/mMEQRzSl1X6vClE4UHE6LWClvn+rCz6GBRXTIG8+Igw/a5BXdUSXs11poeiz0+cPpYkjfjGwGmLJqkIvxYNw==}
+  '@svelte-thing/dom-event@0.0.3':
+    resolution: {integrity: sha512-a9xVQZW/cZxMUpMzKctN/JdPkFCiBjqHHWyUKIQrL+e2LG49KFF90YlhIy/LTVOSekaWwJx+1seFApJ27XmgZQ==}
 
   '@svelte-thing/state-event@0.0.2':
     resolution: {integrity: sha512-BEaG0QFkowJwWikFBvM+b/VSyJf+bjLOqMDjehFNS+pJ2MDYeZ9++x0kzvtzAuD+R6+ErDnsX5XNenP7HiwJvg==}
@@ -3406,13 +3406,13 @@ snapshots:
 
   '@sinclair/typebox@0.27.8': {}
 
-  '@svelte-thing/builders@0.0.2':
+  '@svelte-thing/builders@0.0.3':
     dependencies:
-      '@svelte-thing/dom-event': 0.0.2
+      '@svelte-thing/dom-event': 0.0.3
       '@svelte-thing/state-event': 0.0.2
       uid: 2.0.2
 
-  '@svelte-thing/dom-event@0.0.2':
+  '@svelte-thing/dom-event@0.0.3':
     dependencies:
       uid: 2.0.2
 

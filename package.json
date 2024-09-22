@@ -55,7 +55,6 @@
 			"output": []
 		},
 		"pre-commit": {
-			"command": "pnpm install",
 			"dependencies": [
 				"./packages/builders:pre-commit",
 				"./packages/components:pre-commit",
@@ -66,7 +65,7 @@
 			]
 		},
 		"release": {
-			"command": "changeset publish",
+			"command": "changeset publish && pnpm install",
 			"dependencies": [
 				"./packages/builders:release",
 				"./packages/components:release",
