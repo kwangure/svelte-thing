@@ -4,7 +4,8 @@
 	"scripts": {
 		"build": "wireit",
 		"pre-commit": "wireit",
-		"publint": "wireit"
+		"publint": "wireit",
+		"test": "wireit"
 	},
 	"wireit": {
 		"build": {
@@ -33,13 +34,15 @@
 		"pre-commit": {
 			"dependencies": [
 				"build",
-				"publint"
+				"publint",
+				"test"
 			]
 		},
 		"release": {
 			"dependencies": [
 				"build",
-				"publint"
+				"publint",
+				"test"
 			]
 		},
 		"test": {

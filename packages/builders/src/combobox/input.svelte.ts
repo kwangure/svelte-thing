@@ -1,30 +1,41 @@
 import { rootEvent, type ComboboxBuilder } from './root.svelte.js';
-import { Keys, Mod, eventToKeys, cancelEvent } from '@svelte-thing/dom-event';
+import {
+	cancelEvent,
+	encodeKeys,
+	Keys,
+	type KeyCode,
+	keysFromEvent,
+} from '@svelte-thing/dom-event';
 import { clearChildren, node, type StateNode } from '@svelte-thing/state-event';
 
 export interface CreateComboboxInputConfig<TOption> {
 	combobox: ComboboxBuilder<TOption>;
 }
 
-const createInputEvent = (...type: (string | number)[]) =>
-	`input.${type.join('.')}`;
+const createInputEvent = (name: string, codes?: KeyCode[]) => {
+	let key = `input.${name}`;
+	if (codes?.length) {
+		key += `.${encodeKeys(codes)}`;
+	}
+	return key;
+};
 
 export const inputEvent = {
 	input: createInputEvent('input'),
 	keydown: {
-		AltArrowDown: createInputEvent('keydown', Mod.Alt | Keys.ArrowDown),
-		ArrowDown: createInputEvent('keydown', Keys.ArrowDown),
-		AltArrowUp: createInputEvent('keydown', Mod.Alt | Keys.ArrowUp),
-		ArrowUp: createInputEvent('keydown', Keys.ArrowUp),
-		End: createInputEvent('keydown', Keys.End),
-		Enter: createInputEvent('keydown', Keys.Enter),
-		Escape: createInputEvent('keydown', Keys.Escape),
-		Home: createInputEvent('keydown', Keys.Home),
-		Tab: createInputEvent('keydown', Keys.Tab),
+		AltArrowDown: createInputEvent('keydown', [Keys.Alt, Keys.ArrowDown]),
+		ArrowDown: createInputEvent('keydown', [Keys.ArrowDown]),
+		AltArrowUp: createInputEvent('keydown', [Keys.Alt, Keys.ArrowUp]),
+		ArrowUp: createInputEvent('keydown', [Keys.ArrowUp]),
+		End: createInputEvent('keydown', [Keys.End]),
+		Enter: createInputEvent('keydown', [Keys.Enter]),
+		Escape: createInputEvent('keydown', [Keys.Escape]),
+		Home: createInputEvent('keydown', [Keys.Home]),
+		Tab: createInputEvent('keydown', [Keys.Tab]),
 	},
 	keyup: {
-		Backspace: createInputEvent('keyup', Keys.Backspace),
-		Delete: createInputEvent('keyup', Keys.Delete),
+		Backspace: createInputEvent('keyup', [Keys.Backspace]),
+		Delete: createInputEvent('keyup', [Keys.Delete]),
 	},
 } as const;
 
@@ -171,13 +182,13 @@ export function createComboboxInput<TOption>({
 			},
 			onkeydown(event: KeyboardEvent) {
 				operations.emitEvent(
-					createInputEvent('keydown', eventToKeys(event)),
+					createInputEvent('keydown', keysFromEvent(event)),
 					event,
 				);
 			},
 			onkeyup(event: KeyboardEvent) {
 				operations.emitEvent(
-					createInputEvent('keyup', eventToKeys(event)),
+					createInputEvent('keyup', keysFromEvent(event)),
 					event,
 				);
 			},
