@@ -1,5 +1,12 @@
 # @svelte-thing/builders
 
+## 0.0.3
+
+### Patch Changes
+
+- Updated dependencies [665c542]
+  - @svelte-thing/dom-event@0.0.3
+
 ## 0.0.2
 
 ### Patch Changes

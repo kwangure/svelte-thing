@@ -1,5 +1,11 @@
 # @svelte-thing/skinless-components
 
+## 0.0.3
+
+### Patch Changes
+
+- @svelte-thing/builders@0.0.3
+
 ## 0.0.2
 
 ### Patch Changes
