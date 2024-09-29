@@ -22,6 +22,7 @@
 	input {
 		background-color: transparent;
 		border: none;
+		flex-grow: 1;
 		outline: 0;
 		padding-block: var(--st-size-1);
 		padding-inline: 12px var(--st-size-2);
