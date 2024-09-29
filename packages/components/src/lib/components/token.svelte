@@ -1,8 +1,7 @@
-<script lang>
-	import '../code/code.css';
+<script lang="ts">
+	import '../css/code.css';
 
-	/** @type {{ color: string, segment: string }}*/
-	export let token;
+	export let token: { color: string; segment: string };
 </script>
 
 <span class={token.color}>{token.segment}</span>

@@ -9,7 +9,6 @@ export function createComboboxButton<TOption>(
 	config: CreateComboboxButtonConfig<TOption>,
 ) {
 	const { combobox } = config;
-	const { operations } = combobox;
 
 	return {
 		properties: {
@@ -24,9 +23,9 @@ export function createComboboxButton<TOption>(
 			},
 			onclick() {
 				if (combobox.isOpen) {
-					operations.emitEvent(rootEvent.close);
+					combobox.emitEvent(rootEvent.close);
 				} else {
-					operations.emitEvent(rootEvent.open);
+					combobox.emitEvent(rootEvent.open);
 				}
 			},
 			tabindex: -1,

@@ -15,7 +15,6 @@ export function createListboxItem<TOption>(
 	config: CreateComboboxListboxItemConfig<TOption>,
 ) {
 	const { combobox } = config;
-	const { operations } = combobox;
 	const isActive = $derived(Object.is(config.value, combobox.activeItem));
 
 	return {
@@ -26,8 +25,8 @@ export function createListboxItem<TOption>(
 			},
 			role: 'option',
 			onclick() {
-				operations.emitEvent(rootEvent.set.value, config.value);
-				operations.emitEvent(rootEvent.close);
+				combobox.emitEvent(rootEvent.set.value, config.value);
+				combobox.emitEvent(rootEvent.close);
 			},
 			get ['data-active-item']() {
 				return isActive || undefined;

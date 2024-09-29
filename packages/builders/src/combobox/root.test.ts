@@ -67,7 +67,7 @@ describe('combobox', () => {
 		});
 
 		it('Enter accepts the autocomplete suggestion if one is selected', () => {
-			combobox.operations.emitEvent(rootEvent.open);
+			combobox.emitEvent(rootEvent.open);
 			expect(combobox.visualFocus).toBe('input');
 			const event = new KeyboardEvent('keydown', { key: 'Enter' });
 			input.properties.onkeydown(event);
@@ -89,8 +89,8 @@ describe('combobox', () => {
 		});
 
 		it('Alt+ArrowUp closes the popup and returns focus to the combobox', () => {
-			combobox.operations.emitEvent(rootEvent.open);
-			combobox.operations.emitEvent(rootEvent.set.firstItemActive);
+			combobox.emitEvent(rootEvent.open);
+			combobox.emitEvent(rootEvent.set.firstItemActive);
 			expect(combobox.visualFocus).toBe('listbox');
 			const event = new KeyboardEvent('keydown', {
 				key: 'ArrowUp',
@@ -104,8 +104,8 @@ describe('combobox', () => {
 
 	describe('When focus is on the listbox popup', () => {
 		beforeEach(() => {
-			combobox.operations.emitEvent(rootEvent.open);
-			combobox.operations.emitEvent(rootEvent.set.firstItemActive);
+			combobox.emitEvent(rootEvent.open);
+			combobox.emitEvent(rootEvent.set.firstItemActive);
 		});
 
 		it('Enter accepts the focused option', () => {
@@ -131,7 +131,7 @@ describe('combobox', () => {
 		});
 
 		it('ArrowUp moves focus to and selects the previous option', () => {
-			combobox.operations.emitEvent(rootEvent.set.nextItemActive);
+			combobox.emitEvent(rootEvent.set.nextItemActive);
 			expect(combobox.activeItem).toEqual(options[1]);
 			const event = new KeyboardEvent('keydown', { key: 'ArrowUp' });
 			input.properties.onkeydown(event);
