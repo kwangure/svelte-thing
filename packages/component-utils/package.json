@@ -15,7 +15,7 @@
 				"../../config/tsconfig.base.json"
 			],
 			"output": [
-				"types"
+				"dist"
 			]
 		},
 		"publint": {
@@ -64,10 +64,10 @@
 		"!**/*.test.d.ts"
 	],
 	"devDependencies": {
-		"@types/node": "^20.10.5",
 		"publint": "^0.2.6",
+		"svelte": "^5.0.0-next.260",
 		"typescript": "^5.4.5",
-		"vitest": "^1.6.0"
+		"vitest": "^2.1.1"
 	},
 	"type": "module"
 }

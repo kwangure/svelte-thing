@@ -15,7 +15,7 @@
 				"../../config/tsconfig.base.json"
 			],
 			"output": [
-				"types"
+				"dist"
 			]
 		},
 		"publint": {
@@ -64,18 +64,15 @@
 		"!**/*.test.js.map",
 		"!**/*.test.d.ts"
 	],
-	"dependencies": {
-		"uid": "^2.0.2"
-	},
 	"devDependencies": {
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"@types/node": "^20.10.5",
 		"jsdom": "^25.0.0",
 		"publint": "^0.2.6",
-		"svelte": "5.0.0-next.227",
+		"svelte": "5.0.0-next.260",
 		"typescript": "^5.4.5",
-		"vite": "^5.0.0",
-		"vitest": "^1.6.0"
+		"vite": "^5.4.0",
+		"vitest": "^2.1.1"
 	},
 	"type": "module"
 }
