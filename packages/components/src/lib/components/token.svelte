@@ -1,7 +1,7 @@
 <script lang>
 	import '../code/code.css';
 
-	/** @type {import('../code/highlight.js').HighlightResult}*/
+	/** @type {{ color: string, segment: string }}*/
 	export let token;
 </script>
 

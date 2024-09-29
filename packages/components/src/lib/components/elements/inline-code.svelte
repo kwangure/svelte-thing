@@ -2,12 +2,11 @@
 	import '../../css/color-preference.css';
 	import '../../css/color.css';
 	import '../../css/size.css';
-	import { type HighlightResult } from '../../code/highlight.js';
 	import Token from '../token.svelte';
 
 	interface Props {
 		attributes?: Record<string, unknown>;
-		tokens: HighlightResult[];
+		tokens: { color: string; segment: string }[];
 	}
 
 	const { attributes, tokens }: Props = $props();

@@ -9,11 +9,10 @@
 		createCopier,
 		type LineInterval,
 	} from '../../creators/copy.svelte.js';
-	import type { HighlightResult } from '../../code/highlight.js';
 
 	interface Props {
 		attributes?: Record<string, unknown> | undefined;
-		lines: HighlightResult[][];
+		lines: { color: string; segment: string }[][];
 		copyRanges?: LineInterval[] | undefined;
 		copyText?: string | undefined;
 	}

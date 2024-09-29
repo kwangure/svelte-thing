@@ -1,1 +1,1 @@
-export * from './combobox/index.js';
+export * as Combobox from './combobox/index.js';
