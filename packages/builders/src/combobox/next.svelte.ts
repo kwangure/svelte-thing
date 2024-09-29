@@ -23,7 +23,7 @@ export function createComboboxNext<TOption>(
 				cancelEvent(event);
 			},
 			onclick() {
-				combobox.operations.emitEvent(rootEvent.set.nextItemActive);
+				combobox.emitEvent(rootEvent.set.nextItemActive);
 			},
 		},
 	};
