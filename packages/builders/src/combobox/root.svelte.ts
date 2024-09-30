@@ -1,4 +1,3 @@
-import { inputEvent } from './input.svelte.js';
 import {
 	appendChild,
 	clearChildren,
@@ -7,9 +6,10 @@ import {
 	removeChild,
 	type StateNode,
 } from '@svelte-thing/state-event';
+import { inputEvent } from './input.svelte.js';
+import { onclickoutside } from '@svelte-thing/components/actions';
 import { uid } from 'uid';
-import { mergeActions } from '../helpers/mergeActions.js';
-import { on } from 'svelte/events';
+import { mergeActions } from '@svelte-thing/component-utils';
 
 export interface CreateCombmboxConfig<TOption> {
 	filter?: ComboboxFilter<TOption>;
@@ -224,14 +224,4 @@ export function createCombobox<TOption>(config: CreateCombmboxConfig<TOption>) {
 			},
 		},
 	};
-}
-
-function onclickoutside(node: HTMLElement) {
-	const destroy = on(document, 'click', (event: Event) => {
-		if (!node.contains(event.target as Node)) {
-			node.dispatchEvent(new Event('clickoutside', event));
-		}
-	});
-
-	return { destroy };
 }
