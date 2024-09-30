@@ -7,9 +7,9 @@ import {
 	type StateNode,
 } from '@svelte-thing/state-event';
 import { inputEvent } from './input.svelte.js';
-import { mergeActions } from '../helpers/mergeActions.js';
 import { onclickoutside } from '@svelte-thing/components/actions';
 import { uid } from 'uid';
+import { mergeActions } from '@svelte-thing/component-utils';
 
 export interface CreateCombmboxConfig<TOption> {
 	filter?: ComboboxFilter<TOption>;
