@@ -80,6 +80,10 @@ importers:
         version: 2.1.1(@types/node@20.13.0)(jsdom@25.0.0)
 
   packages/component-utils:
+    dependencies:
+      esm-env:
+        specifier: ^1.0.0
+        version: 1.0.0
     devDependencies:
       publint:
         specifier: ^0.2.6
