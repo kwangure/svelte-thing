@@ -1,5 +1,11 @@
 # @svelte-thing/builders
 
+## 0.0.4
+
+### Patch Changes
+
+- eff4a42: Correct builder setup ordering
+
 ## 0.0.3
 
 ### Patch Changes

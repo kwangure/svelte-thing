@@ -1,5 +1,15 @@
 # @svelte-thing/skinless-components
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies [16bf0fd]
+- Updated dependencies [eff4a42]
+- Updated dependencies [fac247b]
+  - @svelte-thing/components@0.0.30
+  - @svelte-thing/builders@0.0.4
+
 ## 0.0.3
 
 ### Patch Changes

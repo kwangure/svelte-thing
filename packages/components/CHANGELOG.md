@@ -1,5 +1,12 @@
 # @svelte-thing/components
 
+## 0.0.30
+
+### Patch Changes
+
+- 16bf0fd: Fix incorrect filepath
+- fac247b: Add `onclickoutside` action
+
 ## 0.0.29
 
 ### Patch Changes
