@@ -1,23 +1,19 @@
 import { getFocusableElements } from '../dom/dom.js';
 
-/**
- * @param {HTMLElement} node
- * @param {{ shouldTrapFocus?: () => boolean }} [options]
- */
-export function focustrap(node, options) {
+export function focustrap(
+	node: HTMLElement,
+	options?: { shouldTrapFocus?: () => boolean },
+) {
 	const shouldTrapFocus = options?.shouldTrapFocus || (() => true);
 
-	/**
-	 * @param {KeyboardEvent} event
-	 */
-	function handleKeydown(event) {
+	function handleKeydown(event: KeyboardEvent) {
 		if (!shouldTrapFocus()) return;
 		// ignore if Tab is not pressed
 		if (event.key !== 'Tab' && event.keyCode !== 9) return;
 
-		let focusableElements = getFocusableElements(node);
-		let firstFocusableElement = focusableElements[0];
-		let lastFocusableElement = focusableElements[focusableElements.length - 1];
+		const focusableElements = getFocusableElements(node);
+		const firstFocusableElement = focusableElements[0];
+		const lastFocusableElement = focusableElements[focusableElements.length - 1];
 
 		if (event.shiftKey) {
 			if (document.activeElement === firstFocusableElement) {
