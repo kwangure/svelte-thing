@@ -5,6 +5,7 @@
 -->
 <script lang="ts">
 	import '@svelte-thing/components/css/breakpoint';
+	import '@svelte-thing/components/css/motion';
 	import type { HTMLDialogAttributes } from 'svelte/elements';
 	import type { Snippet } from 'svelte';
 	import { createDialogRoot } from './root.svelte.js';
@@ -31,7 +32,6 @@
 
 <dialog
 	class:modal={dialog.isModal}
-	class:non-modal={!dialog.isModal}
 	{...mergeProps(restProps, dialog.properties)}
 	use:dialog.action
 >
@@ -45,6 +45,9 @@
 	}
 	dialog {
 		align-items: start;
+		animation: var(--st-motion-no-preference) slide-out-down 0.5s
+			cubic-bezier(0.25, 0, 0.3, 1) forwards;
+		animation-timing-function: cubic-bezier(0.5, -0.5, 0.1, 1.5);
 		--_background-color-dark: var(--st-color-preference-dark) #222;
 		background-color: var(--_background-color-dark, #fff);
 		border: 1px solid transparent;
@@ -65,14 +68,10 @@
 		transition: opacity 0.5s cubic-bezier(0.25, 0, 0.3, 1);
 		z-index: 100000;
 	}
-
-	@media (prefers-reduced-motion: no-preference) {
-		dialog {
-			animation: slide-out-down 0.5s cubic-bezier(0.25, 0, 0.3, 1) forwards;
-			animation-timing-function: cubic-bezier(0.5, -0.5, 0.1, 1.5);
-		}
+	dialog[open] {
+		animation: var(--st-motion-no-preference) slide-in-up 0.5s
+			cubic-bezier(0.25, 0, 0.3, 1) forwards;
 	}
-
 	dialog.modal {
 		--_border-end-end-radius: var(--st-breakpoint-not-md) 0px;
 		border-end-end-radius: var(--_border-end-end-radius, var(--st-size-1));
@@ -80,16 +79,6 @@
 		border-end-start-radius: var(--_border-end-start-radius, var(--st-size-1));
 		--_margin-block-end: var(--st-breakpoint-not-md) 0px;
 		margin-block-end: var(--_margin-block-end, auto);
-	}
-
-	@media (prefers-reduced-motion: no-preference) {
-		dialog.modal {
-			animation: slide-out-down 0.5s cubic-bezier(0.25, 0, 0.3, 1) forwards;
-			animation-timing-function: cubic-bezier(0.5, -0.5, 0.1, 1.5);
-		}
-		dialog[open] {
-			animation: slide-in-up 0.5s cubic-bezier(0.25, 0, 0.3, 1) forwards;
-		}
 	}
 
 	@keyframes slide-out-down {
@@ -120,7 +109,7 @@
 		opacity: 1;
 	}
 
-	dialog.non-modal::backdrop {
+	dialog:not(.modal)::backdrop {
 		background-color: transparent;
 	}
 </style>

@@ -1,0 +1,23 @@
+@media (prefers-reduced-motion: no-preference) {
+	:where(:root) {
+		--st-motion-no-preference: ;
+		--st-motion-reduce: initial;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	:root {
+		--st-motion-no-preference: initial;
+		--st-motion-reduce: ;
+	}
+}
+
+.no-preference {
+	--st-motion-no-preference: ;
+	--st-motion-reduce: initial;
+}
+
+.reduce {
+	--st-motion-no-preference: initial;
+	--st-motion-reduce: ;
+}
