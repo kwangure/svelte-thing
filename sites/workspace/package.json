@@ -72,8 +72,11 @@
 		}
 	},
 	"dependencies": {
+		"@mdi/js": "^7.2.96",
+		"@svelte-thing/component-utils": "workspace:^",
 		"@svelte-thing/components": "workspace:^",
-		"@svelte-thing/skinless-components": "workspace:^"
+		"@svelte-thing/skinless-components": "workspace:^",
+		"@svelte-thing/state-event": "workspace:^"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
