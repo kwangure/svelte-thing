@@ -126,8 +126,8 @@ export function createComboboxInput<TOption>({
 					cancelDOMEvent(event);
 				},
 				[rootEvent.set.value](value: TOption) {
-					if (element && setInputValue) {
-						element.value = setInputValue(value);
+					if (element) {
+						element.value = setInputValue?.(value) ?? (value as string);
 					}
 				},
 			},
