@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Combobox } from '@svelte-thing/skinless-components';
+	import * as Combobox from '@svelte-thing/skinless-components/combobox';
 
 	interface Fruit {
 		id: number;
@@ -59,7 +59,11 @@
 
 <div class="box">
 	<div class="text">
-		<Combobox.Root {options} {filter}>
+		<Combobox.Root
+			{options}
+			{filter}
+			setInputValue={(fruit: Fruit) => fruit.label}
+		>
 			{#snippet children(combobox)}
 				<Combobox.Controls>
 					<Combobox.Input />

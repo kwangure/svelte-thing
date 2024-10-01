@@ -240,12 +240,21 @@ importers:
 
   sites/workspace:
     dependencies:
+      '@mdi/js':
+        specifier: ^7.2.96
+        version: 7.3.67
+      '@svelte-thing/component-utils':
+        specifier: workspace:^
+        version: link:../../packages/component-utils
       '@svelte-thing/components':
         specifier: workspace:^
         version: link:../../packages/components
       '@svelte-thing/skinless-components':
         specifier: workspace:^
         version: link:../../packages/skinless-components
+      '@svelte-thing/state-event':
+        specifier: workspace:^
+        version: link:../../packages/state-event
     devDependencies:
       '@sveltejs/adapter-auto':
         specifier: ^3.0.0
