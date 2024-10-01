@@ -1,5 +1,14 @@
 # @svelte-thing/builders
 
+## 0.0.5
+
+### Patch Changes
+
+- eb6cc3c: Reuse onclickoutside action from @svelte-thing/components
+- cac8f63: Support stringifiable active item
+- Updated dependencies
+  - @svelte-thing/components@0.0.31
+
 ## 0.0.4
 
 ### Patch Changes

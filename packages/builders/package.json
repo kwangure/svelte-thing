@@ -1,6 +1,6 @@
 {
 	"name": "@svelte-thing/builders",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"scripts": {
 		"build": "wireit",
 		"pre-commit": "wireit",
@@ -74,7 +74,7 @@
 	],
 	"dependencies": {
 		"@svelte-thing/component-utils": "^0.0.2",
-		"@svelte-thing/components": "^0.0.30",
+		"@svelte-thing/components": "^0.0.31",
 		"@svelte-thing/dom-event": "^0.0.3",
 		"@svelte-thing/state-event": "^0.0.2",
 		"uid": "^2.0.2"

@@ -1,5 +1,16 @@
 # @svelte-thing/skinless-components
 
+## 0.0.5
+
+### Patch Changes
+
+- cac8f63: Remove barrel export
+- Updated dependencies
+- Updated dependencies [eb6cc3c]
+- Updated dependencies [cac8f63]
+  - @svelte-thing/components@0.0.31
+  - @svelte-thing/builders@0.0.5
+
 ## 0.0.4
 
 ### Patch Changes
