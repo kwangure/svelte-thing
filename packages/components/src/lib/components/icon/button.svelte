@@ -4,20 +4,15 @@
 	import '../../css/utilities.css';
 	import Icon from './simple.svelte';
 
-	const {
-		action = () => {},
-		label,
-		path,
-		...attributes
-	}: {
-		/* eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any */
-		action?: (node: HTMLElement) => any;
+	interface Props extends HTMLButtonAttributes {
 		label: string;
 		path: string;
-	} & HTMLButtonAttributes = $props();
+	}
+
+	const { label, path, title = label, ...restProps }: Props = $props();
 </script>
 
-<button {...attributes} use:action title={label}>
+<button {...restProps} {title}>
 	<Icon {path} />
 	<span class="sr-only">{label}</span>
 </button>

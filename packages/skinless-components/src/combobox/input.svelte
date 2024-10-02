@@ -6,18 +6,12 @@
 	} from '@svelte-thing/builders';
 	import { mergeProps } from '@svelte-thing/component-utils';
 
-	type ComboboxInput = ReturnType<typeof createComboboxInput>;
-	type InputProps = Omit<
-		HTMLInputAttributes,
-		keyof ComboboxInput['properties']
-	>;
-
-	const { ...restProps }: InputProps = $props();
+	const props: HTMLInputAttributes = $props();
 	const combobox = getComboboxContext();
 	const input = createComboboxInput({ combobox });
 </script>
 
-<input {...mergeProps(restProps, input.props)} use:input.action />
+<input {...mergeProps(props, input.props)} use:input.action />
 
 <style>
 	input {
