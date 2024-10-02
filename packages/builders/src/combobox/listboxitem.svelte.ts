@@ -1,19 +1,14 @@
-import { rootEvent, type ComboboxBuilder } from './root.svelte.js';
+import { rootEvent, type ComboboxRoot } from './root.svelte.js';
 
-export interface ComboboxListboxItemState<T> {
-	operations: {
-		selectItem(value: T): void;
-	};
+export interface CreateComboboxListboxItemConfig {
+	/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+	combobox: ComboboxRoot<any>;
+	item: unknown;
 }
 
-export interface CreateComboboxListboxItemConfig<TOption> {
-	combobox: ComboboxBuilder<TOption>;
-	item: TOption;
-}
+export type ComboboxListboxItem = ReturnType<typeof createListboxItem>;
 
-export function createListboxItem<TOption>(
-	config: CreateComboboxListboxItemConfig<TOption>,
-) {
+export function createListboxItem(config: CreateComboboxListboxItemConfig) {
 	const { combobox } = config;
 	const isActive = $derived(Object.is(config.item, combobox.activeItem));
 

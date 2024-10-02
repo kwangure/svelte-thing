@@ -4,12 +4,14 @@
 	import '@svelte-thing/components/css/color';
 	import '$lib/css/app.css';
 
-	import { Shell, Sidebar } from '@svelte-thing/components';
+	import { Darkmode, Shell, Sidebar } from '@svelte-thing/components';
 	import { page as pageStore } from '$app/stores';
 
 	const { children } = $props();
 	const pathname = $derived($pageStore.url.pathname);
 </script>
+
+<Darkmode />
 
 <Shell.Root>
 	<Sidebar.Root>

@@ -11,7 +11,7 @@ import { onclickoutside } from '@svelte-thing/components/actions';
 import { uid } from 'uid';
 import { mergeActions } from '@svelte-thing/component-utils';
 
-export interface CreateCombmboxConfig<TOption> {
+export interface CreateCombmboxRootConfig<TOption> {
 	filter?: ComboboxFilter<TOption>;
 	hasInputCompletion?: false;
 	includesBaseElement?: boolean;
@@ -29,8 +29,8 @@ export interface ComboboxFilterArg<TOption> {
 	readonly inputValue: string;
 }
 
-export type ComboboxBuilder<TOption> = ReturnType<
-	typeof createCombobox<TOption>
+export type ComboboxRoot<TOption> = ReturnType<
+	typeof createComboboxRoot<TOption>
 >;
 
 const createRootEvent = (...type: (string | number)[]) =>
@@ -56,7 +56,9 @@ export const rootEvent = {
 
 export type ComboboxVisualFocus = 'listbox' | 'input';
 
-export function createCombobox<TOption>(config: CreateCombmboxConfig<TOption>) {
+export function createComboboxRoot<TOption>(
+	config: CreateCombmboxRootConfig<TOption>,
+) {
 	let activeItemIndex = $state(-1);
 	let inputValue = $state('');
 	let isOpen = $state(false);

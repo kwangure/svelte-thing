@@ -5,24 +5,22 @@
 	import '../../css/utilities.css';
 	import Icon from './simple.svelte';
 
+	interface Props extends HTMLAnchorAttributes {
+		label: string;
+		path: string;
+	}
+
 	const {
-		action = () => {},
-		href,
 		label,
 		path,
 		target,
+		title = label,
 		rel = target === '_blank' ? 'noopener' : undefined,
-		...attributes
-	}: {
-		/* eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any */
-		action?: (node: HTMLElement) => any;
-		href: string;
-		label: string;
-		path: string;
-	} & HTMLAnchorAttributes = $props();
+		...restProps
+	}: Props = $props();
 </script>
 
-<a {...attributes} use:action {href} title={label} {target} {rel}>
+<a {...restProps} {title} {target} {rel}>
 	<Icon {path} />
 	<span class="sr-only">{label}</span>
 </a>

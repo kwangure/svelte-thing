@@ -1,22 +1,24 @@
-<script>
+<script lang="ts">
+	import type { Snippet } from 'svelte';
+	import type { HTMLAnchorAttributes } from 'svelte/elements';
 	import '../../css/color-preference.css';
 	import '../../css/color.css';
 	import '../../css/size.css';
 
-	/** @type {((arg: HTMLElement) => any)} */
-	export let action = () => {};
-	/** @type {string} */
-	export let href;
-	/** @type {any} */
-	export let props = undefined;
-	/** @type {'_blank' | '_parent' | '_self' | '_top' | undefined} */
-	export let target = undefined;
+	interface Props extends HTMLAnchorAttributes {
+		children: Snippet;
+	}
 
-	$: rel = target === '_blank' ? 'noopener' : undefined;
+	const {
+		children,
+		target,
+		rel = target === '_blank' ? 'noopener' : undefined,
+		...restProps
+	}: Props = $props();
 </script>
 
-<a {...props} use:action {href} {rel} {target}>
-	<slot />
+<a {...restProps} {rel} {target}>
+	{@render children()}
 </a>
 
 <style>

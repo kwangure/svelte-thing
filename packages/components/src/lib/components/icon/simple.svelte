@@ -6,11 +6,11 @@
 		'aria-hidden': ariaHidden = true,
 		path,
 		viewBox = '0 0 24 24',
-		...attributes
+		...restProps
 	}: { path: string } & SVGAttributes<SVGElement> = $props();
 </script>
 
-<svg {...attributes} aria-hidden={ariaHidden} {viewBox}>
+<svg {...restProps} aria-hidden={ariaHidden} {viewBox}>
 	<path d={path} />
 </svg>
 

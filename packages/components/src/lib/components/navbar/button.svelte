@@ -1,14 +1,17 @@
-<script>
+<script lang="ts">
+	import type { HTMLButtonAttributes } from 'svelte/elements';
+	import type { Snippet } from 'svelte';
 	import '../../css/breakpoint.css';
 	import '../../css/size.css';
-	/** @type {((arg: HTMLElement) => any)} */
-	export let action = () => {};
-	/** @type {any} */
-	export let props = undefined;
+
+	interface Props extends HTMLButtonAttributes {
+		children: Snippet;
+	}
+	const { children, ...restProps }: Props = $props();
 </script>
 
-<button {...props} use:action>
-	<slot />
+<button {...restProps}>
+	{@render children()}
 </button>
 
 <style>

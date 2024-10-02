@@ -6,13 +6,11 @@
 	} from '@svelte-thing/builders';
 	import { mergeProps } from '@svelte-thing/component-utils';
 
-	type ComboboxButton = ReturnType<typeof createComboboxButton>;
-	type ButtonProps = Omit<
-		HTMLButtonAttributes,
-		keyof ComboboxButton['properties']
-	>;
+	interface Props extends HTMLButtonAttributes {
+		label: string;
+	}
 
-	const { label, ...restProps }: { label: string } & ButtonProps = $props();
+	const { label, ...restProps }: Props = $props();
 	const combobox = getComboboxContext();
 	const button = createComboboxButton({
 		combobox,

@@ -1,4 +1,4 @@
-import { rootEvent, type ComboboxBuilder } from './root.svelte.js';
+import { rootEvent, type ComboboxRoot } from './root.svelte.js';
 import {
 	cancelEvent as cancelDOMEvent,
 	encodeKeys,
@@ -8,9 +8,12 @@ import {
 } from '@svelte-thing/dom-event';
 import { clearChildren, node, type StateNode } from '@svelte-thing/state-event';
 
-export interface CreateComboboxInputConfig<TOption> {
-	combobox: ComboboxBuilder<TOption>;
+export interface CreateComboboxInputConfig {
+	/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+	combobox: ComboboxRoot<any>;
 }
+
+export type ComboboxInput = ReturnType<typeof createComboboxInput>;
 
 const createInputEvent = (name: string, codes?: KeyCode[]) => {
 	let key = `input.${name}`;
@@ -39,9 +42,7 @@ export const inputEvent = {
 	},
 } as const;
 
-export function createComboboxInput<TOption>({
-	combobox,
-}: CreateComboboxInputConfig<TOption>) {
+export function createComboboxInput({ combobox }: CreateComboboxInputConfig) {
 	const { emitEvent, setInputValue } = combobox;
 	let element = $state<HTMLInputElement>();
 	let state: StateNode | undefined;
@@ -125,7 +126,7 @@ export function createComboboxInput<TOption>({
 					emitEvent(rootEvent.clear.activeItem);
 					cancelDOMEvent(event);
 				},
-				[rootEvent.set.value](value: TOption) {
+				[rootEvent.set.value](value: unknown) {
 					if (element) {
 						element.value = setInputValue?.(value) ?? (value as string);
 					}
@@ -138,7 +139,7 @@ export function createComboboxInput<TOption>({
 
 	setup();
 
-	function destroy() {
+	function cleanup() {
 		if (!state) return;
 
 		combobox.removeChild(state);
@@ -151,10 +152,12 @@ export function createComboboxInput<TOption>({
 			element = _element;
 			setup();
 
-			return { destroy };
-		},
-		get element() {
-			return element;
+			return {
+				destroy() {
+					element = undefined;
+					cleanup();
+				},
+			};
 		},
 		props: {
 			get ['aria-autocomplete']() {
