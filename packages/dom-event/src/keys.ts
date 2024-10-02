@@ -41,8 +41,7 @@ export function encodeKeys(keyCodes: KeyCode[]) {
 	let str = '';
 	for (let i = bitset.length - 1; i >= 0; i--) {
 		if (bitset[i] !== 0 || str) {
-			const val = bitset[i].toString(16);
-			str = (str ? val.padStart(8, '0') : val) + str;
+			str += '.' + bitset[i].toString(16);
 		}
 	}
 	return str;
