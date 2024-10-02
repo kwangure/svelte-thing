@@ -16,19 +16,40 @@
 <script lang="ts" generics="TOption">
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { Snippet } from 'svelte';
+	import { mergeProps } from '@svelte-thing/component-utils';
 	import { setComboboxContext } from '@svelte-thing/builders';
 
-	const { children, ...comboboxConfig }: Props<TOption> = $props();
-	const combobox = setComboboxContext<TOption>(comboboxConfig);
+	const {
+		children,
+		filter,
+		hasInputCompletion,
+		includesBaseElement,
+		label,
+		options,
+		setInputValue,
+		...restProps
+	}: Props<TOption> = $props();
+	const combobox = setComboboxContext<TOption>({
+		filter,
+		hasInputCompletion,
+		includesBaseElement,
+		label,
+		options,
+		setInputValue,
+	});
 </script>
 
-<div class="root" {...combobox.properties} use:combobox.action>
+<div
+	class="root"
+	{...mergeProps(restProps, combobox.properties)}
+	use:combobox.action
+>
 	{@render children(combobox)}
 </div>
 
 <style>
 	.root {
-		display: flex;
+		display: inline-flex;
 		flex-direction: column;
 	}
 </style>
