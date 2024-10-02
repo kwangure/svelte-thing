@@ -1,5 +1,12 @@
 # @svelte-thing/builders
 
+## 0.0.7
+
+### Patch Changes
+
+- Updated dependencies [5cbae89]
+  - @svelte-thing/components@0.0.33
+
 ## 0.0.6
 
 ### Patch Changes

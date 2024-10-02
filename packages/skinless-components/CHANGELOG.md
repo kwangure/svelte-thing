@@ -1,5 +1,14 @@
 # @svelte-thing/skinless-components
 
+## 0.0.7
+
+### Patch Changes
+
+- 5cbae89: Simplify props for buttons and links
+- Updated dependencies [5cbae89]
+  - @svelte-thing/components@0.0.33
+  - @svelte-thing/builders@0.0.7
+
 ## 0.0.6
 
 ### Patch Changes

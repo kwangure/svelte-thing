@@ -1,15 +1,15 @@
 <script module>
 	import type {
-		createCombobox,
-		CreateCombmboxConfig,
+		CreateCombmboxRootConfig,
+		ComboboxRoot,
 	} from '@svelte-thing/builders';
 
 	type DivAttributes = Omit<HTMLAttributes<HTMLDivElement>, 'children'>;
 
 	interface Props<TOption>
-		extends CreateCombmboxConfig<TOption>,
+		extends CreateCombmboxRootConfig<TOption>,
 			DivAttributes {
-		children: Snippet<[ReturnType<typeof createCombobox<TOption>>]>;
+		children: Snippet<[ComboboxRoot<TOption>]>;
 	}
 </script>
 

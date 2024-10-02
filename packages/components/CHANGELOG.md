@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.33
+
+### Patch Changes
+
+- 5cbae89: Simplify props for buttons and links
+
 ## 0.0.32
 
 ### Patch Changes

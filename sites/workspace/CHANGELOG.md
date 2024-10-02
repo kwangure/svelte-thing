@@ -1,5 +1,13 @@
 # worspace-site
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies [5cbae89]
+  - @svelte-thing/skinless-components@0.0.7
+  - @svelte-thing/components@0.0.33
+
 ## 0.0.3
 
 ### Patch Changes
