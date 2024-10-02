@@ -59,6 +59,9 @@ export default [
 			parser: svelteParser,
 			parserOptions: {
 				parser: '@typescript-eslint/parser',
+				svelteFeatures: {
+					experimentalGenerics: true,
+				},
 			},
 			globals: {
 				...browser,

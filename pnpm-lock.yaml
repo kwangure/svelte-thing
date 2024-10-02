@@ -51,8 +51,8 @@ importers:
         specifier: ^0.0.2
         version: 0.0.2
       '@svelte-thing/components':
-        specifier: ^0.0.30
-        version: 0.0.30(svelte@5.0.0-next.260)
+        specifier: ^0.0.31
+        version: 0.0.31(svelte@5.0.0-next.260)
       '@svelte-thing/dom-event':
         specifier: ^0.0.3
         version: 0.0.3
@@ -198,11 +198,14 @@ importers:
   packages/skinless-components:
     dependencies:
       '@svelte-thing/builders':
-        specifier: ^0.0.4
-        version: 0.0.4
+        specifier: ^0.0.5
+        version: 0.0.5(svelte@5.0.0-next.260)
+      '@svelte-thing/component-utils':
+        specifier: ^0.0.2
+        version: 0.0.2
       '@svelte-thing/components':
-        specifier: ^0.0.30
-        version: 0.0.30(svelte@5.0.0-next.260)
+        specifier: ^0.0.31
+        version: 0.0.31(svelte@5.0.0-next.260)
     devDependencies:
       '@sveltejs/package':
         specifier: ^2.3.5
@@ -687,14 +690,14 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@svelte-thing/builders@0.0.4':
-    resolution: {integrity: sha512-0lA28EGMjEsNsfoh0z5h7U4Vh8p9Ysa9JVyqAGJmP5mHHaPf9jqYbZnH1nvgNGDujm8Igx4+mIb9sWjqrcBkoQ==}
+  '@svelte-thing/builders@0.0.5':
+    resolution: {integrity: sha512-N6wQ/SlRjnsl1uV4pAMXLLRPjVe3QGFuKCAZNAc7+JQiwCO+TkX8zOsCVSbhgiDPABDlKaEbGhJmaJlNOUKbyg==}
 
   '@svelte-thing/component-utils@0.0.2':
     resolution: {integrity: sha512-8RseMY1AtpSboGCOU9PNCou3fsUC5QanL54i0orBkdM8fMzJic4XUwmM6eIQuJejbL52N863PYtzX+AHVyez1Q==}
 
-  '@svelte-thing/components@0.0.30':
-    resolution: {integrity: sha512-2qTgxOWbc3AYxNoHI+zawzwhoX9TrqZJBn9hPC5xoOyOa5PiI4hNrJj5wKqeoBKNOHqDn1q7tEfs7G1y5AW0Tg==}
+  '@svelte-thing/components@0.0.31':
+    resolution: {integrity: sha512-96+KGDamYgONPO79XIq7jrCSFsOTNkJvVvoxDuxrvBR/kHEAFCFwoPMpeFEKxHJDkBJkvG2XXB2hNFRyzA0BFw==}
     peerDependencies:
       svelte: ^5.0.0-next.260
 
@@ -3157,17 +3160,21 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.22.5':
     optional: true
 
-  '@svelte-thing/builders@0.0.4':
+  '@svelte-thing/builders@0.0.5(svelte@5.0.0-next.260)':
     dependencies:
+      '@svelte-thing/component-utils': 0.0.2
+      '@svelte-thing/components': 0.0.31(svelte@5.0.0-next.260)
       '@svelte-thing/dom-event': 0.0.3
       '@svelte-thing/state-event': 0.0.2
       uid: 2.0.2
+    transitivePeerDependencies:
+      - svelte
 
   '@svelte-thing/component-utils@0.0.2':
     dependencies:
       esm-env: 1.0.0
 
-  '@svelte-thing/components@0.0.30(svelte@5.0.0-next.260)':
+  '@svelte-thing/components@0.0.31(svelte@5.0.0-next.260)':
     dependencies:
       '@mdi/js': 7.3.67
       '@melt-ui/svelte': 0.76.3(svelte@5.0.0-next.260)

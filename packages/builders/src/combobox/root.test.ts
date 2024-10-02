@@ -44,7 +44,7 @@ describe('combobox', () => {
 		cleanup.push(input.action(document.createElement('input')).destroy);
 		listboxItems = new Map();
 		for (const option of options) {
-			const item = createListboxItem({ combobox, value: option });
+			const item = createListboxItem({ combobox, item: option });
 			listboxItems.set(option.name, item);
 		}
 	});

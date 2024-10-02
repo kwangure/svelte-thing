@@ -4,6 +4,7 @@
 		createComboboxButton,
 		getComboboxContext,
 	} from '@svelte-thing/builders';
+	import { mergeProps } from '@svelte-thing/component-utils';
 
 	type ComboboxButton = ReturnType<typeof createComboboxButton>;
 	type ButtonProps = Omit<
@@ -11,7 +12,7 @@
 		keyof ComboboxButton['properties']
 	>;
 
-	const { label, ...attributes }: { label: string } & ButtonProps = $props();
+	const { label, ...restProps }: { label: string } & ButtonProps = $props();
 	const combobox = getComboboxContext();
 	const button = createComboboxButton({
 		combobox,
@@ -21,7 +22,7 @@
 	});
 </script>
 
-<button {...attributes} {...button.properties}>
+<button {...mergeProps(restProps, button.properties)}>
 	<span aria-hidden="true" style="padding: 0 2px;">▼</span>
 </button>
 

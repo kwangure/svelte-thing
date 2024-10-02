@@ -1,4 +1,4 @@
-<script lang="ts" generics="TOption">
+<script lang="ts">
 	import '@svelte-thing/components/css/breakpoint';
 	import '@svelte-thing/components/css/size';
 	/* eslint-disable no-undef */
@@ -7,18 +7,25 @@
 		createListboxItem,
 		getComboboxContext,
 	} from '@svelte-thing/builders';
+	import type { HTMLLiAttributes } from 'svelte/elements';
+	import { mergeProps } from '@svelte-thing/component-utils';
 
-	const { children, value }: { children?: Snippet; value: TOption } = $props();
-	const combobox = getComboboxContext<TOption>();
+	interface Props extends HTMLLiAttributes {
+		children?: Snippet;
+		item: unknown;
+	}
+
+	const { children, item, ...restProps }: Props = $props();
+	const combobox = getComboboxContext();
 	const listboxItem = createListboxItem({
 		combobox,
-		get value() {
-			return value;
+		get item() {
+			return item;
 		},
 	});
 </script>
 
-<li {...listboxItem.properties} use:listboxItem.action>
+<li {...mergeProps(restProps, listboxItem.properties)} use:listboxItem.action>
 	{#if children}
 		{@render children()}
 	{/if}
