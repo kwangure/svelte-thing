@@ -1,4 +1,5 @@
 import type { ComboboxRoot } from './root.svelte.js';
+import type { RuneComponent } from '../types.js';
 
 export interface CreateComboboxListboxConfig {
 	/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
@@ -18,5 +19,5 @@ export function createComboboxListbox(config: CreateComboboxListboxConfig) {
 			id: combobox.ids.listbox,
 			role: 'listbox',
 		},
-	};
+	} satisfies RuneComponent<'div'>;
 }

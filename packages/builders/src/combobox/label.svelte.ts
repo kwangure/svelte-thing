@@ -1,4 +1,6 @@
+import type { RuneComponent } from '../types.js';
 import type { ComboboxRoot } from './root.svelte.js';
+import type { HTMLLabelAttributes } from 'svelte/elements';
 
 export interface CreateComboboxLabelConfig {
 	/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
@@ -16,5 +18,5 @@ export function createComboboxLabel(config: CreateComboboxLabelConfig) {
 				return combobox.ids.input;
 			},
 		},
-	};
+	} satisfies RuneComponent<'label'>;
 }

@@ -1,4 +1,6 @@
-import { type ComboboxRoot } from './root.svelte.js';
+import type { HTMLButtonAttributes } from 'svelte/elements';
+import type { ComboboxRoot } from './root.svelte.js';
+import type { RuneComponent } from '../types.js';
 
 export interface CreateComboboxButtonConfig {
 	/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
@@ -31,7 +33,7 @@ export function createComboboxButton(config: CreateComboboxButtonConfig) {
 				}
 			},
 			tabindex: -1,
-			type: 'button' as const,
+			type: 'button',
 		},
-	};
+	} satisfies RuneComponent<'button'>;
 }

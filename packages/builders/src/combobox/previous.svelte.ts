@@ -1,4 +1,5 @@
-import { type ComboboxRoot } from './root.svelte.js';
+import type { ComboboxRoot } from './root.svelte.js';
+import type { RuneComponent } from '../types.js';
 import { cancelEvent } from '@svelte-thing/dom-event';
 
 export interface CreateComboboxPreviousConfig {
@@ -27,6 +28,7 @@ export function createComboboxPrevious(config: CreateComboboxPreviousConfig) {
 			onclick() {
 				combobox.setPreviousItemActive();
 			},
+			type: 'button',
 		},
-	};
+	} satisfies RuneComponent<'button'>;
 }

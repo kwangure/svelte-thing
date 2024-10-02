@@ -1,4 +1,5 @@
-import { type ComboboxRoot } from './root.svelte.js';
+import type { ComboboxRoot } from './root.svelte.js';
+import type { RuneComponent } from '../types.js';
 import { cancelEvent } from '@svelte-thing/dom-event';
 
 export interface CreateColorListNextConfig {
@@ -27,6 +28,7 @@ export function createComboboxNext(config: CreateColorListNextConfig) {
 			onclick() {
 				combobox.setNextItemActive();
 			},
+			type: 'button',
 		},
-	};
+	} satisfies RuneComponent<'button'>;
 }

@@ -1,6 +1,8 @@
+import type { HTMLAttributes, MouseEventHandler } from 'svelte/elements';
 import { mergeActions } from '@svelte-thing/component-utils';
 import { onclickoutside } from '@svelte-thing/components/actions';
 import { uid } from 'uid';
+import type { RuneComponent } from '../types';
 
 export interface CreateCombmboxRootConfig<TOption> {
 	filter?: ComboboxFilter<TOption>;
@@ -9,6 +11,11 @@ export interface CreateCombmboxRootConfig<TOption> {
 	label: string;
 	options?: TOption[];
 	optionToString?: (selectedValue: TOption) => string;
+}
+
+export interface ComboboxRootAttributes<T extends HTMLElement = HTMLElement>
+	extends HTMLAttributes<T> {
+	onclickoutside: MouseEventHandler<T>;
 }
 
 export type ComboboxFilter<TOption> = (
@@ -158,5 +165,5 @@ export function createComboboxRoot<TOption>(
 				close();
 			},
 		},
-	};
+	} satisfies RuneComponent<'div'>;
 }

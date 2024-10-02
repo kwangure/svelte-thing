@@ -1,3 +1,4 @@
+import type { HTMLAttributes } from 'svelte/elements';
 import { type ComboboxRoot } from './root.svelte.js';
 
 export interface CreateComboboxListboxItemConfig {
@@ -44,6 +45,6 @@ export function createListboxItem(config: CreateComboboxListboxItemConfig) {
 			get ['data-focus-visible']() {
 				return isActive || undefined;
 			},
-		},
+		} satisfies HTMLAttributes<HTMLElement>,
 	};
 }
