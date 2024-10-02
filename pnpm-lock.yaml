@@ -252,6 +252,9 @@ importers:
       '@svelte-thing/components':
         specifier: workspace:^
         version: link:../../packages/components
+      '@svelte-thing/dom-event':
+        specifier: workspace:^
+        version: link:../../packages/dom-event
       '@svelte-thing/skinless-components':
         specifier: workspace:^
         version: link:../../packages/skinless-components

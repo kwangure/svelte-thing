@@ -75,6 +75,7 @@
 		"@mdi/js": "^7.2.96",
 		"@svelte-thing/component-utils": "workspace:^",
 		"@svelte-thing/components": "workspace:^",
+		"@svelte-thing/dom-event": "workspace:^",
 		"@svelte-thing/skinless-components": "workspace:^",
 		"@svelte-thing/state-event": "workspace:^"
 	},
