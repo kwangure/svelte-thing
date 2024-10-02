@@ -156,7 +156,7 @@ export function createComboboxInput<TOption>({
 		get element() {
 			return element;
 		},
-		properties: {
+		props: {
 			get ['aria-autocomplete']() {
 				return (
 					{

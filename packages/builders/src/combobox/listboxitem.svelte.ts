@@ -19,7 +19,7 @@ export function createListboxItem<TOption>(
 
 	return {
 		action(_node: HTMLElement) {},
-		properties: {
+		props: {
 			get ['aria-selected']() {
 				return isActive;
 			},

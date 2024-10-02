@@ -32,7 +32,7 @@
 
 <dialog
 	class:modal={dialog.isModal}
-	{...mergeProps(restProps, dialog.properties)}
+	{...mergeProps(restProps, dialog.props)}
 	use:dialog.action
 >
 	{@render children()}

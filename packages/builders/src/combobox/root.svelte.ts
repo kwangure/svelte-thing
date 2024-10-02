@@ -218,7 +218,7 @@ export function createCombobox<TOption>(config: CreateCombmboxConfig<TOption>) {
 		appendChild: _appendChild,
 		emitEvent: _emitEvent,
 		removeChild: _removeChild,
-		properties: {
+		props: {
 			onclickoutside() {
 				_emitEvent(rootEvent.close);
 			},

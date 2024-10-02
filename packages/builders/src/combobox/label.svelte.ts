@@ -9,7 +9,7 @@ export function createComboboxLabel<TOption>(
 ) {
 	const { combobox } = config;
 	return {
-		properties: {
+		props: {
 			get for() {
 				return combobox.ids.input;
 			},

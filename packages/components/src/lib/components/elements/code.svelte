@@ -42,7 +42,7 @@
 			<Icon.Button
 				label="Copy"
 				path={copier.isCopied ? mdiCheck : mdiContentCopy}
-				{...copier.properties}
+				{...copier.props}
 			/>
 		</div>
 	{/if}

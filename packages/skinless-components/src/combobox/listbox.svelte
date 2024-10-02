@@ -17,7 +17,7 @@
 	const listbox = createComboboxListbox({ combobox });
 </script>
 
-<ul {...mergeProps(restProps, listbox.properties)}>
+<ul {...mergeProps(restProps, listbox.props)}>
 	{@render children()}
 </ul>
 

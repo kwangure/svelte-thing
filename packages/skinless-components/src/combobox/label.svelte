@@ -16,7 +16,7 @@
 	const label = createComboboxLabel({ combobox });
 </script>
 
-<label {...mergeProps(restProps, label.properties)}>
+<label {...mergeProps(restProps, label.props)}>
 	{#if children}
 		{@render children()}
 	{:else}
