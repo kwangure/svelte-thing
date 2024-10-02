@@ -1,16 +1,16 @@
 import { getContext, setContext } from 'svelte';
 import {
-	createCombobox,
-	type CreateCombmboxConfig,
-	type ComboboxBuilder,
+	createComboboxRoot,
+	type CreateCombmboxRootConfig,
+	type ComboboxRoot,
 } from './root.svelte.js';
 
 export const comboboxContextKey = Symbol('combobox');
 
 export function setComboboxContext<TOption>(
-	options: CreateCombmboxConfig<TOption>,
+	options: CreateCombmboxRootConfig<TOption>,
 ) {
-	const combobox = createCombobox<TOption>(options);
+	const combobox = createComboboxRoot<TOption>(options);
 	setContext(comboboxContextKey, combobox);
 	return combobox;
 }
@@ -22,5 +22,5 @@ export function getComboboxContext<TOption>() {
 			'Combobox context not found. Wrap combobox child in a root element.',
 		);
 	}
-	return combobox as ComboboxBuilder<TOption>;
+	return combobox as ComboboxRoot<TOption>;
 }

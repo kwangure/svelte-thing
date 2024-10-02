@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import {
-	createCombobox,
+	createComboboxRoot,
 	rootEvent,
-	type ComboboxBuilder,
+	type ComboboxRoot,
 } from './root.svelte.js';
 import { createComboboxInput } from './input.svelte.js';
 import { createListboxItem } from './listboxitem.svelte.js';
@@ -11,8 +11,9 @@ describe('combobox', () => {
 	interface Fruit {
 		name: string;
 	}
-	let combobox: ComboboxBuilder<Fruit>;
+	let combobox: ComboboxRoot<Fruit>;
 	let input: ReturnType<typeof createComboboxInput>;
+	let inputElement: HTMLInputElement;
 	let listboxItems: Map<string, ReturnType<typeof createListboxItem>>;
 	let options: Fruit[];
 	let cleanup: (() => void)[];
@@ -26,7 +27,7 @@ describe('combobox', () => {
 			{ name: 'Boysenberry' },
 			{ name: 'Cherry' },
 		];
-		combobox = createCombobox({
+		combobox = createComboboxRoot({
 			filter({ inputValue, options }) {
 				return (
 					options?.filter((option) =>
@@ -41,7 +42,8 @@ describe('combobox', () => {
 		cleanup.push(combobox.action(document.createElement('div')).destroy);
 
 		input = createComboboxInput({ combobox });
-		cleanup.push(input.action(document.createElement('input')).destroy);
+		inputElement = document.createElement('input');
+		cleanup.push(input.action(inputElement).destroy);
 		listboxItems = new Map();
 		for (const option of options) {
 			const item = createListboxItem({ combobox, item: option });
@@ -161,7 +163,7 @@ describe('combobox', () => {
 
 			listboxItems.get(clickedItem.name)?.props.onclick();
 
-			expect(input.element?.value).toEqual(setInputValue(clickedItem));
+			expect(inputElement.value).toEqual(setInputValue(clickedItem));
 			expect(combobox.value).toEqual(clickedItem);
 			expect(combobox.isOpen).toEqual(false);
 			expect(combobox.visualFocus).toEqual('input');

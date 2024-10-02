@@ -1,13 +1,14 @@
-import { rootEvent, type ComboboxBuilder } from './root.svelte.js';
+import { rootEvent, type ComboboxRoot } from './root.svelte.js';
 
-export interface CreateComboboxButtonConfig<TOption> {
-	combobox: ComboboxBuilder<TOption>;
+export interface CreateComboboxButtonConfig {
+	/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+	combobox: ComboboxRoot<any>;
 	label: string;
 }
 
-export function createComboboxButton<TOption>(
-	config: CreateComboboxButtonConfig<TOption>,
-) {
+export type ComboboxButton = ReturnType<typeof createComboboxButton>;
+
+export function createComboboxButton(config: CreateComboboxButtonConfig) {
 	const { combobox } = config;
 
 	return {

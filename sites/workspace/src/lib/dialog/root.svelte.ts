@@ -9,13 +9,13 @@ import {
 	type StateNode,
 } from '@svelte-thing/state-event';
 
-export interface CreateDialogConfig {
+export interface CreateDialogRootConfig {
 	hideOnInteractOutside?: boolean;
 	isOpen: boolean | null | undefined;
 	isModal?: boolean;
 }
 
-export type Dialog = ReturnType<typeof createDialogRoot>;
+export type DialogRoot = ReturnType<typeof createDialogRoot>;
 
 const createDialogEvent = (...type: (string | number)[]) =>
 	`dialog.${type.join('.')}`;
@@ -30,7 +30,7 @@ export const dialogEvent = {
 	},
 };
 
-export function createDialogRoot(config?: CreateDialogConfig) {
+export function createDialogRoot(config?: CreateDialogRootConfig) {
 	let element = $state<HTMLDialogElement>();
 	let hideOnInteractOutside = $state(config?.hideOnInteractOutside ?? true);
 	let isModal = $state(config?.isModal ?? true);
