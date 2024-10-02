@@ -11,7 +11,7 @@
 		"build": {
 			"command": "svelte-package -i ./src",
 			"files": [
-				"src/**/*.{js,ts}",
+				"src/**/*.{js,svelte,ts}",
 				"tsconfig.json",
 				"../../config/tsconfig.base.json"
 			],

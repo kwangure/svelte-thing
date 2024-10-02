@@ -28,7 +28,7 @@
 
 <style>
 	.root {
-		display: flex;
+		display: inline-flex;
 		flex-direction: column;
 	}
 </style>
