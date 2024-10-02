@@ -1,16 +1,22 @@
 <script lang="ts">
+	import type { HTMLLabelAttributes } from 'svelte/elements';
 	import type { Snippet } from 'svelte';
 	import {
 		createComboboxLabel,
 		getComboboxContext,
 	} from '@svelte-thing/builders';
+	import { mergeProps } from '@svelte-thing/component-utils';
 
-	const { children }: { children?: Snippet } = $props();
+	interface Props extends HTMLLabelAttributes {
+		children?: Snippet;
+	}
+
+	const { children, ...restProps }: Props = $props();
 	const combobox = getComboboxContext();
-	const { properties } = createComboboxLabel({ combobox });
+	const label = createComboboxLabel({ combobox });
 </script>
 
-<label {...properties}>
+<label {...mergeProps(restProps, label.properties)}>
 	{#if children}
 		{@render children()}
 	{:else}

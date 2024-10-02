@@ -1,17 +1,23 @@
-<script lang="ts" generics="TOption">
+<script lang="ts">
 	/* eslint-disable no-undef */
+	import type { HTMLAttributes } from 'svelte/elements';
 	import type { Snippet } from 'svelte';
 	import {
 		createComboboxListbox,
 		getComboboxContext,
 	} from '@svelte-thing/builders';
+	import { mergeProps } from '@svelte-thing/component-utils';
 
-	const { children }: { children: Snippet } = $props();
-	const combobox = getComboboxContext<TOption>();
-	const { properties } = createComboboxListbox({ combobox });
+	interface Props extends HTMLAttributes<HTMLUListElement> {
+		children: Snippet;
+	}
+
+	const { children, ...restProps }: Props = $props();
+	const combobox = getComboboxContext();
+	const listbox = createComboboxListbox({ combobox });
 </script>
 
-<ul {...properties}>
+<ul {...mergeProps(restProps, listbox.properties)}>
 	{@render children()}
 </ul>
 

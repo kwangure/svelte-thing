@@ -4,16 +4,15 @@
 		createComboboxPrevious,
 		getComboboxContext,
 	} from '@svelte-thing/builders';
+	import { mergeProps } from '@svelte-thing/component-utils';
 
-	type ComboboxNext = ReturnType<typeof createComboboxPrevious>;
-	type ButtonProps = Omit<
-		HTMLButtonAttributes,
-		keyof ComboboxNext['properties']
-	>;
+	interface Props extends HTMLButtonAttributes {
+		label: string;
+	}
 
-	const { label, ...attributes }: { label: string } & ButtonProps = $props();
+	const { label, ...restProps }: Props = $props();
 	const combobox = getComboboxContext();
-	const { properties } = createComboboxPrevious({
+	const previous = createComboboxPrevious({
 		combobox,
 		get label() {
 			return label;
@@ -21,7 +20,7 @@
 	});
 </script>
 
-<button {...attributes} {...properties}>
+<button {...mergeProps(restProps, previous.properties)}>
 	<span aria-hidden="true" style="padding: 0 2px;">◀</span>
 </button>
 

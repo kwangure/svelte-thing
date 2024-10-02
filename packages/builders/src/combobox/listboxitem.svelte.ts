@@ -8,14 +8,14 @@ export interface ComboboxListboxItemState<T> {
 
 export interface CreateComboboxListboxItemConfig<TOption> {
 	combobox: ComboboxBuilder<TOption>;
-	value: TOption;
+	item: TOption;
 }
 
 export function createListboxItem<TOption>(
 	config: CreateComboboxListboxItemConfig<TOption>,
 ) {
 	const { combobox } = config;
-	const isActive = $derived(Object.is(config.value, combobox.activeItem));
+	const isActive = $derived(Object.is(config.item, combobox.activeItem));
 
 	return {
 		action(_node: HTMLElement) {},
@@ -25,7 +25,7 @@ export function createListboxItem<TOption>(
 			},
 			role: 'option',
 			onclick() {
-				combobox.emitEvent(rootEvent.set.value, config.value);
+				combobox.emitEvent(rootEvent.set.value, config.item);
 				combobox.emitEvent(rootEvent.close);
 			},
 			get ['data-active-item']() {
