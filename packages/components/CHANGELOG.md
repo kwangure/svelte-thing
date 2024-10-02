@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.32
+
+### Patch Changes
+
+- 15bde12: Rename properties to props
+
 ## 0.0.31
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
 	"name": "@svelte-thing/skinless-components",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"scripts": {
 		"build": "wireit",
 		"check": "wireit",
@@ -69,9 +69,9 @@
 		"!**/*.test.d.ts"
 	],
 	"dependencies": {
-		"@svelte-thing/builders": "^0.0.5",
+		"@svelte-thing/builders": "^0.0.6",
 		"@svelte-thing/component-utils": "^0.0.2",
-		"@svelte-thing/components": "^0.0.31"
+		"@svelte-thing/components": "^0.0.32"
 	},
 	"devDependencies": {
 		"@sveltejs/package": "^2.3.5",

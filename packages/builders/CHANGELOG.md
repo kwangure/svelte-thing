@@ -1,5 +1,16 @@
 # @svelte-thing/builders
 
+## 0.0.6
+
+### Patch Changes
+
+- 9b038d8: Merge props in components
+- 15bde12: Rename properties to props
+- Updated dependencies [a48386f]
+- Updated dependencies [15bde12]
+  - @svelte-thing/dom-event@0.0.4
+  - @svelte-thing/components@0.0.32
+
 ## 0.0.5
 
 ### Patch Changes

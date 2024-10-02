@@ -1,5 +1,11 @@
 # @svelte-thing/dom-event
 
+## 0.0.4
+
+### Patch Changes
+
+- a48386f: Add isClickInside to dom-event
+
 ## 0.0.3
 
 ### Patch Changes
