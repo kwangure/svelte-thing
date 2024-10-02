@@ -7,16 +7,15 @@ import {
 } from '@svelte-thing/dom-event';
 import type { RuneComponent } from '../types.js';
 
-export interface CreateComboboxInputConfig {
-	/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-	combobox: ComboboxRoot<any>;
+export interface CreateComboboxInputConfig<TOption> {
+	combobox: ComboboxRoot<TOption>;
 }
 
 export type ComboboxInput = ReturnType<typeof createComboboxInput>;
 
 export const INPUT_SET_VALUE = 'combobox.input.set.value';
 
-export function createComboboxInput({ combobox }: CreateComboboxInputConfig) {
+export function createComboboxInput<TOption>({ combobox }: CreateComboboxInputConfig<TOption>) {
 	let element: HTMLInputElement | undefined;
 
 	combobox.onSetInputValue((value) => {

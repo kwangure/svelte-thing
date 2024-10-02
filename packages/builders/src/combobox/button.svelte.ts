@@ -2,15 +2,16 @@ import type { HTMLButtonAttributes } from 'svelte/elements';
 import type { ComboboxRoot } from './root.svelte.js';
 import type { RuneComponent } from '../types.js';
 
-export interface CreateComboboxButtonConfig {
-	/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-	combobox: ComboboxRoot<any>;
+export interface CreateComboboxButtonConfig<TOption> {
+	combobox: ComboboxRoot<TOption>;
 	label: string;
 }
 
 export type ComboboxButton = ReturnType<typeof createComboboxButton>;
 
-export function createComboboxButton(config: CreateComboboxButtonConfig) {
+export function createComboboxButton<TOption>(
+	config: CreateComboboxButtonConfig<TOption>,
+) {
 	const { combobox } = config;
 
 	return {
