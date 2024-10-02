@@ -12,7 +12,7 @@ export function createCopier(options: CopierOptions) {
 	let copyTimeout: ReturnType<typeof setTimeout>;
 
 	return {
-		properties: {
+		props: {
 			onclick() {
 				if (typeof navigator === 'undefined') return;
 				if (!textToCopy) return;

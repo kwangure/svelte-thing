@@ -144,7 +144,7 @@ export function createDialogRoot(config?: CreateDialogConfig) {
 				_emitEvent(dialogEvent.close);
 			}
 		},
-		properties: {
+		props: {
 			get ['aria-hidden']() {
 				return !isOpen || undefined;
 			},

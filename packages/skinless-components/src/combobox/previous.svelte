@@ -20,7 +20,7 @@
 	});
 </script>
 
-<button {...mergeProps(restProps, previous.properties)}>
+<button {...mergeProps(restProps, previous.props)}>
 	<span aria-hidden="true" style="padding: 0 2px;">◀</span>
 </button>
 

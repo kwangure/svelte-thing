@@ -12,7 +12,7 @@ export function createComboboxPrevious<TOption>(
 	const { combobox } = config;
 
 	return {
-		properties: {
+		props: {
 			get ['aria-controls']() {
 				return combobox.ids.listbox;
 			},

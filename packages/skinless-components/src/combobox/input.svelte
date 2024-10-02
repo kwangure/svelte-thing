@@ -17,7 +17,7 @@
 	const input = createComboboxInput({ combobox });
 </script>
 
-<input {...mergeProps(restProps, input.properties)} use:input.action />
+<input {...mergeProps(restProps, input.props)} use:input.action />
 
 <style>
 	input {

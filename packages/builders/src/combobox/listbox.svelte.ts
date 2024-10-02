@@ -9,7 +9,7 @@ export function createComboboxListbox<TOption>(
 ) {
 	const { combobox } = config;
 	return {
-		properties: {
+		props: {
 			get ['aria-label']() {
 				return combobox.label;
 			},

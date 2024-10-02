@@ -41,7 +41,7 @@
 
 <div
 	class="root"
-	{...mergeProps(restProps, combobox.properties)}
+	{...mergeProps(restProps, combobox.props)}
 	use:combobox.action
 >
 	{@render children(combobox)}

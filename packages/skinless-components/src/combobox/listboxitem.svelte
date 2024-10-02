@@ -25,7 +25,7 @@
 	});
 </script>
 
-<li {...mergeProps(restProps, listboxItem.properties)} use:listboxItem.action>
+<li {...mergeProps(restProps, listboxItem.props)} use:listboxItem.action>
 	{#if children}
 		{@render children()}
 	{/if}
