@@ -1,31 +1,52 @@
-import type { StateNode, StateNodeConfig } from './types.js';
-
-export function node(config?: StateNodeConfig) {
-	return {
-		children: new Set(),
-		on: new Map(Object.entries(config?.on ?? {})),
-	} satisfies StateNode;
+export interface StateNodeConfig {
+	on: Record<string, StateEventListener>;
 }
 
-export function appendChild(parent: StateNode, child: StateNode) {
-	parent.children.add(child);
+export interface StateEventListener {
+	(event: unknown): unknown;
 }
 
-export function removeChild(parent: StateNode, child: StateNode) {
-	parent.children.delete(child);
-}
+export class StateNode {
+	#children = new Set<StateNode>();
+	#on: Map<string, StateEventListener>;
+	#parent: StateNode | null = null;
 
-export function clearChildren(node: StateNode) {
-	for (const child of node.children) {
-		clearChildren(child);
+	constructor(config: StateNodeConfig) {
+		this.#on = new Map(Object.entries(config.on));
 	}
-	node.children.clear();
-}
 
-export function emitEvent(node: StateNode, type: string, value: unknown) {
-	node.on.get(type)?.(value);
+	appendChild(child: StateNode) {
+		this.#children.add(child);
+		child.#parent = this;
+	}
 
-	for (const child of node.children) {
-		emitEvent(child, type, value);
+	clearChildren() {
+		for (const child of this.#children) {
+			child.#parent = null;
+		}
+		this.#children.clear();
+	}
+
+	#emitEvent(type: string, value: unknown) {
+		this.#on.get(type)?.(value);
+		for (const child of this.#children) {
+			child.#emitEvent(type, value);
+		}
+	}
+
+	emitEvent(type: string, value: unknown) {
+		/* eslint-disable-next-line @typescript-eslint/no-this-alias */
+		let root: StateNode = this;
+		while (root.#parent) {
+			root = root.#parent;
+		}
+
+		root.#emitEvent(type, value);
+	}
+
+	removeChild(child: StateNode) {
+		if (this.#children.delete(child)) {
+			child.#parent = null;
+		}
 	}
 }
