@@ -1,4 +1,11 @@
-# worspace-site
+# workspace-site
+
+## 0.0.5
+
+### Patch Changes
+
+- Updated dependencies [f5bd405]
+  - @svelte-thing/state-event@0.0.3
 
 ## 0.0.4
 

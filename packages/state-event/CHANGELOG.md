@@ -1,5 +1,11 @@
 # @svelte-thing/state-event
 
+## 0.0.3
+
+### Patch Changes
+
+- f5bd405: Convert @svelte-thing/state-event to class
+
 ## 0.0.2
 
 ### Patch Changes
