@@ -1,15 +1,8 @@
-import {
-	appendChild,
-	clearChildren,
-	emitEvent,
-	node,
-	removeChild,
-	type StateNode,
-} from '@svelte-thing/state-event';
 import { inputEvent } from './input.svelte.js';
-import { onclickoutside } from '@svelte-thing/components/actions';
-import { uid } from 'uid';
 import { mergeActions } from '@svelte-thing/component-utils';
+import { onclickoutside } from '@svelte-thing/components/actions';
+import { StateNode } from '@svelte-thing/state-event';
+import { uid } from 'uid';
 
 export interface CreateCombmboxRootConfig<TOption> {
 	filter?: ComboboxFilter<TOption>;
@@ -74,109 +67,78 @@ export function createComboboxRoot<TOption>(
 		} satisfies ComboboxFilterArg<TOption>);
 	});
 	const activeItem = $derived(filteredOptions[activeItemIndex]);
-
-	let state: StateNode | undefined;
-
-	function _appendChild(child: StateNode) {
-		// TODO: Add DEV warning `state === undefined`
-		if (!state) return;
-		appendChild(state, child);
-	}
-
-	function _emitEvent(type: string, value?: unknown) {
-		// TODO: Add DEV warning `state === undefined`
-		if (!state) return;
-		emitEvent(state, type, value);
-	}
-
-	function _removeChild(child: StateNode) {
-		// TODO: Add DEV warning `state === undefined`
-		if (!state) return;
-		removeChild(state, child);
-	}
-
-	function setup() {
-		if (state) return;
-		// TODO: validate event values in DEV mode
-		state = node({
-			on: {
-				[inputEvent.input](event: unknown) {
-					inputValue = (event as Event & { currentTarget: HTMLInputElement })
-						.currentTarget.value;
-				},
-				[rootEvent.clear.activeItem]() {
-					_emitEvent(rootEvent.set.activeItemIndex, -1);
-					_emitEvent(rootEvent.set.visualFocus, 'input');
-				},
-				[rootEvent.close]() {
-					_emitEvent(rootEvent.set.isOpen, false);
-					_emitEvent(rootEvent.set.activeItemIndex, -1);
-					_emitEvent(rootEvent.set.visualFocus, 'input');
-				},
-				[rootEvent.open]() {
-					_emitEvent(rootEvent.set.isOpen, true);
-				},
-				[rootEvent.set.activeItemIndex](value: unknown) {
-					activeItemIndex = value as number;
-				},
-				[rootEvent.set.firstItemActive]() {
-					_emitEvent(rootEvent.set.activeItemIndex, 0);
-					_emitEvent(rootEvent.set.visualFocus, 'listbox');
-				},
-				[rootEvent.set.isOpen](value: unknown) {
-					isOpen = value as boolean;
-				},
-				[rootEvent.set.lastItemActive]() {
-					_emitEvent(rootEvent.set.activeItemIndex, filteredOptions.length - 1);
-					_emitEvent(rootEvent.set.visualFocus, 'listbox');
-				},
-				[rootEvent.set.nextItemActive]() {
-					// - Set to: 0,...,activeCollection.length,0,...
-					// - For activeCollection[activeCollection.length] i.e. `undefined`, focus is set on the input
-					const length =
-						filteredOptions.length + +Boolean(config.includesBaseElement);
-					_emitEvent(
-						rootEvent.set.activeItemIndex,
-						(activeItemIndex + 1) % length,
-					);
-					_emitEvent(rootEvent.set.visualFocus, 'listbox');
-				},
-				[rootEvent.set.previousItemActive]() {
-					// - Set to: activeCollection.length,...,0,activeCollection.length,...
-					// - For activeCollection[activeCollection.length] i.e. `undefined`, focus is set on the input
-					const length =
-						filteredOptions.length + +Boolean(config.includesBaseElement);
-					_emitEvent(
-						rootEvent.set.activeItemIndex,
-						-(activeItemIndex - 1 + length) % length,
-					);
-					_emitEvent(rootEvent.set.visualFocus, 'listbox');
-				},
-				[rootEvent.set.value](v: unknown) {
-					value = v as TOption;
-				},
-				[rootEvent.set.visualFocus](v: unknown) {
-					visualFocus = v as ComboboxVisualFocus;
-				},
+	const state = new StateNode({
+		on: {
+			[inputEvent.input](event: unknown) {
+				inputValue = (event as Event & { currentTarget: HTMLInputElement })
+					.currentTarget.value;
 			},
-		});
-	}
-
-	setup();
-
-	function destroy() {
-		if (!state) return;
-
-		clearChildren(state);
-		state = undefined;
-	}
+			[rootEvent.clear.activeItem]() {
+				state.emitEvent(rootEvent.set.activeItemIndex, -1);
+				state.emitEvent(rootEvent.set.visualFocus, 'input');
+			},
+			[rootEvent.close]() {
+				state.emitEvent(rootEvent.set.isOpen, false);
+				state.emitEvent(rootEvent.set.activeItemIndex, -1);
+				state.emitEvent(rootEvent.set.visualFocus, 'input');
+			},
+			[rootEvent.open]() {
+				state.emitEvent(rootEvent.set.isOpen, true);
+			},
+			[rootEvent.set.activeItemIndex](value: unknown) {
+				activeItemIndex = value as number;
+			},
+			[rootEvent.set.firstItemActive]() {
+				state.emitEvent(rootEvent.set.activeItemIndex, 0);
+				state.emitEvent(rootEvent.set.visualFocus, 'listbox');
+			},
+			[rootEvent.set.isOpen](value: unknown) {
+				isOpen = value as boolean;
+			},
+			[rootEvent.set.lastItemActive]() {
+				state.emitEvent(
+					rootEvent.set.activeItemIndex,
+					filteredOptions.length - 1,
+				);
+				state.emitEvent(rootEvent.set.visualFocus, 'listbox');
+			},
+			[rootEvent.set.nextItemActive]() {
+				// - Set to: 0,...,activeCollection.length,0,...
+				// - For activeCollection[activeCollection.length] i.e. `undefined`, focus is set on the input
+				const length =
+					filteredOptions.length + +Boolean(config.includesBaseElement);
+				state.emitEvent(
+					rootEvent.set.activeItemIndex,
+					(activeItemIndex + 1) % length,
+				);
+				state.emitEvent(rootEvent.set.visualFocus, 'listbox');
+			},
+			[rootEvent.set.previousItemActive]() {
+				// - Set to: activeCollection.length,...,0,activeCollection.length,...
+				// - For activeCollection[activeCollection.length] i.e. `undefined`, focus is set on the input
+				const length =
+					filteredOptions.length + +Boolean(config.includesBaseElement);
+				state.emitEvent(
+					rootEvent.set.activeItemIndex,
+					-(activeItemIndex - 1 + length) % length,
+				);
+				state.emitEvent(rootEvent.set.visualFocus, 'listbox');
+			},
+			[rootEvent.set.value](v: unknown) {
+				value = v as TOption;
+			},
+			[rootEvent.set.visualFocus](v: unknown) {
+				visualFocus = v as ComboboxVisualFocus;
+			},
+		},
+	});
 
 	return {
-		action: mergeActions(onclickoutside, () => {
-			setup();
-
-			return { destroy };
-		}),
+		action: mergeActions(onclickoutside, () => ({
+			destroy() {
+				state.clearChildren();
+			},
+		})),
 		get activeItem() {
 			return activeItem;
 		},
@@ -217,12 +179,18 @@ export function createComboboxRoot<TOption>(
 			input: uid(),
 			listbox: uid(),
 		},
-		appendChild: _appendChild,
-		emitEvent: _emitEvent,
-		removeChild: _removeChild,
+		appendChild(child: StateNode) {
+			state.appendChild(child);
+		},
+		emitEvent(type: string, value?: unknown) {
+			state.emitEvent(type, value);
+		},
+		removeChild(child: StateNode) {
+			state.removeChild(child);
+		},
 		props: {
 			onclickoutside() {
-				_emitEvent(rootEvent.close);
+				state.emitEvent(rootEvent.close, undefined);
 			},
 		},
 	};
