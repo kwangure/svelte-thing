@@ -56,9 +56,6 @@ importers:
       '@svelte-thing/dom-event':
         specifier: ^0.0.4
         version: 0.0.4
-      '@svelte-thing/state-event':
-        specifier: ^0.0.3
-        version: 0.0.3
       uid:
         specifier: ^2.0.2
         version: 2.0.2
@@ -709,9 +706,6 @@ packages:
 
   '@svelte-thing/state-event@0.0.2':
     resolution: {integrity: sha512-BEaG0QFkowJwWikFBvM+b/VSyJf+bjLOqMDjehFNS+pJ2MDYeZ9++x0kzvtzAuD+R6+ErDnsX5XNenP7HiwJvg==}
-
-  '@svelte-thing/state-event@0.0.3':
-    resolution: {integrity: sha512-ro/pQ+k2uHgVC1A6QNfeP0DgBVdLPjFJY5BSz1aMhH8psup7eFQPYzunmyzFom5s0xuCS8Zh7jnqw/wF7ur2qA==}
 
   '@sveltejs/adapter-auto@3.0.0':
     resolution: {integrity: sha512-UNWSs/rOReBRfI/xFwSO2WYF1a7PT74SrWOHJmSNLY3Lq+zbH0uuvnlP+TmrTUBvOTkou3WJDjL6lK3n6aOUgQ==}
@@ -3193,8 +3187,6 @@ snapshots:
   '@svelte-thing/state-event@0.0.2':
     dependencies:
       uid: 2.0.2
-
-  '@svelte-thing/state-event@0.0.3': {}
 
   '@sveltejs/adapter-auto@3.0.0(@sveltejs/kit@2.5.22(@sveltejs/vite-plugin-svelte@3.0.1(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@20.13.0)))(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@20.13.0)))':
     dependencies:

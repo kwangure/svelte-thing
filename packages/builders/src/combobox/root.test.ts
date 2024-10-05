@@ -1,9 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import {
-	createComboboxRoot,
-	rootEvent,
-	type ComboboxRoot,
-} from './root.svelte.js';
+import { createComboboxRoot, type ComboboxRoot } from './root.svelte.js';
 import { createComboboxInput } from './input.svelte.js';
 import { createListboxItem } from './listboxitem.svelte.js';
 
@@ -37,7 +33,7 @@ describe('combobox', () => {
 			},
 			label: 'Favorite Fruit',
 			options,
-			setInputValue,
+			optionToString: setInputValue,
 		});
 		cleanup.push(combobox.action(document.createElement('div')).destroy);
 
@@ -69,7 +65,7 @@ describe('combobox', () => {
 		});
 
 		it('Enter accepts the autocomplete suggestion if one is selected', () => {
-			combobox.emitEvent(rootEvent.open);
+			combobox.open();
 			expect(combobox.visualFocus).toBe('input');
 			const event = new KeyboardEvent('keydown', { key: 'Enter' });
 			input.props.onkeydown(event);
@@ -91,8 +87,8 @@ describe('combobox', () => {
 		});
 
 		it('Alt+ArrowUp closes the popup and returns focus to the combobox', () => {
-			combobox.emitEvent(rootEvent.open);
-			combobox.emitEvent(rootEvent.set.firstItemActive);
+			combobox.open();
+			combobox.setFirstItemActive();
 			expect(combobox.visualFocus).toBe('listbox');
 			const event = new KeyboardEvent('keydown', {
 				key: 'ArrowUp',
@@ -106,8 +102,8 @@ describe('combobox', () => {
 
 	describe('When focus is on the listbox popup', () => {
 		beforeEach(() => {
-			combobox.emitEvent(rootEvent.open);
-			combobox.emitEvent(rootEvent.set.firstItemActive);
+			combobox.open();
+			combobox.setFirstItemActive();
 		});
 
 		it('Enter accepts the focused option', () => {
@@ -133,7 +129,7 @@ describe('combobox', () => {
 		});
 
 		it('ArrowUp moves focus to and selects the previous option', () => {
-			combobox.emitEvent(rootEvent.set.nextItemActive);
+			combobox.setNextItemActive();
 			expect(combobox.activeItem).toEqual(options[1]);
 			const event = new KeyboardEvent('keydown', { key: 'ArrowUp' });
 			input.props.onkeydown(event);

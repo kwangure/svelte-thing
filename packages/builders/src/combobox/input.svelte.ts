@@ -1,12 +1,10 @@
-import { invariant } from '@svelte-thing/component-utils';
-import { rootEvent, type ComboboxRoot } from './root.svelte.js';
+import { type ComboboxRoot } from './root.svelte.js';
 import {
 	cancelEvent as cancelDOMEvent,
 	encodeKeys,
 	Keys,
 	keysFromEvent,
 } from '@svelte-thing/dom-event';
-import { StateNode } from '@svelte-thing/state-event';
 
 export interface CreateComboboxInputConfig {
 	/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
@@ -18,26 +16,19 @@ export type ComboboxInput = ReturnType<typeof createComboboxInput>;
 export const INPUT_SET_VALUE = 'combobox.input.set.value';
 
 export function createComboboxInput({ combobox }: CreateComboboxInputConfig) {
-	const { setInputValue } = combobox;
 	let element: HTMLInputElement | undefined;
-	const state = new StateNode({
-		on: {
-			[INPUT_SET_VALUE](value) {
-				invariant(
-					typeof value === 'string',
-					`"${INPUT_SET_VALUE}" expect string.`,
-				);
-				state.emitEvent(rootEvent.clear.activeItem, undefined);
-				if (!combobox.isOpen && value.length) {
-					state.emitEvent(rootEvent.open, undefined);
-				}
-			},
-			[rootEvent.set.value](value) {
-				if (element) {
-					element.value = setInputValue?.(value) ?? (value as string);
-				}
-			},
-		},
+
+	combobox.onSetInputValue((value) => {
+		combobox.clearActiveItem();
+		if (!combobox.isOpen && value.length) {
+			combobox.open();
+		}
+	});
+
+	combobox.onSetValue((value) => {
+		if (element) {
+			element.value = combobox.optionToString?.(value) ?? (value as string);
+		}
 	});
 
 	interface EventRecord {
@@ -46,28 +37,28 @@ export function createComboboxInput({ combobox }: CreateComboboxInputConfig) {
 
 	const keydownEvents: EventRecord = {
 		[encodeKeys([Keys.Alt, Keys.ArrowDown])](event: unknown) {
-			state.emitEvent(rootEvent.open, undefined);
+			combobox.open();
 			cancelDOMEvent(event as Event);
 		},
 		[encodeKeys([Keys.ArrowDown])](event: Event) {
 			if (combobox.isOpen) {
-				state.emitEvent(rootEvent.set.nextItemActive, undefined);
+				combobox.setNextItemActive();
 			} else {
-				state.emitEvent(rootEvent.open, undefined);
-				state.emitEvent(rootEvent.set.firstItemActive, undefined);
+				combobox.open();
+				combobox.setFirstItemActive();
 			}
 			cancelDOMEvent(event);
 		},
 		[encodeKeys([Keys.Alt, Keys.ArrowUp])](event) {
-			state.emitEvent(rootEvent.close, undefined);
+			combobox.close();
 			cancelDOMEvent(event as Event);
 		},
 		[encodeKeys([Keys.ArrowUp])](event: Event) {
 			if (combobox.isOpen) {
-				state.emitEvent(rootEvent.set.previousItemActive, undefined);
+				combobox.setPreviousItemActive();
 			} else {
-				state.emitEvent(rootEvent.open, undefined);
-				state.emitEvent(rootEvent.set.lastItemActive, undefined);
+				combobox.open();
+				combobox.setLastItemActive();
 			}
 			cancelDOMEvent(event);
 		},
@@ -76,16 +67,16 @@ export function createComboboxInput({ combobox }: CreateComboboxInputConfig) {
 		},
 		[encodeKeys([Keys.Enter])](event: Event) {
 			if (combobox.activeItem) {
-				state.emitEvent(rootEvent.set.value, combobox.activeItem);
+				combobox.setValue(combobox.activeItem);
 			}
-			state.emitEvent(rootEvent.close, undefined);
+			combobox.close();
 			cancelDOMEvent(event);
 		},
 		[encodeKeys([Keys.Escape])](event: Event) {
 			if (combobox.isOpen) {
-				state.emitEvent(rootEvent.close, undefined);
+				combobox.close();
 			} else {
-				state.emitEvent(rootEvent.clear.activeItem, undefined);
+				combobox.clearActiveItem();
 				if (element) {
 					element.value = '';
 				}
@@ -97,19 +88,19 @@ export function createComboboxInput({ combobox }: CreateComboboxInputConfig) {
 		},
 		[encodeKeys([Keys.Tab])]() {
 			if (combobox.activeItem) {
-				state.emitEvent(rootEvent.set.value, combobox.activeItem);
+				combobox.setValue(combobox.activeItem);
 			}
-			state.emitEvent(rootEvent.close, undefined);
+			combobox.close();
 		},
 	};
 
 	const keyupEvents: EventRecord = {
 		[encodeKeys([Keys.Backspace])](event: Event) {
-			state.emitEvent(rootEvent.clear.activeItem, undefined);
+			combobox.clearActiveItem();
 			cancelDOMEvent(event);
 		},
 		[encodeKeys([Keys.Delete])](event: Event) {
-			state.emitEvent(rootEvent.clear.activeItem, undefined);
+			combobox.clearActiveItem();
 			cancelDOMEvent(event);
 		},
 	};
@@ -117,12 +108,10 @@ export function createComboboxInput({ combobox }: CreateComboboxInputConfig) {
 	return {
 		action(_element: HTMLInputElement) {
 			element = _element;
-			combobox.appendChild(state);
 
 			return {
 				destroy() {
 					element = undefined;
-					combobox.removeChild(state);
 				},
 			};
 		},
@@ -150,14 +139,13 @@ export function createComboboxInput({ combobox }: CreateComboboxInputConfig) {
 			id: combobox.ids.input,
 			onclick() {
 				if (combobox.isOpen) {
-					state.emitEvent(rootEvent.close, undefined);
+					combobox.close();
 				} else {
-					state.emitEvent(rootEvent.open, undefined);
+					combobox.open();
 				}
 			},
 			oninput(event: Event) {
-				state.emitEvent(
-					INPUT_SET_VALUE,
+				combobox.setInputValue(
 					(event as Event & { currentTarget: EventTarget & HTMLInputElement })
 						.currentTarget.value,
 				);
