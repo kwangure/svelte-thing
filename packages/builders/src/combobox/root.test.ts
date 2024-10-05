@@ -142,19 +142,15 @@ describe('combobox', () => {
 
 		it('Backspace returns focus to the combobox', () => {
 			expect(combobox.visualFocus).toEqual('listbox');
-			const backspaceEvent = new KeyboardEvent('keydown', {
-				key: 'Backspace',
-			});
-			input.props.onkeyup(backspaceEvent);
+			const event = new KeyboardEvent('keyup', { key: 'Backspace' });
+			input.props.onkeyup(event);
 			expect(combobox.visualFocus).toEqual('input');
 		});
 
 		it('Delete returns focus to the combobox', () => {
 			expect(combobox.visualFocus).toEqual('listbox');
-			const deleteEvent = new KeyboardEvent('keydown', {
-				key: 'Delete',
-			});
-			input.props.onkeyup(deleteEvent);
+			const event = new KeyboardEvent('keyup', { key: 'Delete' });
+			input.props.onkeyup(event);
 			expect(combobox.visualFocus).toEqual('input');
 		});
 
