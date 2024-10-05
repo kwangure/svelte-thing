@@ -133,15 +133,17 @@ export function createComboboxRoot<TOption>(
 			visualFocus = 'listbox';
 		},
 		setNextItemActive() {
-			const length =
-				filteredOptions.length + (config.includesBaseElement ? 1 : 0);
-			activeItemIndex = (activeItemIndex + 1) % length;
+			const minValue = config.includesBaseElement ? -1 : 0;
+			const maxValue = filteredOptions.length - 1;
+			activeItemIndex =
+				activeItemIndex === maxValue ? minValue : activeItemIndex + 1;
 			visualFocus = activeItemIndex === -1 ? 'input' : 'listbox';
 		},
 		setPreviousItemActive() {
-			const length =
-				filteredOptions.length + (config.includesBaseElement ? 1 : 0);
-			activeItemIndex = -(activeItemIndex - 1 + length) % length;
+			const minValue = config.includesBaseElement ? -1 : 0;
+			const maxValue = filteredOptions.length - 1;
+			activeItemIndex =
+				activeItemIndex <= minValue ? maxValue : activeItemIndex - 1;
 			visualFocus = 'listbox';
 		},
 		setValue(v: TOption) {

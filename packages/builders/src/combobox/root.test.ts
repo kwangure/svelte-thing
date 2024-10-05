@@ -56,12 +56,36 @@ describe('combobox', () => {
 			expect(combobox.visualFocus).toBe('listbox');
 		});
 
+		it('ArrowDown when open moves focus to the next element', () => {
+			combobox.open();
+			expect(combobox.visualFocus).toBe('input');
+			const event = new KeyboardEvent('keydown', { key: 'ArrowDown' });
+			input.props.onkeydown(event);
+			expect(combobox.visualFocus).toBe('listbox');
+			expect(combobox.activeItem).toBe(options.at(0));
+			input.props.onkeydown(event);
+			expect(combobox.visualFocus).toBe('listbox');
+			expect(combobox.activeItem).toBe(options.at(1));
+		});
+
 		it('ArrowUp opens popup and places focus on the last focusable element', () => {
 			const event = new KeyboardEvent('keydown', { key: 'ArrowUp' });
 			input.props.onkeydown(event);
 			expect(combobox.isOpen).toBe(true);
 			expect(combobox.activeItem).toBe(options.at(-1));
 			expect(combobox.visualFocus).toBe('listbox');
+		});
+
+		it('ArrowUp when open moves focus to the previous element', () => {
+			combobox.open();
+			expect(combobox.visualFocus).toBe('input');
+			const event = new KeyboardEvent('keydown', { key: 'ArrowUp' });
+			input.props.onkeydown(event);
+			expect(combobox.visualFocus).toBe('listbox');
+			expect(combobox.activeItem).toBe(options.at(-1));
+			input.props.onkeydown(event);
+			expect(combobox.visualFocus).toBe('listbox');
+			expect(combobox.activeItem).toBe(options.at(-2));
 		});
 
 		it('Enter accepts the autocomplete suggestion if one is selected', () => {
