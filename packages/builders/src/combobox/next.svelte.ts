@@ -1,4 +1,4 @@
-import { rootEvent, type ComboboxRoot } from './root.svelte.js';
+import { type ComboboxRoot } from './root.svelte.js';
 import { cancelEvent } from '@svelte-thing/dom-event';
 
 export interface CreateColorListNextConfig {
@@ -24,7 +24,7 @@ export function createComboboxNext(config: CreateColorListNextConfig) {
 				cancelEvent(event);
 			},
 			onclick() {
-				combobox.emitEvent(rootEvent.set.nextItemActive);
+				combobox.setNextItemActive();
 			},
 		},
 	};

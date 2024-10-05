@@ -27,7 +27,13 @@
 	const dialog = createDialogRoot({ isModal, isOpen });
 	$effect(() => dialog.setHideOnInteractOutside(hideOnInteractOutside));
 	$effect(() => dialog.setIsModal(isModal));
-	$effect(() => dialog.setIsOpen(isOpen));
+	$effect(() => {
+		if (isOpen) {
+			dialog.open();
+		} else {
+			dialog.close();
+		}
+	});
 </script>
 
 <dialog

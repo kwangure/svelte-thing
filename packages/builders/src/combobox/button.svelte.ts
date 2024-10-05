@@ -1,4 +1,4 @@
-import { rootEvent, type ComboboxRoot } from './root.svelte.js';
+import { type ComboboxRoot } from './root.svelte.js';
 
 export interface CreateComboboxButtonConfig {
 	/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
@@ -24,9 +24,9 @@ export function createComboboxButton(config: CreateComboboxButtonConfig) {
 			},
 			onclick() {
 				if (combobox.isOpen) {
-					combobox.emitEvent(rootEvent.close);
+					combobox.close();
 				} else {
-					combobox.emitEvent(rootEvent.open);
+					combobox.open();
 				}
 			},
 			tabindex: -1,

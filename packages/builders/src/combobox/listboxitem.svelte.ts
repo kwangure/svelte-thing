@@ -1,4 +1,4 @@
-import { rootEvent, type ComboboxRoot } from './root.svelte.js';
+import { type ComboboxRoot } from './root.svelte.js';
 
 export interface CreateComboboxListboxItemConfig {
 	/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
@@ -20,8 +20,8 @@ export function createListboxItem(config: CreateComboboxListboxItemConfig) {
 			},
 			role: 'option',
 			onclick() {
-				combobox.emitEvent(rootEvent.set.value, config.item);
-				combobox.emitEvent(rootEvent.close);
+				combobox.setValue(config.item);
+				combobox.close();
 			},
 			get ['data-active-item']() {
 				return isActive || undefined;

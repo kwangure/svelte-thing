@@ -1,4 +1,4 @@
-import { rootEvent, type ComboboxRoot } from './root.svelte.js';
+import { type ComboboxRoot } from './root.svelte.js';
 import { cancelEvent } from '@svelte-thing/dom-event';
 
 export interface CreateComboboxPreviousConfig {
@@ -24,7 +24,7 @@ export function createComboboxPrevious(config: CreateComboboxPreviousConfig) {
 				cancelEvent(event);
 			},
 			onclick() {
-				combobox.emitEvent(rootEvent.set.previousItemActive);
+				combobox.setPreviousItemActive();
 			},
 		},
 	};

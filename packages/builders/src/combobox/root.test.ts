@@ -1,9 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import {
-	createComboboxRoot,
-	rootEvent,
-	type ComboboxRoot,
-} from './root.svelte.js';
+import { createComboboxRoot, type ComboboxRoot } from './root.svelte.js';
 import { createComboboxInput } from './input.svelte.js';
 import { createListboxItem } from './listboxitem.svelte.js';
 
@@ -37,7 +33,7 @@ describe('combobox', () => {
 			},
 			label: 'Favorite Fruit',
 			options,
-			setInputValue,
+			optionToString: setInputValue,
 		});
 		cleanup.push(combobox.action(document.createElement('div')).destroy);
 
@@ -60,6 +56,18 @@ describe('combobox', () => {
 			expect(combobox.visualFocus).toBe('listbox');
 		});
 
+		it('ArrowDown when open moves focus to the next element', () => {
+			combobox.open();
+			expect(combobox.visualFocus).toBe('input');
+			const event = new KeyboardEvent('keydown', { key: 'ArrowDown' });
+			input.props.onkeydown(event);
+			expect(combobox.visualFocus).toBe('listbox');
+			expect(combobox.activeItem).toBe(options.at(0));
+			input.props.onkeydown(event);
+			expect(combobox.visualFocus).toBe('listbox');
+			expect(combobox.activeItem).toBe(options.at(1));
+		});
+
 		it('ArrowUp opens popup and places focus on the last focusable element', () => {
 			const event = new KeyboardEvent('keydown', { key: 'ArrowUp' });
 			input.props.onkeydown(event);
@@ -68,8 +76,20 @@ describe('combobox', () => {
 			expect(combobox.visualFocus).toBe('listbox');
 		});
 
+		it('ArrowUp when open moves focus to the previous element', () => {
+			combobox.open();
+			expect(combobox.visualFocus).toBe('input');
+			const event = new KeyboardEvent('keydown', { key: 'ArrowUp' });
+			input.props.onkeydown(event);
+			expect(combobox.visualFocus).toBe('listbox');
+			expect(combobox.activeItem).toBe(options.at(-1));
+			input.props.onkeydown(event);
+			expect(combobox.visualFocus).toBe('listbox');
+			expect(combobox.activeItem).toBe(options.at(-2));
+		});
+
 		it('Enter accepts the autocomplete suggestion if one is selected', () => {
-			combobox.emitEvent(rootEvent.open);
+			combobox.open();
 			expect(combobox.visualFocus).toBe('input');
 			const event = new KeyboardEvent('keydown', { key: 'Enter' });
 			input.props.onkeydown(event);
@@ -91,8 +111,8 @@ describe('combobox', () => {
 		});
 
 		it('Alt+ArrowUp closes the popup and returns focus to the combobox', () => {
-			combobox.emitEvent(rootEvent.open);
-			combobox.emitEvent(rootEvent.set.firstItemActive);
+			combobox.open();
+			combobox.setFirstItemActive();
 			expect(combobox.visualFocus).toBe('listbox');
 			const event = new KeyboardEvent('keydown', {
 				key: 'ArrowUp',
@@ -106,8 +126,8 @@ describe('combobox', () => {
 
 	describe('When focus is on the listbox popup', () => {
 		beforeEach(() => {
-			combobox.emitEvent(rootEvent.open);
-			combobox.emitEvent(rootEvent.set.firstItemActive);
+			combobox.open();
+			combobox.setFirstItemActive();
 		});
 
 		it('Enter accepts the focused option', () => {
@@ -133,7 +153,7 @@ describe('combobox', () => {
 		});
 
 		it('ArrowUp moves focus to and selects the previous option', () => {
-			combobox.emitEvent(rootEvent.set.nextItemActive);
+			combobox.setNextItemActive();
 			expect(combobox.activeItem).toEqual(options[1]);
 			const event = new KeyboardEvent('keydown', { key: 'ArrowUp' });
 			input.props.onkeydown(event);
@@ -142,19 +162,15 @@ describe('combobox', () => {
 
 		it('Backspace returns focus to the combobox', () => {
 			expect(combobox.visualFocus).toEqual('listbox');
-			const backspaceEvent = new KeyboardEvent('keydown', {
-				key: 'Backspace',
-			});
-			input.props.onkeyup(backspaceEvent);
+			const event = new KeyboardEvent('keyup', { key: 'Backspace' });
+			input.props.onkeyup(event);
 			expect(combobox.visualFocus).toEqual('input');
 		});
 
 		it('Delete returns focus to the combobox', () => {
 			expect(combobox.visualFocus).toEqual('listbox');
-			const deleteEvent = new KeyboardEvent('keydown', {
-				key: 'Delete',
-			});
-			input.props.onkeyup(deleteEvent);
+			const event = new KeyboardEvent('keyup', { key: 'Delete' });
+			input.props.onkeyup(event);
 			expect(combobox.visualFocus).toEqual('input');
 		});
 

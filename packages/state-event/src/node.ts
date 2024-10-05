@@ -1,5 +1,5 @@
 export interface StateNodeConfig {
-	on: Record<string, StateEventListener>;
+	on?: Record<string, StateEventListener>;
 }
 
 export interface StateEventListener {
@@ -11,8 +11,8 @@ export class StateNode {
 	#on: Map<string, StateEventListener>;
 	#parent: StateNode | null = null;
 
-	constructor(config: StateNodeConfig) {
-		this.#on = new Map(Object.entries(config.on));
+	constructor(config?: StateNodeConfig) {
+		this.#on = new Map(config?.on ? Object.entries(config.on) : []);
 	}
 
 	appendChild(child: StateNode) {
@@ -34,7 +34,7 @@ export class StateNode {
 		}
 	}
 
-	emitEvent(type: string, value: unknown) {
+	emitEvent(type: string, value?: unknown) {
 		/* eslint-disable-next-line @typescript-eslint/no-this-alias */
 		let root: StateNode = this;
 		while (root.#parent) {

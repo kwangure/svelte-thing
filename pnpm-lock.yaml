@@ -56,9 +56,6 @@ importers:
       '@svelte-thing/dom-event':
         specifier: ^0.0.4
         version: 0.0.4
-      '@svelte-thing/state-event':
-        specifier: ^0.0.2
-        version: 0.0.2
       uid:
         specifier: ^2.0.2
         version: 2.0.2

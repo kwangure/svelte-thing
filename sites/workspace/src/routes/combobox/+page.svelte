@@ -51,15 +51,18 @@
 	];
 
 	function filter({ options, inputValue }: Combobox.FilterArg<Fruit>) {
-		return options?.filter(({ value }) => {
-			return value.includes(inputValue.toLowerCase());
-		});
+		return (
+			options?.filter(({ value }) => {
+				return value.includes(inputValue.toLowerCase());
+			}) ?? []
+		);
 	}
 </script>
 
 <div class="box">
 	<div class="text">
 		<Combobox.Root
+			label="Fruits"
 			{options}
 			{filter}
 			setInputValue={(fruit: Fruit) => fruit.label}
@@ -72,7 +75,7 @@
 				{#if combobox.isOpen}
 					<Combobox.Listbox>
 						{#each combobox.filteredOptions as fruit}
-							<Combobox.Item value={fruit}>
+							<Combobox.Item item={fruit}>
 								{fruit.label}
 							</Combobox.Item>
 						{/each}
