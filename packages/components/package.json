@@ -3,79 +3,24 @@
 	"version": "0.0.33",
 	"scripts": {
 		"build": "wireit",
-		"build:package": "wireit",
-		"build:package:watch": "wireit",
-		"build:site": "wireit",
 		"check": "wireit",
-		"dev": "vite dev",
-		"publint": "wireit",
-		"sync": "wireit"
+		"pre-commit": "wireit",
+		"publint": "wireit"
 	},
 	"wireit": {
 		"build": {
-			"dependencies": [
-				"build:package",
-				"build:site"
-			]
-		},
-		"build:package": {
-			"command": "svelte-package -i ./src/lib",
+			"command": "svelte-package -i ./src",
 			"files": [
-				"src/**/*.{css,js,ts,svelte}",
-				"svelte.config.js",
-				"vite.config.js",
+				"src/**/*.{css,js,svelte,ts}",
 				"tsconfig.json",
 				"../../config/tsconfig.base.json"
-			],
-			"#comment": [
-				"svelte-package delays emptying the dist folder until all the",
-				"files are compiled. Which means the dist/ output is in a bad",
-				"state only for a very tiny amount of time. This means HMR",
-				"apps testing a local build are not in a broken state.",
-				"See https://github.com/sveltejs/kit/pull/10514.",
-				"So we leave wireit `output` empty since svelte-package",
-				"will take care of emptying it."
-			],
-			"output": []
-		},
-		"build:package:watch": {
-			"command": "svelte-package -i ./src/lib --watch",
-			"files": [
-				"src/**/*.{js,ts,svelte}",
-				"svelte.config.js",
-				"vite.config.js",
-				"tsconfig.json",
-				"../../config/tsconfig.base.json"
-			],
-			"#comment": [
-				"svelte-package delays emptying the dist folder until all the",
-				"files are compiled. Which means the dist/ output is in a bad",
-				"state only for a very tiny amount of time. This means HMR",
-				"apps testing a local build are not in a broken state.",
-				"See https://github.com/sveltejs/kit/pull/10514.",
-				"So we leave wireit `output` empty since svelte-package",
-				"will take care of emptying it."
-			],
-			"output": []
-		},
-		"build:site": {
-			"command": "vite build",
-			"files": [
-				"src/**/*.{js,ts,svelte}",
-				"static/**",
-				"svelte.config.js",
-				"vite.config.js"
 			],
 			"output": [
-				"./svelte-kit/output",
-				"build"
+				"dist"
 			]
 		},
 		"check": {
 			"command": "svelte-check --tsconfig ./tsconfig.json",
-			"dependencies": [
-				"sync"
-			],
 			"files": [
 				"{src,test}/**/*.{js,ts,svelte}",
 				"tsconfig.json",
@@ -83,17 +28,10 @@
 			],
 			"output": []
 		},
-		"pre-commit": {
-			"dependencies": [
-				"check",
-				"publint",
-				"sync"
-			]
-		},
 		"publint": {
 			"command": "publint",
 			"dependencies": [
-				"build:package"
+				"build"
 			],
 			"files": [
 				"dist",
@@ -101,22 +39,19 @@
 			],
 			"output": []
 		},
-		"release": {
+		"pre-commit": {
 			"dependencies": [
-				"build:package",
+				"build",
+				"check",
 				"publint"
 			]
 		},
-		"sync": {
-			"command": "svelte-kit sync",
-			"files": [
-				"src/**/*.{js,ts,svelte}",
-				"static/**",
-				"svelte.config.js",
-				"vite.config.js",
-				"tsconfig.json"
-			],
-			"output": []
+		"release": {
+			"dependencies": [
+				"build",
+				"check",
+				"publint"
+			]
 		}
 	},
 	"exports": {
@@ -186,20 +121,15 @@
 		"esm-env": "^1.0.0",
 		"uid": "^2.0.2"
 	},
+	"devDependencies": {
+		"@sveltejs/package": "^2.3.5",
+		"publint": "^0.2.6",
+		"svelte": "^5.0.0-next.260",
+		"svelte-check": "^4.0.0",
+		"typescript": "^5.4.5"
+	},
 	"peerDependencies": {
 		"svelte": "^5.0.0-next.260"
-	},
-	"devDependencies": {
-		"@sveltejs/adapter-auto": "^3.0.0",
-		"@sveltejs/kit": "^2.5.0",
-		"@sveltejs/package": "^2.3.4",
-		"@sveltejs/vite-plugin-svelte": "^3.0.0",
-		"publint": "^0.2.2",
-		"svelte": "^5.0.0-next.260",
-		"svelte-check": "^4.0.4",
-		"tslib": "^2.4.1",
-		"typescript": "^5.6.0",
-		"vite": "^5.4.0"
 	},
 	"license": "MIT",
 	"type": "module"

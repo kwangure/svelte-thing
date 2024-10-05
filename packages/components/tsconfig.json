@@ -1,3 +1,7 @@
 {
-	"extends": "./.svelte-kit/tsconfig.json"
+	"extends": "../../config/tsconfig.base.json",
+	"compilerOptions": {
+		"noEmit": true
+	},
+	"exclude": ["dist"]
 }

@@ -24,8 +24,7 @@
 				"build"
 			],
 			"files": [
-				"src/**",
-				"types/**",
+				"dist",
 				"package.json"
 			],
 			"output": []
