@@ -1,9 +1,9 @@
+import { invariant } from '@svelte-thing/component-utils';
 import { rootEvent, type ComboboxRoot } from './root.svelte.js';
 import {
 	cancelEvent as cancelDOMEvent,
 	encodeKeys,
 	Keys,
-	type KeyCode,
 	keysFromEvent,
 } from '@svelte-thing/dom-event';
 import { StateNode } from '@svelte-thing/state-event';
@@ -15,115 +15,104 @@ export interface CreateComboboxInputConfig {
 
 export type ComboboxInput = ReturnType<typeof createComboboxInput>;
 
-const createInputEvent = (name: string, codes?: KeyCode[]) => {
-	let key = `input.${name}`;
-	if (codes?.length) {
-		key += `.${encodeKeys(codes)}`;
-	}
-	return key;
-};
-
-export const inputEvent = {
-	input: createInputEvent('input'),
-	keydown: {
-		AltArrowDown: createInputEvent('keydown', [Keys.Alt, Keys.ArrowDown]),
-		ArrowDown: createInputEvent('keydown', [Keys.ArrowDown]),
-		AltArrowUp: createInputEvent('keydown', [Keys.Alt, Keys.ArrowUp]),
-		ArrowUp: createInputEvent('keydown', [Keys.ArrowUp]),
-		End: createInputEvent('keydown', [Keys.End]),
-		Enter: createInputEvent('keydown', [Keys.Enter]),
-		Escape: createInputEvent('keydown', [Keys.Escape]),
-		Home: createInputEvent('keydown', [Keys.Home]),
-		Tab: createInputEvent('keydown', [Keys.Tab]),
-	},
-	keyup: {
-		Backspace: createInputEvent('keyup', [Keys.Backspace]),
-		Delete: createInputEvent('keyup', [Keys.Delete]),
-	},
-} as const;
+export const INPUT_SET_VALUE = 'combobox.input.set.value';
 
 export function createComboboxInput({ combobox }: CreateComboboxInputConfig) {
 	const { setInputValue } = combobox;
 	let element: HTMLInputElement | undefined;
 	const state = new StateNode({
 		on: {
-			[inputEvent.input]() {
+			[INPUT_SET_VALUE](value) {
+				invariant(
+					typeof value === 'string',
+					`"${INPUT_SET_VALUE}" expect string.`,
+				);
 				state.emitEvent(rootEvent.clear.activeItem, undefined);
-				if (!combobox.isOpen && element?.value.length) {
+				if (!combobox.isOpen && value.length) {
 					state.emitEvent(rootEvent.open, undefined);
 				}
 			},
-			[inputEvent.keydown.AltArrowDown](event: unknown) {
-				state.emitEvent(rootEvent.open, undefined);
-				cancelDOMEvent(event as Event);
-			},
-			[inputEvent.keydown.ArrowDown](event: Event) {
-				if (combobox.isOpen) {
-					state.emitEvent(rootEvent.set.nextItemActive, undefined);
-				} else {
-					state.emitEvent(rootEvent.open, undefined);
-					state.emitEvent(rootEvent.set.firstItemActive, undefined);
-				}
-				cancelDOMEvent(event);
-			},
-			[inputEvent.keydown.AltArrowUp](event) {
-				state.emitEvent(rootEvent.close, undefined);
-				cancelDOMEvent(event as Event);
-			},
-			[inputEvent.keydown.ArrowUp](event: Event) {
-				if (combobox.isOpen) {
-					state.emitEvent(rootEvent.set.previousItemActive, undefined);
-				} else {
-					state.emitEvent(rootEvent.open, undefined);
-					state.emitEvent(rootEvent.set.lastItemActive, undefined);
-				}
-				cancelDOMEvent(event);
-			},
-			[inputEvent.keydown.End]() {
-				element?.setSelectionRange(element.value.length, element.value.length);
-			},
-			[inputEvent.keydown.Enter](event: Event) {
-				if (combobox.activeItem) {
-					state.emitEvent(rootEvent.set.value, combobox.activeItem);
-				}
-				state.emitEvent(rootEvent.close, undefined);
-				cancelDOMEvent(event);
-			},
-			[inputEvent.keydown.Escape](event: Event) {
-				if (combobox.isOpen) {
-					state.emitEvent(rootEvent.close, undefined);
-				} else {
-					state.emitEvent(rootEvent.clear.activeItem, undefined);
-					if (element) {
-						element.value = '';
-					}
-				}
-				cancelDOMEvent(event);
-			},
-			[inputEvent.keydown.Home]() {
-				element?.setSelectionRange(0, 0);
-			},
-			[inputEvent.keydown.Tab]() {
-				if (combobox.activeItem) {
-					state.emitEvent(rootEvent.set.value, combobox.activeItem);
-				}
-				state.emitEvent(rootEvent.close, undefined);
-			},
-			[inputEvent.keyup.Backspace](event: Event) {
-				state.emitEvent(rootEvent.clear.activeItem, undefined);
-				cancelDOMEvent(event);
-			},
-			[inputEvent.keyup.Delete](event: Event) {
-				state.emitEvent(rootEvent.clear.activeItem, undefined);
-				cancelDOMEvent(event);
-			},
-			[rootEvent.set.value](value: unknown) {
+			[rootEvent.set.value](value) {
 				if (element) {
 					element.value = setInputValue?.(value) ?? (value as string);
 				}
 			},
 		},
 	});
+
+	interface EventRecord {
+		[k: string]: (event: KeyboardEvent) => void;
+	}
+
+	const keydownEvents: EventRecord = {
+		[encodeKeys([Keys.Alt, Keys.ArrowDown])](event: unknown) {
+			state.emitEvent(rootEvent.open, undefined);
+			cancelDOMEvent(event as Event);
+		},
+		[encodeKeys([Keys.ArrowDown])](event: Event) {
+			if (combobox.isOpen) {
+				state.emitEvent(rootEvent.set.nextItemActive, undefined);
+			} else {
+				state.emitEvent(rootEvent.open, undefined);
+				state.emitEvent(rootEvent.set.firstItemActive, undefined);
+			}
+			cancelDOMEvent(event);
+		},
+		[encodeKeys([Keys.Alt, Keys.ArrowUp])](event) {
+			state.emitEvent(rootEvent.close, undefined);
+			cancelDOMEvent(event as Event);
+		},
+		[encodeKeys([Keys.ArrowUp])](event: Event) {
+			if (combobox.isOpen) {
+				state.emitEvent(rootEvent.set.previousItemActive, undefined);
+			} else {
+				state.emitEvent(rootEvent.open, undefined);
+				state.emitEvent(rootEvent.set.lastItemActive, undefined);
+			}
+			cancelDOMEvent(event);
+		},
+		[encodeKeys([Keys.End])]() {
+			element?.setSelectionRange(element.value.length, element.value.length);
+		},
+		[encodeKeys([Keys.Enter])](event: Event) {
+			if (combobox.activeItem) {
+				state.emitEvent(rootEvent.set.value, combobox.activeItem);
+			}
+			state.emitEvent(rootEvent.close, undefined);
+			cancelDOMEvent(event);
+		},
+		[encodeKeys([Keys.Escape])](event: Event) {
+			if (combobox.isOpen) {
+				state.emitEvent(rootEvent.close, undefined);
+			} else {
+				state.emitEvent(rootEvent.clear.activeItem, undefined);
+				if (element) {
+					element.value = '';
+				}
+			}
+			cancelDOMEvent(event);
+		},
+		[encodeKeys([Keys.Home])]() {
+			element?.setSelectionRange(0, 0);
+		},
+		[encodeKeys([Keys.Tab])]() {
+			if (combobox.activeItem) {
+				state.emitEvent(rootEvent.set.value, combobox.activeItem);
+			}
+			state.emitEvent(rootEvent.close, undefined);
+		},
+	};
+
+	const keyupEvents: EventRecord = {
+		[encodeKeys([Keys.Backspace])](event: Event) {
+			state.emitEvent(rootEvent.clear.activeItem, undefined);
+			cancelDOMEvent(event);
+		},
+		[encodeKeys([Keys.Delete])](event: Event) {
+			state.emitEvent(rootEvent.clear.activeItem, undefined);
+			cancelDOMEvent(event);
+		},
+	};
 
 	return {
 		action(_element: HTMLInputElement) {
@@ -167,16 +156,17 @@ export function createComboboxInput({ combobox }: CreateComboboxInputConfig) {
 				}
 			},
 			oninput(event: Event) {
-				state.emitEvent(inputEvent.input, event);
-			},
-			onkeydown(event: KeyboardEvent) {
 				state.emitEvent(
-					createInputEvent('keydown', keysFromEvent(event)),
-					event,
+					INPUT_SET_VALUE,
+					(event as Event & { currentTarget: EventTarget & HTMLInputElement })
+						.currentTarget.value,
 				);
 			},
+			onkeydown(event: KeyboardEvent) {
+				keydownEvents[encodeKeys(keysFromEvent(event))](event);
+			},
 			onkeyup(event: KeyboardEvent) {
-				state.emitEvent(createInputEvent('keyup', keysFromEvent(event)), event);
+				keyupEvents[encodeKeys(keysFromEvent(event))](event);
 			},
 			role: 'combobox',
 			type: 'text' as const,

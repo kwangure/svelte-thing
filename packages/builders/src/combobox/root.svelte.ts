@@ -1,4 +1,4 @@
-import { inputEvent } from './input.svelte.js';
+import { INPUT_SET_VALUE } from './input.svelte.js';
 import { mergeActions } from '@svelte-thing/component-utils';
 import { onclickoutside } from '@svelte-thing/components/actions';
 import { StateNode } from '@svelte-thing/state-event';
@@ -69,7 +69,7 @@ export function createComboboxRoot<TOption>(
 	const activeItem = $derived(filteredOptions[activeItemIndex]);
 	const state = new StateNode({
 		on: {
-			[inputEvent.input](event: unknown) {
+			[INPUT_SET_VALUE](event: unknown) {
 				inputValue = (event as Event & { currentTarget: HTMLInputElement })
 					.currentTarget.value;
 			},
