@@ -22,7 +22,7 @@ export function getFocusableElements(element) {
 
 	return selectedElements.filter((element) => {
 		const tabIndex = element.getAttribute('tabindex');
-		// @ts-expect-error
+		// @ts-expect-error because
 		if (element.disabled || (tabIndex !== null && Number(tabIndex) < 0)) {
 			return false;
 		}

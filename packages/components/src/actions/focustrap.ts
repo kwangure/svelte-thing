@@ -13,7 +13,8 @@ export function focustrap(
 
 		const focusableElements = getFocusableElements(node);
 		const firstFocusableElement = focusableElements[0];
-		const lastFocusableElement = focusableElements[focusableElements.length - 1];
+		const lastFocusableElement =
+			focusableElements[focusableElements.length - 1];
 
 		if (event.shiftKey) {
 			if (document.activeElement === firstFocusableElement) {

@@ -1,8 +1,10 @@
 <script>
+	// @ts-expect-error requires svelte-kit
 	import { afterNavigate } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { getScrollingElement, isPartiallyHidden } from '../../dom/dom.js';
 	import List from './list.svelte';
+	// @ts-expect-error requires svelte-kit
 	import { page } from '$app/stores';
 
 	/** @type {import('./types.js').TocEntry[]} */
