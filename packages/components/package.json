@@ -15,9 +15,8 @@
 				"tsconfig.json",
 				"../../config/tsconfig.base.json"
 			],
-			"output": [
-				"dist"
-			]
+			"#comment": "Do not empty out outputDir to avoid breaking HMR for workspace:^ packages.",
+			"output": []
 		},
 		"check": {
 			"command": "svelte-check --tsconfig ./tsconfig.json",

@@ -1,8 +1,16 @@
-<script>
+<script lang="ts">
 	import '../../css/size.css';
+	import type { HTMLLiAttributes } from 'svelte/elements';
+	import type { Snippet } from 'svelte';
+
+	interface Props extends HTMLLiAttributes {
+		children: Snippet;
+	}
+
+	const { children, ...restProps }: Props = $props();
 </script>
 
-<li><slot /></li>
+<li {...restProps}>{@render children?.()}</li>
 
 <style>
 	li {
