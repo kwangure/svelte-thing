@@ -50,7 +50,6 @@
 		overflow: hidden;
 	}
 	dialog {
-		align-items: start;
 		animation: var(--st-motion-no-preference) slide-out-down 0.5s
 			cubic-bezier(0.25, 0, 0.3, 1) forwards;
 		animation-timing-function: cubic-bezier(0.5, -0.5, 0.1, 1.5);
@@ -68,8 +67,6 @@
 		max-inline-size: min(90vw, 60ch);
 		max-block-size: min(80vh, 100%);
 		overflow: hidden;
-		padding-block: var(--st-size-4);
-		padding-inline: var(--st-size-6);
 		position: fixed;
 		transition: opacity 0.5s cubic-bezier(0.25, 0, 0.3, 1);
 		z-index: 100000;

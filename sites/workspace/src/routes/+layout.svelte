@@ -26,6 +26,14 @@
 							Autocomplete
 						</Sidebar.Link>
 					</Sidebar.Item>
+					<Sidebar.Item>
+						<Sidebar.Link
+							href="/combobox/dialog"
+							ariaCurrent={pathname === `/combobox/dialog`}
+						>
+							Dialog
+						</Sidebar.Link>
+					</Sidebar.Item>
 				</Sidebar.Section>
 			</Sidebar.Item>
 			<Sidebar.Item>

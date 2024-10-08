@@ -72,6 +72,7 @@
 		}
 	},
 	"dependencies": {
+		"@content-thing/memdb": "^0.0.9",
 		"@mdi/js": "^7.2.96",
 		"@svelte-thing/component-utils": "workspace:^",
 		"@svelte-thing/components": "workspace:^",
