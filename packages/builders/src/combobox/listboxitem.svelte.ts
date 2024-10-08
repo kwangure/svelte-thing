@@ -12,9 +12,24 @@ export function createListboxItem(config: CreateComboboxListboxItemConfig) {
 	const { combobox } = config;
 	const isActive = $derived(Object.is(config.item, combobox.activeItem));
 
+	let element: HTMLElement | undefined;
+	combobox.onSetValue((value) => {
+		if (Object.is(config.item, value)) {
+			element?.scrollIntoView({ block: 'nearest' });
+		}
+	});
+
 	return {
-		action(_node: HTMLElement) {},
+		action(_element: HTMLElement) {
+			element = _element;
+			return {
+				destroy() {
+					element = undefined;
+				},
+			};
+		},
 		props: {
+			'data-st-combobox-listbox-item': '',
 			get ['aria-selected']() {
 				return isActive;
 			},

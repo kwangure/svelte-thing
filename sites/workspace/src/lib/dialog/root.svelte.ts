@@ -9,8 +9,8 @@ export interface CreateDialogRootConfig {
 export type DialogRoot = ReturnType<typeof createDialogRoot>;
 
 export function createDialogRoot(config?: CreateDialogRootConfig) {
-	let element = $state<HTMLDialogElement>();
-	let hideOnInteractOutside = $state(config?.hideOnInteractOutside ?? true);
+	let element: HTMLDialogElement | undefined;
+	let hideOnInteractOutside = config?.hideOnInteractOutside ?? true;
 	let isModal = $state(config?.isModal ?? true);
 	let isOpen = $state(config?.isOpen ?? false);
 
@@ -52,6 +52,7 @@ export function createDialogRoot(config?: CreateDialogRootConfig) {
 			isModal = v ?? true;
 		},
 		props: {
+			'data-st-dialog-root': '',
 			get ['aria-hidden']() {
 				return !isOpen || undefined;
 			},

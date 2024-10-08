@@ -116,6 +116,7 @@ export function createComboboxInput({ combobox }: CreateComboboxInputConfig) {
 			};
 		},
 		props: {
+			'data-st-combobox-input': '',
 			get ['aria-autocomplete']() {
 				return (
 					{

@@ -1,13 +1,22 @@
-<script>
+<script lang="ts">
 	import '../../css/color-preference.css';
 	import '../../css/color.css';
 	import '../../css/size.css';
-	/** @type {string} */
-	export let title;
+	import type { HTMLAttributes } from 'svelte/elements';
+	import type { Snippet } from 'svelte';
+
+	interface Props extends HTMLAttributes<HTMLUListElement> {
+		children?: Snippet;
+		title?: string;
+	}
+
+	const { children, title }: Props = $props();
 </script>
 
-<h5>{title}</h5>
-<ul><slot /></ul>
+{#if title}
+	<h5>{title}</h5>
+{/if}
+<ul>{@render children?.()}</ul>
 
 <style>
 	h5 {
@@ -30,5 +39,9 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--st-size-1);
+	}
+	:global(li) h5,
+	:global(li) ul {
+		padding-inline-start: var(--st-size-2);
 	}
 </style>

@@ -39,16 +39,12 @@
 	});
 </script>
 
-<div
-	class="root"
-	{...mergeProps(restProps, combobox.props)}
-	use:combobox.action
->
+<div {...mergeProps(restProps, combobox.props)} use:combobox.action>
 	{@render children(combobox)}
 </div>
 
 <style>
-	.root {
+	div {
 		display: inline-flex;
 		flex-direction: column;
 	}

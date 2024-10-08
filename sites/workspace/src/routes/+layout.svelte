@@ -17,9 +17,24 @@
 	<Sidebar.Root>
 		<Sidebar.Section title="Components">
 			<Sidebar.Item>
-				<Sidebar.Link href="/combobox" ariaCurrent={pathname === `/combobox`}>
-					Combobox
-				</Sidebar.Link>
+				<Sidebar.Section title="combobox">
+					<Sidebar.Item>
+						<Sidebar.Link
+							href="/combobox/autocomplete"
+							ariaCurrent={pathname === `/combobox/autocomplete`}
+						>
+							Autocomplete
+						</Sidebar.Link>
+					</Sidebar.Item>
+					<Sidebar.Item>
+						<Sidebar.Link
+							href="/combobox/dialog"
+							ariaCurrent={pathname === `/combobox/dialog`}
+						>
+							Dialog
+						</Sidebar.Link>
+					</Sidebar.Item>
+				</Sidebar.Section>
 			</Sidebar.Item>
 			<Sidebar.Item>
 				<Sidebar.Link href="/dialog" ariaCurrent={pathname === `/dialog`}>

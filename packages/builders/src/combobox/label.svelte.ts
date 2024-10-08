@@ -11,6 +11,7 @@ export function createComboboxLabel(config: CreateComboboxLabelConfig) {
 	const { combobox } = config;
 	return {
 		props: {
+			'data-st-combobox-label': '',
 			get for() {
 				return combobox.ids.input;
 			},
