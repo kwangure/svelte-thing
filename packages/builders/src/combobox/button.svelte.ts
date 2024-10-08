@@ -13,6 +13,7 @@ export function createComboboxButton(config: CreateComboboxButtonConfig) {
 
 	return {
 		props: {
+			'data-st-combobox-button': '',
 			get ['aria-controls']() {
 				return combobox.ids.listbox;
 			},

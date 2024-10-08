@@ -14,6 +14,7 @@ export function createComboboxNext(config: CreateColorListNextConfig) {
 
 	return {
 		props: {
+			'data-st-combobox-next': '',
 			get ['aria-controls']() {
 				return combobox.ids.listbox;
 			},

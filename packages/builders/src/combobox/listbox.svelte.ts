@@ -11,6 +11,7 @@ export function createComboboxListbox(config: CreateComboboxListboxConfig) {
 	const { combobox } = config;
 	return {
 		props: {
+			'data-st-combobox-listbox': '',
 			get ['aria-label']() {
 				return combobox.label;
 			},

@@ -153,6 +153,7 @@ export function createComboboxRoot<TOption>(
 			}
 		},
 		props: {
+			'data-st-combobox-root': '',
 			onclickoutside() {
 				close();
 			},

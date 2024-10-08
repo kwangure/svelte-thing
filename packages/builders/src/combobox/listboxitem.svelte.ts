@@ -29,6 +29,7 @@ export function createListboxItem(config: CreateComboboxListboxItemConfig) {
 			};
 		},
 		props: {
+			'data-st-combobox-listbox-item': '',
 			get ['aria-selected']() {
 				return isActive;
 			},
