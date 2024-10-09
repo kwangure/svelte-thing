@@ -1,5 +1,11 @@
 # @svelte-thing/builders
 
+## 0.0.9
+
+### Patch Changes
+
+- 76ad53e: Fix builder type typos
+
 ## 0.0.8
 
 ### Patch Changes
