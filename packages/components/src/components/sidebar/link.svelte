@@ -44,7 +44,10 @@
 	[aria-current='page'] {
 		--_background-color-dark: var(--st-color-preference-dark)
 			var(--st-color-blue-200);
-		background-color: var(--_background-color-dark, var(--st-color-blue-100));
+		background-color: var(
+			--_background-color-dark,
+			var(--st-color-blue-100)
+		);
 		--_color-dark: var(--st-color-preference-dark) var(--st-color-blue-700);
 		color: var(--_color-dark, var(--st-color-blue-600));
 	}
@@ -53,6 +56,9 @@
 	[aria-current='page']:hover {
 		--_background-color-dark: var(--st-color-preference-dark)
 			var(--st-color-blue-100);
-		background-color: var(--_background-color-dark, var(--st-color-blue-200));
+		background-color: var(
+			--_background-color-dark,
+			var(--st-color-blue-200)
+		);
 	}
 </style>

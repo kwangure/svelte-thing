@@ -29,7 +29,8 @@ export function getFocusableElements(element) {
 
 		// Check computed style last since it's more expensive
 		const style = getComputedStyle(element);
-		const isHidden = style.display === 'none' || style.visibility === 'hidden';
+		const isHidden =
+			style.display === 'none' || style.visibility === 'hidden';
 		return !isHidden;
 	});
 }

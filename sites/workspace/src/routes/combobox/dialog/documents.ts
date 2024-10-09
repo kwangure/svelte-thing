@@ -1,10 +1,10 @@
 import { createSearchIndex, createTable, search } from '@content-thing/memdb';
 
-export type BookSummaries = {
+export interface BookSummaries {
 	id: string;
 	title: string;
 	content: string;
-};
+}
 
 const bookSummaries: BookSummaries[] = [
 	{
@@ -137,7 +137,10 @@ console.log(
 			([word, frequencies]) =>
 				[
 					word,
-					Array.from(frequencies.values()).reduce((sum, freq) => sum + freq, 0),
+					Array.from(frequencies.values()).reduce(
+						(sum, freq) => sum + freq,
+						0,
+					),
 				] satisfies [string, number],
 		)
 		.sort(([, a], [, b]) => b - a),

@@ -37,7 +37,10 @@
 				</Sidebar.Section>
 			</Sidebar.Item>
 			<Sidebar.Item>
-				<Sidebar.Link href="/dialog" ariaCurrent={pathname === `/dialog`}>
+				<Sidebar.Link
+					href="/dialog"
+					ariaCurrent={pathname === `/dialog`}
+				>
 					Dialog
 				</Sidebar.Link>
 			</Sidebar.Item>

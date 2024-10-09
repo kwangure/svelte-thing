@@ -23,7 +23,8 @@
 		--_background-color-dark: var(--st-color-preference-dark)
 			var(--st-color-neutral-800);
 		background-color: var(--_background-color-dark, var(--st-color-white));
-		--_color-dark: var(--st-color-preference-dark) var(--st-color-neutral-400);
+		--_color-dark: var(--st-color-preference-dark)
+			var(--st-color-neutral-400);
 		color: var(--_color-dark, var(--st-color-neutral-900));
 		font-size: var(--st-size-3);
 		font-weight: 600;

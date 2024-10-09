@@ -4,22 +4,22 @@
 
 ### Patch Changes
 
-- 57d25b6: Make StateNode args optional
+-   57d25b6: Make StateNode args optional
 
 ## 0.0.3
 
 ### Patch Changes
 
-- f5bd405: Convert @svelte-thing/state-event to class
+-   f5bd405: Convert @svelte-thing/state-event to class
 
 ## 0.0.2
 
 ### Patch Changes
 
-- 78fe4aa: Ignore test sourcemaps when publishing
+-   78fe4aa: Ignore test sourcemaps when publishing
 
 ## 0.0.1
 
 ### Patch Changes
 
-- de885f5: Ignore tests
+-   de885f5: Ignore tests

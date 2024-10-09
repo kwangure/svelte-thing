@@ -4,10 +4,10 @@
 
 ### Patch Changes
 
-- 44dca9f: Add invariant util
+-   44dca9f: Add invariant util
 
 ## 0.0.1
 
 ### Patch Changes
 
-- 78fe4aa: Ignore test sourcemaps when publishing
+-   78fe4aa: Ignore test sourcemaps when publishing

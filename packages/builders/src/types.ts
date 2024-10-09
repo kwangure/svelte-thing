@@ -12,20 +12,21 @@ type RemoveIndexSignature<T> = {
 		  : K]: T[K];
 };
 
-interface HTMLElementAttributes
-	extends RemoveIndexSignature<
-		SvelteHTMLElements & { search: HTMLAttributes<HTMLElement> }
-	> {}
+type HTMLElementAttributes = RemoveIndexSignature<
+	SvelteHTMLElements & { search: HTMLAttributes<HTMLElement> }
+>;
 
 export interface RuneComponent<
 	TElementTagName extends keyof HTMLElementTagNameMap,
 > {
 	action?: (_element: HTMLElementTagNameMap[TElementTagName]) => {
-		destroy?(): void;
-		update?(): void;
+		destroy?: () => void;
+		update?: () => void;
 	} | void;
 	props: HTMLElementAttributes[TElementTagName] & {
-		onclickoutside?: MouseEventHandler<HTMLElementTagNameMap[TElementTagName]>;
+		onclickoutside?: MouseEventHandler<
+			HTMLElementTagNameMap[TElementTagName]
+		>;
 	};
 	[key: string]: unknown;
 }

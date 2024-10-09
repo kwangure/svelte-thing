@@ -19,7 +19,9 @@ const theme = {
 		__theme = t;
 		if (BROWSER) {
 			document.documentElement.classList.add(t === DARK ? DARK : LIGHT);
-			document.documentElement.classList.remove(t === DARK ? LIGHT : DARK);
+			document.documentElement.classList.remove(
+				t === DARK ? LIGHT : DARK,
+			);
 		}
 	},
 };

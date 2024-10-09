@@ -79,7 +79,10 @@
 		--_border-end-end-radius: var(--st-breakpoint-not-md) 0px;
 		border-end-end-radius: var(--_border-end-end-radius, var(--st-size-1));
 		--_border-end-start-radius: var(--st-breakpoint-not-md) 0px;
-		border-end-start-radius: var(--_border-end-start-radius, var(--st-size-1));
+		border-end-start-radius: var(
+			--_border-end-start-radius,
+			var(--st-size-1)
+		);
 		--_margin-block-end: var(--st-breakpoint-not-md) 0px;
 		margin-block-end: var(--_margin-block-end, auto);
 	}

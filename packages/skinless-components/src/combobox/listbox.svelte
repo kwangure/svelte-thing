@@ -16,9 +16,9 @@
 
 	const { children, ...restProps }: Props = $props();
 	const combobox = getComboboxContext();
-	const listbox = createComboboxListbox({ combobox } satisfies NullablyRequired<
-		CreateComboboxListboxConfig<unknown>
-	>);
+	const listbox = createComboboxListbox({
+		combobox,
+	} satisfies NullablyRequired<CreateComboboxListboxConfig<unknown>>);
 </script>
 
 <ul {...mergeProps(restProps, listbox.props)}>
@@ -37,8 +37,8 @@
 		border-width: 1px;
 		--_box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
 			0 4px 6px -4px rgb(0 0 0 / 0.1);
-		--_box-shadow-dark: var(--st-color-preference-dark) 0 10px 15px -3px rgb(0 0
-						0 / 0.25),
+		--_box-shadow-dark: var(--st-color-preference-dark) 0 10px 15px -3px rgb(0
+						0 0 / 0.25),
 			0 4px 6px -4px rgb(0 0 0 / 0.1);
 		box-shadow: var(--_box-shadow-dark, var(--_box-shadow));
 		display: flex;

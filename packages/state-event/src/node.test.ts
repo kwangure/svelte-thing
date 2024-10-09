@@ -106,14 +106,22 @@ describe('StateNode', () => {
 			const rootListener = vi.fn(() => callOrder.push('root'));
 			const child1Listener = vi.fn(() => callOrder.push('child1'));
 			const child2Listener = vi.fn(() => callOrder.push('child2'));
-			const grandchild1Listener = vi.fn(() => callOrder.push('grandchild1'));
-			const grandchild2Listener = vi.fn(() => callOrder.push('grandchild2'));
+			const grandchild1Listener = vi.fn(() =>
+				callOrder.push('grandchild1'),
+			);
+			const grandchild2Listener = vi.fn(() =>
+				callOrder.push('grandchild2'),
+			);
 
 			const root = new StateNode({ on: { test: rootListener } });
 			const child1 = new StateNode({ on: { test: child1Listener } });
 			const child2 = new StateNode({ on: { test: child2Listener } });
-			const grandchild1 = new StateNode({ on: { test: grandchild1Listener } });
-			const grandchild2 = new StateNode({ on: { test: grandchild2Listener } });
+			const grandchild1 = new StateNode({
+				on: { test: grandchild1Listener },
+			});
+			const grandchild2 = new StateNode({
+				on: { test: grandchild2Listener },
+			});
 
 			root.appendChild(child1);
 			root.appendChild(child2);

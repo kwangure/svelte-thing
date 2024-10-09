@@ -12,14 +12,14 @@
 
 	let isOpen = $state(false);
 
-	type BookSummarySearchResult = {
+	interface BookSummarySearchResult {
 		id: string;
 		title: string;
 		tokens: {
 			title: [string, number][];
 			content: [string, number][];
 		};
-	};
+	}
 
 	function filter(combobox: Combobox.FilterArg<BookSummarySearchResult>) {
 		const { inputValue } = combobox;
@@ -61,7 +61,9 @@
 					<div class="search">
 						<Icon.Simple path={mdiMagnify} />
 					</div>
-					<Combobox.Input placeholder="Search for Programming Book..." />
+					<Combobox.Input
+						placeholder="Search for Programming Book..."
+					/>
 					<div class="close">
 						<Icon.Button
 							label="Close"
@@ -79,7 +81,9 @@
 										<Tokens tokens={result.tokens.title} />
 									</div>
 									<div class="content">
-										<Tokens tokens={result.tokens.content} />
+										<Tokens
+											tokens={result.tokens.content}
+										/>
 									</div>
 								</a>
 							</Combobox.Item>

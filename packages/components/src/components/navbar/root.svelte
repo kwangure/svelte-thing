@@ -17,7 +17,11 @@
 <div></div>
 <nav>
 	{#if showOpen && $shouldShowToggle}
-		<button title="Open Menu" aria-label="Open Menu" use:show={{ focus: true }}>
+		<button
+			title="Open Menu"
+			aria-label="Open Menu"
+			use:show={{ focus: true }}
+		>
 			<Icon --st-icon-width="100%" --st-icon-height=" " path={mdiMenu} />
 		</button>
 	{/if}

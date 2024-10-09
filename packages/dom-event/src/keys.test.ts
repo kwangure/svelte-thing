@@ -29,7 +29,9 @@ describe('keysFromEvent', () => {
 
 	it('should handle legacy key aliases', () => {
 		const downEvent = new KeyboardEvent('keydown', { key: 'Down' });
-		const arrowDownEvent = new KeyboardEvent('keydown', { key: 'ArrowDown' });
+		const arrowDownEvent = new KeyboardEvent('keydown', {
+			key: 'ArrowDown',
+		});
 		expect(keysFromEvent(downEvent)).toEqual(keysFromEvent(arrowDownEvent));
 
 		const escEvent = new KeyboardEvent('keydown', { key: 'Esc' });

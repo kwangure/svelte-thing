@@ -49,13 +49,19 @@
 	li[data-active-item='true'] {
 		--_background-color-dark: var(--st-color-preference-dark)
 			var(--st-color-blue-200);
-		background-color: var(--_background-color-dark, var(--st-color-blue-100));
+		background-color: var(
+			--_background-color-dark,
+			var(--st-color-blue-100)
+		);
 		--_color-dark: var(--st-color-preference-dark) var(--st-color-blue-700);
 		color: var(--_color-dark, var(--st-color-blue-600));
 	}
 	li[data-active-item='true']:hover {
 		--_background-color-dark: var(--st-color-preference-dark)
 			var(--st-color-blue-100);
-		background-color: var(--_background-color-dark, var(--st-color-blue-200));
+		background-color: var(
+			--_background-color-dark,
+			var(--st-color-blue-200)
+		);
 	}
 </style>

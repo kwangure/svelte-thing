@@ -1,13 +1,14 @@
 import { tick, untrack } from 'svelte';
 
-export interface KeyedWatcherSetup {
-	(): KeyedWatcherCleanup;
-}
+export type KeyedWatcherSetup = () => KeyedWatcherCleanup;
 
 export type KeyedWatcherCleanup = (() => unknown) | void | undefined;
 
 export function createKeyedWatcher() {
-	const watchers = new Map<KeyedWatcherSetup, [number, KeyedWatcherCleanup]>();
+	const watchers = new Map<
+		KeyedWatcherSetup,
+		[number, KeyedWatcherCleanup]
+	>();
 
 	return {
 		watch(setup: KeyedWatcherSetup) {

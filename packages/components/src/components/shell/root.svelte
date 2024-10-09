@@ -17,8 +17,8 @@
 	div {
 		display: grid;
 		--_grid-template-columns: [page-start] 1fr [nav-start] min-content
-			[content-start] var(--st-content-width, 6fr) [content-end nav-end] 1fr
-			[page-end];
+			[content-start] var(--st-content-width, 6fr) [content-end nav-end]
+			1fr [page-end];
 		--_grid-template-columns-xl: var(--st-breakpoint-xl) [page-start] 1fr
 			[nav-start] min-content [content-start]
 			var(--st-content-width, 60rem /* 960px */) [content-end nav-end] 1fr

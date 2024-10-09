@@ -16,11 +16,14 @@ export type ComboboxInput = ReturnType<typeof createComboboxInput>;
 export function createComboboxInput<TOption>({
 	combobox,
 }: CreateComboboxInputConfig<TOption>) {
-	interface EventRecord {
-		[k: string]: (
-			event: KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement },
-		) => void;
-	}
+	type EventRecord = Record<
+		string,
+		(
+			event: KeyboardEvent & {
+				currentTarget: EventTarget & HTMLInputElement;
+			},
+		) => void
+	>;
 
 	const keydownEvents: EventRecord = {
 		[encodeKeys([Keys.Alt, Keys.ArrowDown])](event) {
@@ -102,7 +105,8 @@ export function createComboboxInput<TOption>({
 			});
 
 			const unsub2 = combobox.onSetValue((value) => {
-				element.value = combobox.optionToString?.(value) ?? (value as string);
+				element.value =
+					combobox.optionToString?.(value) ?? (value as string);
 			});
 
 			return {

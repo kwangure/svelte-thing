@@ -56,7 +56,9 @@
 			grid-column-start: nav-start;
 			grid-column-end: content-start;
 			grid-row-start: 2;
-			height: calc(100vh - var(--st-navbar-height) - var(--st-navbar-y-gap));
+			height: calc(
+				100vh - var(--st-navbar-height) - var(--st-navbar-y-gap)
+			);
 			top: calc(var(--st-navbar-height) + var(--st-navbar-y-gap));
 		}
 	}

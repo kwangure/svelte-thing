@@ -46,15 +46,18 @@
 		padding-inline: var(--st-size-2);
 	}
 	textarea:hover:not(:focus) {
-		--_box-shadow-dark: var(--st-color-preference-dark) rgb(135 205 255 / 30%);
+		--_box-shadow-dark: var(--st-color-preference-dark)
+			rgb(135 205 255 / 30%);
 		box-shadow: 0 0 0px 2px var(--_box-shadow-dark, hsl(215deg 100% 90%));
-		--_border-color-dark: var(--st-color-preference-dark) hsl(225deg 100% 60%);
+		--_border-color-dark: var(--st-color-preference-dark)
+			hsl(225deg 100% 60%);
 		border: 1px solid var(--_border-color-dark, hsl(225deg 100% 55%));
 	}
 	textarea:focus {
 		--_box-shadow-dark: var(--st-color-preference-dark) hsl(225deg 100% 60%);
 		box-shadow: 0 0 0px 1px var(--_box-shadow-dark, hsl(225deg 100% 55%));
-		--_border-color-dark: var(--st-color-preference-dark) hsl(225deg 100% 60%);
+		--_border-color-dark: var(--st-color-preference-dark)
+			hsl(225deg 100% 60%);
 		border: 1px solid var(--_border-color-dark, hsl(225deg 100% 55%));
 	}
 </style>

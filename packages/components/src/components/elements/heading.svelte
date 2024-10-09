@@ -35,10 +35,13 @@
 	h4,
 	h5,
 	h6 {
-		--_color-dark: var(--st-color-preference-dark) var(--st-color-neutral-200);
+		--_color-dark: var(--st-color-preference-dark)
+			var(--st-color-neutral-200);
 		color: var(--_color-dark, var(--st-color-neutral-900));
 		font-weight: 600;
-		scroll-margin-top: calc(var(--st-navbar-height) + var(--st-navbar-y-gap));
+		scroll-margin-top: calc(
+			var(--st-navbar-height) + var(--st-navbar-y-gap)
+		);
 	}
 	h1,
 	h2,
