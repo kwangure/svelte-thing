@@ -1,5 +1,12 @@
 # workspace-site
 
+## 0.0.6
+
+### Patch Changes
+
+- Updated dependencies [9efccf8]
+  - @svelte-thing/skinless-components@0.0.8
+
 ## 0.0.5
 
 ### Patch Changes

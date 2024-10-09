@@ -1,5 +1,11 @@
 # @svelte-thing/skinless-components
 
+## 0.0.8
+
+### Patch Changes
+
+- 9efccf8: Upgrade dependencies
+
 ## 0.0.7
 
 ### Patch Changes
