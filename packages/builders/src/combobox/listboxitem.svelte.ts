@@ -1,5 +1,5 @@
-import type { HTMLAttributes } from 'svelte/elements';
-import { type ComboboxRoot } from './root.svelte.js';
+import type { ComboboxRoot } from './root.svelte.js';
+import type { RuneComponent } from '../types.js';
 
 export interface CreateComboboxListboxItemConfig<TOption> {
 	combobox: ComboboxRoot<TOption>;
@@ -14,19 +14,17 @@ export function createListboxItem<TOption>(
 	const { combobox } = config;
 	const isActive = $derived(Object.is(config.item, combobox.activeItem));
 
-	let element: HTMLElement | undefined;
-	combobox.onSetValue((value) => {
-		if (Object.is(config.item, value)) {
-			element?.scrollIntoView({ block: 'nearest' });
-		}
-	});
-
 	return {
-		action(_element: HTMLElement) {
-			element = _element;
+		action(element) {
+			const unsub1 = combobox.onSetActiveItem((value) => {
+				if (Object.is(config.item, value)) {
+					element.scrollIntoView({ block: 'nearest' });
+				}
+			});
+
 			return {
 				destroy() {
-					element = undefined;
+					unsub1();
 				},
 			};
 		},
@@ -46,6 +44,6 @@ export function createListboxItem<TOption>(
 			get ['data-focus-visible']() {
 				return isActive || undefined;
 			},
-		} satisfies HTMLAttributes<HTMLElement>,
-	};
+		},
+	} satisfies RuneComponent<'li'>;
 }

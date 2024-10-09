@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { HTMLButtonAttributes } from 'svelte/elements';
-	import type { NullablyRequired } from '../types';
+	import type { NullablyRequired } from '../types.js';
 	import {
 		createComboboxButton,
 		getComboboxContext,
