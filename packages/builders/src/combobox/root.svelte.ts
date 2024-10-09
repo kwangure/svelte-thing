@@ -49,12 +49,17 @@ export function createComboboxRoot<TOption>(
 			inputValue,
 		} satisfies ComboboxFilterArg<TOption>);
 	});
+	// TODO: what happens if `options.length` decreases thus decreasing
+	// `filteredOptions.length` to less than the `activeItemIndex`
+	// Maybe do `activeItemIndex = Math.max(activeItemIndex, options.length)`
+	// when `options` is updated? But I don't want to use an $effect.
+	// Maybe something like $state.link() using $derived? TODO.
 	const activeItem = $derived(filteredOptions[activeItemIndex]);
 
 	function setActiveItemIndex(index: number) {
 		activeItemIndex = index;
 		for (const listener of setActiveItemListeners) {
-			listener(activeItem);
+			listener(activeItem as TOption);
 		}
 	}
 

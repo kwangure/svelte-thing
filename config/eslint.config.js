@@ -12,16 +12,13 @@ export default [
 		ignores: [
 			'**/.svelte-kit/',
 			'**/.wireit/',
-			'**/dist/',
-			'**/packages/*/.types/',
-			'**/packages/*/public/',
-			'**/root/',
-			'**/build/',
-			'**/tmp/',
+			'**/dist/', // package output
+			'**/build/', // site output
 		],
 	},
 	js.configs.recommended,
 	...tseslint.configs.recommended,
+	...tseslint.configs.stylistic,
 	{
 		languageOptions: {
 			globals: {
@@ -31,6 +28,8 @@ export default [
 			},
 		},
 		rules: {
+			// Disable in favour of @typescript-eslint/no-unused-vars which
+			// understands that function arguments in types are always unused
 			'no-unused-vars': 'off',
 			'@typescript-eslint/no-unused-vars': [
 				'error',
@@ -39,6 +38,7 @@ export default [
 					args: 'all',
 				},
 			],
+			'@typescript-eslint/method-signature-style': ['error', 'property'],
 			'require-await': 'error',
 			...prettier.rules,
 		},
@@ -59,9 +59,6 @@ export default [
 			parser: svelteParser,
 			parserOptions: {
 				parser: '@typescript-eslint/parser',
-				svelteFeatures: {
-					experimentalGenerics: true,
-				},
 			},
 			globals: {
 				...browser,
@@ -71,11 +68,11 @@ export default [
 		plugins: {
 			svelte: sveltePlugin,
 		},
+		processor: 'svelte/svelte',
 		rules: {
 			...js.configs.recommended.rules,
 			...sveltePlugin.configs.recommended.rules,
 			'no-inner-declarations': 'off',
-			'no-unused-vars': 'off',
 		},
 	},
 ];

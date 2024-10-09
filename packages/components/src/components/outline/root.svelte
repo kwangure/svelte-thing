@@ -10,7 +10,7 @@
 	/** @type {import('./types.js').TocEntry[]} */
 	export let toc;
 
-	/** @type {string} */
+	/** @type {string | undefined} */
 	let activeTarget = toc[0]?.id;
 
 	/**
@@ -43,7 +43,10 @@
 				if (element) {
 					const bounding = element.getBoundingClientRect();
 					// Check if the element is above the viewport and closer to the top than the previous one
-					if (bounding.top < 0 && Math.abs(bounding.top) < closestDistance) {
+					if (
+						bounding.top < 0 &&
+						Math.abs(bounding.top) < closestDistance
+					) {
 						closestDistance = Math.abs(bounding.top);
 						activeTarget = node.id;
 					}
@@ -122,7 +125,8 @@
 		width: var(--st-size-72);
 	}
 	h5 {
-		--_color-dark: var(--st-color-preference-dark) var(--st-color-neutral-400);
+		--_color-dark: var(--st-color-preference-dark)
+			var(--st-color-neutral-400);
 		color: var(--_color-dark, var(--st-color-neutral-900));
 		font-size: var(--st-size-3);
 		font-weight: 600;

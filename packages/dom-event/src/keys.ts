@@ -17,7 +17,6 @@ export const Keys = {
 	// ... more keys can be added here up to 127
 } as const;
 
-/* eslint-disable-next-line @typescript-eslint/ban-types */
 export type KeyCode = (typeof Keys)[keyof typeof Keys] & {};
 export type KeyName = keyof typeof Keys;
 
@@ -35,12 +34,14 @@ export function encodeKeys(keyCodes: KeyCode[]) {
 	for (const keyCode of keyCodes) {
 		const index = keyCode >>> 5; // Divide by 32 to get the array index
 		const bitPosition = keyCode & 31; // Modulo 32 to get the bit position
+		// @ts-expect-error undefined won't happen if `keyCode` satisfies `KeyCode`
 		bitset[index] |= 1 << bitPosition;
 	}
 
 	let str = '';
 	for (let i = bitset.length - 1; i >= 0; i--) {
 		if (bitset[i] !== 0 || str) {
+			// @ts-expect-error undefined won't happen if `keyCode` satisfies `KeyCode`
 			str += '.' + bitset[i].toString(16);
 		}
 	}

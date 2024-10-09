@@ -18,12 +18,12 @@ export function focustrap(
 
 		if (event.shiftKey) {
 			if (document.activeElement === firstFocusableElement) {
-				lastFocusableElement.focus();
+				lastFocusableElement?.focus();
 				event.preventDefault();
 			}
 		} else {
 			if (document.activeElement === lastFocusableElement) {
-				firstFocusableElement.focus();
+				firstFocusableElement?.focus();
 				event.preventDefault();
 			}
 		}

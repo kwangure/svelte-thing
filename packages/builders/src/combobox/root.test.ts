@@ -13,7 +13,7 @@ describe('combobox', () => {
 	let listboxItems: Map<string, ReturnType<typeof createListboxItem>>;
 	let options: Fruit[];
 	let cleanup: (() => void)[];
-	const setInputValue = (fruit: Fruit) => fruit?.name;
+	const optionToString = (fruit: Fruit) => fruit?.name;
 	beforeEach(() => {
 		cleanup = [];
 		options = [
@@ -27,13 +27,15 @@ describe('combobox', () => {
 			filter({ inputValue, options }) {
 				return (
 					options?.filter((option) =>
-						option.name.toLowerCase().startsWith(inputValue.toLowerCase()),
+						option.name
+							.toLowerCase()
+							.startsWith(inputValue.toLowerCase()),
 					) ?? []
 				);
 			},
 			label: 'Favorite Fruit',
 			options,
-			optionToString: setInputValue,
+			optionToString,
 		});
 		cleanup.push(combobox.action(document.createElement('div')).destroy);
 
@@ -51,7 +53,9 @@ describe('combobox', () => {
 		it('ArrowDown opens popup and moves focus to first focusable element', () => {
 			const event = new KeyboardEvent('keydown', {
 				key: 'ArrowDown',
-			}) as KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement };
+			}) as KeyboardEvent & {
+				currentTarget: EventTarget & HTMLInputElement;
+			};
 			input.props.onkeydown(event);
 			expect(combobox.isOpen).toBe(true);
 			expect(combobox.activeItem).toBe(options[0]);
@@ -63,7 +67,9 @@ describe('combobox', () => {
 			expect(combobox.visualFocus).toBe('input');
 			const event = new KeyboardEvent('keydown', {
 				key: 'ArrowDown',
-			}) as KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement };
+			}) as KeyboardEvent & {
+				currentTarget: EventTarget & HTMLInputElement;
+			};
 			input.props.onkeydown(event);
 			expect(combobox.visualFocus).toBe('listbox');
 			expect(combobox.activeItem).toBe(options.at(0));
@@ -75,7 +81,9 @@ describe('combobox', () => {
 		it('ArrowUp opens popup and places focus on the last focusable element', () => {
 			const event = new KeyboardEvent('keydown', {
 				key: 'ArrowUp',
-			}) as KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement };
+			}) as KeyboardEvent & {
+				currentTarget: EventTarget & HTMLInputElement;
+			};
 			input.props.onkeydown(event);
 			expect(combobox.isOpen).toBe(true);
 			expect(combobox.activeItem).toBe(options.at(-1));
@@ -87,7 +95,9 @@ describe('combobox', () => {
 			expect(combobox.visualFocus).toBe('input');
 			const event = new KeyboardEvent('keydown', {
 				key: 'ArrowUp',
-			}) as KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement };
+			}) as KeyboardEvent & {
+				currentTarget: EventTarget & HTMLInputElement;
+			};
 			input.props.onkeydown(event);
 			expect(combobox.visualFocus).toBe('listbox');
 			expect(combobox.activeItem).toBe(options.at(-1));
@@ -101,7 +111,9 @@ describe('combobox', () => {
 			expect(combobox.visualFocus).toBe('input');
 			const event = new KeyboardEvent('keydown', {
 				key: 'Enter',
-			}) as KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement };
+			}) as KeyboardEvent & {
+				currentTarget: EventTarget & HTMLInputElement;
+			};
 			input.props.onkeydown(event);
 			expect(combobox.value).toBe(undefined);
 			expect(combobox.isOpen).toBe(false);
@@ -113,7 +125,9 @@ describe('combobox', () => {
 			const event = new KeyboardEvent('keydown', {
 				key: 'ArrowDown',
 				altKey: true,
-			}) as KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement };
+			}) as KeyboardEvent & {
+				currentTarget: EventTarget & HTMLInputElement;
+			};
 			input.props.onkeydown(event);
 			expect(combobox.isOpen).toBe(true);
 			expect(combobox.activeItem).toBeUndefined();
@@ -127,7 +141,9 @@ describe('combobox', () => {
 			const event = new KeyboardEvent('keydown', {
 				key: 'ArrowUp',
 				altKey: true,
-			}) as KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement };
+			}) as KeyboardEvent & {
+				currentTarget: EventTarget & HTMLInputElement;
+			};
 			input.props.onkeydown(event);
 			expect(combobox.isOpen).toBe(false);
 			expect(combobox.visualFocus).toBe('input');
@@ -143,7 +159,9 @@ describe('combobox', () => {
 		it('Enter accepts the focused option', () => {
 			const event = new KeyboardEvent('keydown', {
 				key: 'Enter',
-			}) as KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement };
+			}) as KeyboardEvent & {
+				currentTarget: EventTarget & HTMLInputElement;
+			};
 			input.props.onkeydown(event);
 			expect(combobox.value).toEqual(options[0]);
 			expect(combobox.isOpen).toBe(false);
@@ -153,7 +171,9 @@ describe('combobox', () => {
 			expect(combobox.visualFocus).toBe('listbox');
 			const event = new KeyboardEvent('keydown', {
 				key: 'Escape',
-			}) as KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement };
+			}) as KeyboardEvent & {
+				currentTarget: EventTarget & HTMLInputElement;
+			};
 			input.props.onkeydown(event);
 			expect(combobox.value).toBe(undefined);
 			expect(combobox.isOpen).toBe(false);
@@ -163,7 +183,9 @@ describe('combobox', () => {
 		it('ArrowDown moves focus to and selects the next option', () => {
 			const event = new KeyboardEvent('keydown', {
 				key: 'ArrowDown',
-			}) as KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement };
+			}) as KeyboardEvent & {
+				currentTarget: EventTarget & HTMLInputElement;
+			};
 			input.props.onkeydown(event);
 			expect(combobox.activeItem).toBe(options[1]);
 		});
@@ -173,7 +195,9 @@ describe('combobox', () => {
 			expect(combobox.activeItem).toEqual(options[1]);
 			const event = new KeyboardEvent('keydown', {
 				key: 'ArrowUp',
-			}) as KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement };
+			}) as KeyboardEvent & {
+				currentTarget: EventTarget & HTMLInputElement;
+			};
 			input.props.onkeydown(event);
 			expect(combobox.activeItem).toEqual(options[0]);
 		});
@@ -182,7 +206,9 @@ describe('combobox', () => {
 			expect(combobox.visualFocus).toEqual('listbox');
 			const event = new KeyboardEvent('keyup', {
 				key: 'Backspace',
-			}) as KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement };
+			}) as KeyboardEvent & {
+				currentTarget: EventTarget & HTMLInputElement;
+			};
 			input.props.onkeyup(event);
 			expect(combobox.visualFocus).toEqual('input');
 		});
@@ -191,17 +217,19 @@ describe('combobox', () => {
 			expect(combobox.visualFocus).toEqual('listbox');
 			const event = new KeyboardEvent('keyup', {
 				key: 'Delete',
-			}) as KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement };
+			}) as KeyboardEvent & {
+				currentTarget: EventTarget & HTMLInputElement;
+			};
 			input.props.onkeyup(event);
 			expect(combobox.visualFocus).toEqual('input');
 		});
 
 		it('Clicking listboxItem sets input and combobox value', () => {
-			const clickedItem = options[1]; // Banana;
+			const clickedItem = options[1]!; // Banana;
 
 			listboxItems.get(clickedItem.name)?.props.onclick();
 
-			expect(inputElement.value).toEqual(setInputValue(clickedItem));
+			expect(inputElement.value).toEqual(optionToString(clickedItem));
 			expect(combobox.value).toEqual(clickedItem);
 			expect(combobox.isOpen).toEqual(false);
 			expect(combobox.visualFocus).toEqual('input');
