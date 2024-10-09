@@ -1,14 +1,14 @@
 import { getContext, setContext } from 'svelte';
 import {
 	createComboboxRoot,
-	type CreateCombmboxRootConfig,
+	type CreateComboboxRootConfig,
 	type ComboboxRoot,
 } from './root.svelte.js';
 
 export const comboboxContextKey = Symbol('combobox');
 
 export function setComboboxContext<TOption>(
-	options: CreateCombmboxRootConfig<TOption>,
+	options: CreateComboboxRootConfig<TOption>,
 ) {
 	const combobox = createComboboxRoot<TOption>(options);
 	setContext(comboboxContextKey, combobox);

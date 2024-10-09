@@ -2,7 +2,7 @@ import type { ComboboxRoot } from './root.svelte.js';
 import type { RuneComponent } from '../types.js';
 import { cancelEvent } from '@svelte-thing/dom-event';
 
-export interface CreateColorListNextConfig<TOption> {
+export interface CreateComboboxNextConfig<TOption> {
 	combobox: ComboboxRoot<TOption>;
 	label: string;
 }
@@ -10,7 +10,7 @@ export interface CreateColorListNextConfig<TOption> {
 export type ComboboxNext = ReturnType<typeof createComboboxNext>;
 
 export function createComboboxNext<TOption>(
-	config: CreateColorListNextConfig<TOption>,
+	config: CreateComboboxNextConfig<TOption>,
 ) {
 	const { combobox } = config;
 
