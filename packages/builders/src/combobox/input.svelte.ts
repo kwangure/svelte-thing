@@ -13,8 +13,6 @@ export interface CreateComboboxInputConfig<TOption> {
 
 export type ComboboxInput = ReturnType<typeof createComboboxInput>;
 
-export const INPUT_SET_VALUE = 'combobox.input.set.value';
-
 export function createComboboxInput<TOption>({
 	combobox,
 }: CreateComboboxInputConfig<TOption>) {

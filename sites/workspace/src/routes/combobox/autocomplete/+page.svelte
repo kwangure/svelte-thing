@@ -65,7 +65,7 @@
 			label="Fruits"
 			{options}
 			{filter}
-			setInputValue={(fruit: Fruit) => fruit.label}
+			optionToString={(fruit: Fruit) => fruit.label}
 		>
 			{#snippet children(combobox)}
 				<Combobox.Controls>
