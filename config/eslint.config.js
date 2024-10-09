@@ -73,9 +73,7 @@ export default [
 		},
 		rules: {
 			...js.configs.recommended.rules,
-			.../** @type {import('eslint').Linter.RulesRecord} */ (
-				sveltePlugin.configs.recommended.rules
-			),
+			...sveltePlugin.configs.recommended.rules,
 			'no-inner-declarations': 'off',
 			'no-unused-vars': 'off',
 		},
