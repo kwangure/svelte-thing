@@ -1,14 +1,16 @@
 <script lang="ts">
 	import type { HTMLButtonAttributes } from 'svelte/elements';
+	import type { NullablyRequired } from '../types';
 	import {
 		createComboboxButton,
 		getComboboxContext,
+		type CreateComboboxButtonConfig,
 	} from '@svelte-thing/builders';
 	import { mergeProps } from '@svelte-thing/component-utils';
 
-	interface Props extends HTMLButtonAttributes {
-		label: string;
-	}
+	interface Props
+		extends HTMLButtonAttributes,
+			Omit<CreateComboboxButtonConfig<unknown>, 'combobox'> {}
 
 	const { label, ...restProps }: Props = $props();
 	const combobox = getComboboxContext();
@@ -17,7 +19,7 @@
 		get label() {
 			return label;
 		},
-	});
+	} satisfies NullablyRequired<CreateComboboxButtonConfig<unknown>>);
 </script>
 
 <button {...mergeProps(restProps, button.props)}>
