@@ -1,5 +1,12 @@
 # @svelte-thing/builders
 
+## 0.0.8
+
+### Patch Changes
+
+- 90db2f8: Add data-<component> attributes to combobox
+- 57d25b6: Update dependencies
+
 ## 0.0.7
 
 ### Patch Changes

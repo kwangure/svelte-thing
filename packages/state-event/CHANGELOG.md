@@ -1,5 +1,11 @@
 # @svelte-thing/state-event
 
+## 0.0.4
+
+### Patch Changes
+
+- 57d25b6: Make StateNode args optional
+
 ## 0.0.3
 
 ### Patch Changes
