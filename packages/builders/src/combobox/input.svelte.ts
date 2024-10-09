@@ -146,10 +146,10 @@ export function createComboboxInput<TOption>({
 				combobox.setInputValue(event.currentTarget.value);
 			},
 			onkeydown(event) {
-				keydownEvents[encodeKeys(keysFromEvent(event))](event);
+				keydownEvents[encodeKeys(keysFromEvent(event))]?.(event);
 			},
 			onkeyup(event) {
-				keyupEvents[encodeKeys(keysFromEvent(event))](event);
+				keyupEvents[encodeKeys(keysFromEvent(event))]?.(event);
 			},
 			role: 'combobox',
 			type: 'text',
