@@ -1,6 +1,6 @@
 import type { ComboboxRoot } from './root.svelte.js';
 import {
-	cancelEvent as cancelDOMEvent,
+	cancelEvent,
 	encodeKeys,
 	Keys,
 	keysFromEvent,
@@ -25,7 +25,7 @@ export function createComboboxInput<TOption>({
 	const keydownEvents: EventRecord = {
 		[encodeKeys([Keys.Alt, Keys.ArrowDown])](event) {
 			combobox.open();
-			cancelDOMEvent(event);
+			cancelEvent(event);
 		},
 		[encodeKeys([Keys.ArrowDown])](event) {
 			if (combobox.isOpen) {
@@ -34,11 +34,11 @@ export function createComboboxInput<TOption>({
 				combobox.open();
 				combobox.setFirstItemActive();
 			}
-			cancelDOMEvent(event);
+			cancelEvent(event);
 		},
 		[encodeKeys([Keys.Alt, Keys.ArrowUp])](event) {
 			combobox.close();
-			cancelDOMEvent(event);
+			cancelEvent(event);
 		},
 		[encodeKeys([Keys.ArrowUp])](event) {
 			if (combobox.isOpen) {
@@ -47,7 +47,7 @@ export function createComboboxInput<TOption>({
 				combobox.open();
 				combobox.setLastItemActive();
 			}
-			cancelDOMEvent(event);
+			cancelEvent(event);
 		},
 		[encodeKeys([Keys.End])](event) {
 			const element = event.currentTarget;
@@ -59,7 +59,7 @@ export function createComboboxInput<TOption>({
 				combobox.setValue(combobox.activeItem);
 			}
 			combobox.close();
-			cancelDOMEvent(event);
+			cancelEvent(event);
 		},
 		[encodeKeys([Keys.Escape])](event) {
 			if (combobox.isOpen) {
@@ -68,7 +68,7 @@ export function createComboboxInput<TOption>({
 				combobox.clearActiveItem();
 				event.currentTarget.value = '';
 			}
-			cancelDOMEvent(event);
+			cancelEvent(event);
 		},
 		[encodeKeys([Keys.Home])](event) {
 			event.currentTarget.setSelectionRange(0, 0);
@@ -84,11 +84,11 @@ export function createComboboxInput<TOption>({
 	const keyupEvents: EventRecord = {
 		[encodeKeys([Keys.Backspace])](event) {
 			combobox.clearActiveItem();
-			cancelDOMEvent(event);
+			cancelEvent(event);
 		},
 		[encodeKeys([Keys.Delete])](event) {
 			combobox.clearActiveItem();
-			cancelDOMEvent(event);
+			cancelEvent(event);
 		},
 	};
 
