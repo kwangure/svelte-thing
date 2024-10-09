@@ -15,24 +15,13 @@ export type ComboboxInput = ReturnType<typeof createComboboxInput>;
 
 export const INPUT_SET_VALUE = 'combobox.input.set.value';
 
-export function createComboboxInput<TOption>({ combobox }: CreateComboboxInputConfig<TOption>) {
-	let element: HTMLInputElement | undefined;
-
-	combobox.onSetInputValue((value) => {
-		combobox.clearActiveItem();
-		if (!combobox.isOpen && value.length) {
-			combobox.open();
-		}
-	});
-
-	combobox.onSetValue((value) => {
-		if (element) {
-			element.value = combobox.optionToString?.(value) ?? (value as string);
-		}
-	});
-
+export function createComboboxInput<TOption>({
+	combobox,
+}: CreateComboboxInputConfig<TOption>) {
 	interface EventRecord {
-		[k: string]: (event: KeyboardEvent) => void;
+		[k: string]: (
+			event: KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement },
+		) => void;
 	}
 
 	const keydownEvents: EventRecord = {
@@ -62,8 +51,10 @@ export function createComboboxInput<TOption>({ combobox }: CreateComboboxInputCo
 			}
 			cancelDOMEvent(event);
 		},
-		[encodeKeys([Keys.End])]() {
-			element?.setSelectionRange(element.value.length, element.value.length);
+		[encodeKeys([Keys.End])](event) {
+			const element = event.currentTarget;
+			const length = element.value.length;
+			element.setSelectionRange(length, length);
 		},
 		[encodeKeys([Keys.Enter])](event) {
 			if (combobox.activeItem) {
@@ -77,14 +68,12 @@ export function createComboboxInput<TOption>({ combobox }: CreateComboboxInputCo
 				combobox.close();
 			} else {
 				combobox.clearActiveItem();
-				if (element) {
-					element.value = '';
-				}
+				event.currentTarget.value = '';
 			}
 			cancelDOMEvent(event);
 		},
-		[encodeKeys([Keys.Home])]() {
-			element?.setSelectionRange(0, 0);
+		[encodeKeys([Keys.Home])](event) {
+			event.currentTarget.setSelectionRange(0, 0);
 		},
 		[encodeKeys([Keys.Tab])]() {
 			if (combobox.activeItem) {
@@ -106,12 +95,22 @@ export function createComboboxInput<TOption>({ combobox }: CreateComboboxInputCo
 	};
 
 	return {
-		action(_element) {
-			element = _element;
+		action(element) {
+			const unsub1 = combobox.onSetInputValue((value) => {
+				combobox.clearActiveItem();
+				if (!combobox.isOpen && value.length) {
+					combobox.open();
+				}
+			});
+
+			const unsub2 = combobox.onSetValue((value) => {
+				element.value = combobox.optionToString?.(value) ?? (value as string);
+			});
 
 			return {
 				destroy() {
-					element = undefined;
+					unsub1();
+					unsub2();
 				},
 			};
 		},

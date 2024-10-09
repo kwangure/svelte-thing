@@ -118,9 +118,11 @@ export function createComboboxRoot<TOption>(
 		close,
 		onSetInputValue(fn: (arg: string) => void) {
 			setInputValueListeners.add(fn);
+			return () => setInputValueListeners.delete(fn);
 		},
 		onSetValue(fn: (arg: TOption) => void) {
 			setValueListeners.add(fn);
+			return () => setValueListeners.delete(fn);
 		},
 		open() {
 			isOpen = true;
