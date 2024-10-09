@@ -54,7 +54,7 @@
 		<Combobox.Root
 			label="Search Documents"
 			{filter}
-			setInputValue={(option) => option.title}
+			optionToString={(option) => option.title}
 		>
 			{#snippet children(combobox)}
 				<div class="input">
@@ -148,6 +148,7 @@
 		gap: var(--st-size-2);
 		overflow-y: scroll;
 		padding: var(--st-size-2);
+		scroll-padding-block: var(--st-size-4);
 	}
 	.no-results {
 		align-items: center;

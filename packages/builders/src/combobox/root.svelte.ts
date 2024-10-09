@@ -1,8 +1,7 @@
-import type { HTMLAttributes, MouseEventHandler } from 'svelte/elements';
+import type { RuneComponent } from '../types.js';
 import { mergeActions } from '@svelte-thing/component-utils';
 import { onclickoutside } from '@svelte-thing/components/actions';
 import { uid } from 'uid';
-import type { RuneComponent } from '../types';
 
 export interface CreateComboboxRootConfig<TOption> {
 	filter?: ComboboxFilter<TOption>;
@@ -11,11 +10,6 @@ export interface CreateComboboxRootConfig<TOption> {
 	label: string;
 	options?: TOption[];
 	optionToString?: (selectedValue: TOption) => string;
-}
-
-export interface ComboboxRootAttributes<T extends HTMLElement = HTMLElement>
-	extends HTMLAttributes<T> {
-	onclickoutside: MouseEventHandler<T>;
 }
 
 export type ComboboxFilter<TOption> = (
@@ -31,8 +25,6 @@ export type ComboboxRoot<TOption> = ReturnType<
 	typeof createComboboxRoot<TOption>
 >;
 
-export const ROOT_SET_VALUE = 'root.set.value';
-
 export type ComboboxVisualFocus = 'listbox' | 'input';
 
 export function createComboboxRoot<TOption>(
@@ -44,6 +36,7 @@ export function createComboboxRoot<TOption>(
 	let value = $state<TOption>();
 	let visualFocus = $state<ComboboxVisualFocus>('input');
 
+	const setActiveItemListeners = new Set<(arg: TOption) => void>();
 	const setInputValueListeners = new Set<(arg: string) => void>();
 	const setValueListeners = new Set<(arg: TOption) => void>();
 
@@ -58,15 +51,23 @@ export function createComboboxRoot<TOption>(
 	});
 	const activeItem = $derived(filteredOptions[activeItemIndex]);
 
+	function setActiveItemIndex(index: number) {
+		activeItemIndex = index;
+		for (const listener of setActiveItemListeners) {
+			listener(activeItem);
+		}
+	}
+
 	function close() {
-		activeItemIndex = -1;
 		isOpen = false;
 		visualFocus = 'input';
+		setActiveItemIndex(-1);
 	}
 
 	return {
 		action: mergeActions(onclickoutside, () => ({
 			destroy() {
+				setActiveItemListeners.clear();
 				setInputValueListeners.clear();
 				setValueListeners.clear();
 			},
@@ -112,22 +113,28 @@ export function createComboboxRoot<TOption>(
 			listbox: uid(),
 		},
 		clearActiveItem() {
-			activeItemIndex = -1;
 			visualFocus = 'input';
+			setActiveItemIndex(-1);
 		},
 		close,
+		onSetActiveItem(fn: (arg: TOption) => void) {
+			setActiveItemListeners.add(fn);
+			return () => setActiveItemListeners.delete(fn);
+		},
 		onSetInputValue(fn: (arg: string) => void) {
 			setInputValueListeners.add(fn);
+			return () => setInputValueListeners.delete(fn);
 		},
 		onSetValue(fn: (arg: TOption) => void) {
 			setValueListeners.add(fn);
+			return () => setValueListeners.delete(fn);
 		},
 		open() {
 			isOpen = true;
 		},
 		setFirstItemActive() {
-			activeItemIndex = 0;
 			visualFocus = 'listbox';
+			setActiveItemIndex(0);
 		},
 		setInputValue(value: string) {
 			inputValue = value;
@@ -136,22 +143,27 @@ export function createComboboxRoot<TOption>(
 			}
 		},
 		setLastItemActive() {
-			activeItemIndex = filteredOptions.length - 1;
 			visualFocus = 'listbox';
+			setActiveItemIndex(filteredOptions.length - 1);
 		},
 		setNextItemActive() {
 			const minValue = config.includesBaseElement ? -1 : 0;
 			const maxValue = filteredOptions.length - 1;
-			activeItemIndex =
-				activeItemIndex === maxValue ? minValue : activeItemIndex + 1;
-			visualFocus = activeItemIndex === -1 ? 'input' : 'listbox';
+			visualFocus =
+				activeItemIndex === maxValue && config.includesBaseElement
+					? 'input'
+					: 'listbox';
+			setActiveItemIndex(
+				activeItemIndex === maxValue ? minValue : activeItemIndex + 1,
+			);
 		},
 		setPreviousItemActive() {
 			const minValue = config.includesBaseElement ? -1 : 0;
 			const maxValue = filteredOptions.length - 1;
-			activeItemIndex =
-				activeItemIndex <= minValue ? maxValue : activeItemIndex - 1;
 			visualFocus = 'listbox';
+			setActiveItemIndex(
+				activeItemIndex <= minValue ? maxValue : activeItemIndex - 1,
+			);
 		},
 		setValue(v: TOption) {
 			value = v;

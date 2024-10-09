@@ -1,6 +1,6 @@
 import type { ComboboxRoot } from './root.svelte.js';
 import {
-	cancelEvent as cancelDOMEvent,
+	cancelEvent,
 	encodeKeys,
 	Keys,
 	keysFromEvent,
@@ -13,32 +13,19 @@ export interface CreateComboboxInputConfig<TOption> {
 
 export type ComboboxInput = ReturnType<typeof createComboboxInput>;
 
-export const INPUT_SET_VALUE = 'combobox.input.set.value';
-
-export function createComboboxInput<TOption>({ combobox }: CreateComboboxInputConfig<TOption>) {
-	let element: HTMLInputElement | undefined;
-
-	combobox.onSetInputValue((value) => {
-		combobox.clearActiveItem();
-		if (!combobox.isOpen && value.length) {
-			combobox.open();
-		}
-	});
-
-	combobox.onSetValue((value) => {
-		if (element) {
-			element.value = combobox.optionToString?.(value) ?? (value as string);
-		}
-	});
-
+export function createComboboxInput<TOption>({
+	combobox,
+}: CreateComboboxInputConfig<TOption>) {
 	interface EventRecord {
-		[k: string]: (event: KeyboardEvent) => void;
+		[k: string]: (
+			event: KeyboardEvent & { currentTarget: EventTarget & HTMLInputElement },
+		) => void;
 	}
 
 	const keydownEvents: EventRecord = {
 		[encodeKeys([Keys.Alt, Keys.ArrowDown])](event) {
 			combobox.open();
-			cancelDOMEvent(event);
+			cancelEvent(event);
 		},
 		[encodeKeys([Keys.ArrowDown])](event) {
 			if (combobox.isOpen) {
@@ -47,11 +34,11 @@ export function createComboboxInput<TOption>({ combobox }: CreateComboboxInputCo
 				combobox.open();
 				combobox.setFirstItemActive();
 			}
-			cancelDOMEvent(event);
+			cancelEvent(event);
 		},
 		[encodeKeys([Keys.Alt, Keys.ArrowUp])](event) {
 			combobox.close();
-			cancelDOMEvent(event);
+			cancelEvent(event);
 		},
 		[encodeKeys([Keys.ArrowUp])](event) {
 			if (combobox.isOpen) {
@@ -60,31 +47,31 @@ export function createComboboxInput<TOption>({ combobox }: CreateComboboxInputCo
 				combobox.open();
 				combobox.setLastItemActive();
 			}
-			cancelDOMEvent(event);
+			cancelEvent(event);
 		},
-		[encodeKeys([Keys.End])]() {
-			element?.setSelectionRange(element.value.length, element.value.length);
+		[encodeKeys([Keys.End])](event) {
+			const element = event.currentTarget;
+			const length = element.value.length;
+			element.setSelectionRange(length, length);
 		},
 		[encodeKeys([Keys.Enter])](event) {
 			if (combobox.activeItem) {
 				combobox.setValue(combobox.activeItem);
 			}
 			combobox.close();
-			cancelDOMEvent(event);
+			cancelEvent(event);
 		},
 		[encodeKeys([Keys.Escape])](event) {
 			if (combobox.isOpen) {
 				combobox.close();
 			} else {
 				combobox.clearActiveItem();
-				if (element) {
-					element.value = '';
-				}
+				event.currentTarget.value = '';
 			}
-			cancelDOMEvent(event);
+			cancelEvent(event);
 		},
-		[encodeKeys([Keys.Home])]() {
-			element?.setSelectionRange(0, 0);
+		[encodeKeys([Keys.Home])](event) {
+			event.currentTarget.setSelectionRange(0, 0);
 		},
 		[encodeKeys([Keys.Tab])]() {
 			if (combobox.activeItem) {
@@ -97,21 +84,31 @@ export function createComboboxInput<TOption>({ combobox }: CreateComboboxInputCo
 	const keyupEvents: EventRecord = {
 		[encodeKeys([Keys.Backspace])](event) {
 			combobox.clearActiveItem();
-			cancelDOMEvent(event);
+			cancelEvent(event);
 		},
 		[encodeKeys([Keys.Delete])](event) {
 			combobox.clearActiveItem();
-			cancelDOMEvent(event);
+			cancelEvent(event);
 		},
 	};
 
 	return {
-		action(_element) {
-			element = _element;
+		action(element) {
+			const unsub1 = combobox.onSetInputValue((value) => {
+				combobox.clearActiveItem();
+				if (!combobox.isOpen && value.length) {
+					combobox.open();
+				}
+			});
+
+			const unsub2 = combobox.onSetValue((value) => {
+				element.value = combobox.optionToString?.(value) ?? (value as string);
+			});
 
 			return {
 				destroy() {
-					element = undefined;
+					unsub1();
+					unsub2();
 				},
 			};
 		},
@@ -149,10 +146,10 @@ export function createComboboxInput<TOption>({ combobox }: CreateComboboxInputCo
 				combobox.setInputValue(event.currentTarget.value);
 			},
 			onkeydown(event) {
-				keydownEvents[encodeKeys(keysFromEvent(event))](event);
+				keydownEvents[encodeKeys(keysFromEvent(event))]?.(event);
 			},
 			onkeyup(event) {
-				keyupEvents[encodeKeys(keysFromEvent(event))](event);
+				keyupEvents[encodeKeys(keysFromEvent(event))]?.(event);
 			},
 			role: 'combobox',
 			type: 'text',
