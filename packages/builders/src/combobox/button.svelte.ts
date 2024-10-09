@@ -1,4 +1,3 @@
-import type { HTMLButtonAttributes } from 'svelte/elements';
 import type { ComboboxRoot } from './root.svelte.js';
 import type { RuneComponent } from '../types.js';
 

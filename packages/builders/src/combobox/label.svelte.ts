@@ -1,6 +1,5 @@
 import type { RuneComponent } from '../types.js';
 import type { ComboboxRoot } from './root.svelte.js';
-import type { HTMLLabelAttributes } from 'svelte/elements';
 
 export interface CreateComboboxLabelConfig<TOption> {
 	combobox: ComboboxRoot<TOption>;
