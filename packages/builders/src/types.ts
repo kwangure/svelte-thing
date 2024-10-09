@@ -1,4 +1,8 @@
-import type { HTMLAttributes, MouseEventHandler, SvelteHTMLElements } from 'svelte/elements';
+import type {
+	HTMLAttributes,
+	MouseEventHandler,
+	SvelteHTMLElements,
+} from 'svelte/elements';
 
 type RemoveIndexSignature<T> = {
 	[K in keyof T as string extends K
@@ -8,17 +12,19 @@ type RemoveIndexSignature<T> = {
 		  : K]: T[K];
 };
 
-interface HTMLElements
+interface HTMLElementAttributes
 	extends RemoveIndexSignature<
 		SvelteHTMLElements & { search: HTMLAttributes<HTMLElement> }
 	> {}
 
-export interface RuneComponent<TElementTagName extends keyof HTMLElementTagNameMap> {
+export interface RuneComponent<
+	TElementTagName extends keyof HTMLElementTagNameMap,
+> {
 	action?: (_element: HTMLElementTagNameMap[TElementTagName]) => {
 		destroy?(): void;
 		update?(): void;
 	} | void;
-	props: HTMLElements[TElementTagName] & {
+	props: HTMLElementAttributes[TElementTagName] & {
 		onclickoutside?: MouseEventHandler<HTMLElementTagNameMap[TElementTagName]>;
 	};
 	[key: string]: unknown;

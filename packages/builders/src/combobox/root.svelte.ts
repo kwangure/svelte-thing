@@ -4,7 +4,7 @@ import { onclickoutside } from '@svelte-thing/components/actions';
 import { uid } from 'uid';
 import type { RuneComponent } from '../types';
 
-export interface CreateCombmboxRootConfig<TOption> {
+export interface CreateComboboxRootConfig<TOption> {
 	filter?: ComboboxFilter<TOption>;
 	hasInputCompletion?: false;
 	includesBaseElement?: boolean;
@@ -36,7 +36,7 @@ export const ROOT_SET_VALUE = 'root.set.value';
 export type ComboboxVisualFocus = 'listbox' | 'input';
 
 export function createComboboxRoot<TOption>(
-	config: CreateCombmboxRootConfig<TOption>,
+	config: CreateComboboxRootConfig<TOption>,
 ) {
 	let activeItemIndex = $state(-1);
 	let inputValue = $state('');
