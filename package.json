@@ -4,7 +4,6 @@
 	"scripts": {
 		"build": "wireit",
 		"check": "wireit",
-		"dev": "wireit",
 		"format": "wireit",
 		"lint": "wireit",
 		"pre-commit": "wireit",
@@ -28,11 +27,6 @@
 				"./packages/components:check"
 			]
 		},
-		"dev": {
-			"dependencies": [
-				"./packages/components:dev"
-			]
-		},
 		"format": {
 			"command": "prettier . --write --cache --config ./config/prettier.config.mjs --ignore-path ./config/.prettierignore",
 			"files": [
@@ -45,9 +39,9 @@
 			"output": []
 		},
 		"lint": {
-			"command": "cross-env ESLINT_USE_FLAT_CONFIG=true eslint --color --cache --fix --config ./config/eslint.config.js --cache-location ./config/.eslintcache \"**/*.{js,svelte}\"",
+			"command": "cross-env ESLINT_USE_FLAT_CONFIG=true eslint --color --cache --fix --config ./config/eslint.config.js --cache-location ./config/.eslintcache \"**/*.{js,svelte,ts}\"",
 			"files": [
-				"**/*.{js,svelte}",
+				"**/*.{js,svelte,ts}",
 				"!packages/*/dist/**",
 				"!packages/*/types/**",
 				"./config/eslint.config.js"

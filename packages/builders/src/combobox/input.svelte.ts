@@ -1,21 +1,21 @@
-import { type ComboboxRoot } from './root.svelte.js';
+import type { ComboboxRoot } from './root.svelte.js';
 import {
 	cancelEvent as cancelDOMEvent,
 	encodeKeys,
 	Keys,
 	keysFromEvent,
 } from '@svelte-thing/dom-event';
+import type { RuneComponent } from '../types.js';
 
-export interface CreateComboboxInputConfig {
-	/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-	combobox: ComboboxRoot<any>;
+export interface CreateComboboxInputConfig<TOption> {
+	combobox: ComboboxRoot<TOption>;
 }
 
 export type ComboboxInput = ReturnType<typeof createComboboxInput>;
 
 export const INPUT_SET_VALUE = 'combobox.input.set.value';
 
-export function createComboboxInput({ combobox }: CreateComboboxInputConfig) {
+export function createComboboxInput<TOption>({ combobox }: CreateComboboxInputConfig<TOption>) {
 	let element: HTMLInputElement | undefined;
 
 	combobox.onSetInputValue((value) => {
@@ -36,11 +36,11 @@ export function createComboboxInput({ combobox }: CreateComboboxInputConfig) {
 	}
 
 	const keydownEvents: EventRecord = {
-		[encodeKeys([Keys.Alt, Keys.ArrowDown])](event: unknown) {
+		[encodeKeys([Keys.Alt, Keys.ArrowDown])](event) {
 			combobox.open();
-			cancelDOMEvent(event as Event);
+			cancelDOMEvent(event);
 		},
-		[encodeKeys([Keys.ArrowDown])](event: Event) {
+		[encodeKeys([Keys.ArrowDown])](event) {
 			if (combobox.isOpen) {
 				combobox.setNextItemActive();
 			} else {
@@ -51,9 +51,9 @@ export function createComboboxInput({ combobox }: CreateComboboxInputConfig) {
 		},
 		[encodeKeys([Keys.Alt, Keys.ArrowUp])](event) {
 			combobox.close();
-			cancelDOMEvent(event as Event);
+			cancelDOMEvent(event);
 		},
-		[encodeKeys([Keys.ArrowUp])](event: Event) {
+		[encodeKeys([Keys.ArrowUp])](event) {
 			if (combobox.isOpen) {
 				combobox.setPreviousItemActive();
 			} else {
@@ -65,14 +65,14 @@ export function createComboboxInput({ combobox }: CreateComboboxInputConfig) {
 		[encodeKeys([Keys.End])]() {
 			element?.setSelectionRange(element.value.length, element.value.length);
 		},
-		[encodeKeys([Keys.Enter])](event: Event) {
+		[encodeKeys([Keys.Enter])](event) {
 			if (combobox.activeItem) {
 				combobox.setValue(combobox.activeItem);
 			}
 			combobox.close();
 			cancelDOMEvent(event);
 		},
-		[encodeKeys([Keys.Escape])](event: Event) {
+		[encodeKeys([Keys.Escape])](event) {
 			if (combobox.isOpen) {
 				combobox.close();
 			} else {
@@ -95,18 +95,18 @@ export function createComboboxInput({ combobox }: CreateComboboxInputConfig) {
 	};
 
 	const keyupEvents: EventRecord = {
-		[encodeKeys([Keys.Backspace])](event: Event) {
+		[encodeKeys([Keys.Backspace])](event) {
 			combobox.clearActiveItem();
 			cancelDOMEvent(event);
 		},
-		[encodeKeys([Keys.Delete])](event: Event) {
+		[encodeKeys([Keys.Delete])](event) {
 			combobox.clearActiveItem();
 			cancelDOMEvent(event);
 		},
 	};
 
 	return {
-		action(_element: HTMLInputElement) {
+		action(_element) {
 			element = _element;
 
 			return {
@@ -145,20 +145,17 @@ export function createComboboxInput({ combobox }: CreateComboboxInputConfig) {
 					combobox.open();
 				}
 			},
-			oninput(event: Event) {
-				combobox.setInputValue(
-					(event as Event & { currentTarget: EventTarget & HTMLInputElement })
-						.currentTarget.value,
-				);
+			oninput(event) {
+				combobox.setInputValue(event.currentTarget.value);
 			},
-			onkeydown(event: KeyboardEvent) {
+			onkeydown(event) {
 				keydownEvents[encodeKeys(keysFromEvent(event))](event);
 			},
-			onkeyup(event: KeyboardEvent) {
+			onkeyup(event) {
 				keyupEvents[encodeKeys(keysFromEvent(event))](event);
 			},
 			role: 'combobox',
-			type: 'text' as const,
+			type: 'text',
 		},
-	};
+	} satisfies RuneComponent<'input'>;
 }

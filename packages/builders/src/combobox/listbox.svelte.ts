@@ -1,13 +1,15 @@
 import type { ComboboxRoot } from './root.svelte.js';
+import type { RuneComponent } from '../types.js';
 
-export interface CreateComboboxListboxConfig {
-	/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-	combobox: ComboboxRoot<any>;
+export interface CreateComboboxListboxConfig<TOption> {
+	combobox: ComboboxRoot<TOption>;
 }
 
 export type ComboboxListbox = ReturnType<typeof createComboboxListbox>;
 
-export function createComboboxListbox(config: CreateComboboxListboxConfig) {
+export function createComboboxListbox<TOption>(
+	config: CreateComboboxListboxConfig<TOption>,
+) {
 	const { combobox } = config;
 	return {
 		props: {
@@ -18,5 +20,5 @@ export function createComboboxListbox(config: CreateComboboxListboxConfig) {
 			id: combobox.ids.listbox,
 			role: 'listbox',
 		},
-	};
+	} satisfies RuneComponent<'div'>;
 }

@@ -1,15 +1,17 @@
-import { type ComboboxRoot } from './root.svelte.js';
+import type { ComboboxRoot } from './root.svelte.js';
+import type { RuneComponent } from '../types.js';
 import { cancelEvent } from '@svelte-thing/dom-event';
 
-export interface CreateComboboxPreviousConfig {
-	/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-	combobox: ComboboxRoot<any>;
+export interface CreateComboboxPreviousConfig<TOption> {
+	combobox: ComboboxRoot<TOption>;
 	label: string;
 }
 
 export type ComboboxPrevious = ReturnType<typeof createComboboxPrevious>;
 
-export function createComboboxPrevious(config: CreateComboboxPreviousConfig) {
+export function createComboboxPrevious<TOption>(
+	config: CreateComboboxPreviousConfig<TOption>,
+) {
 	const { combobox } = config;
 
 	return {
@@ -27,6 +29,7 @@ export function createComboboxPrevious(config: CreateComboboxPreviousConfig) {
 			onclick() {
 				combobox.setPreviousItemActive();
 			},
+			type: 'button',
 		},
-	};
+	} satisfies RuneComponent<'button'>;
 }

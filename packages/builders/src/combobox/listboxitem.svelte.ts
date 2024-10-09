@@ -1,14 +1,16 @@
+import type { HTMLAttributes } from 'svelte/elements';
 import { type ComboboxRoot } from './root.svelte.js';
 
-export interface CreateComboboxListboxItemConfig {
-	/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-	combobox: ComboboxRoot<any>;
-	item: unknown;
+export interface CreateComboboxListboxItemConfig<TOption> {
+	combobox: ComboboxRoot<TOption>;
+	item: TOption;
 }
 
 export type ComboboxListboxItem = ReturnType<typeof createListboxItem>;
 
-export function createListboxItem(config: CreateComboboxListboxItemConfig) {
+export function createListboxItem<TOption>(
+	config: CreateComboboxListboxItemConfig<TOption>,
+) {
 	const { combobox } = config;
 	const isActive = $derived(Object.is(config.item, combobox.activeItem));
 
@@ -44,6 +46,6 @@ export function createListboxItem(config: CreateComboboxListboxItemConfig) {
 			get ['data-focus-visible']() {
 				return isActive || undefined;
 			},
-		},
+		} satisfies HTMLAttributes<HTMLElement>,
 	};
 }
