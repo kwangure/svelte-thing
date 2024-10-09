@@ -1,14 +1,18 @@
 <script lang="ts">
 	import type { HTMLInputAttributes } from 'svelte/elements';
+	import type { NullablyRequired } from '../types.js';
 	import {
 		createComboboxInput,
 		getComboboxContext,
+		type CreateComboboxInputConfig,
 	} from '@svelte-thing/builders';
 	import { mergeProps } from '@svelte-thing/component-utils';
 
 	const props: HTMLInputAttributes = $props();
 	const combobox = getComboboxContext();
-	const input = createComboboxInput({ combobox });
+	const input = createComboboxInput({ combobox } satisfies NullablyRequired<
+		CreateComboboxInputConfig<unknown>
+	>);
 </script>
 
 <input {...mergeProps(props, input.props)} use:input.action />

@@ -1,10 +1,12 @@
 <script lang="ts">
 	/* eslint-disable no-undef */
 	import type { HTMLAttributes } from 'svelte/elements';
+	import type { NullablyRequired } from '../types.js';
 	import type { Snippet } from 'svelte';
 	import {
 		createComboboxListbox,
 		getComboboxContext,
+		type CreateComboboxListboxConfig,
 	} from '@svelte-thing/builders';
 	import { mergeProps } from '@svelte-thing/component-utils';
 
@@ -14,7 +16,9 @@
 
 	const { children, ...restProps }: Props = $props();
 	const combobox = getComboboxContext();
-	const listbox = createComboboxListbox({ combobox });
+	const listbox = createComboboxListbox({ combobox } satisfies NullablyRequired<
+		CreateComboboxListboxConfig<unknown>
+	>);
 </script>
 
 <ul {...mergeProps(restProps, listbox.props)}>

@@ -68,7 +68,7 @@
 		"!**/*.test.d.ts"
 	],
 	"dependencies": {
-		"@svelte-thing/builders": "^0.0.7",
+		"@svelte-thing/builders": "^0.0.9",
 		"@svelte-thing/component-utils": "^0.0.2",
 		"@svelte-thing/components": "^0.0.33"
 	},

@@ -1,17 +1,17 @@
 <script lang="ts">
+	/* eslint-disable no-undef */
 	import '@svelte-thing/components/css/breakpoint';
 	import '@svelte-thing/components/css/size';
-	/* eslint-disable no-undef */
-	import { type Snippet } from 'svelte';
+	import type { NullablyRequired } from '../types.js';
 	import {
 		createListboxItem,
 		getComboboxContext,
+		type CreateComboboxListboxItemConfig,
 	} from '@svelte-thing/builders';
 	import type { HTMLLiAttributes } from 'svelte/elements';
 	import { mergeProps } from '@svelte-thing/component-utils';
 
 	interface Props extends HTMLLiAttributes {
-		children?: Snippet;
 		item: unknown;
 	}
 
@@ -22,13 +22,11 @@
 		get item() {
 			return item;
 		},
-	});
+	} satisfies NullablyRequired<CreateComboboxListboxItemConfig<unknown>>);
 </script>
 
 <li {...mergeProps(restProps, listboxItem.props)} use:listboxItem.action>
-	{#if children}
-		{@render children()}
-	{/if}
+	{@render children?.()}
 </li>
 
 <style>
