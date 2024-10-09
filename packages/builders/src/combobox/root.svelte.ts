@@ -25,8 +25,6 @@ export type ComboboxRoot<TOption> = ReturnType<
 	typeof createComboboxRoot<TOption>
 >;
 
-export const ROOT_SET_VALUE = 'root.set.value';
-
 export type ComboboxVisualFocus = 'listbox' | 'input';
 
 export function createComboboxRoot<TOption>(
