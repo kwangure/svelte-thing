@@ -1,10 +1,15 @@
 <script lang="ts">
-	export let action: string | undefined = undefined;
-	export let method: string | undefined = undefined;
+	import type { HTMLFormAttributes } from 'svelte/elements';
+
+	const { children, ...restProps }: HTMLFormAttributes = $props();
 </script>
 
-<form {action} {method}>
-	<slot />
+<form {...restProps}>
+	<!--
+		Allow `undefined` children. Inputs can be defined outside the form but
+		reference it by `id` using the "form" attribute
+	-->
+	{@render children?.()}
 </form>
 
 <style>

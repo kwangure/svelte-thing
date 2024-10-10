@@ -1,12 +1,18 @@
-<script>
+<script lang="ts">
 	import '../../css/breakpoint.css';
+	import type { Snippet } from 'svelte';
 	import { setSidebarContext } from '../sidebar/sidebar.js';
+
+	interface Props {
+		children: Snippet;
+	}
+	let { children }: Props = $props();
 
 	setSidebarContext();
 </script>
 
 <div>
-	<slot />
+	{@render children()}
 </div>
 
 <style>

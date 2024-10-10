@@ -1,16 +1,17 @@
 <script lang="ts">
-	export let checked = false;
-	export let name: string | undefined = undefined;
-	export let value: string | undefined = undefined;
-	/* eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any */
-	export let onchange: ((...args: any[]) => any) | undefined = undefined;
+	import type { HTMLInputAttributes } from 'svelte/elements';
+	import type { Snippet } from 'svelte';
+
+	interface Props extends HTMLInputAttributes {
+		label: Snippet;
+		type?: 'checkbox';
+	}
+	const { label, ...restProps }: Props = $props();
 </script>
 
 <label>
-	<input type="checkbox" {checked} {name} {value} on:change={onchange} />
-	{#if $$slots.label}
-		<slot name="label" />
-	{/if}
+	<input type="checkbox" {...restProps} />
+	{@render label()}
 </label>
 
 <style>

@@ -1,18 +1,18 @@
-<script>
+<script lang="ts">
 	import '../../css/color-preference.css';
 	import '../../css/color.css';
-	/**
-	 * @typedef {'location' | 'page' | boolean | null | undefined} AriaCurrent
-	 */
+	import type { HTMLAnchorAttributes } from 'svelte/elements';
+	import type { Snippet } from 'svelte';
 
-	/** @type {AriaCurrent} */
-	export let ariaCurrent = undefined;
-	/** @type {string} */
-	export let href;
+	interface Props extends HTMLAnchorAttributes {
+		href: string;
+		children: Snippet;
+	}
+	const { children, ...restProps }: Props = $props();
 </script>
 
-<a {href} aria-current={ariaCurrent}>
-	<slot />
+<a {...restProps}>
+	{@render children()}
 </a>
 
 <style>

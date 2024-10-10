@@ -1,33 +1,26 @@
 <script lang="ts">
+	import type { HTMLInputAttributes } from 'svelte/elements';
+	import type { Snippet } from 'svelte';
 	import { uid } from 'uid';
 
-	export let id = uid();
-	export let max: number | undefined = undefined;
-	export let min: number | undefined = undefined;
-	export let name: string | undefined = undefined;
-	/* eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any */
-	export let onchange: ((...args: any[]) => any) | undefined = undefined;
-	/* eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any */
-	export let oninput: ((...args: any[]) => any) | undefined = undefined;
-	export let value: number | undefined = undefined;
+	interface Props extends HTMLInputAttributes {
+		max?: number;
+		min?: number;
+		value?: number;
+		label?: Snippet;
+		type?: 'number';
+	}
+
+	const { id = uid(), label, ...restProps }: Props = $props();
 </script>
 
 <div>
-	{#if $$slots.label}
+	{#if label}
 		<label for={id}>
-			<slot name="label" />
+			{@render label?.()}
 		</label>
 	{/if}
-	<input
-		{id}
-		{max}
-		{min}
-		{name}
-		type="number"
-		{value}
-		on:change={onchange}
-		on:input={oninput}
-	/>
+	<input type="number" {...restProps} />
 </div>
 
 <style>

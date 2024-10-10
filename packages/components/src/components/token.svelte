@@ -1,7 +1,11 @@
 <script lang="ts">
 	import '../css/code.css';
 
-	export let token: { color: string; segment: string };
+	interface Props {
+		token: { color: string; segment: string };
+	}
+
+	let { token }: Props = $props();
 </script>
 
 <span class={token.color}>{token.segment}</span>

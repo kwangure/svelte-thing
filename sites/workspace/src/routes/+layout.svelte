@@ -21,7 +21,7 @@
 					<Sidebar.Item>
 						<Sidebar.Link
 							href="/combobox/autocomplete"
-							ariaCurrent={pathname === `/combobox/autocomplete`}
+							aria-current={pathname === `/combobox/autocomplete`}
 						>
 							Autocomplete
 						</Sidebar.Link>
@@ -29,7 +29,7 @@
 					<Sidebar.Item>
 						<Sidebar.Link
 							href="/combobox/dialog"
-							ariaCurrent={pathname === `/combobox/dialog`}
+							aria-current={pathname === `/combobox/dialog`}
 						>
 							Dialog
 						</Sidebar.Link>
@@ -39,7 +39,7 @@
 			<Sidebar.Item>
 				<Sidebar.Link
 					href="/dialog"
-					ariaCurrent={pathname === `/dialog`}
+					aria-current={pathname === `/dialog`}
 				>
 					Dialog
 				</Sidebar.Link>
