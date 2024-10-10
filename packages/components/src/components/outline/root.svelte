@@ -1,24 +1,24 @@
-<script>
+<script lang="ts">
+	import type { TocEntry } from './types.js';
+	import { getScrollingElement, isPartiallyHidden } from '../../dom/dom.js';
 	// @ts-expect-error requires svelte-kit
 	import { afterNavigate } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import { getScrollingElement, isPartiallyHidden } from '../../dom/dom.js';
 	import List from './list.svelte';
 	// @ts-expect-error requires svelte-kit
 	import { page } from '$app/stores';
 
-	/** @type {import('./types.js').TocEntry[]} */
-	export let toc;
+	interface Props {
+		toc: TocEntry[];
+	}
 
-	/** @type {string | undefined} */
-	let activeTarget = toc[0]?.id;
+	let { toc }: Props = $props();
+	let activeTarget: string | undefined = $state(toc[0]?.id);
 
 	/**
 	 * Set the first visible heading as active
-	 *
-	 * @param {import('./types.js').TocEntry[]} tree
 	 */
-	function updateActiveSlug(tree) {
+	function updateActiveSlug(tree: TocEntry[]) {
 		for (const heading of tree) {
 			const element = document.getElementById(heading.id);
 			if (!element) continue;
@@ -34,10 +34,9 @@
 		}
 
 		let closestDistance = Infinity;
-		/**
-		 * @param {import("./types.js").TocEntry[]} nodes
-		 */
-		function findClosestAboveViewport(nodes) {
+		function findClosestAboveViewport(
+			nodes: import('./types.js').TocEntry[],
+		) {
 			for (const node of nodes) {
 				const element = document.getElementById(node.id);
 				if (element) {
@@ -72,11 +71,9 @@
 	/**
 	 * Prioritize the changed hash over the output of the algorithm in
 	 * `updateActiveSlug()`
-	 *
-	 * @param {URL} url
 	 * @link {https://github.com/sveltejs/kit/blob/a6fe5fcb1c7258281b4bf53b94543272e6e6c6d8/sites/kit.svelte.dev/src/routes/docs/%5Bslug%5D/OnThisPage.svelte#L67}
 	 */
-	function preferHashchangeTarget(url) {
+	function preferHashchangeTarget(url: URL) {
 		const update = () => (activeTarget = url.hash.slice(1));
 
 		// belt...
@@ -86,8 +83,7 @@
 		addEventListener('scroll', update, { once: true });
 	}
 
-	/** @param {HTMLElement} node */
-	function addScrollListener(node) {
+	function addScrollListener(node: HTMLElement) {
 		const scrollingElement = getScrollingElement(node.parentElement);
 		if (!scrollingElement) return;
 
@@ -101,7 +97,7 @@
 	}
 </script>
 
-<svelte:window on:hashchange={() => preferHashchangeTarget($page.url)} />
+<svelte:window onhashchange={() => preferHashchangeTarget($page.url)} />
 
 <aside use:addScrollListener>
 	<nav>

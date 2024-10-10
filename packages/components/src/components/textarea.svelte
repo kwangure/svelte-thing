@@ -1,34 +1,22 @@
 <script lang="ts">
+	import type { HTMLTextareaAttributes } from 'svelte/elements';
+	import type { Snippet } from 'svelte';
 	import { uid } from 'uid';
 
-	export let id = uid();
-	export let cols: number | undefined = undefined;
-	export let maxlength: number | undefined = undefined;
-	export let minlength: number | undefined = undefined;
-	/* eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any */
-	export let onchange: ((...args: any[]) => any) | undefined = undefined;
-	/* eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any */
-	export let oninput: ((...args: any[]) => any) | undefined = undefined;
-	export let rows: number | undefined = undefined;
-	export let value: string | undefined = undefined;
+	interface Props extends HTMLTextareaAttributes {
+		label?: Snippet;
+	}
+
+	const { id = uid(), label, ...restProps }: Props = $props();
 </script>
 
 <div>
-	{#if $$slots.label}
+	{#if label}
 		<label for={id}>
-			<slot name="label" />
+			{@render label?.()}
 		</label>
 	{/if}
-	<textarea
-		{cols}
-		{id}
-		{maxlength}
-		{minlength}
-		{rows}
-		{value}
-		on:change={onchange}
-		on:input={oninput}
-	></textarea>
+	<textarea {id} {...restProps}></textarea>
 </div>
 
 <style>

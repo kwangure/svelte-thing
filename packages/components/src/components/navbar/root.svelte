@@ -1,19 +1,25 @@
-<script>
+<script lang="ts">
 	import '../../css/breakpoint.css';
 	import '../../css/color-preference.css';
 	import '../../css/color.css';
 	import '../../css/size.css';
+	import type { Snippet } from 'svelte';
 	import { getSidebarContext } from '../sidebar/sidebar.js';
-	import Icon from '../icon/simple.svelte';
 	import { mdiMenu } from '@mdi/js';
+	import Icon from '../icon/simple.svelte';
 
-	export let showOpen = true;
+	interface Props {
+		showOpen?: boolean;
+		children: Snippet;
+	}
+	const { showOpen = true, children }: Props = $props();
 
 	const { elements, state } = getSidebarContext();
 	const { show } = elements;
 	const { shouldShowToggle } = state;
 </script>
 
+<!-- Render bottom border first because of z-index -->
 <div></div>
 <nav>
 	{#if showOpen && $shouldShowToggle}
@@ -25,7 +31,7 @@
 			<Icon --st-icon-width="100%" --st-icon-height=" " path={mdiMenu} />
 		</button>
 	{/if}
-	<slot />
+	{@render children()}
 </nav>
 
 <style>

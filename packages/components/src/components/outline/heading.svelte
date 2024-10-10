@@ -1,18 +1,20 @@
-<script>
+<script lang="ts">
 	import '../../css/size.css';
+	import type { TocEntry } from './types';
 	import { Item } from '../sidebar/index.js';
 	import Link from './link.svelte';
 	import List from './list.svelte';
 
-	/** @type {import('./types.js').TocEntry} */
-	export let self;
-	/** @type {string | undefined} */
-	export let activeTarget;
+	interface Props {
+		self: TocEntry;
+		activeTarget: string | undefined;
+	}
+	let { self, activeTarget }: Props = $props();
 </script>
 
 <Item>
 	<div class:nested={self.depth == 3}>
-		<Link href={self.hash} ariaCurrent={self.id === activeTarget}>
+		<Link href={self.hash} aria-current={self.id === activeTarget}>
 			{self.value}
 		</Link>
 	</div>

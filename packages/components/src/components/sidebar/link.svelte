@@ -1,21 +1,20 @@
-<script>
+<script lang="ts">
 	import '../../css/size.css';
+	import type { HTMLAnchorAttributes } from 'svelte/elements';
+	import type { Snippet } from 'svelte';
 	import { getSidebarContext } from './sidebar.js';
 
-	/**
-	 * @typedef {'location' | 'page' | boolean | null | undefined} AriaCurrent
-	 */
-
-	/** @type {AriaCurrent} */
-	export let ariaCurrent = undefined;
-	/** @type {string} */
-	export let href;
+	interface Props extends HTMLAnchorAttributes {
+		href: string;
+		children: Snippet;
+	}
+	let { children, ...restProps }: Props = $props();
 
 	const sidebar = getSidebarContext();
 </script>
 
-<a {href} aria-current={ariaCurrent} use:sidebar.elements.hide>
-	<slot />
+<a {...restProps} use:sidebar.elements.hide>
+	{@render children?.()}
 </a>
 
 <style>

@@ -1,10 +1,11 @@
 import { createSearchIndex, createTable, search } from '@content-thing/memdb';
 
-export interface BookSummaries {
+/* eslint-disable-next-line @typescript-eslint/consistent-type-definitions */
+export type BookSummaries = {
 	id: string;
 	title: string;
 	content: string;
-}
+};
 
 const bookSummaries: BookSummaries[] = [
 	{

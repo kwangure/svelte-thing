@@ -1,10 +1,12 @@
-<script>
+<script lang="ts">
+	import type { TocEntry } from './types';
 	import Heading from './heading.svelte';
 
-	/** @type {string | undefined} */
-	export let activeTarget;
-	/** @type {import('./types.js').TocEntry[]} */
-	export let toc;
+	interface Props {
+		activeTarget: string | undefined;
+		toc: TocEntry[];
+	}
+	const { activeTarget, toc }: Props = $props();
 </script>
 
 {#if toc.length}
