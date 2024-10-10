@@ -1,12 +1,12 @@
 <script lang="ts">
 	import type { HTMLLabelAttributes } from 'svelte/elements';
-	import type { NullablyRequired } from '../types.js';
+	import type { NullablyRequired } from '../../types.js';
 	import type { Snippet } from 'svelte';
 	import {
 		createComboboxLabel,
 		getComboboxContext,
 		type CreateComboboxLabelConfig,
-	} from '@svelte-thing/builders';
+	} from '../runes';
 	import { mergeProps } from '@svelte-thing/component-utils';
 
 	interface Props extends HTMLLabelAttributes {

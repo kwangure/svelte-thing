@@ -9,4 +9,4 @@ export { default as Root } from './root.svelte';
 export type {
 	ComboboxFilter as Filter,
 	ComboboxFilterArg as FilterArg,
-} from '@svelte-thing/builders/combobox';
+} from '../runes';

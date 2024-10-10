@@ -131,20 +131,20 @@ const bookSummaries: BookSummaries[] = [
 
 const bookSummaryTable = createTable(bookSummaries);
 const searchIndex = createSearchIndex(bookSummaryTable, ['title', 'content']);
-console.log(
-	Array.from(searchIndex.invertedIndex)
-		.map(
-			([word, frequencies]) =>
-				[
-					word,
-					Array.from(frequencies.values()).reduce(
-						(sum, freq) => sum + freq,
-						0,
-					),
-				] satisfies [string, number],
-		)
-		.sort(([, a], [, b]) => b - a),
-);
+// console.log(
+// 	Array.from(searchIndex.invertedIndex)
+// 		.map(
+// 			([word, frequencies]) =>
+// 				[
+// 					word,
+// 					Array.from(frequencies.values()).reduce(
+// 						(sum, freq) => sum + freq,
+// 						0,
+// 					),
+// 				] satisfies [string, number],
+// 		)
+// 		.sort(([, a], [, b]) => b - a),
+// );
 export function searchBookSumarries(query: string) {
 	return search(bookSummaryTable, searchIndex, query);
 }

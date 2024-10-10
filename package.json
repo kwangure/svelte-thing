@@ -14,11 +14,10 @@
 	"wireit": {
 		"build": {
 			"dependencies": [
-				"./packages/builders:build",
 				"./packages/components:build",
 				"./packages/dom-event:build",
 				"./packages/reactivity:build",
-				"./packages/skinless-components:build",
+				"./packages/rune-components:build",
 				"./packages/state-event:build"
 			]
 		},
@@ -50,22 +49,20 @@
 		},
 		"pre-commit": {
 			"dependencies": [
-				"./packages/builders:pre-commit",
 				"./packages/components:pre-commit",
 				"./packages/dom-event:pre-commit",
 				"./packages/reactivity:pre-commit",
-				"./packages/skinless-components:pre-commit",
+				"./packages/rune-components:pre-commit",
 				"./packages/state-event:pre-commit"
 			]
 		},
 		"release": {
 			"command": "changeset publish && pnpm install",
 			"dependencies": [
-				"./packages/builders:release",
 				"./packages/components:release",
 				"./packages/dom-event:release",
 				"./packages/reactivity:release",
-				"./packages/skinless-components:release",
+				"./packages/rune-components:release",
 				"./packages/state-event:release"
 			]
 		},

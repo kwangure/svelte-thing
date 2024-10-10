@@ -1,5 +1,5 @@
 <script lang="ts">
-	import * as Combobox from '@svelte-thing/skinless-components/combobox';
+	import * as Combobox from '@svelte-thing/rune-components/combobox';
 
 	interface Fruit {
 		id: number;

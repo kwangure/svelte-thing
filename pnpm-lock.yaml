@@ -45,43 +45,6 @@ importers:
         specifier: ^8.7.0
         version: 8.8.1(eslint@8.57.0)(typescript@5.6.2)
 
-  packages/builders:
-    dependencies:
-      '@svelte-thing/component-utils':
-        specifier: ^0.0.2
-        version: 0.0.2
-      '@svelte-thing/components':
-        specifier: ^0.0.33
-        version: 0.0.33(svelte@5.0.0-next.260)
-      '@svelte-thing/dom-event':
-        specifier: ^0.0.4
-        version: 0.0.4
-      uid:
-        specifier: ^2.0.2
-        version: 2.0.2
-    devDependencies:
-      '@sveltejs/vite-plugin-svelte':
-        specifier: ^3.0.0
-        version: 3.0.1(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@20.13.0))
-      jsdom:
-        specifier: ^25.0.0
-        version: 25.0.0
-      publint:
-        specifier: ^0.2.6
-        version: 0.2.10
-      svelte:
-        specifier: ^5.0.0-next.260
-        version: 5.0.0-next.260
-      typescript:
-        specifier: ^5.4.5
-        version: 5.5.4
-      vite:
-        specifier: ^5.4.0
-        version: 5.4.8(@types/node@20.13.0)
-      vitest:
-        specifier: ^2.1.1
-        version: 2.1.1(@types/node@20.13.0)(jsdom@25.0.0)
-
   packages/component-utils:
     dependencies:
       esm-env:
@@ -177,24 +140,33 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1(@types/node@20.13.0)(jsdom@25.0.0)
 
-  packages/skinless-components:
+  packages/rune-components:
     dependencies:
-      '@svelte-thing/builders':
-        specifier: ^0.0.9
-        version: 0.0.9(svelte@5.0.0-next.260)
       '@svelte-thing/component-utils':
         specifier: ^0.0.2
         version: 0.0.2
       '@svelte-thing/components':
         specifier: ^0.0.33
         version: 0.0.33(svelte@5.0.0-next.260)
+      '@svelte-thing/dom-event':
+        specifier: ^0.0.4
+        version: 0.0.4
+      uid:
+        specifier: ^2.0.2
+        version: 2.0.2
     devDependencies:
       '@sveltejs/package':
         specifier: ^2.3.5
-        version: 2.3.5(svelte@5.0.0-next.260)(typescript@5.5.4)
+        version: 2.3.5(svelte@5.0.0-next.260)(typescript@5.6.2)
+      '@sveltejs/vite-plugin-svelte':
+        specifier: ^3.1.2
+        version: 3.1.2(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@20.13.0))
       '@types/node':
         specifier: ^20.10.5
         version: 20.13.0
+      jsdom:
+        specifier: ^25.0.0
+        version: 25.0.0
       publint:
         specifier: ^0.2.6
         version: 0.2.10
@@ -203,10 +175,16 @@ importers:
         version: 5.0.0-next.260
       svelte-check:
         specifier: ^4.0.0
-        version: 4.0.4(svelte@5.0.0-next.260)(typescript@5.5.4)
+        version: 4.0.4(svelte@5.0.0-next.260)(typescript@5.6.2)
       typescript:
         specifier: ^5.4.5
-        version: 5.5.4
+        version: 5.6.2
+      vite:
+        specifier: ^5.4.8
+        version: 5.4.8(@types/node@20.13.0)
+      vitest:
+        specifier: ^2.1.1
+        version: 2.1.1(@types/node@20.13.0)(jsdom@25.0.0)
 
   packages/state-event:
     devDependencies:
@@ -226,8 +204,8 @@ importers:
   sites/workspace:
     dependencies:
       '@content-thing/memdb':
-        specifier: ^0.0.9
-        version: 0.0.9
+        specifier: ^0.0.10
+        version: 0.0.10
       '@mdi/js':
         specifier: ^7.2.96
         version: 7.3.67
@@ -240,9 +218,9 @@ importers:
       '@svelte-thing/dom-event':
         specifier: workspace:^
         version: link:../../packages/dom-event
-      '@svelte-thing/skinless-components':
+      '@svelte-thing/rune-components':
         specifier: workspace:^
-        version: link:../../packages/skinless-components
+        version: link:../../packages/rune-components
     devDependencies:
       '@sveltejs/adapter-auto':
         specifier: ^3.0.0
@@ -347,8 +325,8 @@ packages:
   '@changesets/write@0.2.3':
     resolution: {integrity: sha512-Dbamr7AIMvslKnNYsLFafaVORx4H0pvCA2MHqgtNCySMe1blImEyAEOzDmcgKAkgz4+uwoLz7demIrX+JBr/Xw==}
 
-  '@content-thing/memdb@0.0.9':
-    resolution: {integrity: sha512-MznxN20S2mQ6W6tfgSs7CywE0cAzsvP8g7sHj0d7xYHk8BCtNZYBzNjTvciGDMFHip1XbVVI2fzE2XH9qNJZXA==}
+  '@content-thing/memdb@0.0.10':
+    resolution: {integrity: sha512-3vH0uIr8pWD0SuDk4Cma3lt6ZfvMYr5HFGtjIGvsRww5iHdz+13hBV8AsVrSatnmHwYz1tqNEm8F7XHmDZ+9UQ==}
 
   '@esbuild/aix-ppc64@0.21.5':
     resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==}
@@ -679,9 +657,6 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@svelte-thing/builders@0.0.9':
-    resolution: {integrity: sha512-mYeo9xNA2FxeSMdZwje4tuu9gVyv64ZvUFuwn2Ydhf4VuD4jpcUj3huCTD3bCUMVZLg8bzp0G5+spw4M8G8xwA==}
-
   '@svelte-thing/component-utils@0.0.2':
     resolution: {integrity: sha512-8RseMY1AtpSboGCOU9PNCou3fsUC5QanL54i0orBkdM8fMzJic4XUwmM6eIQuJejbL52N863PYtzX+AHVyez1Q==}
 
@@ -722,6 +697,14 @@ packages:
       svelte: ^4.0.0 || ^5.0.0-next.0
       vite: ^5.0.0
 
+  '@sveltejs/vite-plugin-svelte-inspector@2.1.0':
+    resolution: {integrity: sha512-9QX28IymvBlSCqsCll5t0kQVxipsfhFFL+L2t3nTWfXnddYwxBuAEtTtlaVQpRz9c37BhJjltSeY4AJSC03SSg==}
+    engines: {node: ^18.0.0 || >=20}
+    peerDependencies:
+      '@sveltejs/vite-plugin-svelte': ^3.0.0
+      svelte: ^4.0.0 || ^5.0.0-next.0
+      vite: ^5.0.0
+
   '@sveltejs/vite-plugin-svelte-inspector@3.0.0-next.3':
     resolution: {integrity: sha512-kuGJ2CZ5lAw3gKF8Kw0AfKtUJWbwdlDHY14K413B0MCyrzvQvsKTorwmwZcky0+QqY6RnVIZ/5FttB9bQmkLXg==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22}
@@ -732,6 +715,13 @@ packages:
 
   '@sveltejs/vite-plugin-svelte@3.0.1':
     resolution: {integrity: sha512-CGURX6Ps+TkOovK6xV+Y2rn8JKa8ZPUHPZ/NKgCxAmgBrXReavzFl8aOSCj3kQ1xqT7yGJj53hjcV/gqwDAaWA==}
+    engines: {node: ^18.0.0 || >=20}
+    peerDependencies:
+      svelte: ^4.0.0 || ^5.0.0-next.0
+      vite: ^5.0.0
+
+  '@sveltejs/vite-plugin-svelte@3.1.2':
+    resolution: {integrity: sha512-Txsm1tJvtiYeLUVRNqxZGKR/mI+CzuIQuc2gn+YCs9rMTowpNZ2Nqt53JdL8KF9bLhAf2ruR/dr9eZCwdTriRA==}
     engines: {node: ^18.0.0 || >=20}
     peerDependencies:
       svelte: ^4.0.0 || ^5.0.0-next.0
@@ -2039,10 +2029,6 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
-  punycode@2.3.0:
-    resolution: {integrity: sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==}
-    engines: {node: '>=6'}
-
   punycode@2.3.1:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
@@ -2306,6 +2292,12 @@ packages:
 
   svelte-hmr@0.15.3:
     resolution: {integrity: sha512-41snaPswvSf8TJUhlkoJBekRrABDXDMdpNpT2tfHIv4JuhgvHqLMhEPGtaQn0BmbNSTkuz2Ed20DF2eHw0SmBQ==}
+    engines: {node: ^12.20 || ^14.13.1 || >= 16}
+    peerDependencies:
+      svelte: ^3.19.0 || ^4.0.0
+
+  svelte-hmr@0.16.0:
+    resolution: {integrity: sha512-Gyc7cOS3VJzLlfj7wKS0ZnzDVdv3Pn2IuVeJPk9m2skfhcu5bq3wtIZyQGggr7/Iim5rH5cncyQft/kRLupcnA==}
     engines: {node: ^12.20 || ^14.13.1 || >= 16}
     peerDependencies:
       svelte: ^3.19.0 || ^4.0.0
@@ -2854,7 +2846,7 @@ snapshots:
       human-id: 1.0.2
       prettier: 2.8.8
 
-  '@content-thing/memdb@0.0.9': {}
+  '@content-thing/memdb@0.0.10': {}
 
   '@esbuild/aix-ppc64@0.21.5':
     optional: true
@@ -3103,15 +3095,6 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.22.5':
     optional: true
 
-  '@svelte-thing/builders@0.0.9(svelte@5.0.0-next.260)':
-    dependencies:
-      '@svelte-thing/component-utils': 0.0.2
-      '@svelte-thing/components': 0.0.33(svelte@5.0.0-next.260)
-      '@svelte-thing/dom-event': 0.0.4
-      uid: 2.0.2
-    transitivePeerDependencies:
-      - svelte
-
   '@svelte-thing/component-utils@0.0.2':
     dependencies:
       esm-env: 1.0.0
@@ -3149,17 +3132,6 @@ snapshots:
       tiny-glob: 0.2.9
       vite: 5.4.8(@types/node@20.13.0)
 
-  '@sveltejs/package@2.3.5(svelte@5.0.0-next.260)(typescript@5.5.4)':
-    dependencies:
-      chokidar: 4.0.1
-      kleur: 4.1.5
-      sade: 1.8.1
-      semver: 7.6.3
-      svelte: 5.0.0-next.260
-      svelte2tsx: 0.7.21(svelte@5.0.0-next.260)(typescript@5.5.4)
-    transitivePeerDependencies:
-      - typescript
-
   '@sveltejs/package@2.3.5(svelte@5.0.0-next.260)(typescript@5.6.2)':
     dependencies:
       chokidar: 4.0.1
@@ -3174,7 +3146,16 @@ snapshots:
   '@sveltejs/vite-plugin-svelte-inspector@2.0.0(@sveltejs/vite-plugin-svelte@3.0.1(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@20.13.0)))(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@20.13.0))':
     dependencies:
       '@sveltejs/vite-plugin-svelte': 3.0.1(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@20.13.0))
-      debug: 4.3.4
+      debug: 4.3.7
+      svelte: 5.0.0-next.260
+      vite: 5.4.8(@types/node@20.13.0)
+    transitivePeerDependencies:
+      - supports-color
+
+  '@sveltejs/vite-plugin-svelte-inspector@2.1.0(@sveltejs/vite-plugin-svelte@3.1.2(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@20.13.0)))(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@20.13.0))':
+    dependencies:
+      '@sveltejs/vite-plugin-svelte': 3.1.2(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@20.13.0))
+      debug: 4.3.7
       svelte: 5.0.0-next.260
       vite: 5.4.8(@types/node@20.13.0)
     transitivePeerDependencies:
@@ -3198,6 +3179,20 @@ snapshots:
       magic-string: 0.30.5
       svelte: 5.0.0-next.260
       svelte-hmr: 0.15.3(svelte@5.0.0-next.260)
+      vite: 5.4.8(@types/node@20.13.0)
+      vitefu: 0.2.5(vite@5.4.8(@types/node@20.13.0))
+    transitivePeerDependencies:
+      - supports-color
+
+  '@sveltejs/vite-plugin-svelte@3.1.2(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@20.13.0))':
+    dependencies:
+      '@sveltejs/vite-plugin-svelte-inspector': 2.1.0(@sveltejs/vite-plugin-svelte@3.1.2(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@20.13.0)))(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@20.13.0))
+      debug: 4.3.7
+      deepmerge: 4.3.1
+      kleur: 4.1.5
+      magic-string: 0.30.11
+      svelte: 5.0.0-next.260
+      svelte-hmr: 0.16.0(svelte@5.0.0-next.260)
       vite: 5.4.8(@types/node@20.13.0)
       vitefu: 0.2.5(vite@5.4.8(@types/node@20.13.0))
     transitivePeerDependencies:
@@ -3843,7 +3838,7 @@ snapshots:
   eslint@8.57.0:
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.0)
-      '@eslint-community/regexpp': 4.9.1
+      '@eslint-community/regexpp': 4.11.1
       '@eslint/eslintrc': 2.1.4
       '@eslint/js': 8.57.0
       '@humanwhocodes/config-array': 0.11.14
@@ -3867,7 +3862,7 @@ snapshots:
       glob-parent: 6.0.2
       globals: 13.23.0
       graphemer: 1.4.0
-      ignore: 5.2.4
+      ignore: 5.3.2
       imurmurhash: 0.1.4
       is-glob: 4.0.3
       is-path-inside: 3.0.3
@@ -4126,14 +4121,14 @@ snapshots:
   http-proxy-agent@7.0.2:
     dependencies:
       agent-base: 7.1.1
-      debug: 4.3.4
+      debug: 4.3.7
     transitivePeerDependencies:
       - supports-color
 
   https-proxy-agent@7.0.5:
     dependencies:
       agent-base: 7.1.1
-      debug: 4.3.4
+      debug: 4.3.7
     transitivePeerDependencies:
       - supports-color
 
@@ -4645,8 +4640,6 @@ snapshots:
       picocolors: 1.1.0
       sade: 1.8.1
 
-  punycode@2.3.0: {}
-
   punycode@2.3.1: {}
 
   querystringify@2.2.0: {}
@@ -4903,18 +4896,6 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-check@4.0.4(svelte@5.0.0-next.260)(typescript@5.5.4):
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.25
-      chokidar: 4.0.1
-      fdir: 6.3.0
-      picocolors: 1.1.0
-      sade: 1.8.1
-      svelte: 5.0.0-next.260
-      typescript: 5.5.4
-    transitivePeerDependencies:
-      - picomatch
-
   svelte-check@4.0.4(svelte@5.0.0-next.260)(typescript@5.6.2):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
@@ -4941,12 +4922,9 @@ snapshots:
     dependencies:
       svelte: 5.0.0-next.260
 
-  svelte2tsx@0.7.21(svelte@5.0.0-next.260)(typescript@5.5.4):
+  svelte-hmr@0.16.0(svelte@5.0.0-next.260):
     dependencies:
-      dedent-js: 1.0.1
-      pascal-case: 3.1.2
       svelte: 5.0.0-next.260
-      typescript: 5.5.4
 
   svelte2tsx@0.7.21(svelte@5.0.0-next.260)(typescript@5.6.2):
     dependencies:
@@ -5007,7 +4985,7 @@ snapshots:
   tough-cookie@4.1.4:
     dependencies:
       psl: 1.9.0
-      punycode: 2.3.0
+      punycode: 2.3.1
       universalify: 0.2.0
       url-parse: 1.5.10
 
@@ -5106,7 +5084,7 @@ snapshots:
 
   uri-js@4.4.1:
     dependencies:
-      punycode: 2.3.0
+      punycode: 2.3.1
 
   url-parse@1.5.10:
     dependencies:

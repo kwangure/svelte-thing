@@ -1,6 +1,6 @@
 {
 	"name": "workspace-site",
-	"version": "0.0.6",
+	"version": "0.0.0",
 	"private": true,
 	"scripts": {
 		"build": "wireit",
@@ -13,7 +13,7 @@
 		"build": {
 			"command": "vite build",
 			"dependencies": [
-				"../../packages/skinless-components:build"
+				"../../packages/rune-components:build"
 			],
 			"files": [
 				"src/**/*.{js,ts,svelte}",
@@ -29,7 +29,7 @@
 			"command": "svelte-check --tsconfig ./tsconfig.json",
 			"dependencies": [
 				"sync",
-				"../../packages/skinless-components:build"
+				"../../packages/rune-components:build"
 			],
 			"files": [
 				"src/**/*.{js,ts,svelte}",
@@ -72,12 +72,12 @@
 		}
 	},
 	"dependencies": {
-		"@content-thing/memdb": "^0.0.9",
+		"@content-thing/memdb": "^0.0.10",
 		"@mdi/js": "^7.2.96",
 		"@svelte-thing/component-utils": "workspace:^",
 		"@svelte-thing/components": "workspace:^",
 		"@svelte-thing/dom-event": "workspace:^",
-		"@svelte-thing/skinless-components": "workspace:^"
+		"@svelte-thing/rune-components": "workspace:^"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",

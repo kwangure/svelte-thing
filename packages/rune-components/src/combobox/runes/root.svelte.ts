@@ -1,4 +1,4 @@
-import type { RuneComponent } from '../types.js';
+import type { RuneComponent } from '../../types.js';
 import { mergeActions } from '@svelte-thing/component-utils';
 import { onclickoutside } from '@svelte-thing/components/actions';
 import { uid } from 'uid';

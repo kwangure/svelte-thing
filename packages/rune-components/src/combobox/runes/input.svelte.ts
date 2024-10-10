@@ -5,7 +5,7 @@ import {
 	Keys,
 	keysFromEvent,
 } from '@svelte-thing/dom-event';
-import type { RuneComponent } from '../types.js';
+import type { RuneComponent } from '../../types.js';
 
 export interface CreateComboboxInputConfig<TOption> {
 	combobox: ComboboxRoot<TOption>;

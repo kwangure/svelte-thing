@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type { HTMLButtonAttributes } from 'svelte/elements';
-	import type { NullablyRequired } from '../types.js';
+	import type { NullablyRequired } from '../../types.js';
 	import {
 		createComboboxButton,
 		getComboboxContext,
 		type CreateComboboxButtonConfig,
-	} from '@svelte-thing/builders';
+	} from '../runes';
 	import { mergeProps } from '@svelte-thing/component-utils';
 
 	interface Props

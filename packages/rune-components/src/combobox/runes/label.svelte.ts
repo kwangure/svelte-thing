@@ -1,4 +1,4 @@
-import type { RuneComponent } from '../types.js';
+import type { RuneComponent } from '../../types.js';
 import type { ComboboxRoot } from './root.svelte.js';
 
 export interface CreateComboboxLabelConfig<TOption> {
