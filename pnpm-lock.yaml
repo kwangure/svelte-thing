@@ -204,8 +204,8 @@ importers:
   sites/workspace:
     dependencies:
       '@content-thing/memdb':
-        specifier: ^0.0.9
-        version: 0.0.9
+        specifier: ^0.0.10
+        version: 0.0.10
       '@mdi/js':
         specifier: ^7.2.96
         version: 7.3.67
@@ -325,8 +325,8 @@ packages:
   '@changesets/write@0.2.3':
     resolution: {integrity: sha512-Dbamr7AIMvslKnNYsLFafaVORx4H0pvCA2MHqgtNCySMe1blImEyAEOzDmcgKAkgz4+uwoLz7demIrX+JBr/Xw==}
 
-  '@content-thing/memdb@0.0.9':
-    resolution: {integrity: sha512-MznxN20S2mQ6W6tfgSs7CywE0cAzsvP8g7sHj0d7xYHk8BCtNZYBzNjTvciGDMFHip1XbVVI2fzE2XH9qNJZXA==}
+  '@content-thing/memdb@0.0.10':
+    resolution: {integrity: sha512-3vH0uIr8pWD0SuDk4Cma3lt6ZfvMYr5HFGtjIGvsRww5iHdz+13hBV8AsVrSatnmHwYz1tqNEm8F7XHmDZ+9UQ==}
 
   '@esbuild/aix-ppc64@0.21.5':
     resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==}
@@ -2846,7 +2846,7 @@ snapshots:
       human-id: 1.0.2
       prettier: 2.8.8
 
-  '@content-thing/memdb@0.0.9': {}
+  '@content-thing/memdb@0.0.10': {}
 
   '@esbuild/aix-ppc64@0.21.5':
     optional: true
