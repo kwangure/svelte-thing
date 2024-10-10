@@ -2,9 +2,7 @@ export interface StateNodeConfig {
 	on?: Record<string, StateEventListener>;
 }
 
-export interface StateEventListener {
-	(event: unknown): unknown;
-}
+export type StateEventListener = (event: unknown) => unknown;
 
 export class StateNode {
 	#children = new Set<StateNode>();

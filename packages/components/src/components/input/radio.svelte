@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let checked: boolean = false;
+	export let checked = false;
 	export let name: string | undefined = undefined;
 	export let value: string | undefined = undefined;
 	/* eslint-disable-next-line no-unused-vars, @typescript-eslint/no-explicit-any */
