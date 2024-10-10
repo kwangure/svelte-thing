@@ -1,11 +1,11 @@
 <script lang="ts">
 	import type { HTMLInputAttributes } from 'svelte/elements';
-	import type { NullablyRequired } from '../types.js';
+	import type { NullablyRequired } from '../../types.js';
 	import {
 		createComboboxInput,
 		getComboboxContext,
 		type CreateComboboxInputConfig,
-	} from '@svelte-thing/builders';
+	} from '../runes';
 	import { mergeProps } from '@svelte-thing/component-utils';
 
 	const props: HTMLInputAttributes = $props();

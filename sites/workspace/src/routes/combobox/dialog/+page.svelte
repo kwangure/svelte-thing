@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as Dialog from '$lib/dialog';
-	import * as Combobox from '@svelte-thing/skinless-components/combobox';
+	import * as Combobox from '@svelte-thing/rune-components/combobox';
 	import {
 		highlightFlattenColumns,
 		highlightSearchResult,

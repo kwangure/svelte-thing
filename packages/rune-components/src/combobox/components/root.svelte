@@ -1,8 +1,5 @@
 <script module>
-	import type {
-		CreateComboboxRootConfig,
-		ComboboxRoot,
-	} from '@svelte-thing/builders';
+	import type { CreateComboboxRootConfig, ComboboxRoot } from '../runes';
 
 	type DivAttributes = Omit<HTMLAttributes<HTMLDivElement>, 'children'>;
 
@@ -16,10 +13,10 @@
 <script lang="ts" generics="TOption">
 	/* eslint-disable no-undef */
 	import type { HTMLAttributes } from 'svelte/elements';
-	import type { NullablyRequired } from '../types.js';
+	import type { NullablyRequired } from '../../types.js';
 	import type { Snippet } from 'svelte';
 	import { mergeProps } from '@svelte-thing/component-utils';
-	import { setComboboxContext } from '@svelte-thing/builders';
+	import { setComboboxContext } from '../runes';
 
 	const {
 		children,

@@ -1,29 +1,29 @@
 <script lang="ts">
 	import type { HTMLButtonAttributes } from 'svelte/elements';
-	import type { NullablyRequired } from '../types.js';
+	import type { NullablyRequired } from '../../types.js';
 	import {
-		createComboboxNext,
+		createComboboxPrevious,
 		getComboboxContext,
-		type CreateComboboxNextConfig,
-	} from '@svelte-thing/builders';
+		type CreateComboboxPreviousConfig,
+	} from '../runes';
 	import { mergeProps } from '@svelte-thing/component-utils';
 
 	interface Props
 		extends HTMLButtonAttributes,
-			Omit<CreateComboboxNextConfig<unknown>, 'combobox'> {}
+			Omit<CreateComboboxPreviousConfig<unknown>, 'combobox'> {}
 
 	const { label, ...restProps }: Props = $props();
 	const combobox = getComboboxContext();
-	const next = createComboboxNext({
+	const previous = createComboboxPrevious({
 		combobox,
 		get label() {
 			return label;
 		},
-	} satisfies NullablyRequired<CreateComboboxNextConfig<unknown>>);
+	} satisfies NullablyRequired<CreateComboboxPreviousConfig<unknown>>);
 </script>
 
-<button {...mergeProps(restProps, next.props)}>
-	<span aria-hidden="true" style="padding: 0 2px;">▶</span>
+<button {...mergeProps(restProps, previous.props)}>
+	<span aria-hidden="true" style="padding: 0 2px;">◀</span>
 </button>
 
 <style>

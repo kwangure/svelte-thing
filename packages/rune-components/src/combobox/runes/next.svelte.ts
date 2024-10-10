@@ -1,22 +1,22 @@
 import type { ComboboxRoot } from './root.svelte.js';
-import type { RuneComponent } from '../types.js';
+import type { RuneComponent } from '../../types.js';
 import { cancelEvent } from '@svelte-thing/dom-event';
 
-export interface CreateComboboxPreviousConfig<TOption> {
+export interface CreateComboboxNextConfig<TOption> {
 	combobox: ComboboxRoot<TOption>;
 	label: string;
 }
 
-export type ComboboxPrevious = ReturnType<typeof createComboboxPrevious>;
+export type ComboboxNext = ReturnType<typeof createComboboxNext>;
 
-export function createComboboxPrevious<TOption>(
-	config: CreateComboboxPreviousConfig<TOption>,
+export function createComboboxNext<TOption>(
+	config: CreateComboboxNextConfig<TOption>,
 ) {
 	const { combobox } = config;
 
 	return {
 		props: {
-			'data-st-combobox-previous': '',
+			'data-st-combobox-next': '',
 			get ['aria-controls']() {
 				return combobox.ids.listbox;
 			},
@@ -27,7 +27,7 @@ export function createComboboxPrevious<TOption>(
 				cancelEvent(event);
 			},
 			onclick() {
-				combobox.setPreviousItemActive();
+				combobox.setNextItemActive();
 			},
 			type: 'button',
 		},
