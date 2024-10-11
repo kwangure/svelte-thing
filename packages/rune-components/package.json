@@ -6,7 +6,8 @@
 		"check": "wireit",
 		"pre-commit": "wireit",
 		"publint": "wireit",
-		"test": "wireit"
+		"test": "wireit",
+		"test:dev": "wireit"
 	},
 	"wireit": {
 		"build": {
@@ -57,10 +58,18 @@
 			]
 		},
 		"test": {
-			"command": "vitest run",
+			"command": "vitest run --workspace=vitest.workspace.ts",
 			"files": [
 				"src/**/*.{js,ts}",
-				"tests/**/*.{js,ts}"
+				"vitest.workspace.ts"
+			],
+			"output": []
+		},
+		"test:dev": {
+			"command": "vitest --workspace=vitest.workspace.ts",
+			"files": [
+				"src/**/*.{js,ts}",
+				"vitest.workspace.ts"
 			],
 			"output": []
 		}
@@ -91,15 +100,18 @@
 	},
 	"devDependencies": {
 		"@sveltejs/package": "^2.3.5",
-		"@sveltejs/vite-plugin-svelte": "^3.1.2",
+		"@sveltejs/vite-plugin-svelte": "^4.0.0-next.6",
 		"@types/node": "^20.10.5",
+		"@vitest/browser": "^2.1.2",
 		"jsdom": "^25.0.0",
+		"playwright": "^1.48.0",
 		"publint": "^0.2.6",
 		"svelte": "^5.0.0-next.260",
 		"svelte-check": "^4.0.0",
 		"typescript": "^5.4.5",
 		"vite": "^5.4.8",
-		"vitest": "^2.1.1"
+		"vitest": "^2.1.2",
+		"vitest-browser-svelte": "^0.0.1"
 	},
 	"peerDependencies": {
 		"svelte": "^5.0.0-next.260"
