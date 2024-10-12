@@ -35,7 +35,11 @@ export function createComboboxInput<TOption>({
 				combobox.setNextItemActive();
 			} else {
 				combobox.open();
+				// TODO: Remove setFirstItemActive and uncomment
 				combobox.setFirstItemActive();
+				// if (!combobox.activeItem) {
+				// 	combobox.setNextItemActive();
+				// }
 			}
 			cancelEvent(event);
 		},
@@ -104,10 +108,7 @@ export function createComboboxInput<TOption>({
 				}
 			});
 
-			const unsub2 = combobox.onSetValue((value) => {
-				element.value =
-					combobox.optionToString?.(value) ?? (value as string);
-			});
+			const unsub2 = combobox.onSetValue(() => element.focus());
 
 			return {
 				destroy() {
@@ -137,6 +138,12 @@ export function createComboboxInput<TOption>({
 			},
 			get ['aria-expanded']() {
 				return combobox.isOpen;
+			},
+			get value() {
+				if (combobox.optionToString && combobox.value) {
+					return combobox.optionToString(combobox.value);
+				}
+				return combobox.value;
 			},
 			id: combobox.ids.input,
 			onclick() {
