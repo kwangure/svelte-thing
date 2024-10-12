@@ -54,6 +54,11 @@
 		".": {
 			"types": "./dist/index.d.ts",
 			"default": "./dist/index.js"
+		},
+		"./reactivity": {
+			"types": "./dist/reactivity/index.d.ts",
+			"svelte": "./dist/reactivity/index.js",
+			"default": "./dist/reactivity/index.js"
 		}
 	},
 	"files": [
