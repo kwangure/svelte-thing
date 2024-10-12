@@ -17,25 +17,45 @@
 	import type { Snippet } from 'svelte';
 	import { mergeProps } from '@svelte-thing/component-utils';
 	import { setComboboxContext } from '../runes';
+	import { skipEffect } from '../../utils.svelte';
 
 	const {
 		children,
 		filter,
 		hasInputCompletion,
 		includesBaseElement,
+		isOpen,
 		label,
 		options,
 		optionToString,
+		value,
 		...restProps
 	}: Props<TOption> = $props();
 	const combobox = setComboboxContext<TOption>({
 		filter,
 		hasInputCompletion,
 		includesBaseElement,
+		isOpen,
 		label,
 		options,
 		optionToString,
+		value,
 	} satisfies NullablyRequired<CreateComboboxRootConfig<TOption>>);
+
+	skipEffect(
+		() => isOpen,
+		(isOpen2) => {
+			if (isOpen2) {
+				combobox.open();
+			} else {
+				combobox.close();
+			}
+		},
+	);
+	skipEffect(
+		() => value,
+		(v) => combobox.setValue(v),
+	);
 </script>
 
 <div {...mergeProps(restProps, combobox.props)} use:combobox.action>

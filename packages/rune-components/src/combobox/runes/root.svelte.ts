@@ -7,9 +7,11 @@ export interface CreateComboboxRootConfig<TOption> {
 	filter?: ComboboxFilter<TOption>;
 	hasInputCompletion?: false;
 	includesBaseElement?: boolean;
+	isOpen?: boolean;
 	label: string;
 	options?: TOption[];
 	optionToString?: (selectedValue: TOption) => string;
+	value?: TOption;
 }
 
 export type ComboboxFilter<TOption> = (
@@ -30,15 +32,15 @@ export type ComboboxVisualFocus = 'listbox' | 'input';
 export function createComboboxRoot<TOption>(
 	config: CreateComboboxRootConfig<TOption>,
 ) {
-	let activeItemIndex = $state(-1);
 	let inputValue = $state('');
-	let isOpen = $state(false);
-	let value = $state<TOption>();
-	let visualFocus = $state<ComboboxVisualFocus>('input');
+	let isOpen = $state(config.isOpen ?? false);
+	const options = $state.raw(config.options);
+	let value = $state.raw<TOption | undefined>(config.value);
+	let visualFocus = $state<ComboboxVisualFocus>(isOpen ? 'listbox' : 'input');
 
 	const setActiveItemListeners = new Set<(arg: TOption) => void>();
 	const setInputValueListeners = new Set<(arg: string) => void>();
-	const setValueListeners = new Set<(arg: TOption) => void>();
+	const setValueListeners = new Set<(arg: TOption | undefined) => void>();
 
 	const filteredOptions = $derived.by(() => {
 		if (typeof config.filter !== 'function') {
@@ -49,11 +51,7 @@ export function createComboboxRoot<TOption>(
 			inputValue,
 		} satisfies ComboboxFilterArg<TOption>);
 	});
-	// TODO: what happens if `options.length` decreases thus decreasing
-	// `filteredOptions.length` to less than the `activeItemIndex`
-	// Maybe do `activeItemIndex = Math.max(activeItemIndex, options.length)`
-	// when `options` is updated? But I don't want to use an $effect.
-	// Maybe something like $state.link() using $derived? TODO.
+	let activeItemIndex = $state(filteredOptions.findIndex((o) => o === value));
 	const activeItem = $derived(filteredOptions[activeItemIndex]);
 
 	function setActiveItemIndex(index: number) {
@@ -66,7 +64,7 @@ export function createComboboxRoot<TOption>(
 	function close() {
 		isOpen = false;
 		visualFocus = 'input';
-		setActiveItemIndex(-1);
+		setActiveItemIndex(filteredOptions.findIndex((o) => o === value));
 	}
 
 	return {
@@ -105,7 +103,7 @@ export function createComboboxRoot<TOption>(
 			return config.label;
 		},
 		get options() {
-			return config.options;
+			return options;
 		},
 		get value() {
 			return value;
@@ -130,7 +128,7 @@ export function createComboboxRoot<TOption>(
 			setInputValueListeners.add(fn);
 			return () => setInputValueListeners.delete(fn);
 		},
-		onSetValue(fn: (arg: TOption) => void) {
+		onSetValue(fn: (arg: TOption | undefined) => void) {
 			setValueListeners.add(fn);
 			return () => setValueListeners.delete(fn);
 		},
@@ -170,7 +168,7 @@ export function createComboboxRoot<TOption>(
 				activeItemIndex <= minValue ? maxValue : activeItemIndex - 1,
 			);
 		},
-		setValue(v: TOption) {
+		setValue(v: TOption | undefined) {
 			value = v;
 			for (const fn of setValueListeners) {
 				fn(value);

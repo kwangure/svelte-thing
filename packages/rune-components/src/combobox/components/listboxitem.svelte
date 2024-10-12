@@ -3,6 +3,7 @@
 	import '@svelte-thing/components/css/breakpoint';
 	import '@svelte-thing/components/css/size';
 	import type { NullablyRequired } from '../../types.js';
+	import type { Snippet } from 'svelte';
 	import {
 		createListboxItem,
 		getComboboxContext,
@@ -12,6 +13,7 @@
 	import { mergeProps } from '@svelte-thing/component-utils';
 
 	interface Props extends HTMLLiAttributes {
+		children: Snippet;
 		item: unknown;
 	}
 
@@ -26,7 +28,7 @@
 </script>
 
 <li {...mergeProps(restProps, listboxItem.props)} use:listboxItem.action>
-	{@render children?.()}
+	{@render children()}
 </li>
 
 <style>
