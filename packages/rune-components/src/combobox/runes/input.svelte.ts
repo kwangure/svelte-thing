@@ -35,7 +35,11 @@ export function createComboboxInput<TOption>({
 				combobox.setNextItemActive();
 			} else {
 				combobox.open();
+				// TODO: Remove setFirstItemActive and uncomment
 				combobox.setFirstItemActive();
+				// if (!combobox.activeItem) {
+				// 	combobox.setNextItemActive();
+				// }
 			}
 			cancelEvent(event);
 		},

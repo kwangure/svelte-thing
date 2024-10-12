@@ -40,7 +40,7 @@ describe('combobox', () => {
 	});
 
 	describe('When focus is on the input', () => {
-		test('ArrowDown opens popup and moves focus to first focusable element', async () => {
+		test('ArrowDown opens popup and focuses first item when no value is selected', async () => {
 			await expect(listbox.query()).not.toBeInTheDocument();
 			await expect(selectedOption.query()).not.toBeInTheDocument();
 
@@ -51,6 +51,21 @@ describe('combobox', () => {
 			await expect
 				.element(selectedOption)
 				.toHaveAccessibleName(options[0]?.name);
+		});
+
+		test.skip('ArrowDown opens popup and focuses selected item', async () => {
+			await screen.rerender({ options, value: options[2] });
+			await expect.element(combobox).toHaveValue(options[2]?.name);
+			await expect(listbox.query()).not.toBeInTheDocument();
+			await expect(selectedOption.query()).not.toBeInTheDocument();
+
+			await userEvent.keyboard('[ArrowDown]');
+			await expect.element(listbox).toBeInTheDocument();
+			await expect.element(listbox).toBeVisible();
+			await expect.element(selectedOption).toBeInTheDocument();
+			await expect
+				.element(selectedOption)
+				.toHaveAccessibleName(options[2]?.name);
 		});
 
 		test('ArrowUp opens popup and places focus on the last focusable element', async () => {
