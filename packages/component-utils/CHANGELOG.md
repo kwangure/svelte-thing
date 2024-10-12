@@ -1,5 +1,11 @@
 # @svelte-thing/component-utils
 
+## 0.0.3
+
+### Patch Changes
+
+-   4d84075: Add `stateIs` helper
+
 ## 0.0.2
 
 ### Patch Changes
