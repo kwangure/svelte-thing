@@ -1,5 +1,6 @@
 import type { ComboboxRoot } from './root.svelte.js';
 import type { RuneComponent } from '../../types.js';
+import { stateIs } from '@svelte-thing/component-utils/reactivity';
 
 export interface CreateComboboxListboxItemConfig<TOption> {
 	combobox: ComboboxRoot<TOption>;
@@ -12,7 +13,6 @@ export function createListboxItem<TOption>(
 	config: CreateComboboxListboxItemConfig<TOption>,
 ) {
 	const { combobox } = config;
-	const isActive = $derived(Object.is(config.item, combobox.activeItem));
 
 	return {
 		action(element) {
@@ -31,7 +31,7 @@ export function createListboxItem<TOption>(
 		props: {
 			'data-st-combobox-listbox-item': '',
 			get ['aria-selected']() {
-				return isActive;
+				return stateIs(config.item, combobox.value) || undefined;
 			},
 			role: 'option',
 			onclick() {
@@ -39,10 +39,7 @@ export function createListboxItem<TOption>(
 				combobox.close();
 			},
 			get ['data-active-item']() {
-				return isActive || undefined;
-			},
-			get ['data-focus-visible']() {
-				return isActive || undefined;
+				return stateIs(config.item, combobox.activeItem) || undefined;
 			},
 		},
 	} satisfies RuneComponent<'li'>;
