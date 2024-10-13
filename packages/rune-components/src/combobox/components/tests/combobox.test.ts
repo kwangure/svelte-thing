@@ -1,8 +1,7 @@
-import type { SvelteComponent } from 'svelte';
 import { beforeEach, describe, expect, test } from 'vitest';
-import { render, type RenderResult } from 'vitest-browser-svelte';
+import { type RenderResult2 } from 'vitest-browser-svelte';
 import { userEvent, type Locator } from '@vitest/browser/context';
-
+import { render } from './util.js';
 import Combobox from './combobox.svelte';
 
 describe('combobox', () => {
@@ -20,16 +19,18 @@ describe('combobox', () => {
 
 	let combobox: Locator;
 	let listbox: Locator;
+	let focusedOption: Locator;
 	let selectedOption: Locator;
-	let screen: RenderResult<
-		SvelteComponent<{ isOpen: boolean; options: Fruit[]; value: Fruit }>
+	let screen: RenderResult2<
+		{ isOpen: boolean; options: Fruit[]; value: Fruit },
+		typeof Combobox
 	>;
 
 	beforeEach(async () => {
-		// @ts-expect-error Svelte 4 types
 		screen = render(Combobox, { options });
 		combobox = screen.getByRole('combobox');
 		listbox = screen.getByRole('listbox');
+		focusedOption = screen.getByAttribute('data-active-item', 'true');
 		selectedOption = screen.getByRole('option', {
 			selected: true,
 		});
@@ -39,21 +40,43 @@ describe('combobox', () => {
 		await expect.element(combobox).toHaveFocus();
 	});
 
+	describe('Modifying props', () => {
+		test('Setting the value updates the selected option', async () => {
+			await screen.rerender({ isOpen: true, value: options[1] });
+			await expect.element(combobox).toHaveValue(options[1]?.name);
+			await expect.element(listbox).toBeInTheDocument();
+
+			await expect.element(selectedOption).toBeInTheDocument();
+			await expect
+				.element(selectedOption)
+				.toHaveAccessibleName(options[1]?.name);
+
+			await expect.element(focusedOption).toBeInTheDocument();
+			await expect
+				.element(focusedOption)
+				.toHaveAccessibleName(options[1]?.name);
+
+			await screen.rerender({ value: undefined });
+			await expect(selectedOption.query()).not.toBeInTheDocument();
+			await expect(focusedOption.query()).not.toBeInTheDocument();
+		});
+	});
+
 	describe('When focus is on the input', () => {
 		test('ArrowDown opens popup and focuses first item when no value is selected', async () => {
 			await expect(listbox.query()).not.toBeInTheDocument();
-			await expect(selectedOption.query()).not.toBeInTheDocument();
+			await expect(focusedOption.query()).not.toBeInTheDocument();
 
 			await userEvent.keyboard('[ArrowDown]');
 			await expect.element(listbox).toBeInTheDocument();
 			await expect.element(listbox).toBeVisible();
-			await expect.element(selectedOption).toBeInTheDocument();
+			await expect.element(focusedOption).toBeInTheDocument();
 			await expect
-				.element(selectedOption)
+				.element(focusedOption)
 				.toHaveAccessibleName(options[0]?.name);
 		});
 
-		test.skip('ArrowDown opens popup and focuses selected item', async () => {
+		test('ArrowDown opens popup and focuses selected item', async () => {
 			await screen.rerender({ options, value: options[2] });
 			await expect.element(combobox).toHaveValue(options[2]?.name);
 			await expect(listbox.query()).not.toBeInTheDocument();
@@ -70,13 +93,13 @@ describe('combobox', () => {
 
 		test('ArrowUp opens popup and places focus on the last focusable element', async () => {
 			await expect(listbox.query()).not.toBeInTheDocument();
-			await expect(selectedOption.query()).not.toBeInTheDocument();
+			await expect(focusedOption.query()).not.toBeInTheDocument();
 
 			await userEvent.keyboard('[ArrowUp]');
 			await expect.element(listbox).toBeInTheDocument();
-			await expect.element(selectedOption).toBeInTheDocument();
+			await expect.element(focusedOption).toBeInTheDocument();
 			await expect
-				.element(selectedOption)
+				.element(focusedOption)
 				.toHaveAccessibleName(options[options.length - 1]?.name);
 		});
 
@@ -84,7 +107,7 @@ describe('combobox', () => {
 			await userEvent.keyboard('{Alt>}{ArrowDown}{/Alt}');
 			await expect.element(combobox).toHaveFocus();
 			await expect.element(listbox).toBeInTheDocument();
-			await expect(selectedOption.query()).not.toBeInTheDocument();
+			await expect(focusedOption.query()).not.toBeInTheDocument();
 		});
 
 		test('Escape clears combobox input', async () => {
@@ -100,7 +123,7 @@ describe('combobox', () => {
 		test('Enter accepts focused option', async () => {
 			await userEvent.keyboard('[ArrowDown]');
 			await expect
-				.element(selectedOption)
+				.element(focusedOption)
 				.toHaveAccessibleName(options[0]?.name);
 			await expect.element(combobox).toHaveValue('');
 
@@ -126,12 +149,12 @@ describe('combobox', () => {
 		test('ArrowDown moves focus to the next element', async () => {
 			await userEvent.keyboard('[ArrowDown]');
 			await expect
-				.element(selectedOption)
+				.element(focusedOption)
 				.toHaveAccessibleName(options[0]?.name);
 
 			await userEvent.keyboard('[ArrowDown]');
 			await expect
-				.element(selectedOption)
+				.element(focusedOption)
 				.toHaveAccessibleName(options[1]?.name);
 		});
 
@@ -148,35 +171,35 @@ describe('combobox', () => {
 		test('ArrowUp moves focus to the previous element when open', async () => {
 			await userEvent.keyboard('[ArrowUp]');
 			await expect
-				.element(selectedOption)
+				.element(focusedOption)
 				.toHaveAccessibleName(options[options.length - 1]?.name);
 
 			await userEvent.keyboard('[ArrowUp]');
 			await expect
-				.element(selectedOption)
+				.element(focusedOption)
 				.toHaveAccessibleName(options[options.length - 2]?.name);
 		});
 
 		test('Delete key returns focus to the combobox input', async () => {
 			await userEvent.keyboard('[ArrowDown]');
 			await expect.element(listbox).toBeInTheDocument();
-			await expect.element(selectedOption).toBeInTheDocument();
+			await expect.element(focusedOption).toBeInTheDocument();
 
 			await userEvent.keyboard('[Delete]');
 			await expect.element(combobox).toHaveFocus();
 			await expect.element(listbox).toBeInTheDocument();
-			await expect(selectedOption.query()).not.toBeInTheDocument();
+			await expect(focusedOption.query()).not.toBeInTheDocument();
 		});
 
 		test('Backspace key returns focus to the combobox input', async () => {
 			await userEvent.keyboard('[ArrowDown]');
 			await expect.element(listbox).toBeInTheDocument();
-			await expect.element(selectedOption).toBeInTheDocument();
+			await expect.element(focusedOption).toBeInTheDocument();
 
 			await userEvent.keyboard('[Backspace]');
 			await expect.element(combobox).toHaveFocus();
 			await expect.element(listbox).toBeInTheDocument();
-			await expect(selectedOption.query()).not.toBeInTheDocument();
+			await expect(focusedOption.query()).not.toBeInTheDocument();
 		});
 
 		test('Clicking listbox item sets input value and closes popup', async () => {

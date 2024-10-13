@@ -1,5 +1,6 @@
 import type { RuneComponent } from '../../types.js';
-import { mergeActions } from '@svelte-thing/component-utils';
+import { invariant, mergeActions } from '@svelte-thing/component-utils';
+import { stateIs } from '@svelte-thing/component-utils/reactivity';
 import { onclickoutside } from '@svelte-thing/components/actions';
 import { uid } from 'uid';
 
@@ -169,9 +170,17 @@ export function createComboboxRoot<TOption>(
 			);
 		},
 		setValue(v: TOption | undefined) {
+			const index = filteredOptions.findIndex((o) => stateIs(o, v));
+			invariant(
+				index > -1 || v === undefined,
+				'`setValue(...)` argument must be in `filteredOptions`.',
+			);
 			value = v;
 			for (const fn of setValueListeners) {
 				fn(value);
+			}
+			if (!stateIs(activeItem, v)) {
+				setActiveItemIndex(index);
 			}
 		},
 		props: {

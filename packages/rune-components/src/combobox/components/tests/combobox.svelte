@@ -38,9 +38,9 @@
 		{#if combobox.isOpen}
 			<Combobox.Listbox>
 				{#each combobox.filteredOptions as option}
-					<Combobox.Item item={option}>
+					<Combobox.ListboxItem item={option}>
 						{option.name}
-					</Combobox.Item>
+					</Combobox.ListboxItem>
 				{/each}
 			</Combobox.Listbox>
 		{/if}
