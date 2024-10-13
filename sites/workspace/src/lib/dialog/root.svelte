@@ -10,6 +10,7 @@
 	import type { Snippet } from 'svelte';
 	import { createDialogRoot } from './root.svelte.js';
 	import { mergeProps } from '@svelte-thing/component-utils';
+	import { skipEffect } from '@svelte-thing/component-utils/reactivity';
 
 	interface Props extends HTMLDialogAttributes {
 		children: Snippet;
@@ -25,15 +26,18 @@
 	}: Props = $props();
 
 	const dialog = createDialogRoot({ isModal, isOpen });
-	$effect(() => dialog.setHideOnInteractOutside(hideOnInteractOutside));
-	$effect(() => dialog.setIsModal(isModal));
-	$effect(() => {
-		if (isOpen) {
-			dialog.open();
-		} else {
-			dialog.close();
-		}
-	});
+	skipEffect(
+		() => hideOnInteractOutside,
+		($hide) => dialog.setHideOnInteractOutside($hide),
+	);
+	skipEffect(
+		() => isModal,
+		($isModal) => dialog.setIsModal($isModal),
+	);
+	skipEffect(
+		() => isOpen,
+		($isOpen) => ($isOpen ? dialog.open() : dialog.close()),
+	);
 </script>
 
 <dialog

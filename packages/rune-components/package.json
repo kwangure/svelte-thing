@@ -92,7 +92,7 @@
 		"!**/*.test.d.ts"
 	],
 	"dependencies": {
-		"@svelte-thing/component-utils": "^0.0.3",
+		"@svelte-thing/component-utils": "^0.0.4",
 		"@svelte-thing/components": "^0.0.33",
 		"@svelte-thing/dom-event": "^0.0.4",
 		"uid": "^2.0.2"

@@ -17,7 +17,7 @@
 	import type { Snippet } from 'svelte';
 	import { mergeProps } from '@svelte-thing/component-utils';
 	import { setComboboxContext } from '../runes';
-	import { skipEffect } from '../../utils.svelte';
+	import { skipEffect } from '@svelte-thing/component-utils/reactivity';
 
 	const {
 		children,
