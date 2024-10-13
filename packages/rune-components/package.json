@@ -3,6 +3,7 @@
 	"version": "0.0.2",
 	"scripts": {
 		"build": "wireit",
+		"build:dev": "wireit",
 		"check": "wireit",
 		"pre-commit": "wireit",
 		"publint": "wireit",
@@ -12,6 +13,16 @@
 	"wireit": {
 		"build": {
 			"command": "svelte-package -i ./src --tsconfig ./tsconfig.build.json",
+			"files": [
+				"src/**/*.{js,svelte,ts}",
+				"tsconfig.build.json",
+				"../../config/tsconfig.base.json"
+			],
+			"#comment": "Empty output. Rely on svelte-package to clean up the output dist folder lazily",
+			"output": []
+		},
+		"build:dev": {
+			"command": "svelte-package -i ./src --tsconfig ./tsconfig.build.json --watch",
 			"files": [
 				"src/**/*.{js,svelte,ts}",
 				"tsconfig.build.json",
@@ -92,7 +103,7 @@
 		"!**/*.test.d.ts"
 	],
 	"dependencies": {
-		"@svelte-thing/component-utils": "^0.0.3",
+		"@svelte-thing/component-utils": "^0.0.4",
 		"@svelte-thing/components": "^0.0.33",
 		"@svelte-thing/dom-event": "^0.0.4",
 		"uid": "^2.0.2"

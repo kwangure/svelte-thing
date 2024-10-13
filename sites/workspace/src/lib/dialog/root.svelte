@@ -10,6 +10,7 @@
 	import type { Snippet } from 'svelte';
 	import { createDialogRoot } from './root.svelte.js';
 	import { mergeProps } from '@svelte-thing/component-utils';
+	import { skipEffect } from '@svelte-thing/component-utils/reactivity';
 
 	interface Props extends HTMLDialogAttributes {
 		children: Snippet;
@@ -25,28 +26,27 @@
 	}: Props = $props();
 
 	const dialog = createDialogRoot({ isModal, isOpen });
-	$effect(() => dialog.setHideOnInteractOutside(hideOnInteractOutside));
-	$effect(() => dialog.setIsModal(isModal));
-	$effect(() => {
-		if (isOpen) {
-			dialog.open();
-		} else {
-			dialog.close();
-		}
-	});
+	skipEffect(
+		() => hideOnInteractOutside,
+		($hide) => dialog.setHideOnInteractOutside($hide),
+	);
+	skipEffect(
+		() => isModal,
+		($isModal) => dialog.setIsModal($isModal),
+	);
+	skipEffect(
+		() => isOpen,
+		($isOpen) => ($isOpen ? dialog.open() : dialog.close()),
+	);
 </script>
 
-<dialog
-	class:modal={dialog.isModal}
-	{...mergeProps(restProps, dialog.props)}
-	use:dialog.action
->
+<dialog {...mergeProps(restProps, dialog.props)} use:dialog.action>
 	{@render children()}
 </dialog>
 
 <style>
 	/* Prevent scrolling when modal dialog is open */
-	:global(html):has(dialog[open].modal) {
+	:global(html):has(dialog[open][data-st-modal]) {
 		overflow: hidden;
 	}
 	dialog {
@@ -75,7 +75,7 @@
 		animation: var(--st-motion-no-preference) slide-in-up 0.5s
 			cubic-bezier(0.25, 0, 0.3, 1) forwards;
 	}
-	dialog.modal {
+	dialog[data-st-modal] {
 		--_border-end-end-radius: var(--st-breakpoint-not-md) 0px;
 		border-end-end-radius: var(--_border-end-end-radius, var(--st-size-1));
 		--_border-end-start-radius: var(--st-breakpoint-not-md) 0px;
@@ -108,14 +108,14 @@
 		transition: background-color 0.25s ease;
 	}
 
-	dialog.modal::backdrop {
+	dialog[data-st-modal]::backdrop {
 		--_background-color-dark: var(--st-color-preference-dark)
 			rgba(50, 50, 50, 0.5);
 		background-color: var(--_background-color-dark, rgba(0, 0, 0, 0.5));
 		opacity: 1;
 	}
 
-	dialog:not(.modal)::backdrop {
+	dialog:not([data-st-modal])::backdrop {
 		background-color: transparent;
 	}
 </style>

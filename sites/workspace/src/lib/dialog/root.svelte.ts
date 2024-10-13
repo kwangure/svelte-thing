@@ -37,9 +37,6 @@ export function createDialogRoot(config?: CreateDialogRootConfig) {
 				},
 			};
 		},
-		get isModal() {
-			return isModal;
-		},
 		get isOpen() {
 			return isOpen;
 		},
@@ -55,6 +52,9 @@ export function createDialogRoot(config?: CreateDialogRootConfig) {
 			'data-st-dialog-root': '',
 			get ['aria-hidden']() {
 				return !isOpen || undefined;
+			},
+			get ['data-st-modal']() {
+				return isModal || undefined;
 			},
 			get inert() {
 				return !isOpen || undefined;

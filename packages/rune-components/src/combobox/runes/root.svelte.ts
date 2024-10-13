@@ -52,7 +52,9 @@ export function createComboboxRoot<TOption>(
 			inputValue,
 		} satisfies ComboboxFilterArg<TOption>);
 	});
-	let activeItemIndex = $state(filteredOptions.findIndex((o) => o === value));
+	let activeItemIndex = $state(
+		filteredOptions.findIndex((o) => stateIs(o, value)),
+	);
 	const activeItem = $derived(filteredOptions[activeItemIndex]);
 
 	function setActiveItemIndex(index: number) {

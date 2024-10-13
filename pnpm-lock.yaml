@@ -116,8 +116,8 @@ importers:
   packages/rune-components:
     dependencies:
       '@svelte-thing/component-utils':
-        specifier: ^0.0.3
-        version: 0.0.3
+        specifier: ^0.0.4
+        version: 0.0.4
       '@svelte-thing/components':
         specifier: ^0.0.33
         version: 0.0.33(svelte@5.0.0-next.264)
@@ -675,8 +675,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@svelte-thing/component-utils@0.0.3':
-    resolution: {integrity: sha512-/glIqIiQaXhghhbmi4eSyIs98LmEnhOxv2J7xFZzdEhSry75r+qvGCLqY8th+y3YzqULpMDTDXTbXmQolOKWSg==}
+  '@svelte-thing/component-utils@0.0.4':
+    resolution: {integrity: sha512-w8p78SBAzM+zE68f2qfQqaxGcsxenpuXHNZA20tBo14TovunSz4khtxh8parfUjt6B2wd/MHIy5xqMM0b7Fj4A==}
 
   '@svelte-thing/components@0.0.33':
     resolution: {integrity: sha512-L2xUAzQrUQYS0jQDtRPRrl5afgmO/PT+ZygyVJTjhrcxFOKzUIaah118vLIxWySza6ToetdG9cyZdDqqYKaK6w==}
@@ -3339,7 +3339,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.22.5':
     optional: true
 
-  '@svelte-thing/component-utils@0.0.3':
+  '@svelte-thing/component-utils@0.0.4':
     dependencies:
       esm-env: 1.0.0
 
