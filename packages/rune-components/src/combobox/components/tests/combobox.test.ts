@@ -40,6 +40,28 @@ describe('combobox', () => {
 		await expect.element(combobox).toHaveFocus();
 	});
 
+	describe('Modifying props', () => {
+		test('Setting the value updates the selected option', async () => {
+			await screen.rerender({ isOpen: true, value: options[1] });
+			await expect.element(combobox).toHaveValue(options[1]?.name);
+			await expect.element(listbox).toBeInTheDocument();
+
+			await expect.element(selectedOption).toBeInTheDocument();
+			await expect
+				.element(selectedOption)
+				.toHaveAccessibleName(options[1]?.name);
+
+			await expect.element(focusedOption).toBeInTheDocument();
+			await expect
+				.element(focusedOption)
+				.toHaveAccessibleName(options[1]?.name);
+
+			await screen.rerender({ value: undefined });
+			await expect(selectedOption.query()).not.toBeInTheDocument();
+			await expect(focusedOption.query()).not.toBeInTheDocument();
+		});
+	});
+
 	describe('When focus is on the input', () => {
 		test('ArrowDown opens popup and focuses first item when no value is selected', async () => {
 			await expect(listbox.query()).not.toBeInTheDocument();
