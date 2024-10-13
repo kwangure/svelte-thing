@@ -13,6 +13,8 @@ export function createListboxItem<TOption>(
 	config: CreateComboboxListboxItemConfig<TOption>,
 ) {
 	const { combobox } = config;
+	const isFocused = $derived(stateIs(config.item, combobox.activeItem));
+	const isSelected = $derived(stateIs(config.item, combobox.value));
 
 	return {
 		action(element) {
@@ -28,10 +30,13 @@ export function createListboxItem<TOption>(
 				},
 			};
 		},
+		get isSelected() {
+			return isSelected;
+		},
 		props: {
 			'data-st-combobox-listbox-item': '',
 			get ['aria-selected']() {
-				return stateIs(config.item, combobox.value) || undefined;
+				return isSelected || undefined;
 			},
 			role: 'option',
 			onclick() {
@@ -39,7 +44,7 @@ export function createListboxItem<TOption>(
 				combobox.close();
 			},
 			get ['data-active-item']() {
-				return stateIs(config.item, combobox.activeItem) || undefined;
+				return isFocused || undefined;
 			},
 		},
 	} satisfies RuneComponent<'li'>;

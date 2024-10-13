@@ -1,19 +1,22 @@
 <script lang="ts">
 	/* eslint-disable no-undef */
 	import '@svelte-thing/components/css/breakpoint';
+	import '@svelte-thing/components/css/color-preference';
+	import '@svelte-thing/components/css/color';
 	import '@svelte-thing/components/css/size';
 	import type { NullablyRequired } from '../../types.js';
 	import type { Snippet } from 'svelte';
 	import {
 		createListboxItem,
 		getComboboxContext,
+		type ComboboxListboxItem,
 		type CreateComboboxListboxItemConfig,
 	} from '../runes';
 	import type { HTMLLiAttributes } from 'svelte/elements';
 	import { mergeProps } from '@svelte-thing/component-utils';
 
-	interface Props extends HTMLLiAttributes {
-		children: Snippet;
+	interface Props extends Omit<HTMLLiAttributes, 'children'> {
+		children: Snippet<[ComboboxListboxItem]>;
 		item: unknown;
 	}
 
@@ -28,14 +31,16 @@
 </script>
 
 <li {...mergeProps(restProps, listboxItem.props)} use:listboxItem.action>
-	{@render children()}
+	{@render children(listboxItem)}
 </li>
 
 <style>
 	li {
 		align-items: center;
 		border-radius: var(--st-size-1);
-		display: flex;
+		display: grid;
+		grid-column: 1 / -1;
+		grid-template-columns: subgrid;
 		gap: var(--st-size-3);
 		padding-block: var(--st-size-1);
 		padding-inline: var(--st-size-2);

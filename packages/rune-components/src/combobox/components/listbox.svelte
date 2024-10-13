@@ -41,8 +41,8 @@
 						0 0 / 0.25),
 			0 4px 6px -4px rgb(0 0 0 / 0.1);
 		box-shadow: var(--_box-shadow-dark, var(--_box-shadow));
-		display: flex;
-		flex-direction: column;
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr);
 		min-width: var(--st-size-40);
 		padding: var(--st-size-2);
 	}

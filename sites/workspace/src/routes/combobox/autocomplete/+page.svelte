@@ -1,5 +1,7 @@
 <script lang="ts">
 	import * as Combobox from '@svelte-thing/rune-components/combobox';
+	import { Icon } from '@svelte-thing/components';
+	import { mdiCheck } from '@mdi/js';
 
 	interface Fruit {
 		id: number;
@@ -75,9 +77,16 @@
 				{#if combobox.isOpen}
 					<Combobox.Listbox>
 						{#each combobox.filteredOptions as fruit}
-							<Combobox.Item item={fruit}>
-								{fruit.label}
-							</Combobox.Item>
+							<Combobox.ListboxItem item={fruit}>
+								{#snippet children(listboxItem)}
+									{#if listboxItem.isSelected}
+										<Icon.Simple path={mdiCheck} />
+									{/if}
+									<span style="grid-column-start: 2;">
+										{fruit.label}
+									</span>
+								{/snippet}
+							</Combobox.ListboxItem>
 						{/each}
 					</Combobox.Listbox>
 				{/if}
