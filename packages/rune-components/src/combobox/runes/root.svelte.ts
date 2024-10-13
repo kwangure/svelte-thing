@@ -170,11 +170,9 @@ export function createComboboxRoot<TOption>(
 			);
 		},
 		setValue(v: TOption | undefined) {
-			let index = -1;
+			const index = filteredOptions.findIndex((o) => stateIs(o, v));
 			invariant(
-				v === undefined ||
-					(index = filteredOptions.findIndex((o) => stateIs(o, v))) >
-						-1,
+				index > -1 || v === undefined,
 				'`setValue(...)` argument must be in `filteredOptions`.',
 			);
 			value = v;
