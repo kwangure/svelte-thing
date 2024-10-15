@@ -11,7 +11,6 @@
 </script>
 
 <script lang="ts" generics="TOption">
-	/* eslint-disable no-undef */
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { NullablyRequired } from '../../types.js';
 	import type { Snippet } from 'svelte';

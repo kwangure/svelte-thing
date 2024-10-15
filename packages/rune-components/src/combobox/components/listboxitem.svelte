@@ -1,5 +1,4 @@
 <script lang="ts">
-	/* eslint-disable no-undef */
 	import '@svelte-thing/components/css/breakpoint';
 	import '@svelte-thing/components/css/color-preference';
 	import '@svelte-thing/components/css/color';
