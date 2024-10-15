@@ -1,6 +1,5 @@
 import type { RuneComponent } from '../../types.js';
 import { invariant, mergeActions } from '@svelte-thing/component-utils';
-import { stateIs } from '@svelte-thing/component-utils/reactivity';
 import { onclickoutside } from '@svelte-thing/components/actions';
 import { uid } from 'uid';
 
@@ -10,17 +9,17 @@ export interface CreateComboboxRootConfig<TOption> {
 	includesBaseElement?: boolean;
 	isOpen?: boolean;
 	label: string;
-	options?: TOption[];
-	optionToString?: (selectedValue: TOption) => string;
-	value?: TOption;
+	options?: { key: string; value: TOption }[];
+	optionToString?: (selectedValue: { key: string; value: TOption }) => string;
+	value?: { key: string; value: TOption };
 }
 
 export type ComboboxFilter<TOption> = (
 	args: ComboboxFilterArg<TOption>,
-) => TOption[];
+) => { key: string; value: TOption }[];
 
 export interface ComboboxFilterArg<TOption> {
-	readonly options?: TOption[];
+	readonly options?: { key: string; value: TOption }[];
 	readonly inputValue: string;
 }
 
@@ -35,13 +34,19 @@ export function createComboboxRoot<TOption>(
 ) {
 	let inputValue = $state('');
 	let isOpen = $state(config.isOpen ?? false);
-	const options = $state.raw(config.options);
-	let value = $state.raw<TOption | undefined>(config.value);
+	const options = $state(config.options);
+	let value = $state<{ key: string; value: TOption } | undefined>(
+		config.value,
+	);
 	let visualFocus = $state<ComboboxVisualFocus>(isOpen ? 'listbox' : 'input');
 
-	const setActiveItemListeners = new Set<(arg: TOption) => void>();
+	const setActiveItemListeners = new Set<
+		(arg: { key: string; value: TOption } | undefined) => void
+	>();
 	const setInputValueListeners = new Set<(arg: string) => void>();
-	const setValueListeners = new Set<(arg: TOption | undefined) => void>();
+	const setValueListeners = new Set<
+		(arg: { key: string; value: TOption } | undefined) => void
+	>();
 
 	const filteredOptions = $derived.by(() => {
 		if (typeof config.filter !== 'function') {
@@ -53,21 +58,23 @@ export function createComboboxRoot<TOption>(
 		} satisfies ComboboxFilterArg<TOption>);
 	});
 	let activeItemIndex = $state(
-		filteredOptions.findIndex((o) => stateIs(o, value)),
+		filteredOptions.findIndex((o) => o.key === value?.key),
 	);
 	const activeItem = $derived(filteredOptions[activeItemIndex]);
 
 	function setActiveItemIndex(index: number) {
 		activeItemIndex = index;
 		for (const listener of setActiveItemListeners) {
-			listener(activeItem as TOption);
+			listener(activeItem);
 		}
 	}
 
 	function close() {
 		isOpen = false;
 		visualFocus = 'input';
-		setActiveItemIndex(filteredOptions.findIndex((o) => o === value));
+		setActiveItemIndex(
+			filteredOptions.findIndex((o) => o.key === value?.key),
+		);
 	}
 
 	return {
@@ -123,7 +130,9 @@ export function createComboboxRoot<TOption>(
 			setActiveItemIndex(-1);
 		},
 		close,
-		onSetActiveItem(fn: (arg: TOption) => void) {
+		onSetActiveItem(
+			fn: (arg: { key: string; value: TOption } | undefined) => void,
+		) {
 			setActiveItemListeners.add(fn);
 			return () => setActiveItemListeners.delete(fn);
 		},
@@ -131,7 +140,9 @@ export function createComboboxRoot<TOption>(
 			setInputValueListeners.add(fn);
 			return () => setInputValueListeners.delete(fn);
 		},
-		onSetValue(fn: (arg: TOption | undefined) => void) {
+		onSetValue(
+			fn: (arg: { key: string; value: TOption } | undefined) => void,
+		) {
 			setValueListeners.add(fn);
 			return () => setValueListeners.delete(fn);
 		},
@@ -171,8 +182,8 @@ export function createComboboxRoot<TOption>(
 				activeItemIndex <= minValue ? maxValue : activeItemIndex - 1,
 			);
 		},
-		setValue(v: TOption | undefined) {
-			const index = filteredOptions.findIndex((o) => stateIs(o, v));
+		setValue(v: { key: string; value: TOption } | undefined) {
+			const index = filteredOptions.findIndex((o) => o.key === v?.key);
 			invariant(
 				index > -1 || v === undefined,
 				'`setValue(...)` argument must be in `filteredOptions`.',
@@ -181,7 +192,7 @@ export function createComboboxRoot<TOption>(
 			for (const fn of setValueListeners) {
 				fn(value);
 			}
-			if (!stateIs(activeItem, v)) {
+			if (activeItem?.key !== v?.key) {
 				setActiveItemIndex(index);
 			}
 		},

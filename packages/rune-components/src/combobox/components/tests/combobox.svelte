@@ -2,7 +2,8 @@
 	import * as Combobox from '../';
 
 	interface Fruit {
-		name: string;
+		key: string;
+		value: string;
 	}
 
 	interface Props {
@@ -13,10 +14,13 @@
 
 	const { isOpen, options, value }: Props = $props();
 
-	function filter({ inputValue, options }: Combobox.FilterArg<Fruit>) {
+	function filter({
+		inputValue,
+		options,
+	}: Combobox.FilterArg<Fruit['value']>) {
 		return (
 			options?.filter((option) =>
-				option.name.toLowerCase().startsWith(inputValue.toLowerCase()),
+				option.value.toLowerCase().startsWith(inputValue.toLowerCase()),
 			) ?? []
 		);
 	}
@@ -28,7 +32,7 @@
 	{value}
 	{options}
 	{filter}
-	optionToString={(option) => option.name}
+	optionToString={(option) => option.value}
 >
 	{#snippet children(combobox)}
 		<Combobox.Controls>
@@ -39,7 +43,7 @@
 			<Combobox.Listbox>
 				{#each combobox.filteredOptions as option}
 					<Combobox.ListboxItem item={option}>
-						{option.name}
+						{option.value}
 					</Combobox.ListboxItem>
 				{/each}
 			</Combobox.Listbox>

@@ -143,7 +143,7 @@ export function createComboboxInput<TOption>({
 				if (combobox.optionToString && combobox.value) {
 					return combobox.optionToString(combobox.value);
 				}
-				return combobox.value;
+				return combobox.value?.value;
 			},
 			id: combobox.ids.input,
 			onclick() {

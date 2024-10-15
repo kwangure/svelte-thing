@@ -17,7 +17,7 @@
 
 	interface Props extends Omit<HTMLLiAttributes, 'children'> {
 		children: Snippet<[ComboboxListboxItem]>;
-		item: unknown;
+		item: { key: string; value: unknown };
 	}
 
 	const { children, item, ...restProps }: Props = $props();

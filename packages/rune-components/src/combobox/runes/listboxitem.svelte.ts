@@ -1,10 +1,9 @@
 import type { ComboboxRoot } from './root.svelte.js';
 import type { RuneComponent } from '../../types.js';
-import { stateIs } from '@svelte-thing/component-utils/reactivity';
 
 export interface CreateComboboxListboxItemConfig<TOption> {
 	combobox: ComboboxRoot<TOption>;
-	item: TOption;
+	item: { key: string; value: TOption };
 }
 
 export type ComboboxListboxItem = ReturnType<typeof createListboxItem>;
@@ -13,8 +12,8 @@ export function createListboxItem<TOption>(
 	config: CreateComboboxListboxItemConfig<TOption>,
 ) {
 	const { combobox } = config;
-	const isFocused = $derived(stateIs(config.item, combobox.activeItem));
-	const isSelected = $derived(stateIs(config.item, combobox.value));
+	const isFocused = $derived(config.item.key === combobox.activeItem?.key);
+	const isSelected = $derived(config.item.key === combobox.value?.key);
 
 	return {
 		action(element) {
