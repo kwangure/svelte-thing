@@ -1,34 +1,16 @@
 <script lang="ts">
 	import type { HTMLInputAttributes } from 'svelte/elements';
-	import type { Snippet } from 'svelte';
-	import { uid } from 'uid';
 
 	interface Props extends HTMLInputAttributes {
-		max?: number;
-		min?: number;
-		value?: number;
-		label?: Snippet;
 		type?: 'number';
 	}
 
-	const { id = uid(), label, ...restProps }: Props = $props();
+	const { ...restProps }: Props = $props();
 </script>
 
-<div>
-	{#if label}
-		<label for={id}>
-			{@render label?.()}
-		</label>
-	{/if}
-	<input type="number" {...restProps} />
-</div>
+<input type="number" {...restProps} />
 
 <style>
-	div {
-		display: inline-flex;
-		flex-direction: column;
-		gap: var(--st-size-1);
-	}
 	input {
 		--_border-color-dark: var(--st-color-preference-dark) #474b50;
 		border: 1px solid var(--_border-color-dark, #c3c3c3);
