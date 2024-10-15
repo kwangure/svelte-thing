@@ -1,14 +1,14 @@
 import type { ComboboxRoot } from './root.svelte.js';
 import type { RuneComponent } from '../../types.js';
 
-export interface CreateComboboxListboxConfig<TOption> {
-	combobox: ComboboxRoot<TOption>;
+export interface CreateComboboxListboxConfig<TValue> {
+	combobox: ComboboxRoot<TValue>;
 }
 
 export type ComboboxListbox = ReturnType<typeof createComboboxListbox>;
 
-export function createComboboxListbox<TOption>(
-	config: CreateComboboxListboxConfig<TOption>,
+export function createComboboxListbox<TValue>(
+	config: CreateComboboxListboxConfig<TValue>,
 ) {
 	const { combobox } = config;
 	return {

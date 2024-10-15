@@ -1,12 +1,12 @@
+import type { ComboboxOption } from '../../runes/root.svelte.js';
 import { describe, expect, test } from 'vitest';
 import { userEvent } from '@vitest/browser/context';
 import { render } from './util.js';
 import Combobox from './combobox.svelte';
 
 describe('combobox', () => {
-	interface Fruit {
+	interface Fruit extends ComboboxOption<string> {
 		key: string;
-		value: string;
 	}
 
 	const options: Fruit[] = [

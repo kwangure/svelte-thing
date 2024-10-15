@@ -9,6 +9,7 @@
 		createListboxItem,
 		getComboboxContext,
 		type ComboboxListboxItem,
+		type ComboboxOption,
 		type CreateComboboxListboxItemConfig,
 	} from '../runes';
 	import type { HTMLLiAttributes } from 'svelte/elements';
@@ -16,7 +17,7 @@
 
 	interface Props extends Omit<HTMLLiAttributes, 'children'> {
 		children: Snippet<[ComboboxListboxItem]>;
-		item: { key: string; value: unknown };
+		item: ComboboxOption<unknown>;
 	}
 
 	const { children, item, ...restProps }: Props = $props();

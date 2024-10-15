@@ -1,15 +1,15 @@
-import type { ComboboxRoot } from './root.svelte.js';
+import type { ComboboxOption, ComboboxRoot } from './root.svelte.js';
 import type { RuneComponent } from '../../types.js';
 
-export interface CreateComboboxListboxItemConfig<TOption> {
-	combobox: ComboboxRoot<TOption>;
-	item: { key: string; value: TOption };
+export interface CreateComboboxListboxItemConfig<TValue> {
+	combobox: ComboboxRoot<TValue>;
+	item: ComboboxOption<TValue>;
 }
 
 export type ComboboxListboxItem = ReturnType<typeof createListboxItem>;
 
-export function createListboxItem<TOption>(
-	config: CreateComboboxListboxItemConfig<TOption>,
+export function createListboxItem<TValue>(
+	config: CreateComboboxListboxItemConfig<TValue>,
 ) {
 	const { combobox } = config;
 	const isFocused = $derived(config.item.key === combobox.activeItem?.key);

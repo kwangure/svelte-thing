@@ -1,17 +1,17 @@
 <script lang="ts">
 	import * as Combobox from '../';
+	import type { ComboboxOption } from '../../runes';
 
-	interface Option {
+	interface FruitOption extends ComboboxOption<Fruit> {
 		key: string;
-		value: string;
 	}
 
 	type Fruit = string;
 
 	interface Props {
 		isOpen?: boolean;
-		options: Option[];
-		value?: Option;
+		options: FruitOption[];
+		value?: FruitOption;
 	}
 
 	const { isOpen, options, value }: Props = $props();

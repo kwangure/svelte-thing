@@ -7,20 +7,20 @@ import {
 
 export const comboboxContextKey = Symbol('combobox');
 
-export function setComboboxContext<TOption>(
-	options: CreateComboboxRootConfig<TOption>,
+export function setComboboxContext<TValue>(
+	options: CreateComboboxRootConfig<TValue>,
 ) {
-	const combobox = createComboboxRoot<TOption>(options);
+	const combobox = createComboboxRoot<TValue>(options);
 	setContext(comboboxContextKey, combobox);
 	return combobox;
 }
 
-export function getComboboxContext<TOption>() {
+export function getComboboxContext<TValue>() {
 	const combobox = getContext(comboboxContextKey);
 	if (!combobox) {
 		throw new Error(
 			'Combobox context not found. Wrap combobox child in a root element.',
 		);
 	}
-	return combobox as ComboboxRoot<TOption>;
+	return combobox as ComboboxRoot<TValue>;
 }

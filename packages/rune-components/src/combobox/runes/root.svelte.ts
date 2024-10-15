@@ -3,49 +3,52 @@ import { invariant, mergeActions } from '@svelte-thing/component-utils';
 import { onclickoutside } from '@svelte-thing/components/actions';
 import { uid } from 'uid';
 
-export interface CreateComboboxRootConfig<TOption> {
-	filter?: ComboboxFilter<TOption>;
+export interface CreateComboboxRootConfig<TValue> {
+	filter?: ComboboxFilter<TValue>;
 	hasInputCompletion?: false;
 	includesBaseElement?: boolean;
 	isOpen?: boolean;
 	label: string;
-	options?: { key: string; value: TOption }[];
-	optionToString?: (selectedValue: TOption) => string;
-	value?: { key: string; value: TOption };
+	options?: ComboboxOption<TValue>[];
+	optionToString?: (selectedValue: TValue) => string;
+	value?: ComboboxOption<TValue>;
 }
 
-export type ComboboxFilter<TOption> = (
-	args: ComboboxFilterArg<TOption>,
-) => { key: string; value: TOption }[];
+export type ComboboxFilter<TValue> = (
+	args: ComboboxFilterArg<TValue>,
+) => ComboboxOption<TValue>[];
 
-export interface ComboboxFilterArg<TOption> {
-	readonly options?: { key: string; value: TOption }[];
+export interface ComboboxFilterArg<TValue> {
+	readonly options?: ComboboxOption<TValue>[];
 	readonly inputValue: string;
 }
 
-export type ComboboxRoot<TOption> = ReturnType<
-	typeof createComboboxRoot<TOption>
+export interface ComboboxOption<TValue> {
+	key: string;
+	value: TValue;
+}
+
+export type ComboboxRoot<TValue> = ReturnType<
+	typeof createComboboxRoot<TValue>
 >;
 
 export type ComboboxVisualFocus = 'listbox' | 'input';
 
-export function createComboboxRoot<TOption>(
-	config: CreateComboboxRootConfig<TOption>,
+export function createComboboxRoot<TValue>(
+	config: CreateComboboxRootConfig<TValue>,
 ) {
 	let inputValue = $state('');
 	let isOpen = $state(config.isOpen ?? false);
 	const options = $state(config.options);
-	let value = $state<{ key: string; value: TOption } | undefined>(
-		config.value,
-	);
+	let value = $state<ComboboxOption<TValue> | undefined>(config.value);
 	let visualFocus = $state<ComboboxVisualFocus>(isOpen ? 'listbox' : 'input');
 
 	const setActiveItemListeners = new Set<
-		(arg: { key: string; value: TOption } | undefined) => void
+		(arg: ComboboxOption<TValue> | undefined) => void
 	>();
 	const setInputValueListeners = new Set<(arg: string) => void>();
 	const setValueListeners = new Set<
-		(arg: { key: string; value: TOption } | undefined) => void
+		(arg: ComboboxOption<TValue> | undefined) => void
 	>();
 
 	const filteredOptions = $derived.by(() => {
@@ -55,7 +58,7 @@ export function createComboboxRoot<TOption>(
 		return config.filter({
 			options: config.options,
 			inputValue,
-		} satisfies ComboboxFilterArg<TOption>);
+		} satisfies ComboboxFilterArg<TValue>);
 	});
 	let activeItemIndex = $state(
 		filteredOptions.findIndex((o) => o.key === value?.key),
@@ -130,9 +133,7 @@ export function createComboboxRoot<TOption>(
 			setActiveItemIndex(-1);
 		},
 		close,
-		onSetActiveItem(
-			fn: (arg: { key: string; value: TOption } | undefined) => void,
-		) {
+		onSetActiveItem(fn: (arg: ComboboxOption<TValue> | undefined) => void) {
 			setActiveItemListeners.add(fn);
 			return () => setActiveItemListeners.delete(fn);
 		},
@@ -140,9 +141,7 @@ export function createComboboxRoot<TOption>(
 			setInputValueListeners.add(fn);
 			return () => setInputValueListeners.delete(fn);
 		},
-		onSetValue(
-			fn: (arg: { key: string; value: TOption } | undefined) => void,
-		) {
+		onSetValue(fn: (arg: ComboboxOption<TValue> | undefined) => void) {
 			setValueListeners.add(fn);
 			return () => setValueListeners.delete(fn);
 		},
@@ -182,7 +181,7 @@ export function createComboboxRoot<TOption>(
 				activeItemIndex <= minValue ? maxValue : activeItemIndex - 1,
 			);
 		},
-		setValue(v: { key: string; value: TOption } | undefined) {
+		setValue(v: ComboboxOption<TValue> | undefined) {
 			const index = filteredOptions.findIndex((o) => o.key === v?.key);
 			invariant(
 				index > -1 || v === undefined,

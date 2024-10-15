@@ -7,15 +7,15 @@ import {
 } from '@svelte-thing/dom-event';
 import type { RuneComponent } from '../../types.js';
 
-export interface CreateComboboxInputConfig<TOption> {
-	combobox: ComboboxRoot<TOption>;
+export interface CreateComboboxInputConfig<TValue> {
+	combobox: ComboboxRoot<TValue>;
 }
 
 export type ComboboxInput = ReturnType<typeof createComboboxInput>;
 
-export function createComboboxInput<TOption>({
+export function createComboboxInput<TValue>({
 	combobox,
-}: CreateComboboxInputConfig<TOption>) {
+}: CreateComboboxInputConfig<TValue>) {
 	type EventRecord = Record<
 		string,
 		(
