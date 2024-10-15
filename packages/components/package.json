@@ -123,7 +123,7 @@
 	"devDependencies": {
 		"@sveltejs/package": "^2.3.5",
 		"publint": "^0.2.6",
-		"svelte": "^5.0.0-next.264",
+		"svelte": "^5.0.0-next.265",
 		"svelte-check": "^4.0.0",
 		"typescript": "^5.5.0"
 	},
