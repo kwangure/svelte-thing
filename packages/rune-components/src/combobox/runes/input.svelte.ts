@@ -141,7 +141,7 @@ export function createComboboxInput<TOption>({
 			},
 			get value() {
 				if (combobox.optionToString && combobox.value) {
-					return combobox.optionToString(combobox.value);
+					return combobox.optionToString(combobox.value.value);
 				}
 				return combobox.value?.value;
 			},

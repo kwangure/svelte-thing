@@ -1,23 +1,22 @@
 <script lang="ts">
 	import * as Combobox from '../';
 
-	interface Fruit {
+	interface Option {
 		key: string;
 		value: string;
 	}
 
+	type Fruit = string;
+
 	interface Props {
 		isOpen?: boolean;
-		options: Fruit[];
-		value?: Fruit;
+		options: Option[];
+		value?: Option;
 	}
 
 	const { isOpen, options, value }: Props = $props();
 
-	function filter({
-		inputValue,
-		options,
-	}: Combobox.FilterArg<Fruit['value']>) {
+	function filter({ inputValue, options }: Combobox.FilterArg<Fruit>) {
 		return (
 			options?.filter((option) =>
 				option.value.toLowerCase().startsWith(inputValue.toLowerCase()),
@@ -26,14 +25,7 @@
 	}
 </script>
 
-<Combobox.Root
-	label="Favorite Fruits"
-	{isOpen}
-	{value}
-	{options}
-	{filter}
-	optionToString={(option) => option.value}
->
+<Combobox.Root label="Favorite Fruits" {isOpen} {value} {options} {filter}>
 	{#snippet children(combobox)}
 		<Combobox.Controls>
 			<Combobox.Input />

@@ -10,7 +10,7 @@ export interface CreateComboboxRootConfig<TOption> {
 	isOpen?: boolean;
 	label: string;
 	options?: { key: string; value: TOption }[];
-	optionToString?: (selectedValue: { key: string; value: TOption }) => string;
+	optionToString?: (selectedValue: TOption) => string;
 	value?: { key: string; value: TOption };
 }
 

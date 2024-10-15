@@ -4,58 +4,53 @@
 	import { mdiCheck } from '@mdi/js';
 
 	interface Fruit {
-		id: number;
 		label: string;
-		value: string;
+		name: string;
+	}
+	interface Option {
+		key: string;
+		value: Fruit;
 	}
 
-	const options: Fruit[] = [
+	const options: Option[] = [
 		{
-			id: 1,
-			label: 'Apple',
-			value: 'apple',
+			key: '1',
+			value: { label: 'Apple', name: 'apple' },
 		},
 		{
-			id: 2,
-			label: 'Banana',
-			value: 'banana',
+			key: '2',
+			value: { label: 'Banana', name: 'banana' },
 		},
 		{
-			id: 3,
-			label: 'Cherry',
-			value: 'cherry',
+			key: '3',
+			value: { label: 'Cherry', name: 'cherry' },
 		},
 		{
-			id: 4,
-			label: 'Date',
-			value: 'date',
+			key: '4',
+			value: { label: 'Date', name: 'date' },
 		},
 		{
-			id: 5,
-			label: 'Elderberry',
-			value: 'elderberry',
+			key: '5',
+			value: { label: 'Elderberry', name: 'elderberry' },
 		},
 		{
-			id: 6,
-			label: 'Fig',
-			value: 'fig',
+			key: '6',
+			value: { label: 'Fig', name: 'fig' },
 		},
 		{
-			id: 7,
-			label: 'Grape',
-			value: 'grape',
+			key: '7',
+			value: { label: 'Grape', name: 'grape' },
 		},
 		{
-			id: 8,
-			label: 'Honeydew',
-			value: 'honeydew',
+			key: '8',
+			value: { label: 'Honeydew', name: 'honeydew' },
 		},
 	];
 
 	function filter({ options, inputValue }: Combobox.FilterArg<Fruit>) {
 		return (
 			options?.filter(({ value }) => {
-				return value.includes(inputValue.toLowerCase());
+				return value.name.includes(inputValue.toLowerCase());
 			}) ?? []
 		);
 	}
@@ -67,7 +62,7 @@
 			label="Fruits"
 			{options}
 			{filter}
-			optionToString={(fruit: Fruit) => fruit.label}
+			optionToString={(fruit) => fruit.name}
 		>
 			{#snippet children(combobox)}
 				<Combobox.Controls>
@@ -83,7 +78,7 @@
 										<Icon.Simple path={mdiCheck} />
 									{/if}
 									<span style="grid-column-start: 2;">
-										{fruit.label}
+										{fruit.value.label}
 									</span>
 								{/snippet}
 							</Combobox.ListboxItem>
