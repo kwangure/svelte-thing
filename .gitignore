@@ -16,3 +16,4 @@ sites/*/.svelte-kit
 sites/*/build
 sites/*/vite.config.js.timestamp-*
 sites/*/vite.config.ts.timestamp-*
+__screenshots__

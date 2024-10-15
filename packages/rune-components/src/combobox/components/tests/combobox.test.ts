@@ -19,16 +19,23 @@ describe('combobox', () => {
 
 	interface RenderOptionsArgs {
 		isOpen?: boolean;
+		shouldFocus?: false;
 		value?: Fruit;
 	}
 
 	async function renderScreen(props?: RenderOptionsArgs) {
-		const screen = render(Combobox, { options, ...props });
+		const { shouldFocus = true, ...restProps } = props ?? {};
+		const screen = render(Combobox, { options, ...restProps });
 
-		await userEvent.keyboard('[Tab]'); // focus combobox
+		if (shouldFocus) {
+			await userEvent.keyboard('[Tab]');
+		}
 
 		return {
 			...screen,
+			get button() {
+				return screen.getByRole('button');
+			},
 			get combobox() {
 				return screen.getByRole('combobox');
 			},
@@ -80,6 +87,20 @@ describe('combobox', () => {
 			await rerender({ value: undefined }); // reset
 			await expect(selectedOption.query()).not.toBeInTheDocument();
 			await expect(focusedOption.query()).not.toBeInTheDocument();
+		});
+	});
+
+	describe('When focus is not on the combobox', () => {
+		test('Clicking the button opens the popup and focuses the input', async () => {
+			const { button, combobox, listbox } = await renderScreen({
+				shouldFocus: false,
+			});
+			await expect(listbox.query()).not.toBeInTheDocument();
+			await expect.element(combobox).not.toHaveFocus();
+
+			await button.click();
+			await expect.element(listbox).toBeInTheDocument();
+			await expect.element(combobox).toHaveFocus();
 		});
 	});
 

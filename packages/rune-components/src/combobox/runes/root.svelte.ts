@@ -46,7 +46,7 @@ export function createComboboxRoot<TValue>(
 	const setActiveItemListeners = new Set<
 		(arg: ComboboxOption<TValue> | undefined) => void
 	>();
-	const setInputValueListeners = new Set<(arg: string) => void>();
+	const setIsOpenListeners = new Set<(arg: boolean) => void>();
 	const setValueListeners = new Set<
 		(arg: ComboboxOption<TValue> | undefined) => void
 	>();
@@ -72,19 +72,26 @@ export function createComboboxRoot<TValue>(
 		}
 	}
 
+	function setIsOpen(value: boolean) {
+		isOpen = value;
+		for (const fn of setIsOpenListeners) {
+			fn(isOpen);
+		}
+	}
+
 	function close() {
-		isOpen = false;
 		visualFocus = 'input';
 		setActiveItemIndex(
 			filteredOptions.findIndex((o) => o.key === value?.key),
 		);
+		setIsOpen(false);
 	}
 
 	return {
 		action: mergeActions(onclickoutside, () => ({
 			destroy() {
 				setActiveItemListeners.clear();
-				setInputValueListeners.clear();
+				setIsOpenListeners.clear();
 				setValueListeners.clear();
 			},
 		})),
@@ -137,16 +144,16 @@ export function createComboboxRoot<TValue>(
 			setActiveItemListeners.add(fn);
 			return () => setActiveItemListeners.delete(fn);
 		},
-		onSetInputValue(fn: (arg: string) => void) {
-			setInputValueListeners.add(fn);
-			return () => setInputValueListeners.delete(fn);
+		onSetIsOpen(fn: (arg: boolean) => void) {
+			setIsOpenListeners.add(fn);
+			return () => setIsOpenListeners.delete(fn);
 		},
 		onSetValue(fn: (arg: ComboboxOption<TValue> | undefined) => void) {
 			setValueListeners.add(fn);
 			return () => setValueListeners.delete(fn);
 		},
 		open() {
-			isOpen = true;
+			setIsOpen(true);
 		},
 		setFirstItemActive() {
 			visualFocus = 'listbox';
@@ -154,9 +161,6 @@ export function createComboboxRoot<TValue>(
 		},
 		setInputValue(value: string) {
 			inputValue = value;
-			for (const fn of setInputValueListeners) {
-				fn(value);
-			}
 		},
 		setLastItemActive() {
 			visualFocus = 'listbox';

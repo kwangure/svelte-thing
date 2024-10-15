@@ -101,13 +101,9 @@ export function createComboboxInput<TValue>({
 
 	return {
 		action(element) {
-			const unsub1 = combobox.onSetInputValue((value) => {
-				combobox.clearActiveItem();
-				if (!combobox.isOpen && value.length) {
-					combobox.open();
-				}
+			const unsub1 = combobox.onSetIsOpen((value) => {
+				if (value) element.focus();
 			});
-
 			const unsub2 = combobox.onSetValue(() => element.focus());
 
 			return {
@@ -154,7 +150,12 @@ export function createComboboxInput<TValue>({
 				}
 			},
 			oninput(event) {
-				combobox.setInputValue(event.currentTarget.value);
+				const { value } = event.currentTarget;
+				combobox.clearActiveItem();
+				if (!combobox.isOpen && value.length) {
+					combobox.open();
+				}
+				combobox.setInputValue(value);
 			},
 			onkeydown(event) {
 				keydownEvents[encodeKeys(keysFromEvent(event))]?.(event);

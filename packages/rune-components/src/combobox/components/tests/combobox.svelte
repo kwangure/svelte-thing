@@ -29,6 +29,7 @@
 	{#snippet children(combobox)}
 		<Combobox.Controls>
 			<Combobox.Input />
+			<Combobox.Button label="Show Fruits" />
 		</Combobox.Controls>
 		{console.log()}
 		{#if combobox.isOpen}
