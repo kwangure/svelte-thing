@@ -101,8 +101,15 @@ export function createComboboxInput<TValue>({
 
 	return {
 		action(element) {
-			const unsub1 = combobox.onSetIsOpen((value) => {
-				if (value) element.focus();
+			const unsub1 = combobox.onSetIsOpen((isOpen) => {
+				if (isOpen) {
+					element.focus();
+				} else {
+					const string = combobox.valueToString();
+					if (element.value !== string) {
+						element.value = string;
+					}
+				}
 			});
 			const unsub2 = combobox.onSetValue(() => element.focus());
 
@@ -136,10 +143,7 @@ export function createComboboxInput<TValue>({
 				return combobox.isOpen;
 			},
 			get value() {
-				if (combobox.optionToString && combobox.value) {
-					return combobox.optionToString(combobox.value.value);
-				}
-				return combobox.value?.value;
+				return combobox.valueToString();
 			},
 			id: combobox.ids.input,
 			onclick() {

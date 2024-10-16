@@ -101,9 +101,6 @@ export function createComboboxRoot<TValue>(
 		get activeItemIndex() {
 			return activeItemIndex;
 		},
-		get optionToString() {
-			return config.optionToString;
-		},
 		get filter() {
 			return config.filter;
 		},
@@ -198,6 +195,12 @@ export function createComboboxRoot<TValue>(
 			if (activeItem?.key !== v?.key) {
 				setActiveItemIndex(index);
 			}
+		},
+		valueToString() {
+			if (config.optionToString && value) {
+				return config.optionToString(value.value);
+			}
+			return String(value?.value ?? '');
 		},
 		props: {
 			'data-st-combobox-root': '',

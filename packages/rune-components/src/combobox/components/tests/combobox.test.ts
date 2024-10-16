@@ -196,6 +196,18 @@ describe('combobox', () => {
 			await expect.element(combobox).toHaveValue(options[1]?.value);
 		});
 
+		test('Closing the popup resets the input value to the selected option', async () => {
+			const { combobox } = await renderScreen({
+				isOpen: true,
+				value: options[1],
+			});
+			await userEvent.keyboard('[Backspace]');
+			await expect.element(combobox).toHaveValue('');
+
+			await userEvent.keyboard('[Escape]');
+			await expect.element(combobox).toHaveValue(options[1]?.value);
+		});
+
 		test('ArrowDown moves focus to the next element', async () => {
 			const { focusedOption } = await renderScreen();
 			await userEvent.keyboard('[ArrowDown]');
