@@ -7,6 +7,7 @@
 	import List from './list.svelte';
 	// @ts-expect-error requires svelte-kit
 	import { page } from '$app/stores';
+	import { on } from 'svelte/events';
 
 	interface Props {
 		toc: TocEntry[];
@@ -80,19 +81,17 @@
 		queueMicrotask(update);
 
 		// ...and braces
-		addEventListener('scroll', update, { once: true });
+		on(window, 'scroll', update, { once: true });
 	}
 
 	function addScrollListener(node: HTMLElement) {
 		const scrollingElement = getScrollingElement(node.parentElement);
 		if (!scrollingElement) return;
 
-		const update = () => updateActiveSlug(toc);
-		scrollingElement.addEventListener('scroll', update);
 		return {
-			destroy() {
-				scrollingElement.removeEventListener('scroll', update);
-			},
+			destroy: on(scrollingElement, 'scroll', () => {
+				updateActiveSlug(toc);
+			}),
 		};
 	}
 </script>

@@ -1,7 +1,8 @@
 import { getContext, setContext, tick } from 'svelte';
 import { focustrap } from '../../actions/focustrap.js';
 /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-import { writable, type Writable } from 'svelte/store';
+import { writable } from 'svelte/store';
+import { on } from 'svelte/events';
 
 export function createSidebar() {
 	const visibility = writable<'hidden' | 'hiding' | 'shown' | 'showing'>(
@@ -9,11 +10,8 @@ export function createSidebar() {
 	);
 	const shouldShowToggle = writable(false);
 
-	const setHidden = () => visibility.set('hidden');
-	const setShown = () => visibility.set('shown');
-
 	function show(node: HTMLElement, options?: { focus?: boolean }) {
-		node.addEventListener('click', setShown);
+		const off = on(node, 'click', () => visibility.set('shown'));
 
 		let { focus = false } = options || {};
 		const unsubscribe = visibility.subscribe(async ($visibility) => {
@@ -30,13 +28,13 @@ export function createSidebar() {
 			},
 			destroy() {
 				unsubscribe();
-				node.removeEventListener('click', setShown);
+				off();
 			},
 		};
 	}
 
 	function hide(node: HTMLElement, options?: { focus?: boolean }) {
-		node.addEventListener('click', setHidden);
+		const off = on(node, 'click', () => visibility.set('hidden'));
 
 		let { focus = false } = options || {};
 		const unsubscribe = visibility.subscribe(async ($visibility) => {
@@ -53,7 +51,7 @@ export function createSidebar() {
 			},
 			destroy() {
 				unsubscribe();
-				node.removeEventListener('click', setHidden);
+				off();
 			},
 		};
 	}
