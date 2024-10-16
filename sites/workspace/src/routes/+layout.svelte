@@ -3,16 +3,38 @@
 	import '@svelte-thing/components/css/color';
 	import '$lib/css/app.css';
 
-	import { Darkmode, Shell, Sidebar } from '@svelte-thing/components';
+	import {
+		Darkmode,
+		Icon,
+		Navbar,
+		Shell,
+		Sidebar,
+	} from '@svelte-thing/components';
 	import { page as pageStore } from '$app/stores';
+	import { createDarkModeButton } from '@svelte-thing/components/creators';
+	import { mdiWeatherNight, mdiWhiteBalanceSunny } from '@mdi/js';
 
 	const { children } = $props();
 	const pathname = $derived($pageStore.url.pathname);
+	const darkMode = createDarkModeButton();
 </script>
 
 <Darkmode />
 
 <Shell.Root>
+	<Navbar.Root>
+		<div style="margin-inline-start: auto;">
+			<Icon.Button
+				label="Switch to {darkMode.theme === 'dark'
+					? 'light'
+					: 'dark'} mode"
+				path={darkMode.theme == 'dark'
+					? mdiWhiteBalanceSunny
+					: mdiWeatherNight}
+				{...darkMode.props}
+			/>
+		</div>
+	</Navbar.Root>
 	<Sidebar.Root>
 		<Sidebar.Section title="Components">
 			<Sidebar.Item>
@@ -46,12 +68,12 @@
 		</Sidebar.Section>
 	</Sidebar.Root>
 	<Shell.Main>
-		<div>{@render children()}</div>
+		<div class="layout">{@render children()}</div>
 	</Shell.Main>
 </Shell.Root>
 
 <style>
-	div {
+	.layout {
 		padding-inline: var(--st-breakpoint-lg) var(--st-size-6);
 		margin-block-end: var(--st-size-40);
 	}

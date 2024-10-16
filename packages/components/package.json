@@ -3,16 +3,27 @@
 	"version": "0.0.33",
 	"scripts": {
 		"build": "wireit",
+		"build:dev": "wireit",
 		"check": "wireit",
 		"pre-commit": "wireit",
 		"publint": "wireit"
 	},
 	"wireit": {
 		"build": {
-			"command": "svelte-package -i ./src",
+			"command": "svelte-package -i ./src --tsconfig ./tsconfig.build.json",
 			"files": [
 				"src/**/*.{css,js,svelte,ts}",
-				"tsconfig.json",
+				"tsconfig.build.json",
+				"../../config/tsconfig.base.json"
+			],
+			"#comment": "Do not empty out outputDir to avoid breaking HMR for workspace:^ packages.",
+			"output": []
+		},
+		"build:dev": {
+			"command": "svelte-package -i ./src --tsconfig ./tsconfig.build.json --watch",
+			"files": [
+				"src/**/*.{js,svelte,ts}",
+				"tsconfig.build.json",
 				"../../config/tsconfig.base.json"
 			],
 			"#comment": "Do not empty out outputDir to avoid breaking HMR for workspace:^ packages.",
@@ -117,6 +128,7 @@
 	"dependencies": {
 		"@mdi/js": "^7.2.96",
 		"@melt-ui/svelte": "^0.76.3",
+		"@svelte-thing/component-utils": "^0.0.4",
 		"esm-env": "^1.0.0",
 		"uid": "^2.0.2"
 	},

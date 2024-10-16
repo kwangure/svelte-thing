@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../../css/breakpoint.css';
 	import type { Snippet } from 'svelte';
-	import { setSidebarContext } from '../sidebar/sidebar.js';
+	import { setSidebarContext } from '../sidebar/sidebar.svelte.js';
 
 	interface Props {
 		children: Snippet;

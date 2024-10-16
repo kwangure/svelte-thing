@@ -2,7 +2,8 @@
 	import '../../css/size.css';
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
 	import type { Snippet } from 'svelte';
-	import { getSidebarContext } from './sidebar.js';
+	import { createHide, getSidebarContext } from './sidebar.svelte.js';
+	import { mergeProps } from '@svelte-thing/component-utils';
 
 	interface Props extends HTMLAnchorAttributes {
 		href: string;
@@ -11,9 +12,10 @@
 	let { children, ...restProps }: Props = $props();
 
 	const sidebar = getSidebarContext();
+	const hide = createHide(sidebar);
 </script>
 
-<a {...restProps} use:sidebar.elements.hide>
+<a {...mergeProps(restProps, hide.props)} use:hide.action>
 	{@render children?.()}
 </a>
 

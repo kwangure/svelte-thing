@@ -4,7 +4,10 @@
 	import '../../css/color.css';
 	import '../../css/size.css';
 	import type { Snippet } from 'svelte';
-	import { getSidebarContext } from '../sidebar/sidebar.js';
+	import {
+		createShow,
+		getSidebarContext,
+	} from '../sidebar/sidebar.svelte.js';
 	import { mdiMenu } from '@mdi/js';
 	import Icon from '../icon/simple.svelte';
 
@@ -12,21 +15,21 @@
 		showOpen?: boolean;
 		children: Snippet;
 	}
-	const { showOpen = true, children }: Props = $props();
+	const { children }: Props = $props();
 
-	const { elements, state } = getSidebarContext();
-	const { show } = elements;
-	const { shouldShowToggle } = state;
+	const sidebar = getSidebarContext();
+	const show = createShow(sidebar);
 </script>
 
 <!-- Render bottom border first because of z-index -->
 <div></div>
 <nav>
-	{#if showOpen && $shouldShowToggle}
+	{#if sidebar.isMounted}
 		<button
 			title="Open Menu"
 			aria-label="Open Menu"
-			use:show={{ focus: true }}
+			use:show.action
+			{...show.props}
 		>
 			<Icon --st-icon-width="100%" --st-icon-height=" " path={mdiMenu} />
 		</button>
