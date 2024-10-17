@@ -17,8 +17,7 @@
 				"./packages/component-utils:build",
 				"./packages/components:build",
 				"./packages/dom-event:build",
-				"./packages/rune-components:build",
-				"./packages/state-event:build"
+				"./packages/rune-components:build"
 			]
 		},
 		"check": {
@@ -52,8 +51,7 @@
 				"./packages/component-utils:pre-commit",
 				"./packages/components:pre-commit",
 				"./packages/dom-event:pre-commit",
-				"./packages/rune-components:pre-commit",
-				"./packages/state-event:pre-commit"
+				"./packages/rune-components:pre-commit"
 			]
 		},
 		"release": {
@@ -62,8 +60,7 @@
 				"./packages/component-utils:release",
 				"./packages/components:release",
 				"./packages/dom-event:release",
-				"./packages/rune-components:release",
-				"./packages/state-event:release"
+				"./packages/rune-components:release"
 			]
 		},
 		"version": {
