@@ -1,10 +1,7 @@
 <script lang="ts">
-	interface Props {
-		alt?: string;
-		src: string;
-	}
+	import type { HTMLImgAttributes } from 'svelte/elements';
 
-	const { alt, src }: Props = $props();
+	const props: HTMLImgAttributes = $props();
 </script>
 
-<img {alt} {src} />
+<img {...props} />

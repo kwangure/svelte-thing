@@ -1,31 +1,29 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
+	import type { HTMLAttributes } from 'svelte/elements';
 	import '../../css/breakpoint.css';
 	import '../../css/color-preference.css';
 	import '../../css/color.css';
 	import '../../css/size.css';
 
-	interface Props {
-		attributes?: Record<string, unknown>;
+	interface Props extends HTMLAttributes<HTMLHeadingElement> {
 		rank: 1 | 2 | 3 | 4 | 5 | 6;
-		children: Snippet;
 	}
 
-	const { attributes = {}, rank, children }: Props = $props();
+	const { rank, children, ...restProps }: Props = $props();
 </script>
 
 {#if rank === 1}
-	<h1 {...attributes}>{@render children()}</h1>
+	<h1 {...restProps}>{@render children?.()}</h1>
 {:else if rank === 2}
-	<h2 {...attributes}>{@render children()}</h2>
+	<h2 {...restProps}>{@render children?.()}</h2>
 {:else if rank === 3}
-	<h3 {...attributes}>{@render children()}</h3>
+	<h3 {...restProps}>{@render children?.()}</h3>
 {:else if rank === 4}
-	<h4 {...attributes}>{@render children()}</h4>
+	<h4 {...restProps}>{@render children?.()}</h4>
 {:else if rank === 5}
-	<h5 {...attributes}>{@render children()}</h5>
+	<h5 {...restProps}>{@render children?.()}</h5>
 {:else if rank === 6}
-	<h6 {...attributes}>{@render children()}</h6>
+	<h6 {...restProps}>{@render children?.()}</h6>
 {/if}
 
 <style>

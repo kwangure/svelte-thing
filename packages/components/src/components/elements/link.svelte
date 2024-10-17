@@ -1,18 +1,12 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
+	import type { HTMLAnchorAttributes } from 'svelte/elements';
 	import '../../css/color.css';
 	import '../../css/size.css';
 
-	interface Props {
-		children: Snippet;
-		href: string;
-		title?: string;
-	}
-
-	const { href, title, children }: Props = $props();
+	const { children, ...restProps }: HTMLAnchorAttributes = $props();
 </script>
 
-<a {href} {title}>{@render children()}</a>
+<a {...restProps}>{@render children?.()}</a>
 
 <style>
 	a {

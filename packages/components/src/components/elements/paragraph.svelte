@@ -1,15 +1,12 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
+	import type { HTMLAttributes } from 'svelte/elements';
 	import '../../css/size.css';
 
-	interface Props {
-		children: Snippet;
-	}
-
-	const { children }: Props = $props();
+	const { children, ...restProps }: HTMLAttributes<HTMLParagraphElement> =
+		$props();
 </script>
 
-<p>{@render children()}</p>
+<p {...restProps}>{@render children?.()}</p>
 
 <style>
 	p {

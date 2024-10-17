@@ -1,9 +1,12 @@
-<script>
+<script lang="ts">
+	import type { HTMLAttributes } from 'svelte/elements';
 	import '../../css/color-preference.css';
 	import '../../css/color.css';
+
+	const props: HTMLAttributes<HTMLElement> = $props();
 </script>
 
-<div></div>
+<div {...props}></div>
 
 <style>
 	div {
