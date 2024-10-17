@@ -13,7 +13,6 @@
 	let isOpen = $state(false);
 
 	interface BookSummarySearchResult {
-		id: string;
 		title: string;
 		tokens: {
 			title: [string, number][];
@@ -28,13 +27,15 @@
 		for (const result of results) {
 			const { title } = highlightSearchResult(result, ['title']);
 			highlightedResults.push({
-				id: result.document.id,
-				title: result.document.title,
-				tokens: {
-					title,
-					content: highlightFlattenColumns(result, ['content'], {
-						matchLength: 20,
-					}),
+				key: result.document.id,
+				value: {
+					title: result.document.title,
+					tokens: {
+						title,
+						content: highlightFlattenColumns(result, ['content'], {
+							matchLength: 20,
+						}),
+					},
 				},
 			});
 		}
@@ -75,18 +76,20 @@
 				{#if combobox.inputValue.trim()}
 					<div class="results block-section">
 						{#each combobox.filteredOptions as result}
-							<Combobox.Item item={result}>
-								<a href="#${result.id}">
+							<Combobox.ListboxItem item={result}>
+								<a href="#${result.key}">
 									<div class="title">
-										<Tokens tokens={result.tokens.title} />
+										<Tokens
+											tokens={result.value.tokens.title}
+										/>
 									</div>
 									<div class="content">
 										<Tokens
-											tokens={result.tokens.content}
+											tokens={result.value.tokens.content}
 										/>
 									</div>
 								</a>
-							</Combobox.Item>
+							</Combobox.ListboxItem>
 						{:else}
 							<div class="no-results">
 								<Icon.Simple

@@ -3,15 +3,14 @@
 
 	type DivAttributes = Omit<HTMLAttributes<HTMLDivElement>, 'children'>;
 
-	interface Props<TOption>
-		extends CreateComboboxRootConfig<TOption>,
+	interface Props<TValue>
+		extends CreateComboboxRootConfig<TValue>,
 			DivAttributes {
-		children: Snippet<[ComboboxRoot<TOption>]>;
+		children: Snippet<[ComboboxRoot<TValue>]>;
 	}
 </script>
 
-<script lang="ts" generics="TOption">
-	/* eslint-disable no-undef */
+<script lang="ts" generics="TValue">
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { NullablyRequired } from '../../types.js';
 	import type { Snippet } from 'svelte';
@@ -30,8 +29,8 @@
 		optionToString,
 		value,
 		...restProps
-	}: Props<TOption> = $props();
-	const combobox = setComboboxContext<TOption>({
+	}: Props<TValue> = $props();
+	const combobox = setComboboxContext<TValue>({
 		filter,
 		hasInputCompletion,
 		includesBaseElement,
@@ -40,7 +39,7 @@
 		options,
 		optionToString,
 		value,
-	} satisfies NullablyRequired<CreateComboboxRootConfig<TOption>>);
+	} satisfies NullablyRequired<CreateComboboxRootConfig<TValue>>);
 
 	skipEffect(
 		() => isOpen,

@@ -7,15 +7,15 @@ import {
 } from '@svelte-thing/dom-event';
 import type { RuneComponent } from '../../types.js';
 
-export interface CreateComboboxInputConfig<TOption> {
-	combobox: ComboboxRoot<TOption>;
+export interface CreateComboboxInputConfig<TValue> {
+	combobox: ComboboxRoot<TValue>;
 }
 
 export type ComboboxInput = ReturnType<typeof createComboboxInput>;
 
-export function createComboboxInput<TOption>({
+export function createComboboxInput<TValue>({
 	combobox,
-}: CreateComboboxInputConfig<TOption>) {
+}: CreateComboboxInputConfig<TValue>) {
 	type EventRecord = Record<
 		string,
 		(
@@ -101,13 +101,16 @@ export function createComboboxInput<TOption>({
 
 	return {
 		action(element) {
-			const unsub1 = combobox.onSetInputValue((value) => {
-				combobox.clearActiveItem();
-				if (!combobox.isOpen && value.length) {
-					combobox.open();
+			const unsub1 = combobox.onSetIsOpen((isOpen) => {
+				if (isOpen) {
+					element.focus();
+				} else {
+					const string = combobox.valueToString();
+					if (element.value !== string) {
+						element.value = string;
+					}
 				}
 			});
-
 			const unsub2 = combobox.onSetValue(() => element.focus());
 
 			return {
@@ -140,10 +143,7 @@ export function createComboboxInput<TOption>({
 				return combobox.isOpen;
 			},
 			get value() {
-				if (combobox.optionToString && combobox.value) {
-					return combobox.optionToString(combobox.value);
-				}
-				return combobox.value;
+				return combobox.valueToString();
 			},
 			id: combobox.ids.input,
 			onclick() {
@@ -154,7 +154,12 @@ export function createComboboxInput<TOption>({
 				}
 			},
 			oninput(event) {
-				combobox.setInputValue(event.currentTarget.value);
+				const { value } = event.currentTarget;
+				combobox.clearActiveItem();
+				if (!combobox.isOpen && value.length) {
+					combobox.open();
+				}
+				combobox.setInputValue(value);
 			},
 			onkeydown(event) {
 				keydownEvents[encodeKeys(keysFromEvent(event))]?.(event);

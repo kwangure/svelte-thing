@@ -2,15 +2,15 @@ import type { ComboboxRoot } from './root.svelte.js';
 import type { RuneComponent } from '../../types.js';
 import { cancelEvent } from '@svelte-thing/dom-event';
 
-export interface CreateComboboxNextConfig<TOption> {
-	combobox: ComboboxRoot<TOption>;
+export interface CreateComboboxNextConfig<TValue> {
+	combobox: ComboboxRoot<TValue>;
 	label: string;
 }
 
 export type ComboboxNext = ReturnType<typeof createComboboxNext>;
 
-export function createComboboxNext<TOption>(
-	config: CreateComboboxNextConfig<TOption>,
+export function createComboboxNext<TValue>(
+	config: CreateComboboxNextConfig<TValue>,
 ) {
 	const { combobox } = config;
 

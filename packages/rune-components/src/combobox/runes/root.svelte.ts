@@ -1,47 +1,55 @@
 import type { RuneComponent } from '../../types.js';
 import { invariant, mergeActions } from '@svelte-thing/component-utils';
-import { stateIs } from '@svelte-thing/component-utils/reactivity';
 import { onclickoutside } from '@svelte-thing/components/actions';
 import { uid } from 'uid';
 
-export interface CreateComboboxRootConfig<TOption> {
-	filter?: ComboboxFilter<TOption>;
+export interface CreateComboboxRootConfig<TValue> {
+	filter?: ComboboxFilter<TValue>;
 	hasInputCompletion?: false;
 	includesBaseElement?: boolean;
 	isOpen?: boolean;
 	label: string;
-	options?: TOption[];
-	optionToString?: (selectedValue: TOption) => string;
-	value?: TOption;
+	options?: ComboboxOption<TValue>[];
+	optionToString?: (selectedValue: TValue) => string;
+	value?: ComboboxOption<TValue>;
 }
 
-export type ComboboxFilter<TOption> = (
-	args: ComboboxFilterArg<TOption>,
-) => TOption[];
+export type ComboboxFilter<TValue> = (
+	args: ComboboxFilterArg<TValue>,
+) => ComboboxOption<TValue>[];
 
-export interface ComboboxFilterArg<TOption> {
-	readonly options?: TOption[];
+export interface ComboboxFilterArg<TValue> {
+	readonly options?: ComboboxOption<TValue>[];
 	readonly inputValue: string;
 }
 
-export type ComboboxRoot<TOption> = ReturnType<
-	typeof createComboboxRoot<TOption>
+export interface ComboboxOption<TValue> {
+	key: string;
+	value: TValue;
+}
+
+export type ComboboxRoot<TValue> = ReturnType<
+	typeof createComboboxRoot<TValue>
 >;
 
 export type ComboboxVisualFocus = 'listbox' | 'input';
 
-export function createComboboxRoot<TOption>(
-	config: CreateComboboxRootConfig<TOption>,
+export function createComboboxRoot<TValue>(
+	config: CreateComboboxRootConfig<TValue>,
 ) {
 	let inputValue = $state('');
 	let isOpen = $state(config.isOpen ?? false);
-	const options = $state.raw(config.options);
-	let value = $state.raw<TOption | undefined>(config.value);
+	const options = $state(config.options);
+	let value = $state<ComboboxOption<TValue> | undefined>(config.value);
 	let visualFocus = $state<ComboboxVisualFocus>(isOpen ? 'listbox' : 'input');
 
-	const setActiveItemListeners = new Set<(arg: TOption) => void>();
-	const setInputValueListeners = new Set<(arg: string) => void>();
-	const setValueListeners = new Set<(arg: TOption | undefined) => void>();
+	const setActiveItemListeners = new Set<
+		(arg: ComboboxOption<TValue> | undefined) => void
+	>();
+	const setIsOpenListeners = new Set<(arg: boolean) => void>();
+	const setValueListeners = new Set<
+		(arg: ComboboxOption<TValue> | undefined) => void
+	>();
 
 	const filteredOptions = $derived.by(() => {
 		if (typeof config.filter !== 'function') {
@@ -50,31 +58,40 @@ export function createComboboxRoot<TOption>(
 		return config.filter({
 			options: config.options,
 			inputValue,
-		} satisfies ComboboxFilterArg<TOption>);
+		} satisfies ComboboxFilterArg<TValue>);
 	});
 	let activeItemIndex = $state(
-		filteredOptions.findIndex((o) => stateIs(o, value)),
+		filteredOptions.findIndex((o) => o.key === value?.key),
 	);
 	const activeItem = $derived(filteredOptions[activeItemIndex]);
 
 	function setActiveItemIndex(index: number) {
 		activeItemIndex = index;
 		for (const listener of setActiveItemListeners) {
-			listener(activeItem as TOption);
+			listener(activeItem);
+		}
+	}
+
+	function setIsOpen(value: boolean) {
+		isOpen = value;
+		for (const fn of setIsOpenListeners) {
+			fn(isOpen);
 		}
 	}
 
 	function close() {
-		isOpen = false;
 		visualFocus = 'input';
-		setActiveItemIndex(filteredOptions.findIndex((o) => o === value));
+		setActiveItemIndex(
+			filteredOptions.findIndex((o) => o.key === value?.key),
+		);
+		setIsOpen(false);
 	}
 
 	return {
 		action: mergeActions(onclickoutside, () => ({
 			destroy() {
 				setActiveItemListeners.clear();
-				setInputValueListeners.clear();
+				setIsOpenListeners.clear();
 				setValueListeners.clear();
 			},
 		})),
@@ -83,9 +100,6 @@ export function createComboboxRoot<TOption>(
 		},
 		get activeItemIndex() {
 			return activeItemIndex;
-		},
-		get optionToString() {
-			return config.optionToString;
 		},
 		get filter() {
 			return config.filter;
@@ -123,20 +137,20 @@ export function createComboboxRoot<TOption>(
 			setActiveItemIndex(-1);
 		},
 		close,
-		onSetActiveItem(fn: (arg: TOption) => void) {
+		onSetActiveItem(fn: (arg: ComboboxOption<TValue> | undefined) => void) {
 			setActiveItemListeners.add(fn);
 			return () => setActiveItemListeners.delete(fn);
 		},
-		onSetInputValue(fn: (arg: string) => void) {
-			setInputValueListeners.add(fn);
-			return () => setInputValueListeners.delete(fn);
+		onSetIsOpen(fn: (arg: boolean) => void) {
+			setIsOpenListeners.add(fn);
+			return () => setIsOpenListeners.delete(fn);
 		},
-		onSetValue(fn: (arg: TOption | undefined) => void) {
+		onSetValue(fn: (arg: ComboboxOption<TValue> | undefined) => void) {
 			setValueListeners.add(fn);
 			return () => setValueListeners.delete(fn);
 		},
 		open() {
-			isOpen = true;
+			setIsOpen(true);
 		},
 		setFirstItemActive() {
 			visualFocus = 'listbox';
@@ -144,9 +158,6 @@ export function createComboboxRoot<TOption>(
 		},
 		setInputValue(value: string) {
 			inputValue = value;
-			for (const fn of setInputValueListeners) {
-				fn(value);
-			}
 		},
 		setLastItemActive() {
 			visualFocus = 'listbox';
@@ -171,8 +182,8 @@ export function createComboboxRoot<TOption>(
 				activeItemIndex <= minValue ? maxValue : activeItemIndex - 1,
 			);
 		},
-		setValue(v: TOption | undefined) {
-			const index = filteredOptions.findIndex((o) => stateIs(o, v));
+		setValue(v: ComboboxOption<TValue> | undefined) {
+			const index = filteredOptions.findIndex((o) => o.key === v?.key);
 			invariant(
 				index > -1 || v === undefined,
 				'`setValue(...)` argument must be in `filteredOptions`.',
@@ -181,9 +192,15 @@ export function createComboboxRoot<TOption>(
 			for (const fn of setValueListeners) {
 				fn(value);
 			}
-			if (!stateIs(activeItem, v)) {
+			if (activeItem?.key !== v?.key) {
 				setActiveItemIndex(index);
 			}
+		},
+		valueToString() {
+			if (config.optionToString && value) {
+				return config.optionToString(value.value);
+			}
+			return String(value?.value ?? '');
 		},
 		props: {
 			'data-st-combobox-root': '',

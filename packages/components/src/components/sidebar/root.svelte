@@ -1,9 +1,11 @@
 <script lang="ts">
+	import '../../css/breakpoint.css';
 	import '../../css/color.css';
 	import '../../css/color-preference.css';
 	import '../../css/size.css';
 	import type { Snippet } from 'svelte';
-	import { getSidebarContext } from './sidebar.js';
+	import { createHide, getSidebarContext } from './sidebar.svelte.js';
+	import { focustrap } from '../../actions';
 	import { mdiClose } from '@mdi/js';
 	import Icon from '../icon/simple.svelte';
 
@@ -12,20 +14,18 @@
 	}
 	const { children }: Props = $props();
 
-	const { elements, state } = getSidebarContext();
-	const { hide, panel } = elements;
-	const { shouldShowToggle, visibility } = state;
-
-	shouldShowToggle.set(true);
+	const sidebar = getSidebarContext();
+	const hide = createHide(sidebar);
 </script>
 
-<aside class:hidden={$visibility === 'hidden'}>
-	<nav use:panel={{ shouldTrapFocus: () => window.innerWidth < 1024 }}>
+<aside use:sidebar.action {...sidebar.props}>
+	<nav use:focustrap={{ shouldTrapFocus: () => window.innerWidth < 1024 }}>
 		<button
 			title="Close Menu"
 			aria-label="Close Menu"
 			class="times-close"
-			use:hide={{ focus: true }}
+			use:hide.action
+			{...hide.props}
 		>
 			<Icon --st-icon-width="100%" --st-icon-height=" " path={mdiClose} />
 		</button>
@@ -34,7 +34,8 @@
 	<button
 		title="Close Menu"
 		aria-label="Close Menu"
-		use:hide
+		use:hide.action
+		{...hide.props}
 		class="overlay-close"
 	></button>
 </aside>
@@ -51,10 +52,8 @@
 		top: 0;
 		z-index: 40;
 	}
-	@media (max-width: 1024px) {
-		aside.hidden {
-			display: none;
-		}
+	aside[data-visibility='hidden'] {
+		display: var(--st-breakpoint-lg, none);
 	}
 	@media (min-width: 1024px) {
 		aside {

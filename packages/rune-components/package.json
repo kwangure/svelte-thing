@@ -114,7 +114,7 @@
 		"@vitest/browser": "^2.1.2",
 		"playwright": "^1.48.0",
 		"publint": "^0.2.6",
-		"svelte": "^5.0.0-next.264",
+		"svelte": "^5.0.0-next.265",
 		"svelte-check": "^4.0.0",
 		"typescript": "^5.4.5",
 		"vite": "^5.4.8",

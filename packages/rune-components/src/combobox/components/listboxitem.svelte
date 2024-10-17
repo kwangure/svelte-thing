@@ -1,5 +1,4 @@
 <script lang="ts">
-	/* eslint-disable no-undef */
 	import '@svelte-thing/components/css/breakpoint';
 	import '@svelte-thing/components/css/color-preference';
 	import '@svelte-thing/components/css/color';
@@ -10,6 +9,7 @@
 		createListboxItem,
 		getComboboxContext,
 		type ComboboxListboxItem,
+		type ComboboxOption,
 		type CreateComboboxListboxItemConfig,
 	} from '../runes';
 	import type { HTMLLiAttributes } from 'svelte/elements';
@@ -17,7 +17,7 @@
 
 	interface Props extends Omit<HTMLLiAttributes, 'children'> {
 		children: Snippet<[ComboboxListboxItem]>;
-		item: unknown;
+		item: ComboboxOption<unknown>;
 	}
 
 	const { children, item, ...restProps }: Props = $props();
