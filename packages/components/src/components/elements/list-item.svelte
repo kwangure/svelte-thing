@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
+	import type { HTMLLiAttributes } from 'svelte/elements';
 
-	const { children }: { children: Snippet } = $props();
+	const { children, ...restProps }: HTMLLiAttributes = $props();
 </script>
 
-<li>{@render children()}</li>
+<li {...restProps}>{@render children?.()}</li>

@@ -1,18 +1,19 @@
 <script lang="ts">
+	import type { HTMLAttributes } from 'svelte/elements';
+	import Token from '../token.svelte';
 	import '../../css/color-preference.css';
 	import '../../css/color.css';
 	import '../../css/size.css';
-	import Token from '../token.svelte';
 
-	interface Props {
+	interface Props extends HTMLAttributes<HTMLElement> {
 		attributes?: Record<string, unknown>;
 		tokens: { color: string; segment: string }[];
 	}
 
-	const { attributes, tokens }: Props = $props();
+	const { tokens, ...restProps }: Props = $props();
 </script>
 
-<code {...attributes}>
+<code {...restProps}>
 	{#each tokens as token}<Token {token} />{/each}
 </code>
 

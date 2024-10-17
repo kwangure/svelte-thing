@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
+	import type { HTMLBlockquoteAttributes } from 'svelte/elements';
 
-	const { children }: { children: Snippet } = $props();
+	const { children, ...restProps }: HTMLBlockquoteAttributes = $props();
 </script>
 
-<blockquote>{@render children()}</blockquote>
+<blockquote {...restProps}>{@render children?.()}</blockquote>

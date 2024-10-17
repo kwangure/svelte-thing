@@ -3,40 +3,41 @@
 	import '../../css/color.css';
 	import '../../css/size.css';
 
+	import type { HTMLAttributes } from 'svelte/elements';
 	import { mdiCheck, mdiContentCopy } from '@mdi/js';
 	import { Icon, Token } from '../../components/index.js';
 	import {
 		createCopier,
 		type LineInterval,
 	} from '../../creators/copy.svelte.js';
+	import { skipEffect } from '@svelte-thing/component-utils/reactivity';
 
-	interface Props {
-		attributes?: Record<string, unknown> | undefined;
+	interface Props extends HTMLAttributes<HTMLElement> {
 		lines: { color: string; segment: string }[][];
 		copyRanges?: LineInterval[] | undefined;
 		copyText?: string | undefined;
 	}
 
-	const { attributes, lines, copyRanges, copyText }: Props = $props();
+	const { lines, copyRanges, copyText, ...restProps }: Props = $props();
 	const copier = createCopier({ text: copyText });
-
-	function rangeToSet(ranges: LineInterval[]) {
+	const lineSet = $derived.by(() => {
 		const resultSet = new Set<number>();
-		for (const [start, end] of ranges) {
+		for (const [start, end] of copyRanges ?? []) {
 			for (let i = start; i <= end; i++) {
 				resultSet.add(i);
 			}
 		}
 		return resultSet;
-	}
-
-	let lineSet = $derived(rangeToSet(copyRanges ?? []));
-	$effect(() => {
-		copier.text = copyText;
 	});
+	skipEffect(
+		() => copyText,
+		(text) => {
+			copier.text = text;
+		},
+	);
 </script>
 
-<code {...attributes}>
+<code {...restProps}>
 	{#if typeof copyText === 'string'}
 		<div class="button">
 			<Icon.Button

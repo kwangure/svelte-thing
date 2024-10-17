@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
+	import type { HTMLAttributes } from 'svelte/elements';
 
-	const { children }: { children: Snippet } = $props();
+	const { children, ...restProps }: HTMLAttributes<HTMLElement> = $props();
 </script>
 
-<strong>{@render children()}</strong>
+<strong {...restProps}>{@render children?.()}</strong>
