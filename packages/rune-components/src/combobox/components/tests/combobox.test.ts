@@ -120,19 +120,19 @@ describe('combobox', () => {
 		});
 
 		test('ArrowDown opens popup and focuses selected item', async () => {
-			const { combobox, listbox, selectedOption } = await renderScreen({
+			const { combobox, focusedOption, listbox } = await renderScreen({
 				value: options[2],
 			});
 			await expect.element(combobox).toHaveValue(options[2]?.value);
 			await expect(listbox.query()).not.toBeInTheDocument();
-			await expect(selectedOption.query()).not.toBeInTheDocument();
+			await expect(focusedOption.query()).not.toBeInTheDocument();
 
 			await userEvent.keyboard('[ArrowDown]');
 			await expect.element(listbox).toBeInTheDocument();
 			await expect.element(listbox).toBeVisible();
-			await expect.element(selectedOption).toBeInTheDocument();
+			await expect.element(focusedOption).toBeInTheDocument();
 			await expect
-				.element(selectedOption)
+				.element(focusedOption)
 				.toHaveAccessibleName(options[2]?.value);
 		});
 
@@ -147,6 +147,23 @@ describe('combobox', () => {
 			await expect
 				.element(focusedOption)
 				.toHaveAccessibleName(options[options.length - 1]?.value);
+		});
+
+		test('ArrowUp opens popup and focuses selected item', async () => {
+			const { combobox, focusedOption, listbox } = await renderScreen({
+				value: options[2],
+			});
+			await expect.element(combobox).toHaveValue(options[2]?.value);
+			await expect(listbox.query()).not.toBeInTheDocument();
+			await expect(focusedOption.query()).not.toBeInTheDocument();
+
+			await userEvent.keyboard('[ArrowUp]');
+			await expect.element(listbox).toBeInTheDocument();
+			await expect.element(listbox).toBeVisible();
+			await expect.element(focusedOption).toBeInTheDocument();
+			await expect
+				.element(focusedOption)
+				.toHaveAccessibleName(options[2]?.value);
 		});
 
 		test('Alt+ArrowDown displays the popup without moving focus', async () => {

@@ -35,11 +35,9 @@ export function createComboboxInput<TValue>({
 				combobox.setNextItemActive();
 			} else {
 				combobox.open();
-				// TODO: Remove setFirstItemActive and uncomment
-				combobox.setFirstItemActive();
-				// if (!combobox.activeItem) {
-				// 	combobox.setNextItemActive();
-				// }
+				if (!combobox.activeItem) {
+					combobox.setNextItemActive();
+				}
 			}
 			cancelEvent(event);
 		},
@@ -52,7 +50,9 @@ export function createComboboxInput<TValue>({
 				combobox.setPreviousItemActive();
 			} else {
 				combobox.open();
-				combobox.setLastItemActive();
+				if (!combobox.activeItem) {
+					combobox.setPreviousItemActive();
+				}
 			}
 			cancelEvent(event);
 		},

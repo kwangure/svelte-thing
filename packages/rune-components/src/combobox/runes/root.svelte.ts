@@ -152,16 +152,8 @@ export function createComboboxRoot<TValue>(
 		open() {
 			setIsOpen(true);
 		},
-		setFirstItemActive() {
-			visualFocus = 'listbox';
-			setActiveItemIndex(0);
-		},
 		setInputValue(value: string) {
 			inputValue = value;
-		},
-		setLastItemActive() {
-			visualFocus = 'listbox';
-			setActiveItemIndex(filteredOptions.length - 1);
 		},
 		setNextItemActive() {
 			const minValue = config.includesBaseElement ? -1 : 0;
