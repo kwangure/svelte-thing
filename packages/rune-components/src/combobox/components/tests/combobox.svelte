@@ -23,11 +23,12 @@
 	}
 </script>
 
-<Combobox.Root label="Favorite Fruits" {isOpen} {value} {options}>
+<Combobox.Root {isOpen} {value} {options}>
 	{#snippet children(combobox)}
+		<Combobox.Label>Favorite Fruits</Combobox.Label>
 		<Combobox.Controls>
 			<Combobox.Input />
-			<Combobox.Button label="Show Fruits" />
+			<Combobox.Button />
 		</Combobox.Controls>
 		{#if combobox.isOpen}
 			<Combobox.Listbox>

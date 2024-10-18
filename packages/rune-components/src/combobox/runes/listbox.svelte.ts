@@ -15,7 +15,7 @@ export function createComboboxListbox<TValue>(
 		props: {
 			'data-st-combobox-listbox': '',
 			get ['aria-label']() {
-				return combobox.label;
+				return 'Suggestions';
 			},
 			id: combobox.ids.listbox,
 			role: 'listbox',

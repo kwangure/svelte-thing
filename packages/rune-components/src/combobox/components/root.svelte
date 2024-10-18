@@ -23,7 +23,6 @@
 		hasInputCompletion,
 		includesBaseElement,
 		isOpen,
-		label,
 		options,
 		optionToString,
 		value,
@@ -33,7 +32,6 @@
 		hasInputCompletion,
 		includesBaseElement,
 		isOpen,
-		label,
 		options,
 		optionToString,
 		value,
@@ -41,17 +39,11 @@
 
 	skipEffect(
 		() => isOpen,
-		(isOpen2) => {
-			if (isOpen2) {
-				combobox.open();
-			} else {
-				combobox.close();
-			}
-		},
+		(i) => (i ? combobox.open() : combobox.close()),
 	);
 	skipEffect(
 		() => options,
-		(v) => combobox.setOptions(v),
+		(o) => combobox.setOptions(o),
 	);
 	skipEffect(
 		() => value,

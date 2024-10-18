@@ -7,7 +7,6 @@ export interface CreateComboboxRootConfig<TValue> {
 	hasInputCompletion?: false;
 	includesBaseElement?: boolean;
 	isOpen?: boolean;
-	label: string;
 	options: ComboboxGetOptions<TValue>;
 	optionToString?: (selectedValue: TValue) => string;
 	value?: ComboboxOption<TValue>;
@@ -112,9 +111,6 @@ export function createComboboxRoot<TValue>(
 		},
 		get isOpen() {
 			return isOpen;
-		},
-		get label() {
-			return config.label;
 		},
 		get options() {
 			return options;

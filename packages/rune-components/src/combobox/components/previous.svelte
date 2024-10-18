@@ -8,17 +8,10 @@
 	} from '../runes';
 	import { mergeProps } from '@svelte-thing/component-utils';
 
-	interface Props
-		extends HTMLButtonAttributes,
-			Omit<CreateComboboxPreviousConfig<unknown>, 'combobox'> {}
-
-	const { label, ...restProps }: Props = $props();
+	const { ...restProps }: HTMLButtonAttributes = $props();
 	const combobox = getComboboxContext();
 	const previous = createComboboxPrevious({
 		combobox,
-		get label() {
-			return label;
-		},
 	} satisfies NullablyRequired<CreateComboboxPreviousConfig<unknown>>);
 </script>
 

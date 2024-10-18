@@ -16,7 +16,7 @@
 	import { mergeProps } from '@svelte-thing/component-utils';
 
 	interface Props extends Omit<HTMLLiAttributes, 'children'> {
-		children: Snippet<[ComboboxListboxItem]>;
+		children?: Snippet<[ComboboxListboxItem]>;
 		item: ComboboxOption<unknown>;
 	}
 
@@ -31,7 +31,7 @@
 </script>
 
 <li {...mergeProps(restProps, listboxItem.props)} use:listboxItem.action>
-	{@render children(listboxItem)}
+	{@render children?.(listboxItem)}
 </li>
 
 <style>

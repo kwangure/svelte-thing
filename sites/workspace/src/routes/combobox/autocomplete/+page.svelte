@@ -56,15 +56,12 @@
 
 <div class="box">
 	<div class="text">
-		<Combobox.Root
-			label="Fruits"
-			{options}
-			optionToString={(fruit) => fruit.label}
-		>
+		<Combobox.Root {options} optionToString={(fruit) => fruit.label}>
 			{#snippet children(combobox)}
+				<Combobox.Label>Fruits</Combobox.Label>
 				<Combobox.Controls>
 					<Combobox.Input />
-					<Combobox.Button label="Show Fruits" />
+					<Combobox.Button />
 				</Combobox.Controls>
 				{#if combobox.isOpen}
 					<Combobox.Listbox>
