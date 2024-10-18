@@ -23,13 +23,12 @@
 		},
 		"build:dev": {
 			"command": "svelte-package -i ./src --tsconfig ./tsconfig.build.json --watch",
+			"service": true,
 			"files": [
 				"src/**/*.{js,svelte,ts}",
 				"tsconfig.build.json",
 				"../../config/tsconfig.base.json"
-			],
-			"#comment": "Empty output. Rely on svelte-package to clean up the output dist folder lazily",
-			"output": []
+			]
 		},
 		"check": {
 			"command": "svelte-check --tsconfig ./tsconfig.json",

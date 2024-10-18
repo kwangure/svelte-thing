@@ -131,9 +131,11 @@ export function createComboboxInput<TValue>({
 						'11': 'both',
 					} as const
 				)[
-					`${+Boolean(combobox.hasInputCompletion)}${+Boolean(
-						combobox.filter,
-					)}` as '00' | '01' | '10' | '11'
+					`${+combobox.hasInputCompletion}${+combobox.hasFiltering}` as
+						| '00'
+						| '01'
+						| '10'
+						| '11'
 				];
 			},
 			get ['aria-controls']() {

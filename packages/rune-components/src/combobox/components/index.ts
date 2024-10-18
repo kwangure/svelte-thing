@@ -7,6 +7,6 @@ export { default as ListboxItem } from './listboxitem.svelte';
 export { default as Root } from './root.svelte';
 
 export type {
-	ComboboxFilter as Filter,
-	ComboboxFilterArg as FilterArg,
+	ComboboxGetOptions as GetOptions,
+	ComboboxGetOptionsArg as GetOptionsArg,
 } from '../runes';

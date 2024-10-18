@@ -45,6 +45,9 @@ describe('combobox', () => {
 			get focusedOption() {
 				return screen.getByAttribute('data-active-item', 'true');
 			},
+			get option() {
+				return screen.getByRole('option');
+			},
 			get selectedOption() {
 				return screen.getByRole('option', { selected: true });
 			},
@@ -298,6 +301,15 @@ describe('combobox', () => {
 			await expect.element(combobox).toHaveValue(options[1]?.value);
 			await expect(listbox.query()).not.toBeInTheDocument();
 			await expect.element(combobox).toHaveFocus();
+		});
+
+		test('Typing filters the combobox options', async () => {
+			const { combobox, option } = await renderScreen({
+				isOpen: true,
+			});
+			await expect(option.elements().length).toBe(options.length);
+			await userEvent.type(combobox, options[1]!.value);
+			await expect(option.elements().length).toBe(1);
 		});
 	});
 });

@@ -20,7 +20,6 @@
 
 	const {
 		children,
-		filter,
 		hasInputCompletion,
 		includesBaseElement,
 		isOpen,
@@ -31,7 +30,6 @@
 		...restProps
 	}: Props<TValue> = $props();
 	const combobox = setComboboxContext<TValue>({
-		filter,
 		hasInputCompletion,
 		includesBaseElement,
 		isOpen,
@@ -50,6 +48,10 @@
 				combobox.close();
 			}
 		},
+	);
+	skipEffect(
+		() => options,
+		(v) => combobox.setOptions(v),
 	);
 	skipEffect(
 		() => value,
