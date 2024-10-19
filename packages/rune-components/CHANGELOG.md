@@ -1,5 +1,17 @@
 # @svelte-thing/rune-components
 
+## 0.0.3
+
+### Patch Changes
+
+-   cba883c: Replace addEventListener calls w/ `import('svelte').on(...)`
+-   cba883c: Reset input value when closing popup
+-   Updated dependencies [cba883c]
+-   Updated dependencies [4223ccd]
+-   Updated dependencies [cba883c]
+    -   @svelte-thing/component-utils@0.0.5
+    -   @svelte-thing/components@0.0.34
+
 ## 0.0.2
 
 ### Patch Changes

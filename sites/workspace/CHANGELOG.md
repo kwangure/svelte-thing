@@ -1,5 +1,17 @@
 # workspace-site
 
+## 0.0.3
+
+### Patch Changes
+
+-   Updated dependencies [cba883c]
+-   Updated dependencies [4223ccd]
+-   Updated dependencies [cba883c]
+-   Updated dependencies [cba883c]
+    -   @svelte-thing/component-utils@0.0.5
+    -   @svelte-thing/rune-components@0.0.3
+    -   @svelte-thing/components@0.0.34
+
 ## 0.0.2
 
 ### Patch Changes

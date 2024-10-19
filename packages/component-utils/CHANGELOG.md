@@ -1,5 +1,11 @@
 # @svelte-thing/component-utils
 
+## 0.0.5
+
+### Patch Changes
+
+-   cba883c: Replace addEventListener calls w/ `import('svelte').on(...)`
+
 ## 0.0.4
 
 ### Patch Changes

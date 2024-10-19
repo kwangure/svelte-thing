@@ -1,5 +1,15 @@
 # @svelte-thing/components
 
+## 0.0.34
+
+### Patch Changes
+
+-   cba883c: Replace addEventListener calls w/ `import('svelte').on(...)`
+-   4223ccd: Accept all element props in elements
+-   cba883c: Convert sidebar to use runes
+-   Updated dependencies [cba883c]
+    -   @svelte-thing/component-utils@0.0.5
+
 ## 0.0.33
 
 ### Patch Changes
