@@ -16,7 +16,7 @@
 	} satisfies NullablyRequired<CreateComboboxListboxConfig<unknown>>);
 </script>
 
-<ul {...mergeProps(restProps, listbox.props)}>
+<ul {...mergeProps(listbox.props, restProps)}>
 	{@render children?.()}
 </ul>
 

@@ -30,7 +30,7 @@
 	} satisfies NullablyRequired<CreateComboboxListboxItemConfig<unknown>>);
 </script>
 
-<li {...mergeProps(restProps, listboxItem.props)} use:listboxItem.action>
+<li {...mergeProps(listboxItem.props, restProps)} use:listboxItem.action>
 	{@render children?.(listboxItem)}
 </li>
 

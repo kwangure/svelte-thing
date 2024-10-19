@@ -15,7 +15,7 @@
 	>);
 </script>
 
-<button {...mergeProps(restProps, button.props)}>
+<button {...mergeProps(button.props, restProps)}>
 	<span aria-hidden="true" style="padding: 0 2px;">▼</span>
 </button>
 

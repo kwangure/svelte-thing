@@ -15,6 +15,6 @@
 	>);
 </script>
 
-<label {...mergeProps(restProps, label.props)}>
+<label {...mergeProps(label.props, restProps)}>
 	{@render children?.()}
 </label>

@@ -51,7 +51,7 @@
 	);
 </script>
 
-<div {...mergeProps(restProps, combobox.props)} use:combobox.action>
+<div {...mergeProps(combobox.props, restProps)} use:combobox.action>
 	{@render children(combobox)}
 </div>
 

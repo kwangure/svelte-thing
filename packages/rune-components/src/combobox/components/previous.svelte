@@ -15,7 +15,7 @@
 	} satisfies NullablyRequired<CreateComboboxPreviousConfig<unknown>>);
 </script>
 
-<button {...mergeProps(restProps, previous.props)}>
+<button {...mergeProps(previous.props, restProps)}>
 	<span aria-hidden="true" style="padding: 0 2px;">◀</span>
 </button>
 
