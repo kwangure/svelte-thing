@@ -4,7 +4,6 @@ import { cancelEvent } from '@svelte-thing/dom-event';
 
 export interface CreateComboboxNextConfig<TValue> {
 	combobox: ComboboxRoot<TValue>;
-	label: string;
 }
 
 export type ComboboxNext = ReturnType<typeof createComboboxNext>;
@@ -21,7 +20,7 @@ export function createComboboxNext<TValue>(
 				return combobox.ids.listbox;
 			},
 			get ['aria-label']() {
-				return config.label;
+				return 'Next';
 			},
 			onmousedown(event: Event) {
 				cancelEvent(event);

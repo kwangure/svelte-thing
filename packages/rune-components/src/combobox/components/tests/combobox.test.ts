@@ -45,6 +45,9 @@ describe('combobox', () => {
 			get focusedOption() {
 				return screen.getByAttribute('data-active-item', 'true');
 			},
+			get option() {
+				return screen.getByRole('option');
+			},
 			get selectedOption() {
 				return screen.getByRole('option', { selected: true });
 			},
@@ -55,38 +58,52 @@ describe('combobox', () => {
 	}
 
 	describe('Modifying props', () => {
-		test('Setting the value updates the selected option', async () => {
-			const {
-				combobox,
-				listbox,
-				selectedOption,
-				focusedOption,
-				rerender,
-			} = await renderScreen({
-				isOpen: true,
-				value: options[1], // init
+		describe('Setting the value updates the selected option', () => {
+			test('init', async () => {
+				const { combobox, selectedOption, focusedOption } =
+					await renderScreen({
+						isOpen: true,
+						value: options[1],
+					});
+				await expect.element(combobox).toHaveValue(options[1]?.value);
+
+				await expect
+					.element(selectedOption)
+					.toHaveAccessibleName(options[1]?.value);
+				await expect
+					.element(focusedOption)
+					.toHaveAccessibleName(options[1]?.value);
 			});
-			await expect.element(combobox).toHaveValue(options[1]?.value);
-			await expect.element(listbox).toBeInTheDocument();
 
-			await expect
-				.element(selectedOption)
-				.toHaveAccessibleName(options[1]?.value);
-			await expect
-				.element(focusedOption)
-				.toHaveAccessibleName(options[1]?.value);
+			test('update', async () => {
+				const { combobox, selectedOption, focusedOption, rerender } =
+					await renderScreen({
+						isOpen: true,
+					});
 
-			await rerender({ value: options[2] }); // update
-			await expect
-				.element(selectedOption)
-				.toHaveAccessibleName(options[2]?.value);
-			await expect
-				.element(focusedOption)
-				.toHaveAccessibleName(options[2]?.value);
+				await rerender({ value: options[2] });
+				await expect.element(combobox).toHaveValue(options[2]?.value);
+				await expect
+					.element(selectedOption)
+					.toHaveAccessibleName(options[2]?.value);
+				await expect
+					.element(focusedOption)
+					.toHaveAccessibleName(options[2]?.value);
+			});
 
-			await rerender({ value: undefined }); // reset
-			await expect(selectedOption.query()).not.toBeInTheDocument();
-			await expect(focusedOption.query()).not.toBeInTheDocument();
+			test('reset', async () => {
+				const { combobox, selectedOption, focusedOption, rerender } =
+					await renderScreen({
+						isOpen: true,
+						value: options[2],
+					});
+				await expect.element(combobox).toHaveValue(options[2]?.value);
+
+				await rerender({ value: undefined });
+				await expect.element(combobox).toHaveValue('');
+				await expect(selectedOption.query()).not.toBeInTheDocument();
+				await expect(focusedOption.query()).not.toBeInTheDocument();
+			});
 		});
 	});
 
@@ -120,19 +137,19 @@ describe('combobox', () => {
 		});
 
 		test('ArrowDown opens popup and focuses selected item', async () => {
-			const { combobox, listbox, selectedOption } = await renderScreen({
+			const { combobox, focusedOption, listbox } = await renderScreen({
 				value: options[2],
 			});
 			await expect.element(combobox).toHaveValue(options[2]?.value);
 			await expect(listbox.query()).not.toBeInTheDocument();
-			await expect(selectedOption.query()).not.toBeInTheDocument();
+			await expect(focusedOption.query()).not.toBeInTheDocument();
 
 			await userEvent.keyboard('[ArrowDown]');
 			await expect.element(listbox).toBeInTheDocument();
 			await expect.element(listbox).toBeVisible();
-			await expect.element(selectedOption).toBeInTheDocument();
+			await expect.element(focusedOption).toBeInTheDocument();
 			await expect
-				.element(selectedOption)
+				.element(focusedOption)
 				.toHaveAccessibleName(options[2]?.value);
 		});
 
@@ -147,6 +164,23 @@ describe('combobox', () => {
 			await expect
 				.element(focusedOption)
 				.toHaveAccessibleName(options[options.length - 1]?.value);
+		});
+
+		test('ArrowUp opens popup and focuses selected item', async () => {
+			const { combobox, focusedOption, listbox } = await renderScreen({
+				value: options[2],
+			});
+			await expect.element(combobox).toHaveValue(options[2]?.value);
+			await expect(listbox.query()).not.toBeInTheDocument();
+			await expect(focusedOption.query()).not.toBeInTheDocument();
+
+			await userEvent.keyboard('[ArrowUp]');
+			await expect.element(listbox).toBeInTheDocument();
+			await expect.element(listbox).toBeVisible();
+			await expect.element(focusedOption).toBeInTheDocument();
+			await expect
+				.element(focusedOption)
+				.toHaveAccessibleName(options[2]?.value);
 		});
 
 		test('Alt+ArrowDown displays the popup without moving focus', async () => {
@@ -281,6 +315,15 @@ describe('combobox', () => {
 			await expect.element(combobox).toHaveValue(options[1]?.value);
 			await expect(listbox.query()).not.toBeInTheDocument();
 			await expect.element(combobox).toHaveFocus();
+		});
+
+		test('Typing filters the combobox options', async () => {
+			const { combobox, option } = await renderScreen({
+				isOpen: true,
+			});
+			await expect(option.elements().length).toBe(options.length);
+			await userEvent.type(combobox, options[1]!.value);
+			await expect(option.elements().length).toBe(1);
 		});
 	});
 });

@@ -20,22 +20,18 @@
 
 	const {
 		children,
-		filter,
 		hasInputCompletion,
 		includesBaseElement,
 		isOpen,
-		label,
 		options,
 		optionToString,
 		value,
 		...restProps
 	}: Props<TValue> = $props();
 	const combobox = setComboboxContext<TValue>({
-		filter,
 		hasInputCompletion,
 		includesBaseElement,
 		isOpen,
-		label,
 		options,
 		optionToString,
 		value,
@@ -43,13 +39,11 @@
 
 	skipEffect(
 		() => isOpen,
-		(isOpen2) => {
-			if (isOpen2) {
-				combobox.open();
-			} else {
-				combobox.close();
-			}
-		},
+		(i) => (i ? combobox.open() : combobox.close()),
+	);
+	skipEffect(
+		() => options,
+		(o) => combobox.setOptions(o),
 	);
 	skipEffect(
 		() => value,
@@ -57,7 +51,7 @@
 	);
 </script>
 
-<div {...mergeProps(restProps, combobox.props)} use:combobox.action>
+<div {...mergeProps(combobox.props, restProps)} use:combobox.action>
 	{@render children(combobox)}
 </div>
 

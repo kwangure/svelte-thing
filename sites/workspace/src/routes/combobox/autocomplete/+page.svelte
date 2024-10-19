@@ -12,7 +12,7 @@
 		value: Fruit;
 	}
 
-	const options: Option[] = [
+	const fruits: Option[] = [
 		{
 			key: '1',
 			value: { label: 'Apple', name: 'apple' },
@@ -47,31 +47,25 @@
 		},
 	];
 
-	function filter({ options, inputValue }: Combobox.FilterArg<Fruit>) {
-		return (
-			options?.filter(({ value }) => {
-				return value.name.includes(inputValue.toLowerCase());
-			}) ?? []
-		);
+	function options({ inputValue }: Combobox.GetOptionsArg) {
+		return fruits.filter(({ value }) => {
+			return value.name.includes(inputValue.trim().toLowerCase());
+		});
 	}
 </script>
 
 <div class="box">
 	<div class="text">
-		<Combobox.Root
-			label="Fruits"
-			{options}
-			{filter}
-			optionToString={(fruit) => fruit.label}
-		>
+		<Combobox.Root {options} optionToString={(fruit) => fruit.label}>
 			{#snippet children(combobox)}
+				<Combobox.Label>Fruits</Combobox.Label>
 				<Combobox.Controls>
 					<Combobox.Input />
-					<Combobox.Button label="Show Fruits" />
+					<Combobox.Button />
 				</Combobox.Controls>
 				{#if combobox.isOpen}
 					<Combobox.Listbox>
-						{#each combobox.filteredOptions as fruit}
+						{#each combobox.options as fruit}
 							<Combobox.ListboxItem item={fruit}>
 								{#snippet children(listboxItem)}
 									{#if listboxItem.isSelected}

@@ -40,7 +40,7 @@
 		"dev": {
 			"command": "vite dev",
 			"dependencies": [
-				"../../packages/rune-components:build"
+				"../../packages/rune-components:build:dev"
 			]
 		},
 		"pre-commit": {

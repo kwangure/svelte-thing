@@ -1,25 +1,22 @@
 import type { RuneComponent } from '../../types.js';
-import { invariant, mergeActions } from '@svelte-thing/component-utils';
+import { mergeActions } from '@svelte-thing/component-utils';
 import { onclickoutside } from '@svelte-thing/components/actions';
 import { uid } from 'uid';
 
 export interface CreateComboboxRootConfig<TValue> {
-	filter?: ComboboxFilter<TValue>;
 	hasInputCompletion?: false;
 	includesBaseElement?: boolean;
 	isOpen?: boolean;
-	label: string;
-	options?: ComboboxOption<TValue>[];
+	options: ComboboxGetOptions<TValue>;
 	optionToString?: (selectedValue: TValue) => string;
 	value?: ComboboxOption<TValue>;
 }
 
-export type ComboboxFilter<TValue> = (
-	args: ComboboxFilterArg<TValue>,
+export type ComboboxGetOptions<TValue> = (
+	args: ComboboxGetOptionsArg,
 ) => ComboboxOption<TValue>[];
 
-export interface ComboboxFilterArg<TValue> {
-	readonly options?: ComboboxOption<TValue>[];
+export interface ComboboxGetOptionsArg {
 	readonly inputValue: string;
 }
 
@@ -39,37 +36,34 @@ export function createComboboxRoot<TValue>(
 ) {
 	let inputValue = $state('');
 	let isOpen = $state(config.isOpen ?? false);
-	const options = $state(config.options);
 	let value = $state<ComboboxOption<TValue> | undefined>(config.value);
 	let visualFocus = $state<ComboboxVisualFocus>(isOpen ? 'listbox' : 'input');
 
-	const setActiveItemListeners = new Set<
-		(arg: ComboboxOption<TValue> | undefined) => void
-	>();
-	const setIsOpenListeners = new Set<(arg: boolean) => void>();
-	const setValueListeners = new Set<
-		(arg: ComboboxOption<TValue> | undefined) => void
-	>();
+	let getOptions = config.options;
+	let options = $state([] as ComboboxOption<TValue>[]);
+	let hasFiltering = $state(false);
+	setOptions();
 
-	const filteredOptions = $derived.by(() => {
-		if (typeof config.filter !== 'function') {
-			return config.options || [];
-		}
-		return config.filter({
-			options: config.options,
-			inputValue,
-		} satisfies ComboboxFilterArg<TValue>);
-	});
 	let activeItemIndex = $state(
-		filteredOptions.findIndex((o) => o.key === value?.key),
+		options.findIndex((o) => o.key === value?.key),
 	);
-	const activeItem = $derived(filteredOptions[activeItemIndex]);
+	const activeItem = $derived(options[activeItemIndex]);
+
+	type OptionListener = (arg: ComboboxOption<TValue> | undefined) => void;
+	const setActiveItemListeners = new Set<OptionListener>();
+	const setIsOpenListeners = new Set<(arg: boolean) => void>();
+	const setValueListeners = new Set<OptionListener>();
 
 	function setActiveItemIndex(index: number) {
 		activeItemIndex = index;
 		for (const listener of setActiveItemListeners) {
 			listener(activeItem);
 		}
+	}
+
+	function setInputValue(value: string) {
+		inputValue = value;
+		setOptions();
 	}
 
 	function setIsOpen(value: boolean) {
@@ -79,11 +73,28 @@ export function createComboboxRoot<TValue>(
 		}
 	}
 
+	function setOptions() {
+		// Whether the options are filtered based on `inputValue`
+		let wasFiltered = false;
+		options = getOptions({
+			get inputValue() {
+				wasFiltered = true;
+				return inputValue;
+			},
+		});
+		hasFiltering = wasFiltered;
+	}
+
+	function valueToString() {
+		if (config.optionToString && value) {
+			return config.optionToString(value.value);
+		}
+		return String(value?.value ?? '');
+	}
+
 	function close() {
 		visualFocus = 'input';
-		setActiveItemIndex(
-			filteredOptions.findIndex((o) => o.key === value?.key),
-		);
+		setActiveItemIndex(options.findIndex((o) => o.key === value?.key));
 		setIsOpen(false);
 	}
 
@@ -101,11 +112,8 @@ export function createComboboxRoot<TValue>(
 		get activeItemIndex() {
 			return activeItemIndex;
 		},
-		get filter() {
-			return config.filter;
-		},
-		get filteredOptions() {
-			return filteredOptions;
+		get hasFiltering() {
+			return hasFiltering;
 		},
 		get hasInputCompletion() {
 			return config.hasInputCompletion ?? false;
@@ -115,9 +123,6 @@ export function createComboboxRoot<TValue>(
 		},
 		get isOpen() {
 			return isOpen;
-		},
-		get label() {
-			return config.label;
 		},
 		get options() {
 			return options;
@@ -152,20 +157,10 @@ export function createComboboxRoot<TValue>(
 		open() {
 			setIsOpen(true);
 		},
-		setFirstItemActive() {
-			visualFocus = 'listbox';
-			setActiveItemIndex(0);
-		},
-		setInputValue(value: string) {
-			inputValue = value;
-		},
-		setLastItemActive() {
-			visualFocus = 'listbox';
-			setActiveItemIndex(filteredOptions.length - 1);
-		},
+		setInputValue,
 		setNextItemActive() {
 			const minValue = config.includesBaseElement ? -1 : 0;
-			const maxValue = filteredOptions.length - 1;
+			const maxValue = options.length - 1;
 			visualFocus =
 				activeItemIndex === maxValue && config.includesBaseElement
 					? 'input'
@@ -176,32 +171,43 @@ export function createComboboxRoot<TValue>(
 		},
 		setPreviousItemActive() {
 			const minValue = config.includesBaseElement ? -1 : 0;
-			const maxValue = filteredOptions.length - 1;
+			const maxValue = options.length - 1;
 			visualFocus = 'listbox';
 			setActiveItemIndex(
 				activeItemIndex <= minValue ? maxValue : activeItemIndex - 1,
 			);
 		},
 		setValue(v: ComboboxOption<TValue> | undefined) {
-			const index = filteredOptions.findIndex((o) => o.key === v?.key);
-			invariant(
-				index > -1 || v === undefined,
-				'`setValue(...)` argument must be in `filteredOptions`.',
-			);
 			value = v;
 			for (const fn of setValueListeners) {
 				fn(value);
 			}
-			if (activeItem?.key !== v?.key) {
-				setActiveItemIndex(index);
+			setInputValue(valueToString());
+			setActiveItemIndex(options.findIndex((o) => o.key === v?.key));
+		},
+		setOptions(g: ComboboxGetOptions<TValue>) {
+			getOptions = g;
+			setOptions();
+			const activeItemKey = activeItem?.key;
+			const valueKey = value?.key;
+			let findActiveItemIndex = -1;
+			let findValueIndex = -1;
+			for (let index = 0; index < options.length; index++) {
+				const key = options[index]?.key;
+				if (key == activeItemKey) findActiveItemIndex = index;
+				if (key == valueKey) findValueIndex = index;
+				if (findActiveItemIndex > 0 && findValueIndex > 0) break;
+			}
+			setActiveItemIndex(findActiveItemIndex);
+			if (findValueIndex == -1) {
+				value = undefined;
+				inputValue = '';
+				for (const fn of setValueListeners) {
+					fn(value);
+				}
 			}
 		},
-		valueToString() {
-			if (config.optionToString && value) {
-				return config.optionToString(value.value);
-			}
-			return String(value?.value ?? '');
-		},
+		valueToString,
 		props: {
 			'data-st-combobox-root': '',
 			onclickoutside() {

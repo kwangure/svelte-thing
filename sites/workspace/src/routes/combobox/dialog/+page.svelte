@@ -12,15 +12,7 @@
 
 	let isOpen = $state(false);
 
-	interface BookSummarySearchResult {
-		title: string;
-		tokens: {
-			title: [string, number][];
-			content: [string, number][];
-		};
-	}
-
-	function filter(combobox: Combobox.FilterArg<BookSummarySearchResult>) {
+	function options(combobox: Combobox.GetOptionsArg) {
 		const { inputValue } = combobox;
 		const results = searchBookSumarries(inputValue);
 		const highlightedResults = [];
@@ -54,7 +46,7 @@
 	<Dialog.Root open={isOpen} onclose={() => (isOpen = false)}>
 		<Combobox.Root
 			label="Search Documents"
-			{filter}
+			{options}
 			optionToString={(option) => option.title}
 		>
 			{#snippet children(combobox)}
@@ -75,7 +67,7 @@
 				</div>
 				{#if combobox.inputValue.trim()}
 					<div class="results block-section">
-						{#each combobox.filteredOptions as result}
+						{#each combobox.options as result}
 							<Combobox.ListboxItem item={result}>
 								<a href="#${result.key}">
 									<div class="title">

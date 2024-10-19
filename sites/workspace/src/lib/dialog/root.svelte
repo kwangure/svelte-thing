@@ -28,19 +28,19 @@
 	const dialog = createDialogRoot({ isModal, isOpen });
 	skipEffect(
 		() => hideOnInteractOutside,
-		($hide) => dialog.setHideOnInteractOutside($hide),
+		(h) => dialog.setHideOnInteractOutside(h),
 	);
 	skipEffect(
 		() => isModal,
-		($isModal) => dialog.setIsModal($isModal),
+		(i) => dialog.setIsModal(i),
 	);
 	skipEffect(
 		() => isOpen,
-		($isOpen) => ($isOpen ? dialog.open() : dialog.close()),
+		(i) => (i ? dialog.open() : dialog.close()),
 	);
 </script>
 
-<dialog {...mergeProps(restProps, dialog.props)} use:dialog.action>
+<dialog {...mergeProps(dialog.props, restProps)} use:dialog.action>
 	{@render children()}
 </dialog>
 

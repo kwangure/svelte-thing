@@ -14,27 +14,25 @@
 		value?: FruitOption;
 	}
 
-	const { isOpen, options, value }: Props = $props();
+	const { isOpen, options: fruits, value }: Props = $props();
 
-	function filter({ inputValue, options }: Combobox.FilterArg<Fruit>) {
-		return (
-			options?.filter((option) =>
-				option.value.toLowerCase().startsWith(inputValue.toLowerCase()),
-			) ?? []
+	function options({ inputValue }: Combobox.GetOptionsArg) {
+		return fruits.filter((fruit) =>
+			fruit.value.toLowerCase().includes(inputValue.toLowerCase()),
 		);
 	}
 </script>
 
-<Combobox.Root label="Favorite Fruits" {isOpen} {value} {options} {filter}>
+<Combobox.Root {isOpen} {value} {options}>
 	{#snippet children(combobox)}
+		<Combobox.Label>Favorite Fruits</Combobox.Label>
 		<Combobox.Controls>
 			<Combobox.Input />
-			<Combobox.Button label="Show Fruits" />
+			<Combobox.Button />
 		</Combobox.Controls>
-		{console.log()}
 		{#if combobox.isOpen}
 			<Combobox.Listbox>
-				{#each combobox.filteredOptions as option}
+				{#each combobox.options as option}
 					<Combobox.ListboxItem item={option}>
 						{option.value}
 					</Combobox.ListboxItem>

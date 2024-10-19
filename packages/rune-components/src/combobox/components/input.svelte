@@ -15,7 +15,7 @@
 	>);
 </script>
 
-<input {...mergeProps(props, input.props)} use:input.action />
+<input {...mergeProps(input.props, props)} use:input.action />
 
 <style>
 	input {

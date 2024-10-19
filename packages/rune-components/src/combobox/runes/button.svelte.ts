@@ -3,7 +3,6 @@ import type { RuneComponent } from '../../types.js';
 
 export interface CreateComboboxButtonConfig<TValue> {
 	combobox: ComboboxRoot<TValue>;
-	label: string;
 }
 
 export type ComboboxButton = ReturnType<typeof createComboboxButton>;
@@ -23,7 +22,7 @@ export function createComboboxButton<TValue>(
 				return combobox.isOpen;
 			},
 			get ['aria-label']() {
-				return config.label;
+				return 'Show suggestions';
 			},
 			onclick() {
 				if (combobox.isOpen) {
