@@ -1,5 +1,5 @@
 import type { RuneComponent } from '../../types.js';
-import { invariant, mergeActions } from '@svelte-thing/component-utils';
+import { mergeActions } from '@svelte-thing/component-utils';
 import { onclickoutside } from '@svelte-thing/components/actions';
 import { uid } from 'uid';
 
@@ -42,7 +42,7 @@ export function createComboboxRoot<TValue>(
 	let getOptions = config.options;
 	let options = $state([] as ComboboxOption<TValue>[]);
 	let hasFiltering = $state(false);
-	setOptions(getOptions);
+	setOptions();
 
 	let activeItemIndex = $state(
 		options.findIndex((o) => o.key === value?.key),
@@ -61,6 +61,11 @@ export function createComboboxRoot<TValue>(
 		}
 	}
 
+	function setInputValue(value: string) {
+		inputValue = value;
+		setOptions();
+	}
+
 	function setIsOpen(value: boolean) {
 		isOpen = value;
 		for (const fn of setIsOpenListeners) {
@@ -68,7 +73,7 @@ export function createComboboxRoot<TValue>(
 		}
 	}
 
-	function setOptions(getOptions: ComboboxGetOptions<TValue>) {
+	function setOptions() {
 		// Whether the options are filtered based on `inputValue`
 		let wasFiltered = false;
 		options = getOptions({
@@ -78,6 +83,13 @@ export function createComboboxRoot<TValue>(
 			},
 		});
 		hasFiltering = wasFiltered;
+	}
+
+	function valueToString() {
+		if (config.optionToString && value) {
+			return config.optionToString(value.value);
+		}
+		return String(value?.value ?? '');
 	}
 
 	function close() {
@@ -145,10 +157,7 @@ export function createComboboxRoot<TValue>(
 		open() {
 			setIsOpen(true);
 		},
-		setInputValue(value: string) {
-			inputValue = value;
-			setOptions(getOptions);
-		},
+		setInputValue,
 		setNextItemActive() {
 			const minValue = config.includesBaseElement ? -1 : 0;
 			const maxValue = options.length - 1;
@@ -169,22 +178,16 @@ export function createComboboxRoot<TValue>(
 			);
 		},
 		setValue(v: ComboboxOption<TValue> | undefined) {
-			const index = options.findIndex((o) => o.key === v?.key);
-			invariant(
-				index > -1 || v === undefined,
-				'`setValue(...)` argument must be in `options`.',
-			);
 			value = v;
 			for (const fn of setValueListeners) {
 				fn(value);
 			}
-			if (activeItem?.key !== v?.key) {
-				setActiveItemIndex(index);
-			}
+			setInputValue(valueToString());
+			setActiveItemIndex(options.findIndex((o) => o.key === v?.key));
 		},
 		setOptions(g: ComboboxGetOptions<TValue>) {
 			getOptions = g;
-			setOptions(getOptions);
+			setOptions();
 			const activeItemKey = activeItem?.key;
 			const valueKey = value?.key;
 			let findActiveItemIndex = -1;
@@ -198,17 +201,13 @@ export function createComboboxRoot<TValue>(
 			setActiveItemIndex(findActiveItemIndex);
 			if (findValueIndex == -1) {
 				value = undefined;
+				inputValue = '';
 				for (const fn of setValueListeners) {
 					fn(value);
 				}
 			}
 		},
-		valueToString() {
-			if (config.optionToString && value) {
-				return config.optionToString(value.value);
-			}
-			return String(value?.value ?? '');
-		},
+		valueToString,
 		props: {
 			'data-st-combobox-root': '',
 			onclickoutside() {
