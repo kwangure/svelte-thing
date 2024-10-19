@@ -127,20 +127,19 @@
 	],
 	"dependencies": {
 		"@mdi/js": "^7.2.96",
-		"@melt-ui/svelte": "^0.76.3",
-		"@svelte-thing/component-utils": "^0.0.4",
+		"@svelte-thing/component-utils": "^0.0.5",
 		"esm-env": "^1.0.0",
 		"uid": "^2.0.2"
 	},
 	"devDependencies": {
 		"@sveltejs/package": "^2.3.5",
-		"publint": "^0.2.6",
+		"publint": "^0.2.11",
 		"svelte": "^5.0.0-next.265",
 		"svelte-check": "^4.0.0",
-		"typescript": "^5.5.0"
+		"typescript": "^5.6.0"
 	},
 	"peerDependencies": {
-		"svelte": "^5.0.0-next.264"
+		"svelte": "^5.0.0-next.265"
 	},
 	"license": "MIT",
 	"type": "module"
