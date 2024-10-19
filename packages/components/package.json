@@ -1,6 +1,6 @@
 {
 	"name": "@svelte-thing/components",
-	"version": "0.0.35",
+	"version": "0.0.36",
 	"scripts": {
 		"build": "wireit",
 		"build:dev": "wireit",
@@ -127,7 +127,7 @@
 	],
 	"dependencies": {
 		"@mdi/js": "^7.2.96",
-		"@svelte-thing/component-utils": "^0.0.5",
+		"@svelte-thing/component-utils": "^0.0.6",
 		"esm-env": "^1.0.0",
 		"uid": "^2.0.2"
 	},

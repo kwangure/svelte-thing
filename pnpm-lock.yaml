@@ -70,8 +70,8 @@ importers:
         specifier: ^7.2.96
         version: 7.3.67
       '@svelte-thing/component-utils':
-        specifier: ^0.0.5
-        version: 0.0.5
+        specifier: ^0.0.6
+        version: 0.0.6
       esm-env:
         specifier: ^1.0.0
         version: 1.0.0
@@ -116,14 +116,14 @@ importers:
   packages/rune-components:
     dependencies:
       '@svelte-thing/component-utils':
+        specifier: ^0.0.6
+        version: 0.0.6
+      '@svelte-thing/components':
+        specifier: ^0.0.36
+        version: 0.0.36(svelte@5.0.0-next.265)
+      '@svelte-thing/dom-event':
         specifier: ^0.0.5
         version: 0.0.5
-      '@svelte-thing/components':
-        specifier: ^0.0.34
-        version: 0.0.34(svelte@5.0.0-next.265)
-      '@svelte-thing/dom-event':
-        specifier: ^0.0.4
-        version: 0.0.4
       uid:
         specifier: ^2.0.2
         version: 2.0.2
@@ -462,15 +462,6 @@ packages:
     resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
-  '@floating-ui/core@1.6.0':
-    resolution: {integrity: sha512-PcF++MykgmTj3CIyOQbKA/hDzOAiqI3mhuoN44WRCopIs1sgoDoU4oty4Jtqaj/y3oDU6fnVSm4QG0a3t5i0+g==}
-
-  '@floating-ui/dom@1.6.3':
-    resolution: {integrity: sha512-RnDthu3mzPlQ31Ss/BTwQ1zjzIhr3lk1gZB1OC56h/1vEtaXkESrOqL5fQVMfXpwGtRwX+YsZBdyHtJMQnkArw==}
-
-  '@floating-ui/utils@0.2.1':
-    resolution: {integrity: sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==}
-
   '@humanwhocodes/config-array@0.11.13':
     resolution: {integrity: sha512-JSBDMiDKSzQVngfRjOdFXgFfklaXI4K9nLF49Auh21lmBWRLIK3+xTErTWD4KU54pb6coM6ESE7Awz/FNU3zgQ==}
     engines: {node: '>=10.10.0'}
@@ -513,9 +504,6 @@ packages:
     resolution: {integrity: sha512-XvJRx+2KR3YXyYtPUUy+qd9i7p+GO9Ko6VIIpWlBrpWwXDv8WLFeHTxz35CfQFUiBMLXlGHhGzys7lqit9gWag==}
     engines: {node: '>=18'}
 
-  '@internationalized/date@3.5.2':
-    resolution: {integrity: sha512-vo1yOMUt2hzp63IutEaTUxROdvQg1qlMRsbCvbay2AK2Gai7wIgCyK5weEX3nHkiLgo4qCXHijFNC/ILhlRpOQ==}
-
   '@jridgewell/gen-mapping@0.3.5':
     resolution: {integrity: sha512-IzL8ZoEDIBRWEzlCcRhOaCupYyN5gdIK+Q6fbFdPDg6HqX6jpkItn7DFIpW9LQzXG6Df9sA7+OKnq0qlz/GaQg==}
     engines: {node: '>=6.0.0'}
@@ -546,11 +534,6 @@ packages:
 
   '@mdi/js@7.3.67':
     resolution: {integrity: sha512-MnRjknFqpTC6FifhGHjZ0+QYq2bAkZFQqIj8JA2AdPZbBxUvr8QSgB2yPAJ8/ob/XkR41xlg5majDR3c1JP1hw==}
-
-  '@melt-ui/svelte@0.76.3':
-    resolution: {integrity: sha512-fEtwHnOVLH0eNwtr+7pX5JQVtOL2XWVFA0/xrNU0yL6NkEpv++4NUwaaulGZC4nVmVG/gIA1JK2fx5M0u01TlA==}
-    peerDependencies:
-      svelte: '>=3 <5'
 
   '@mswjs/interceptors@0.35.9':
     resolution: {integrity: sha512-SSnyl/4ni/2ViHKkiZb8eajA/eN1DNFaHjhGiLUdZvDz6PKF4COSf/17xqSz64nOo2Ia29SA6B2KNCsyCbVmaQ==}
@@ -660,19 +643,16 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@svelte-thing/component-utils@0.0.4':
-    resolution: {integrity: sha512-w8p78SBAzM+zE68f2qfQqaxGcsxenpuXHNZA20tBo14TovunSz4khtxh8parfUjt6B2wd/MHIy5xqMM0b7Fj4A==}
+  '@svelte-thing/component-utils@0.0.6':
+    resolution: {integrity: sha512-UDuYpVd1IysT6Kp+oE60L0dl4lydShluja6teHw+PJpgMQLNsnRpA5Ui7t7BLb710MnKb8Qj87EZj6s+gfi6gg==}
 
-  '@svelte-thing/component-utils@0.0.5':
-    resolution: {integrity: sha512-mso9CFbYpzjaQgjpKUFbAObVzK3OE2ClmK6Nl0r0z/HRJgxi8FUc/68eW8jV6n9fmtFB6s/VUopV8y6dQ07k5Q==}
-
-  '@svelte-thing/components@0.0.34':
-    resolution: {integrity: sha512-YypZw9A8GVEBlMKI4QZGfjba4/yO++lXCpCJunjgnPYgLXfblyW60kjNpUgPqrq9fn6IqCWs8GMc9Hvo0uwJgw==}
+  '@svelte-thing/components@0.0.36':
+    resolution: {integrity: sha512-/s2EOVBRZY+43SqhmmV4wFn5GCXMIkEdno7zKt8yP1Y9y+7cFhVHcL2ZL84HVsLWJrBHfbEsoJgbcg5uOa2jew==}
     peerDependencies:
-      svelte: ^5.0.0-next.264
+      svelte: ^5.0.0-next.265
 
-  '@svelte-thing/dom-event@0.0.4':
-    resolution: {integrity: sha512-lGWJyZRyG0xr0hpOh79TQDMWJ5M8BN3GxrSCg/Ve/dE3uaTp1HJ9Mrmse5EIno0l2+oM9Xb6dWFUw5X0G8OTXw==}
+  '@svelte-thing/dom-event@0.0.5':
+    resolution: {integrity: sha512-e2dBoa6U8NJxUxnlmqvjJEH431BH32Obtjlxw/HPf1JwDRCr1YqmMEezJ4xvePelyIzViqvyQ7Xu68m+pzx/cg==}
 
   '@sveltejs/adapter-auto@3.0.0':
     resolution: {integrity: sha512-UNWSs/rOReBRfI/xFwSO2WYF1a7PT74SrWOHJmSNLY3Lq+zbH0uuvnlP+TmrTUBvOTkou3WJDjL6lK3n6aOUgQ==}
@@ -709,9 +689,6 @@ packages:
     peerDependencies:
       svelte: ^5.0.0-next.96 || ^5.0.0
       vite: ^5.0.0
-
-  '@swc/helpers@0.5.8':
-    resolution: {integrity: sha512-lruDGw3pnfM3wmZHeW7JuhkGQaJjPyiKjxeGhdmfoOT53Ic9qb5JLDNaK2HUdl1zLDeX28H221UvKjfdvSLVMg==}
 
   '@testing-library/dom@10.4.0':
     resolution: {integrity: sha512-pemlzrSESWbdAloYml3bAJMEfNh1Z7EduzqPKprCH5S341frlpYnUEW0H72dLxa6IsYr+mPno20GiSm+h9dEdQ==}
@@ -1380,9 +1357,6 @@ packages:
   flatted@3.2.9:
     resolution: {integrity: sha512-36yxDn5H7OFZQla0/jFJmbIKTdZAQHngCedGxiMmpNfEZM0sdEeT+WczLQrjK6D7o2aiyLYDnkw0R3JK0Qv1RQ==}
 
-  focus-trap@7.5.4:
-    resolution: {integrity: sha512-N7kHdlgsO/v+iD/dMoJKtsSqs5Dz/dXZVebRgJw23LDk+jMi/974zyiOYDziY2JPp8xivq9BmUGwIJMiuSBi7w==}
-
   for-each@0.3.3:
     resolution: {integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==}
 
@@ -1886,11 +1860,6 @@ packages:
   nanoid@3.3.7:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
-    hasBin: true
-
-  nanoid@5.0.6:
-    resolution: {integrity: sha512-rRq0eMHoGZxlvaFOUdK1Ev83Bd1IgzzR+WJ3IbDJ7QOSdAxYjlurSPqFs9s4lJg29RT6nPwizFtJhQS6V5xgiA==}
-    engines: {node: ^18 || >=20}
     hasBin: true
 
   natural-compare@1.4.0:
@@ -2407,9 +2376,6 @@ packages:
 
   symbol-tree@3.2.4:
     resolution: {integrity: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==}
-
-  tabbable@6.2.0:
-    resolution: {integrity: sha512-Cat63mxsVJlzYvN51JmVXIgNoUokrIaT2zLclCXjRd8boZ0004U4KCs/sToJ75C6sdlByWxpYnb5Boif1VSFew==}
 
   term-size@2.2.1:
     resolution: {integrity: sha512-wK0Ri4fOGjv/XPy8SBHZChl8CM7uMc5VML7SqiQ0zG7+J5Vr+RMQDoHa2CNT6KHUnTGIXH34UDMkPzAUyapBZg==}
@@ -3062,17 +3028,6 @@ snapshots:
 
   '@eslint/js@8.57.0': {}
 
-  '@floating-ui/core@1.6.0':
-    dependencies:
-      '@floating-ui/utils': 0.2.1
-
-  '@floating-ui/dom@1.6.3':
-    dependencies:
-      '@floating-ui/core': 1.6.0
-      '@floating-ui/utils': 0.2.1
-
-  '@floating-ui/utils@0.2.1': {}
-
   '@humanwhocodes/config-array@0.11.13':
     dependencies:
       '@humanwhocodes/object-schema': 2.0.1
@@ -3125,10 +3080,6 @@ snapshots:
     dependencies:
       mute-stream: 1.0.0
 
-  '@internationalized/date@3.5.2':
-    dependencies:
-      '@swc/helpers': 0.5.8
-
   '@jridgewell/gen-mapping@0.3.5':
     dependencies:
       '@jridgewell/set-array': 1.2.1
@@ -3165,16 +3116,6 @@ snapshots:
       read-yaml-file: 1.1.0
 
   '@mdi/js@7.3.67': {}
-
-  '@melt-ui/svelte@0.76.3(svelte@5.0.0-next.265)':
-    dependencies:
-      '@floating-ui/core': 1.6.0
-      '@floating-ui/dom': 1.6.3
-      '@internationalized/date': 3.5.2
-      dequal: 2.0.3
-      focus-trap: 7.5.4
-      nanoid: 5.0.6
-      svelte: 5.0.0-next.265
 
   '@mswjs/interceptors@0.35.9':
     dependencies:
@@ -3256,24 +3197,19 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.22.5':
     optional: true
 
-  '@svelte-thing/component-utils@0.0.4':
+  '@svelte-thing/component-utils@0.0.6':
     dependencies:
       esm-env: 1.0.0
 
-  '@svelte-thing/component-utils@0.0.5':
-    dependencies:
-      esm-env: 1.0.0
-
-  '@svelte-thing/components@0.0.34(svelte@5.0.0-next.265)':
+  '@svelte-thing/components@0.0.36(svelte@5.0.0-next.265)':
     dependencies:
       '@mdi/js': 7.3.67
-      '@melt-ui/svelte': 0.76.3(svelte@5.0.0-next.265)
-      '@svelte-thing/component-utils': 0.0.4
+      '@svelte-thing/component-utils': 0.0.6
       esm-env: 1.0.0
       svelte: 5.0.0-next.265
       uid: 2.0.2
 
-  '@svelte-thing/dom-event@0.0.4': {}
+  '@svelte-thing/dom-event@0.0.5': {}
 
   '@sveltejs/adapter-auto@3.0.0(@sveltejs/kit@2.6.1(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.265)(vite@5.4.8(@types/node@22.7.5)))(svelte@5.0.0-next.265)(vite@5.4.8(@types/node@22.7.5)))':
     dependencies:
@@ -3330,10 +3266,6 @@ snapshots:
       vitefu: 1.0.2(vite@5.4.8(@types/node@22.7.5))
     transitivePeerDependencies:
       - supports-color
-
-  '@swc/helpers@0.5.8':
-    dependencies:
-      tslib: 2.6.2
 
   '@testing-library/dom@10.4.0':
     dependencies:
@@ -4161,10 +4093,6 @@ snapshots:
 
   flatted@3.2.9: {}
 
-  focus-trap@7.5.4:
-    dependencies:
-      tabbable: 6.2.0
-
   for-each@0.3.3:
     dependencies:
       is-callable: 1.2.7
@@ -4670,8 +4598,6 @@ snapshots:
   mute-stream@1.0.0: {}
 
   nanoid@3.3.7: {}
-
-  nanoid@5.0.6: {}
 
   natural-compare@1.4.0: {}
 
@@ -5188,8 +5114,6 @@ snapshots:
       zimmerframe: 1.1.2
 
   symbol-tree@3.2.4: {}
-
-  tabbable@6.2.0: {}
 
   term-size@2.2.1: {}
 

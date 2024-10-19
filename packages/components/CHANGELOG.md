@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.36
+
+### Patch Changes
+
+-   Upgrade dependencies
+
 ## 0.0.35
 
 ### Patch Changes
