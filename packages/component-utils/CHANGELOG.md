@@ -1,5 +1,11 @@
 # @svelte-thing/component-utils
 
+## 0.0.6
+
+### Patch Changes
+
+-   7fdcb22: Update dependencies
+
 ## 0.0.5
 
 ### Patch Changes

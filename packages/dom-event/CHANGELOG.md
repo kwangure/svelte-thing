@@ -1,5 +1,11 @@
 # @svelte-thing/dom-event
 
+## 0.0.5
+
+### Patch Changes
+
+-   7fdcb22: Update dependencies
+
 ## 0.0.4
 
 ### Patch Changes

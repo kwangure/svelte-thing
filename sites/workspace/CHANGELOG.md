@@ -1,5 +1,15 @@
 # workspace-site
 
+## 0.0.4
+
+### Patch Changes
+
+-   Updated dependencies [7fdcb22]
+    -   @svelte-thing/component-utils@0.0.6
+    -   @svelte-thing/rune-components@0.0.4
+    -   @svelte-thing/components@0.0.35
+    -   @svelte-thing/dom-event@0.0.5
+
 ## 0.0.3
 
 ### Patch Changes
