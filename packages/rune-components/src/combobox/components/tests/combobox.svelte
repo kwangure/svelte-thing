@@ -34,14 +34,7 @@
 			<Combobox.Listbox>
 				{#each combobox.options as option}
 					<Combobox.ListboxItem item={option}>
-						{#snippet children(listboxItem)}
-							{#if listboxItem.isSelected}
-								<span>✓</span>
-							{/if}
-							<span style="grid-column-start: 2;">
-								{option.value}
-							</span>
-						{/snippet}
+						{option.value}
 					</Combobox.ListboxItem>
 				{/each}
 			</Combobox.Listbox>
