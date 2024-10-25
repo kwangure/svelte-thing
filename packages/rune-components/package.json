@@ -84,6 +84,9 @@
 		}
 	},
 	"exports": {
+		".": {
+			"types": "./dist/types.d.ts"
+		},
 		"./combobox": {
 			"types": "./dist/combobox/components/index.d.ts",
 			"svelte": "./dist/combobox/components/index.js",

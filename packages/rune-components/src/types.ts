@@ -1,6 +1,6 @@
 import type { MouseEventHandler, SvelteHTMLElements } from 'svelte/elements';
 
-export type RemoveIndexSignature<T> = {
+type RemoveIndexSignature<T> = {
 	[K in keyof T as string extends K
 		? never
 		: number extends K
