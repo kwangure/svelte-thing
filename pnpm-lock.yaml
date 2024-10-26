@@ -70,8 +70,8 @@ importers:
         specifier: ^7.2.96
         version: 7.3.67
       '@svelte-thing/component-utils':
-        specifier: ^0.0.6
-        version: 0.0.6
+        specifier: ^0.0.7
+        version: 0.0.7(svelte@5.1.3)
       esm-env:
         specifier: ^1.0.0
         version: 1.0.0
@@ -86,11 +86,11 @@ importers:
         specifier: ^0.2.11
         version: 0.2.11
       svelte:
-        specifier: ^5.0.0-next.265
+        specifier: ^5.0.0
         version: 5.1.3
       svelte-check:
-        specifier: ^4.0.0
-        version: 4.0.4(svelte@5.1.3)(typescript@5.6.2)
+        specifier: ^4.0.5
+        version: 4.0.5(svelte@5.1.3)(typescript@5.6.2)
       typescript:
         specifier: ^5.6.0
         version: 5.6.2
@@ -645,6 +645,11 @@ packages:
 
   '@svelte-thing/component-utils@0.0.6':
     resolution: {integrity: sha512-UDuYpVd1IysT6Kp+oE60L0dl4lydShluja6teHw+PJpgMQLNsnRpA5Ui7t7BLb710MnKb8Qj87EZj6s+gfi6gg==}
+
+  '@svelte-thing/component-utils@0.0.7':
+    resolution: {integrity: sha512-h8e3t7WzpVa1PFHFdIFF4QGv4VVRW8+gCEz05unI+DvyjeifB8SrJcuO/0qdiMhERrL0M22r6hlcJxIz46BOUA==}
+    peerDependencies:
+      svelte: ^5.0.0
 
   '@svelte-thing/components@0.0.36':
     resolution: {integrity: sha512-/s2EOVBRZY+43SqhmmV4wFn5GCXMIkEdno7zKt8yP1Y9y+7cFhVHcL2ZL84HVsLWJrBHfbEsoJgbcg5uOa2jew==}
@@ -2365,6 +2370,14 @@ packages:
       svelte: ^4.0.0 || ^5.0.0-next.0
       typescript: '>=5.0.0'
 
+  svelte-check@4.0.5:
+    resolution: {integrity: sha512-icBTBZ3ibBaywbXUat3cK6hB5Du+Kq9Z8CRuyLmm64XIe2/r+lQcbuBx/IQgsbrC+kT2jQ0weVpZSSRIPwB6jQ==}
+    engines: {node: '>= 18.0.0'}
+    hasBin: true
+    peerDependencies:
+      svelte: ^4.0.0 || ^5.0.0-next.0
+      typescript: '>=5.0.0'
+
   svelte-eslint-parser@0.41.1:
     resolution: {integrity: sha512-08ndI6zTghzI8SuJAFpvMbA/haPSGn3xz19pjre19yYMw8Nw/wQJ2PrZBI/L8ijGTgtkWCQQiLLy+Z1tfaCwNA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -3249,6 +3262,11 @@ snapshots:
   '@svelte-thing/component-utils@0.0.6':
     dependencies:
       esm-env: 1.0.0
+
+  '@svelte-thing/component-utils@0.0.7(svelte@5.1.3)':
+    dependencies:
+      esm-env: 1.0.0
+      svelte: 5.1.3
 
   '@svelte-thing/components@0.0.36(svelte@5.1.3)':
     dependencies:
@@ -5146,6 +5164,18 @@ snapshots:
   supports-preserve-symlinks-flag@1.0.0: {}
 
   svelte-check@4.0.4(svelte@5.1.3)(typescript@5.6.2):
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.25
+      chokidar: 4.0.1
+      fdir: 6.3.0
+      picocolors: 1.1.0
+      sade: 1.8.1
+      svelte: 5.1.3
+      typescript: 5.6.2
+    transitivePeerDependencies:
+      - picomatch
+
+  svelte-check@4.0.5(svelte@5.1.3)(typescript@5.6.2):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       chokidar: 4.0.1
