@@ -1,5 +1,11 @@
 # @svelte-thing/component-utils
 
+## 0.0.7
+
+### Patch Changes
+
+-   1d7bc4a: Upgrade to Svelte 5
+
 ## 0.0.6
 
 ### Patch Changes
