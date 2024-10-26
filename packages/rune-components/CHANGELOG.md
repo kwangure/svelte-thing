@@ -1,5 +1,13 @@
 # @svelte-thing/rune-components
 
+## 0.0.7
+
+### Patch Changes
+
+-   ca33179: Upgrade to Svelte 5
+-   Updated dependencies [a08bcd5]
+    -   @svelte-thing/components@0.0.38
+
 ## 0.0.6
 
 ### Patch Changes

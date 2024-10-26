@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.38
+
+### Patch Changes
+
+-   a08bcd5: Upgrade Svelte 5
+
 ## 0.0.37
 
 ### Patch Changes
