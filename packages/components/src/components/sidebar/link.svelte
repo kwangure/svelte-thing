@@ -40,9 +40,7 @@
 			var(--st-color-neutral-200)
 		);
 	}
-	[aria-current='true'],
-	[aria-current='location'],
-	[aria-current='page'] {
+	[aria-current]:not([aria-current='false']) {
 		--_background-color-dark: var(--st-color-preference-dark)
 			var(--st-color-blue-200);
 		background-color: var(
@@ -52,9 +50,7 @@
 		--_color-dark: var(--st-color-preference-dark) var(--st-color-blue-700);
 		color: var(--_color-dark, var(--st-color-blue-600));
 	}
-	[aria-current='true']:hover,
-	[aria-current='location']:hover,
-	[aria-current='page']:hover {
+	[aria-current]:not([aria-current='false']) {
 		--_background-color-dark: var(--st-color-preference-dark)
 			var(--st-color-blue-100);
 		background-color: var(

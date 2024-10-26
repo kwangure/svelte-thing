@@ -41,4 +41,21 @@
 			var(--st-color-neutral-200)
 		);
 	}
+	[aria-current]:not([aria-current='false']) {
+		--_background-color-dark: var(--st-color-preference-dark)
+			var(--st-color-neutral-700);
+		background-color: var(
+			--_background-color-dark,
+			var(--st-color-neutral-200)
+		);
+		color: var(--st-color-preference-dark) var(--st-color-neutral-300);
+	}
+	[aria-current]:not([aria-current='false']):hover {
+		--_background-color-dark: var(--st-color-preference-dark)
+			var(--st-color-neutral-600);
+		background-color: var(
+			--_background-color-dark,
+			var(--st-color-neutral-300)
+		);
+	}
 </style>
