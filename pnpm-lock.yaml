@@ -119,8 +119,8 @@ importers:
         specifier: ^0.0.7
         version: 0.0.7(svelte@5.1.3)
       '@svelte-thing/components':
-        specifier: ^0.0.37
-        version: 0.0.37(svelte@5.1.3)
+        specifier: ^0.0.39
+        version: 0.0.39(svelte@5.1.3)
       '@svelte-thing/dom-event':
         specifier: ^0.0.5
         version: 0.0.5
@@ -643,18 +643,15 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@svelte-thing/component-utils@0.0.6':
-    resolution: {integrity: sha512-UDuYpVd1IysT6Kp+oE60L0dl4lydShluja6teHw+PJpgMQLNsnRpA5Ui7t7BLb710MnKb8Qj87EZj6s+gfi6gg==}
-
   '@svelte-thing/component-utils@0.0.7':
     resolution: {integrity: sha512-h8e3t7WzpVa1PFHFdIFF4QGv4VVRW8+gCEz05unI+DvyjeifB8SrJcuO/0qdiMhERrL0M22r6hlcJxIz46BOUA==}
     peerDependencies:
       svelte: ^5.0.0
 
-  '@svelte-thing/components@0.0.37':
-    resolution: {integrity: sha512-9glMLjF9kTnENnJRYg+H3C0k/YOFlzOout7bL9fQ6fetyfPtn5bzxrQ7a0PDwolGjI1FrVVipvYH8AmuOjtTfg==}
+  '@svelte-thing/components@0.0.39':
+    resolution: {integrity: sha512-t8J8wszJpo4ICUO3lVZE1eHs0wL1WLOfjmNoT6kyQq68ZXcEnrK0pT8b1hgHlo43aBKaws0V7enuIgY3nmhniw==}
     peerDependencies:
-      svelte: ^5.0.0-next.265
+      svelte: ^5.0.0
 
   '@svelte-thing/dom-event@0.0.5':
     resolution: {integrity: sha512-e2dBoa6U8NJxUxnlmqvjJEH431BH32Obtjlxw/HPf1JwDRCr1YqmMEezJ4xvePelyIzViqvyQ7Xu68m+pzx/cg==}
@@ -3244,19 +3241,15 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.22.5':
     optional: true
 
-  '@svelte-thing/component-utils@0.0.6':
-    dependencies:
-      esm-env: 1.0.0
-
   '@svelte-thing/component-utils@0.0.7(svelte@5.1.3)':
     dependencies:
       esm-env: 1.0.0
       svelte: 5.1.3
 
-  '@svelte-thing/components@0.0.37(svelte@5.1.3)':
+  '@svelte-thing/components@0.0.39(svelte@5.1.3)':
     dependencies:
       '@mdi/js': 7.3.67
-      '@svelte-thing/component-utils': 0.0.6
+      '@svelte-thing/component-utils': 0.0.7(svelte@5.1.3)
       esm-env: 1.0.0
       svelte: 5.1.3
       uid: 2.0.2
