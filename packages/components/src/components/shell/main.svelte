@@ -19,6 +19,7 @@
 		grid-row-end: 3;
 		grid-row-start: 2;
 		grid-template-columns: [prose-start] 1fr [prose-end outline-start] min-content [outline-end];
+		min-height: 0px;
 		min-width: 0px;
 	}
 </style>

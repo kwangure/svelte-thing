@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.39
+
+### Patch Changes
+
+-   6513c17: Set `<Shell.Main />` `max-height` to `0`
+
 ## 0.0.38
 
 ### Patch Changes
