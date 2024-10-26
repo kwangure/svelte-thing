@@ -1,5 +1,11 @@
 # @svelte-thing/rune-components
 
+## 0.0.6
+
+### Patch Changes
+
+-   91e006c: Export rune component types
+
 ## 0.0.5
 
 ### Patch Changes
