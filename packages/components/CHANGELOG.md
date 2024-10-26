@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.37
+
+### Patch Changes
+
+-   2c0b6bf: Add Navbar.Link hover styles
+
 ## 0.0.36
 
 ### Patch Changes
