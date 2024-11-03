@@ -1,5 +1,11 @@
 # @svelte-thing/component-utils
 
+## 0.0.8
+
+### Patch Changes
+
+-   Include sources for sourceMap
+
 ## 0.0.7
 
 ### Patch Changes
