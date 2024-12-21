@@ -13,8 +13,10 @@
 </label>
 
 <style>
-	label {
-		display: flex;
-		gap: var(--st-size-1);
+	@layer component {
+		label {
+			display: flex;
+			gap: var(--st-size-1);
+		}
 	}
 </style>

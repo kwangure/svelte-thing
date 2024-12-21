@@ -1,5 +1,13 @@
 # @svelte-thing/rune-components
 
+## 0.0.10
+
+### Patch Changes
+
+-   Add `@layer component` to Svelte styles
+-   Updated dependencies
+    -   @svelte-thing/components@0.0.42
+
 ## 0.0.9
 
 ### Patch Changes

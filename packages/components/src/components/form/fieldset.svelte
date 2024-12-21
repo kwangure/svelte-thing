@@ -26,12 +26,14 @@
 </fieldset>
 
 <style>
-	fieldset {
-		display: flex;
-		flex-direction: column;
-		gap: var(--st-size-1);
-	}
-	div {
-		display: flex;
+	@layer component {
+		fieldset {
+			display: flex;
+			flex-direction: column;
+			gap: var(--st-size-1);
+		}
+		div {
+			display: flex;
+		}
 	}
 </style>

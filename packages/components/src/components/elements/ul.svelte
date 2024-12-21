@@ -9,8 +9,10 @@
 <ul {...restProps}>{@render children?.()}</ul>
 
 <style>
-	ul {
-		padding-inline-start: var(--st-size-6);
-		list-style-type: disc;
+	@layer component {
+		ul {
+			padding-inline-start: var(--st-size-6);
+			list-style-type: disc;
+		}
 	}
 </style>

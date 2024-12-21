@@ -56,8 +56,10 @@
 </div>
 
 <style>
-	div {
-		display: inline-flex;
-		flex-direction: column;
+	@layer component {
+		div {
+			display: inline-flex;
+			flex-direction: column;
+		}
 	}
 </style>

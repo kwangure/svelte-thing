@@ -18,9 +18,11 @@
 </div>
 
 <style>
-	div {
-		display: inline-flex;
-		flex-direction: column;
-		gap: var(--st-size-1);
+	@layer component {
+		div {
+			display: inline-flex;
+			flex-direction: column;
+			gap: var(--st-size-1);
+		}
 	}
 </style>

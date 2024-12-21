@@ -22,7 +22,9 @@
 </Item>
 
 <style>
-	.nested {
-		padding-inline-start: var(--st-size-5);
+	@layer component {
+		.nested {
+			padding-inline-start: var(--st-size-5);
+		}
 	}
 </style>

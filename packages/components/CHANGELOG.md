@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.42
+
+### Patch Changes
+
+-   Add `@layer component` to Svelte styles
+
 ## 0.0.41
 
 ### Patch Changes

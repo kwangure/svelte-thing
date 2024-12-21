@@ -26,22 +26,24 @@
 </a>
 
 <style>
-	a {
-		align-items: center;
-		border-radius: var(--st-size-1);
-		display: flex;
-		justify-content: center;
-		padding: var(--st-size-2);
-		transition:
-			color 0.125s ease-in,
-			background-color 0.125s ease-in-out;
-	}
-	a:hover {
-		--_background-color-dark: var(--st-color-preference-dark)
-			var(--st-color-neutral-700);
-		background-color: var(
-			--_background-color-dark,
-			var(--st-color-neutral-200)
-		);
+	@layer component {
+		a {
+			align-items: center;
+			border-radius: var(--st-size-1);
+			display: flex;
+			justify-content: center;
+			padding: var(--st-size-2);
+			transition:
+				color 0.125s ease-in,
+				background-color 0.125s ease-in-out;
+		}
+		a:hover {
+			--_background-color-dark: var(--st-color-preference-dark)
+				var(--st-color-neutral-700);
+			background-color: var(
+				--_background-color-dark,
+				var(--st-color-neutral-200)
+			);
+		}
 	}
 </style>

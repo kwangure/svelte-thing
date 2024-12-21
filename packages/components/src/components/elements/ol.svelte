@@ -8,8 +8,10 @@
 <ol {...restProps}>{@render children?.()}</ol>
 
 <style>
-	ol {
-		padding-inline-start: var(--st-size-6);
-		list-style-type: decimal;
+	@layer component {
+		ol {
+			padding-inline-start: var(--st-size-6);
+			list-style-type: decimal;
+		}
 	}
 </style>

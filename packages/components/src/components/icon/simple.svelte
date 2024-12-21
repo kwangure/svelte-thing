@@ -15,11 +15,13 @@
 </svg>
 
 <style>
-	svg {
-		height: var(--st-icon-height, var(--st-size-5));
-		width: var(--st-icon-width, var(--st-size-5));
-	}
-	path {
-		fill: var(--st-icon-fill, currentColor);
+	@layer component {
+		svg {
+			height: var(--st-icon-height, var(--st-size-5));
+			width: var(--st-icon-width, var(--st-size-5));
+		}
+		path {
+			fill: var(--st-icon-fill, currentColor);
+		}
 	}
 </style>

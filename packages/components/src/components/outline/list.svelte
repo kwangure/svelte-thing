@@ -18,9 +18,11 @@
 {/if}
 
 <style>
-	ul {
-		display: flex;
-		flex-direction: column;
-		gap: var(--st-size-1);
+	@layer component {
+		ul {
+			display: flex;
+			flex-direction: column;
+			gap: var(--st-size-1);
+		}
 	}
 </style>

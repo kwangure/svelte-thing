@@ -20,42 +20,45 @@
 </a>
 
 <style>
-	a {
-		align-items: center;
-		border-radius: var(--st-size-1);
-		cursor: pointer;
-		display: flex;
-		gap: var(--st-size-2);
-		padding-block: var(--st-size-1);
-		padding-inline: var(--st-size-4);
-		transition:
-			color 0.125s ease-in,
-			background-color 0.125s ease-in-out;
-	}
-	a:hover {
-		--_background-color-dark: var(--st-color-preference-dark)
-			var(--st-color-neutral-700);
-		background-color: var(
-			--_background-color-dark,
-			var(--st-color-neutral-200)
-		);
-	}
-	[aria-current]:not([aria-current='false']) {
-		--_background-color-dark: var(--st-color-preference-dark)
-			var(--st-color-blue-200);
-		background-color: var(
-			--_background-color-dark,
-			var(--st-color-blue-100)
-		);
-		--_color-dark: var(--st-color-preference-dark) var(--st-color-blue-700);
-		color: var(--_color-dark, var(--st-color-blue-600));
-	}
-	[aria-current]:not([aria-current='false']) {
-		--_background-color-dark: var(--st-color-preference-dark)
-			var(--st-color-blue-100);
-		background-color: var(
-			--_background-color-dark,
-			var(--st-color-blue-200)
-		);
+	@layer component {
+		a {
+			align-items: center;
+			border-radius: var(--st-size-1);
+			cursor: pointer;
+			display: flex;
+			gap: var(--st-size-2);
+			padding-block: var(--st-size-1);
+			padding-inline: var(--st-size-4);
+			transition:
+				color 0.125s ease-in,
+				background-color 0.125s ease-in-out;
+		}
+		a:hover {
+			--_background-color-dark: var(--st-color-preference-dark)
+				var(--st-color-neutral-700);
+			background-color: var(
+				--_background-color-dark,
+				var(--st-color-neutral-200)
+			);
+		}
+		[aria-current]:not([aria-current='false']) {
+			--_background-color-dark: var(--st-color-preference-dark)
+				var(--st-color-blue-200);
+			background-color: var(
+				--_background-color-dark,
+				var(--st-color-blue-100)
+			);
+			--_color-dark: var(--st-color-preference-dark)
+				var(--st-color-blue-700);
+			color: var(--_color-dark, var(--st-color-blue-600));
+		}
+		[aria-current]:not([aria-current='false']) {
+			--_background-color-dark: var(--st-color-preference-dark)
+				var(--st-color-blue-100);
+			background-color: var(
+				--_background-color-dark,
+				var(--st-color-blue-200)
+			);
+		}
 	}
 </style>

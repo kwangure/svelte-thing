@@ -13,9 +13,11 @@
 </form>
 
 <style>
-	form {
-		display: flex;
-		flex-direction: column;
-		gap: var(--st-size-2);
+	@layer component {
+		form {
+			display: flex;
+			flex-direction: column;
+			gap: var(--st-size-2);
+		}
 	}
 </style>

@@ -106,30 +106,32 @@
 </aside>
 
 <style>
-	aside {
-		align-self: flex-start;
-		grid-column-end: outline-end;
-		grid-column-start: outline-start;
-		position: sticky;
-		top: calc(var(--st-navbar-height) + var(--st-navbar-y-gap));
-	}
-	nav {
-		--_display-xl: var(--st-breakpoint-xl) flex;
-		display: var(--_display-xl, none);
-		flex-direction: column;
-		width: var(--st-size-72);
-	}
-	h5 {
-		--_color-dark: var(--st-color-preference-dark)
-			var(--st-color-neutral-400);
-		color: var(--_color-dark, var(--st-color-neutral-900));
-		font-size: var(--st-size-3);
-		font-weight: 600;
-		line-height: var(--st-size-4);
-		padding-block-end: var(--st-size-1);
-		padding-block-start: var(--st-size-2);
-		padding-inline-start: var(--st-size-5);
-		text-transform: uppercase;
-		white-space: nowrap;
+	@layer component {
+		aside {
+			align-self: flex-start;
+			grid-column-end: outline-end;
+			grid-column-start: outline-start;
+			position: sticky;
+			top: calc(var(--st-navbar-height) + var(--st-navbar-y-gap));
+		}
+		nav {
+			--_display-xl: var(--st-breakpoint-xl) flex;
+			display: var(--_display-xl, none);
+			flex-direction: column;
+			width: var(--st-size-72);
+		}
+		h5 {
+			--_color-dark: var(--st-color-preference-dark)
+				var(--st-color-neutral-400);
+			color: var(--_color-dark, var(--st-color-neutral-900));
+			font-size: var(--st-size-3);
+			font-weight: 600;
+			line-height: var(--st-size-4);
+			padding-block-end: var(--st-size-1);
+			padding-block-start: var(--st-size-2);
+			padding-inline-start: var(--st-size-5);
+			text-transform: uppercase;
+			white-space: nowrap;
+		}
 	}
 </style>
