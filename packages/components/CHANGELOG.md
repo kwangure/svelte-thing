@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.41
+
+### Patch Changes
+
+-   Fix non-dynamic title in `Icon`s
+
 ## 0.0.40
 
 ### Patch Changes

@@ -14,13 +14,13 @@
 		label,
 		path,
 		target,
-		title = label,
+		title,
 		rel = target === '_blank' ? 'noopener' : undefined,
 		...restProps
 	}: Props = $props();
 </script>
 
-<a {...restProps} {title} {target} {rel}>
+<a {...restProps} title={title ?? label} {target} {rel}>
 	<Icon {path} />
 	<span class="sr-only">{label}</span>
 </a>

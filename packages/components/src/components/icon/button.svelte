@@ -9,10 +9,10 @@
 		path: string;
 	}
 
-	const { label, path, title = label, ...restProps }: Props = $props();
+	const { label, path, title, ...restProps }: Props = $props();
 </script>
 
-<button {...restProps} {title}>
+<button {...restProps} title={title ?? label}>
 	<Icon {path} />
 	<span class="sr-only">{label}</span>
 </button>

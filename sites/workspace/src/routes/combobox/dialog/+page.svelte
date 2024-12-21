@@ -44,11 +44,7 @@
 </Icon.Button>
 <div class="wrapper">
 	<Dialog.Root open={isOpen} onclose={() => (isOpen = false)}>
-		<Combobox.Root
-			label="Search Documents"
-			{options}
-			optionToString={(option) => option.title}
-		>
+		<Combobox.Root {options} optionToString={(option) => option.title}>
 			{#snippet children(combobox)}
 				<div class="input">
 					<div class="search">
