@@ -1,5 +1,12 @@
 # @svelte-thing/rune-components
 
+## 0.0.11
+
+### Patch Changes
+
+-   Updated dependencies
+    -   @svelte-thing/components@0.0.43
+
 ## 0.0.10
 
 ### Patch Changes

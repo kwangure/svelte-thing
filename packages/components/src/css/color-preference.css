@@ -1,23 +1,27 @@
-@media (prefers-color-scheme: light) {
-	:where(:root) {
+@layer base {
+	@media (prefers-color-scheme: light) {
+		:where(:root) {
+			--st-color-preference-light: ;
+			--st-color-preference-dark: initial;
+		}
+	}
+
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--st-color-preference-light: initial;
+			--st-color-preference-dark: ;
+		}
+	}
+}
+
+@layer utilities {
+	.light {
 		--st-color-preference-light: ;
 		--st-color-preference-dark: initial;
 	}
-}
 
-@media (prefers-color-scheme: dark) {
-	:root {
+	.dark {
 		--st-color-preference-light: initial;
 		--st-color-preference-dark: ;
 	}
-}
-
-.light {
-	--st-color-preference-light: ;
-	--st-color-preference-dark: initial;
-}
-
-.dark {
-	--st-color-preference-light: initial;
-	--st-color-preference-dark: ;
 }
