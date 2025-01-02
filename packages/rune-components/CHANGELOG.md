@@ -1,5 +1,12 @@
 # @svelte-thing/rune-components
 
+## 0.0.12
+
+### Patch Changes
+
+-   0469852: Add css to rune components
+-   0469852: Add `onclickoutsiderect` action
+
 ## 0.0.11
 
 ### Patch Changes
