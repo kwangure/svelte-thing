@@ -1,6 +1,6 @@
 import type { RuneComponent } from '../../types.js';
 import { mergeActions } from '@svelte-thing/component-utils';
-import { onclickoutside } from '@svelte-thing/components/actions';
+import { onclickoutside } from '../../actions/onclickoutside.js';
 import { uid } from 'uid';
 
 export interface CreateComboboxRootConfig<TValue> {

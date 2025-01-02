@@ -1,4 +1,6 @@
 <script lang="ts">
+	import '../../css/color-preference.css';
+	import '../../css/size.css';
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 	import type { NullablyRequired } from '../../types.js';
 	import {

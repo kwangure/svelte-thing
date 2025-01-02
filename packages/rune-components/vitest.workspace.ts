@@ -7,12 +7,11 @@ export default defineWorkspace([
 		test: {
 			exclude: ['.svelte-kit/**', '.wireit/**', 'dist/**'],
 			browser: {
+				api: { port: 1234 },
 				enabled: true,
 				headless: true,
-				name: 'chromium',
 				provider: 'playwright',
-				// https://playwright.dev
-				providerOptions: {},
+				instances: [{ browser: 'chromium' }],
 			},
 			includeTaskLocation: true,
 		},
