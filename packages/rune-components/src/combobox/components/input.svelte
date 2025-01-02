@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '../../css/size.css';
 	import type { HTMLInputAttributes } from 'svelte/elements';
 	import type { NullablyRequired } from '../../types.js';
 	import {

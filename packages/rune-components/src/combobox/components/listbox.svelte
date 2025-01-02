@@ -1,4 +1,7 @@
 <script lang="ts">
+	import '../../css/color-preference.css';
+	import '../../css/color.css';
+	import '../../css/size.css';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { NullablyRequired } from '../../types.js';
 	import {

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import '@svelte-thing/components/css/breakpoint';
-	import '@svelte-thing/components/css/color-preference';
-	import '@svelte-thing/components/css/color';
-	import '@svelte-thing/components/css/size';
+	import '../../css/breakpoint.css';
+	import '../../css/color-preference.css';
+	import '../../css/color.css';
+	import '../../css/size.css';
 	import type { NullablyRequired } from '../../types.js';
 	import type { Snippet } from 'svelte';
 	import {
