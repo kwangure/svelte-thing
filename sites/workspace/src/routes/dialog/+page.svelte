@@ -1,5 +1,5 @@
 <script lang="ts">
-	import * as Dialog from '$lib/dialog';
+	import * as Dialog from '@svelte-thing/rune-components/dialog';
 	import { Icon } from '@svelte-thing/components';
 	import { mdiEyeOutline } from '@mdi/js';
 

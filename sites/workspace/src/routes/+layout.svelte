@@ -1,6 +1,6 @@
 <script>
-	import '@svelte-thing/components/css/preflight';
-	import '@svelte-thing/components/css/color';
+	import '@svelte-thing/rune-components/css/preflight';
+	import '@svelte-thing/rune-components/css/color';
 	import '$lib/css/app.css';
 
 	import {
@@ -10,12 +10,12 @@
 		Shell,
 		Sidebar,
 	} from '@svelte-thing/components';
-	import { page as pageStore } from '$app/stores';
+	import { page } from '$app/state';
 	import { createDarkModeButton } from '@svelte-thing/components/creators';
 	import { mdiWeatherNight, mdiWhiteBalanceSunny } from '@mdi/js';
 
 	const { children } = $props();
-	const pathname = $derived($pageStore.url.pathname);
+	const pathname = $derived(page.url.pathname);
 	const darkMode = createDarkModeButton();
 </script>
 

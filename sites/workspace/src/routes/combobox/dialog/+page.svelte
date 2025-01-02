@@ -1,5 +1,5 @@
 <script lang="ts">
-	import * as Dialog from '$lib/dialog';
+	import * as Dialog from '@svelte-thing/rune-components/dialog';
 	import * as Combobox from '@svelte-thing/rune-components/combobox';
 	import {
 		highlightFlattenColumns,

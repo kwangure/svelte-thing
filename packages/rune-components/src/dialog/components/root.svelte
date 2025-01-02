@@ -4,11 +4,11 @@
 	Dialog presents a dialog box or modal.
 -->
 <script lang="ts">
-	import '@svelte-thing/components/css/breakpoint';
-	import '@svelte-thing/components/css/motion';
+	import '../../css/breakpoint.css';
+	import '../../css/motion.css';
 	import type { HTMLDialogAttributes } from 'svelte/elements';
 	import type { Snippet } from 'svelte';
-	import { createDialogRoot } from './root.svelte.js';
+	import { createDialogRoot } from '../runes/root.svelte.js';
 	import { mergeProps } from '@svelte-thing/component-utils';
 	import { skipEffect } from '@svelte-thing/component-utils/reactivity';
 
