@@ -1,5 +1,5 @@
 <script lang="ts">
-	import * as Combobox from '../';
+	import * as Combobox from '../index.js';
 	import type { ComboboxOption } from '../../runes';
 
 	interface FruitOption extends ComboboxOption<Fruit> {

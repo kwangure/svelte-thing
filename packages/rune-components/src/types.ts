@@ -1,11 +1,7 @@
 import type { MouseEventHandler, SvelteHTMLElements } from 'svelte/elements';
 
-type RemoveIndexSignature<T> = {
-	[K in keyof T as string extends K
-		? never
-		: number extends K
-		  ? never
-		  : K]: T[K];
+export type RemoveIndexSignature<T, Signature = string | number> = {
+	[K in keyof T as Signature extends K ? never : K]: T[K];
 };
 
 export type HTMLElementAttributes = RemoveIndexSignature<SvelteHTMLElements>;

@@ -1,8 +1,12 @@
-import { isClickInside } from '@svelte-thing/dom-event';
+import { mergeActions } from '@svelte-thing/component-utils';
+import {
+	onclickoutside,
+	onclickoutsiderect,
+} from '../../actions/onclickoutside';
 
 export interface CreateDialogRootConfig {
 	hideOnInteractOutside?: boolean;
-	isOpen: boolean | null | undefined;
+	isOpen?: boolean;
 	isModal?: boolean;
 }
 
@@ -29,14 +33,14 @@ export function createDialogRoot(config?: CreateDialogRootConfig) {
 	}
 
 	return {
-		action(node: HTMLDialogElement) {
-			element = node;
+		action: mergeActions(onclickoutside, onclickoutsiderect, (node) => {
+			element = node as unknown as HTMLDialogElement;
 			return {
 				destroy() {
 					element = undefined;
 				},
 			};
-		},
+		}),
 		get isOpen() {
 			return isOpen;
 		},
@@ -65,12 +69,13 @@ export function createDialogRoot(config?: CreateDialogRootConfig) {
 			onclose() {
 				isOpen = false;
 			},
-			onclick(event: Event) {
-				if (
-					hideOnInteractOutside &&
-					element &&
-					!isClickInside(event, element)
-				) {
+			onclickoutside() {
+				if (hideOnInteractOutside) {
+					close();
+				}
+			},
+			onclickoutsiderect() {
+				if (hideOnInteractOutside) {
 					close();
 				}
 			},

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import * as Dialog from '$lib/dialog';
+	import * as Dialog from '@svelte-thing/rune-components/dialog';
 	import { Icon } from '@svelte-thing/components';
 	import { mdiEyeOutline } from '@mdi/js';
 
@@ -13,7 +13,7 @@
 >
 	Open Dialog
 </Icon.Button>
-<Dialog.Root open={isOpen} onclose={() => (isOpen = false)}>
+<Dialog.Root {isOpen} onclose={() => (isOpen = false)}>
 	In the land of perpetual waffles, clouds made of marshmallow sheep drifted
 	lazily across a sea of liquid toast. The trees, with their leaves made of
 	cinnamon rolls, whispered secrets to the winds, who promptly forgot them and
