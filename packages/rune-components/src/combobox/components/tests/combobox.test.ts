@@ -1,7 +1,7 @@
 import type { ComboboxOption } from '../../runes/root.svelte.js';
 import { describe, expect, test } from 'vitest';
 import { userEvent } from '@vitest/browser/context';
-import { render } from './util.js';
+import { render } from '../../../testing/util.js';
 import Combobox from './combobox.svelte';
 
 describe('combobox', () => {

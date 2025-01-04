@@ -7,25 +7,30 @@
 	import '../../css/breakpoint.css';
 	import '../../css/motion.css';
 	import type { HTMLDialogAttributes } from 'svelte/elements';
-	import type { Snippet } from 'svelte';
-	import { createDialogRoot } from '../runes/root.svelte.js';
+	import type { NullablyRequired } from '../../types';
+	import {
+		createDialogRoot,
+		type CreateDialogRootConfig,
+	} from '../runes/root.svelte.js';
 	import { mergeProps } from '@svelte-thing/component-utils';
 	import { skipEffect } from '@svelte-thing/component-utils/reactivity';
 
-	interface Props extends HTMLDialogAttributes {
-		children: Snippet;
-		hideOnInteractOutside?: boolean | undefined;
-		isModal?: boolean;
-	}
+	interface Props
+		extends CreateDialogRootConfig,
+			Omit<HTMLDialogAttributes, 'open'> {}
 	const {
 		children,
 		hideOnInteractOutside,
 		isModal,
-		open: isOpen,
+		isOpen,
 		...restProps
 	}: Props = $props();
 
-	const dialog = createDialogRoot({ isModal, isOpen });
+	const dialog = createDialogRoot({
+		hideOnInteractOutside,
+		isModal,
+		isOpen,
+	} satisfies NullablyRequired<CreateDialogRootConfig>);
 	skipEffect(
 		() => hideOnInteractOutside,
 		(h) => dialog.setHideOnInteractOutside(h),
@@ -41,7 +46,7 @@
 </script>
 
 <dialog {...mergeProps(dialog.props, restProps)} use:dialog.action>
-	{@render children()}
+	{@render children?.()}
 </dialog>
 
 <style>

@@ -1,5 +1,6 @@
 import { page, type LocatorSelectors } from '@vitest/browser/context';
-import type { Component } from 'svelte';
+import type { Component, ComponentProps } from 'svelte';
+import type { RemoveIndexSignature } from '../types';
 import type { RenderOptions, RenderResult2 } from 'vitest-browser-svelte';
 import { render as __render } from 'vitest-browser-svelte';
 
@@ -19,10 +20,10 @@ function getByAttribute(
 
 PlaywrightLocator.prototype.getByAttribute = getByAttribute;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function render<
-	P extends Record<string, unknown>,
-	C extends Component<P>,
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	C extends Component<any, any>,
+	P extends RemoveIndexSignature<ComponentProps<C>, `data-${string}`>,
 >(
 	Component: C,
 	options?: P,
@@ -45,8 +46,9 @@ declare module 'vitest-browser-svelte' {
 	 * Render a component into the document.
 	 */
 	export function render<
-		P extends Record<string, unknown>,
-		C extends Component<P>,
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		C extends Component<any, any>,
+		P extends RemoveIndexSignature<ComponentProps<C>, `data-${string}`>,
 	>(
 		Component: C,
 		options?: P,
