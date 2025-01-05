@@ -14,9 +14,9 @@
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { NullablyRequired } from '../../types.js';
 	import type { Snippet } from 'svelte';
+	import { skip, watch } from '@svelte-thing/component-utils/reactivity';
 	import { mergeProps } from '@svelte-thing/component-utils';
 	import { setComboboxContext } from '../runes';
-	import { skipEffect } from '@svelte-thing/component-utils/reactivity';
 
 	const {
 		children,
@@ -37,17 +37,20 @@
 		value,
 	} satisfies NullablyRequired<CreateComboboxRootConfig<TValue>>);
 
-	skipEffect(
+	watch(
 		() => isOpen,
 		(i) => (i ? combobox.open() : combobox.close()),
+		skip(1),
 	);
-	skipEffect(
+	watch(
 		() => options,
 		(o) => combobox.setOptions(o),
+		skip(1),
 	);
-	skipEffect(
+	watch(
 		() => value,
 		(v) => combobox.setValue(v),
+		skip(1),
 	);
 </script>
 

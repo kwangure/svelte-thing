@@ -119,7 +119,7 @@
 		"!**/*.test.d.ts"
 	],
 	"dependencies": {
-		"@svelte-thing/component-utils": "^0.0.8",
+		"@svelte-thing/component-utils": "^0.0.9",
 		"@svelte-thing/dom-event": "^0.0.5",
 		"uid": "^2.0.2"
 	},

@@ -10,7 +10,7 @@
 		createCopier,
 		type LineInterval,
 	} from '../../creators/copy.svelte.js';
-	import { skipEffect } from '@svelte-thing/component-utils/reactivity';
+	import { skip, watch } from '@svelte-thing/component-utils/reactivity';
 
 	interface Props extends HTMLAttributes<HTMLElement> {
 		lines: { color: string; segment: string }[][];
@@ -29,11 +29,12 @@
 		}
 		return resultSet;
 	});
-	skipEffect(
+	watch(
 		() => copyText,
 		(text) => {
 			copier.text = text;
 		},
+		skip(1),
 	);
 </script>
 

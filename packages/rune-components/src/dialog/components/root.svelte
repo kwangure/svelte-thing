@@ -13,7 +13,7 @@
 		type CreateDialogRootConfig,
 	} from '../runes/root.svelte.js';
 	import { mergeProps } from '@svelte-thing/component-utils';
-	import { skipEffect } from '@svelte-thing/component-utils/reactivity';
+	import { skip, watch } from '@svelte-thing/component-utils/reactivity';
 
 	interface Props
 		extends CreateDialogRootConfig,
@@ -31,17 +31,20 @@
 		isModal,
 		isOpen,
 	} satisfies NullablyRequired<CreateDialogRootConfig>);
-	skipEffect(
+	watch(
 		() => hideOnInteractOutside,
 		(h) => dialog.setHideOnInteractOutside(h),
+		skip(1),
 	);
-	skipEffect(
+	watch(
 		() => isModal,
 		(i) => dialog.setIsModal(i),
+		skip(1),
 	);
-	skipEffect(
+	watch(
 		() => isOpen,
 		(i) => (i ? dialog.open() : dialog.close()),
+		skip(1),
 	);
 </script>
 
