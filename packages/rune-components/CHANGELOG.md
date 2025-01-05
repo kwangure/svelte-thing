@@ -1,5 +1,11 @@
 # @svelte-thing/rune-components
 
+## 0.0.13
+
+### Patch Changes
+
+-   ee06cfd: Update component-utils
+
 ## 0.0.12
 
 ### Patch Changes

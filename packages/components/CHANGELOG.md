@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.44
+
+### Patch Changes
+
+-   ee06cfd: Update component-utils
+
 ## 0.0.43
 
 ### Patch Changes

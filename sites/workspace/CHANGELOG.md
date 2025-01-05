@@ -1,5 +1,13 @@
 # workspace-site
 
+## 0.0.20
+
+### Patch Changes
+
+-   Updated dependencies [ee06cfd]
+    -   @svelte-thing/rune-components@0.0.13
+    -   @svelte-thing/components@0.0.44
+
 ## 0.0.19
 
 ### Patch Changes
