@@ -1,5 +1,6 @@
 import { mergeActions } from '@svelte-thing/component-utils';
 import {
+	isClickInsideRect,
 	onclickoutside,
 	onclickoutsiderect,
 } from '../../actions/onclickoutside';
@@ -24,6 +25,7 @@ export function createDialogRoot(config?: CreateDialogRootConfig) {
 	}
 
 	function open() {
+		console.trace('open');
 		isOpen = true;
 		if (isModal) {
 			element?.showModal();
@@ -69,14 +71,14 @@ export function createDialogRoot(config?: CreateDialogRootConfig) {
 			onclose() {
 				isOpen = false;
 			},
-			onclickoutside() {
-				if (hideOnInteractOutside) {
-					close();
-				}
-			},
-			onclickoutsiderect() {
-				if (hideOnInteractOutside) {
-					close();
+			onclick(event: MouseEvent) {
+				if (
+					isOpen &&
+					hideOnInteractOutside &&
+					element &&
+					!isClickInsideRect(event, element)
+				) {
+					return close();
 				}
 			},
 		},

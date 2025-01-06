@@ -1,6 +1,4 @@
 <script lang="ts">
-	import '../../css/color-preference.css';
-	import '../../css/color.css';
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
 	import type { Snippet } from 'svelte';
 

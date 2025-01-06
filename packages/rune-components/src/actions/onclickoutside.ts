@@ -2,7 +2,7 @@ import { on } from 'svelte/events';
 
 export function onclickoutside(node: HTMLElement) {
 	const destroy = on(document, 'click', (event) => {
-		if (!node.contains(event.target as Node)) {
+		if (!isClickInsideNode(event, node)) {
 			node.dispatchEvent(new MouseEvent('clickoutside', event));
 		}
 	});
@@ -12,7 +12,7 @@ export function onclickoutside(node: HTMLElement) {
 
 export function onclickoutsiderect(node: HTMLElement) {
 	const destroy = on(document, 'click', (event) => {
-		if (!isClickInside(event, node)) {
+		if (!isClickInsideRect(event, node)) {
 			node.dispatchEvent(new MouseEvent('clickoutsiderect', event));
 		}
 	});
@@ -20,7 +20,7 @@ export function onclickoutsiderect(node: HTMLElement) {
 	return { destroy };
 }
 
-function isClickInside(event: MouseEvent, element: HTMLElement) {
+export function isClickInsideRect(event: MouseEvent, element: HTMLElement) {
 	const rect = element.getBoundingClientRect();
 	if (rect.width === 0 || rect.height === 0) return false;
 	return (
@@ -29,4 +29,8 @@ function isClickInside(event: MouseEvent, element: HTMLElement) {
 		rect.left <= event.clientX &&
 		event.clientX <= rect.right
 	);
+}
+
+export function isClickInsideNode(event: MouseEvent, node: HTMLElement) {
+	return node.contains(event.target as Node);
 }

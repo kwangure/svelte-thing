@@ -57,12 +57,3 @@
 <div {...mergeProps(combobox.props, restProps)} use:combobox.action>
 	{@render children(combobox)}
 </div>
-
-<style>
-	@layer component {
-		div {
-			display: inline-flex;
-			flex-direction: column;
-		}
-	}
-</style>

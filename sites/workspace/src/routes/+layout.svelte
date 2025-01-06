@@ -1,6 +1,7 @@
 <script>
-	import '@svelte-thing/rune-components/css/preflight';
-	import '@svelte-thing/rune-components/css/color';
+	import '@svelte-thing/css/base';
+	import '@svelte-thing/css/combobox';
+	import '@svelte-thing/css/dialog';
 	import '$lib/css/app.css';
 
 	import {

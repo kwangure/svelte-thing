@@ -1,5 +1,4 @@
 <script lang="ts">
-	import '../../css/size.css';
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
 	import type { Snippet } from 'svelte';
 	import { createHide, getSidebarContext } from './sidebar.svelte.js';

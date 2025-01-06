@@ -1,5 +1,4 @@
 <script lang="ts">
-	import '../../css/size.css';
 	import type { HTMLLiAttributes } from 'svelte/elements';
 	import type { Snippet } from 'svelte';
 

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { SVGAttributes } from 'svelte/elements';
-	import '../../css/size.css';
 
 	const {
 		'aria-hidden': ariaHidden = true,

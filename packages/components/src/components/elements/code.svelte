@@ -1,8 +1,4 @@
 <script lang="ts">
-	import '../../css/color-preference.css';
-	import '../../css/color.css';
-	import '../../css/size.css';
-
 	import type { HTMLAttributes } from 'svelte/elements';
 	import { mdiCheck, mdiContentCopy } from '@mdi/js';
 	import { Icon, Token } from '../../components/index.js';

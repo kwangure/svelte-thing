@@ -15,7 +15,7 @@ export function createComboboxNext<TValue>(
 
 	return {
 		props: {
-			'data-st-combobox-next': '',
+			'data-st-combobox-next-button': '',
 			get ['aria-controls']() {
 				return combobox.ids.listbox;
 			},

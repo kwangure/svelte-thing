@@ -1,8 +1,5 @@
 <script lang="ts">
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
-	import '../../css/color-preference.css';
-	import '../../css/color.css';
-	import '../../css/utilities.css';
 	import Icon from './simple.svelte';
 
 	interface Props extends HTMLAnchorAttributes {

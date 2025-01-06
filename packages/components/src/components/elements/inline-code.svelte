@@ -1,9 +1,6 @@
 <script lang="ts">
 	import type { HTMLAttributes } from 'svelte/elements';
 	import Token from '../token.svelte';
-	import '../../css/color-preference.css';
-	import '../../css/color.css';
-	import '../../css/size.css';
 
 	interface Props extends HTMLAttributes<HTMLElement> {
 		attributes?: Record<string, unknown>;

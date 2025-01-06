@@ -50,6 +50,7 @@
 			"dependencies": [
 				"./packages/component-utils:pre-commit",
 				"./packages/components:pre-commit",
+				"./packages/css:pre-commit",
 				"./packages/dom-event:pre-commit",
 				"./packages/rune-components:pre-commit"
 			]

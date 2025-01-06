@@ -12,9 +12,7 @@
 			--st-color-preference-dark: ;
 		}
 	}
-}
 
-@layer utilities {
 	.light {
 		--st-color-preference-light: ;
 		--st-color-preference-dark: initial;

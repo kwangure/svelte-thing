@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { HTMLAttributes } from 'svelte/elements';
-	import '../../css/size.css';
 
 	const { children, ...restProps }: HTMLAttributes<HTMLUListElement> =
 		$props();

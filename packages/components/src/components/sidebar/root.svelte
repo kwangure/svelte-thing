@@ -1,8 +1,4 @@
 <script lang="ts">
-	import '../../css/breakpoint.css';
-	import '../../css/color.css';
-	import '../../css/color-preference.css';
-	import '../../css/size.css';
 	import type { Snippet } from 'svelte';
 	import { createHide, getSidebarContext } from './sidebar.svelte.js';
 	import { focustrap } from '../../actions';

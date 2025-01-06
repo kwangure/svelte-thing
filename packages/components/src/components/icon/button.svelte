@@ -1,7 +1,5 @@
 <script lang="ts">
 	import type { HTMLButtonAttributes } from 'svelte/elements';
-	import '../../css/size.css';
-	import '../../css/utilities.css';
 	import Icon from './simple.svelte';
 
 	interface Props extends HTMLButtonAttributes {

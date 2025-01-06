@@ -1,7 +1,5 @@
 <script lang="ts">
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
-	import '../../css/color.css';
-	import '../../css/size.css';
 
 	const { children, ...restProps }: HTMLAnchorAttributes = $props();
 </script>

@@ -15,7 +15,7 @@ export function createComboboxPrevious<TValue>(
 
 	return {
 		props: {
-			'data-st-combobox-previous': '',
+			'data-st-combobox-previous-button': '',
 			get ['aria-controls']() {
 				return combobox.ids.listbox;
 			},

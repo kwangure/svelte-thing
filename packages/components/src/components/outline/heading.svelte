@@ -1,5 +1,4 @@
 <script lang="ts">
-	import '../../css/size.css';
 	import type { TocEntry } from './types';
 	import { Item } from '../sidebar/index.js';
 	import Link from './link.svelte';

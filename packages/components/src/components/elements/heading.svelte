@@ -1,9 +1,5 @@
 <script lang="ts">
 	import type { HTMLAttributes } from 'svelte/elements';
-	import '../../css/breakpoint.css';
-	import '../../css/color-preference.css';
-	import '../../css/color.css';
-	import '../../css/size.css';
 
 	interface Props extends HTMLAttributes<HTMLHeadingElement> {
 		rank: 1 | 2 | 3 | 4 | 5 | 6;
