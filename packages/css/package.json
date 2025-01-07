@@ -1,0 +1,46 @@
+{
+	"name": "@svelte-thing/css",
+	"version": "0.0.0",
+	"scripts": {
+		"pre-commit": "wireit",
+		"publint": "wireit"
+	},
+	"wireit": {
+		"publint": {
+			"command": "publint",
+			"files": [
+				"**/*.js",
+				"**/*.css"
+			],
+			"output": []
+		},
+		"pre-commit": {
+			"dependencies": [
+				"publint"
+			]
+		},
+		"release": {
+			"dependencies": [
+				"publint"
+			]
+		}
+	},
+	"exports": {
+		"./base": {
+			"default": "./src/base/index.js"
+		},
+		"./dialog": {
+			"default": "./src/dialog/index.js"
+		},
+		"./code/*": {
+			"default": "./src/code/*.css"
+		},
+		"./combobox": {
+			"default": "./src/combobox/index.js"
+		}
+	},
+	"devDependencies": {
+		"publint": "^0.2.12"
+	},
+	"type": "module"
+}

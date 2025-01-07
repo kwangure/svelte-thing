@@ -1,6 +1,4 @@
 <script lang="ts">
-	import '../css/code.css';
-
 	interface Props {
 		token: { color: string; segment: string };
 	}

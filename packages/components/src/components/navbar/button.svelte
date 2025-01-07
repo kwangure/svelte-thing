@@ -1,8 +1,6 @@
 <script lang="ts">
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 	import type { Snippet } from 'svelte';
-	import '../../css/breakpoint.css';
-	import '../../css/size.css';
 
 	interface Props extends HTMLButtonAttributes {
 		children: Snippet;

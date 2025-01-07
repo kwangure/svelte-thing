@@ -1,9 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
-	import '../../css/color-preference.css';
-	import '../../css/color.css';
-	import '../../css/size.css';
 
 	interface Props extends HTMLAnchorAttributes {
 		children: Snippet;

@@ -14,7 +14,7 @@ export function createComboboxButton<TValue>(
 
 	return {
 		props: {
-			'data-st-combobox-button': '',
+			'data-st-combobox-trigger-button': '',
 			get ['aria-controls']() {
 				return combobox.ids.listbox;
 			},

@@ -43,7 +43,7 @@
 	Open Dialog
 </Icon.Button>
 <div class="wrapper">
-	<Dialog.Root open={isOpen} onclose={() => (isOpen = false)}>
+	<Dialog.Root {isOpen} onclose={() => (isOpen = false)}>
 		<Combobox.Root {options} optionToString={(option) => option.title}>
 			{#snippet children(combobox)}
 				<div class="input">

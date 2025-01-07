@@ -1,0 +1,6 @@
+@layer component {
+	[data-st-combobox-root] {
+		display: inline-flex;
+		flex-direction: column;
+	}
+}
