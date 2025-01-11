@@ -97,10 +97,6 @@
 			"svelte": "./dist/combobox/runes/index.js",
 			"default": "./dist/combobox/runes/index.js"
 		},
-		"./css/*": {
-			"svelte": "./dist/css/*.css",
-			"default": "./dist/css/*.css"
-		},
 		"./dialog": {
 			"types": "./dist/dialog/components/index.d.ts",
 			"svelte": "./dist/dialog/components/index.js",
