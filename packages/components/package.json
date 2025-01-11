@@ -21,13 +21,13 @@
 		},
 		"build:dev": {
 			"command": "svelte-package -i ./src --tsconfig ./tsconfig.build.json --watch",
+			"service": true,
 			"files": [
 				"src/**/*.{js,svelte,ts}",
 				"tsconfig.build.json",
 				"../../config/tsconfig.base.json"
 			],
-			"#comment": "Do not empty out outputDir to avoid breaking HMR for workspace:^ packages.",
-			"output": []
+			"#comment": "Do not empty out outputDir to avoid breaking HMR for workspace:^ packages."
 		},
 		"check": {
 			"command": "svelte-check --tsconfig ./tsconfig.json",

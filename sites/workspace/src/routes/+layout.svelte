@@ -2,7 +2,6 @@
 	import '@svelte-thing/css/base';
 	import '@svelte-thing/css/combobox';
 	import '@svelte-thing/css/dialog';
-	import '$lib/css/app.css';
 
 	import {
 		Darkmode,
