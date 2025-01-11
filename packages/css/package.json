@@ -1,6 +1,6 @@
 {
 	"name": "@svelte-thing/css",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"scripts": {
 		"pre-commit": "wireit",
 		"publint": "wireit"
