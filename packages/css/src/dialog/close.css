@@ -1,0 +1,15 @@
+@layer component {
+	[data-st-dialog-close-button] {
+		align-items: center;
+		justify-content: center;
+		background-color: transparent;
+		color: inherit;
+		display: inline-flex;
+		padding: var(--st-size-1);
+		border-radius: var(--st-size-0_5);
+		user-select: none;
+		transition:
+			background-color 0.25s ease,
+			color 0.25s ease;
+	}
+}

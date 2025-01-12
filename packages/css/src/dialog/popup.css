@@ -1,10 +1,10 @@
 @layer component {
 	/* Prevent scrolling when modal dialog is open */
-	html:has([data-st-dialog-root][open][data-st-modal]) {
+	html:has([data-st-dialog-popup][open][data-st-modal]) {
 		overflow: hidden;
 	}
 
-	[data-st-dialog-root] {
+	[data-st-dialog-popup] {
 		animation: var(--st-motion-no-preference) slide-out-down 0.5s
 			cubic-bezier(0.25, 0, 0.3, 1) forwards;
 		animation-timing-function: cubic-bezier(0.5, -0.5, 0.1, 1.5);
@@ -27,7 +27,7 @@
 		z-index: 100000;
 	}
 
-	[data-st-dialog-root][open] {
+	[data-st-dialog-popup][open] {
 		animation: var(--st-motion-no-preference) slide-in-up 0.5s
 			cubic-bezier(0.25, 0, 0.3, 1) forwards;
 	}
@@ -35,7 +35,7 @@
 	/**
 	 * Move dialog to the bottom on small screens, and remove bottom rounded corners.
 	 */
-	[data-st-dialog-root][data-st-modal] {
+	[data-st-dialog-popup][data-st-modal] {
 		--_border-end-end-radius: var(--st-breakpoint-not-md) 0px;
 		border-end-end-radius: var(--_border-end-end-radius, var(--st-size-1));
 		--_border-end-start-radius: var(--st-breakpoint-not-md) 0px;
@@ -59,26 +59,26 @@
 		}
 	}
 
-	[data-st-dialog-root]:not([open]) {
+	[data-st-dialog-popup]:not([open]) {
 		pointer-events: none;
 		opacity: 0;
 	}
 
-	[data-st-dialog-root]::backdrop {
+	[data-st-dialog-popup]::backdrop {
 		transition: background-color 0.25s ease;
 	}
 
 	/**
 	 * Add a colored backdrop to modal dialogs.
 	 */
-	[data-st-dialog-root][data-st-modal]::backdrop {
+	[data-st-dialog-popup][data-st-modal]::backdrop {
 		--_background-color-dark: var(--st-color-preference-dark)
 			rgba(50, 50, 50, 0.5);
 		background-color: var(--_background-color-dark, rgba(0, 0, 0, 0.5));
 		opacity: 1;
 	}
 
-	[data-st-dialog-root]:not([data-st-modal])::backdrop {
+	[data-st-dialog-popup]:not([data-st-modal])::backdrop {
 		background-color: transparent;
 	}
 }

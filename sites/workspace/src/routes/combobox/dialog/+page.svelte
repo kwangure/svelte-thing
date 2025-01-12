@@ -5,12 +5,10 @@
 		highlightFlattenColumns,
 		highlightSearchResult,
 	} from '@content-thing/memdb';
-	import { mdiClose, mdiEyeOutline, mdiMagnify } from '@mdi/js';
+	import { mdiClose, mdiMagnify } from '@mdi/js';
 	import { Icon } from '@svelte-thing/components';
 	import { searchBookSumarries } from './documents';
 	import Tokens from './tokens.svelte';
-
-	let isOpen = $state(false);
 
 	function options(combobox: Combobox.GetOptionsArg) {
 		const { inputValue } = combobox;
@@ -35,68 +33,65 @@
 	}
 </script>
 
-<Icon.Button
-	label="Open Dialog"
-	path={mdiEyeOutline}
-	onclick={() => (isOpen = true)}
->
-	Open Dialog
-</Icon.Button>
 <div class="wrapper">
-	<Dialog.Root {isOpen} onclose={() => (isOpen = false)}>
-		<Combobox.Root {options} optionToString={(option) => option.title}>
-			{#snippet children(combobox)}
-				<div class="input">
-					<div class="search">
-						<Icon.Simple path={mdiMagnify} />
-					</div>
-					<Combobox.Input
-						placeholder="Search for Programming Book..."
-					/>
-					<div class="close">
-						<Icon.Button
-							label="Close"
-							onclick={() => (isOpen = false)}
-							path={mdiClose}
+	<Dialog.Root>
+		<Dialog.Trigger>Open Dialog</Dialog.Trigger>
+		<Dialog.Popup>
+			<Combobox.Root {options} optionToString={(option) => option.title}>
+				{#snippet children(combobox)}
+					<div class="input">
+						<div class="search">
+							<Icon.Simple path={mdiMagnify} />
+						</div>
+						<Combobox.Input
+							placeholder="Search for Programming Book..."
 						/>
+						<div class="close">
+							<Dialog.Close>
+								<Icon.Simple path={mdiClose} />
+								<span class="sr-only">Close</span>
+							</Dialog.Close>
+						</div>
 					</div>
-				</div>
-				{#if combobox.inputValue.trim()}
-					<div class="results block-section">
-						{#each combobox.options as result}
-							<Combobox.ListboxItem item={result}>
-								<a href="#${result.key}">
-									<div class="title">
-										<Tokens
-											tokens={result.value.tokens.title}
-										/>
-									</div>
-									<div class="content">
-										<Tokens
-											tokens={result.value.tokens.content}
-										/>
-									</div>
-								</a>
-							</Combobox.ListboxItem>
-						{:else}
-							<div class="no-results">
-								<Icon.Simple
-									path={mdiMagnify}
-									--st-icon-height="var(--st-size-8)"
-									--st-icon-width="var(--st-size-8)"
-								/>
-								No results found for "{combobox.inputValue.trim()}".
-							</div>
-						{/each}
-					</div>
-				{/if}
-			{/snippet}
-		</Combobox.Root>
+					{#if combobox.inputValue.trim()}
+						<div class="results block-section">
+							{#each combobox.options as result}
+								<Combobox.ListboxItem item={result}>
+									<a href="#${result.key}">
+										<div class="title">
+											<Tokens
+												tokens={result.value.tokens
+													.title}
+											/>
+										</div>
+										<div class="content">
+											<Tokens
+												tokens={result.value.tokens
+													.content}
+											/>
+										</div>
+									</a>
+								</Combobox.ListboxItem>
+							{:else}
+								<div class="no-results">
+									<Icon.Simple
+										path={mdiMagnify}
+										--st-icon-height="var(--st-size-8)"
+										--st-icon-width="var(--st-size-8)"
+									/>
+									No results found for "{combobox.inputValue.trim()}".
+								</div>
+							{/each}
+						</div>
+					{/if}
+				{/snippet}
+			</Combobox.Root>
+		</Dialog.Popup>
 	</Dialog.Root>
 </div>
 
 <style>
-	.wrapper :global([data-st-dialog-root]) {
+	.wrapper :global([data-st-dialog-popup]) {
 		inline-size: 90vw;
 		margin-block-start: 16vh;
 		max-inline-size: 35rem /* 560px */;

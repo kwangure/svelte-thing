@@ -1,12 +1,6 @@
-import { mergeActions } from '@svelte-thing/component-utils';
-import {
-	isClickInsideRect,
-	onclickoutside,
-	onclickoutsiderect,
-} from '../../actions/onclickoutside';
+import { uid } from 'uid';
 
 export interface CreateDialogRootConfig {
-	hideOnInteractOutside?: boolean;
 	isOpen?: boolean;
 	isModal?: boolean;
 }
@@ -14,73 +8,36 @@ export interface CreateDialogRootConfig {
 export type DialogRoot = ReturnType<typeof createDialogRoot>;
 
 export function createDialogRoot(config?: CreateDialogRootConfig) {
-	let element: HTMLDialogElement | undefined;
-	let hideOnInteractOutside = config?.hideOnInteractOutside ?? true;
 	let isModal = $state(config?.isModal ?? true);
 	let isOpen = $state(config?.isOpen ?? false);
-
-	function close() {
-		isOpen = false;
-		element?.close();
-	}
-
-	function open() {
-		console.trace('open');
-		isOpen = true;
-		if (isModal) {
-			element?.showModal();
-		} else {
-			element?.show();
-		}
-	}
+	const setIsOpenListeners = new Set<(isOpen: boolean) => void>();
+	const setIsModalListeners = new Set<(isModal: boolean) => void>();
 
 	return {
-		action: mergeActions(onclickoutside, onclickoutsiderect, (node) => {
-			element = node as unknown as HTMLDialogElement;
-			return {
-				destroy() {
-					element = undefined;
-				},
-			};
-		}),
+		get isModal() {
+			return isModal;
+		},
 		get isOpen() {
 			return isOpen;
 		},
-		close,
-		open,
-		setHideOnInteractOutside(v: boolean | undefined) {
-			hideOnInteractOutside = v ?? true;
+		ids: {
+			popup: uid(),
+		},
+		setIsOpen(v: boolean | undefined) {
+			isOpen = v ?? false;
+			for (const fn of setIsOpenListeners) fn(isOpen);
 		},
 		setIsModal(v: boolean | undefined) {
 			isModal = v ?? true;
+			for (const fn of setIsModalListeners) fn(isModal);
 		},
-		props: {
-			'data-st-dialog-root': '',
-			get ['aria-hidden']() {
-				return !isOpen || undefined;
-			},
-			get ['data-st-modal']() {
-				return isModal || undefined;
-			},
-			get inert() {
-				return !isOpen || undefined;
-			},
-			get open() {
-				return isOpen || undefined;
-			},
-			onclose() {
-				isOpen = false;
-			},
-			onclick(event: MouseEvent) {
-				if (
-					isOpen &&
-					hideOnInteractOutside &&
-					element &&
-					!isClickInsideRect(event, element)
-				) {
-					return close();
-				}
-			},
+		onSetIsOpen(fn: (isOpen: boolean) => void) {
+			setIsOpenListeners.add(fn);
+			return () => setIsOpenListeners.delete(fn);
+		},
+		onSetIsModal(fn: (isModal: boolean) => void) {
+			setIsModalListeners.add(fn);
+			return () => setIsModalListeners.delete(fn);
 		},
 	};
 }
