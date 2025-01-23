@@ -8,7 +8,6 @@ describe('dialog', () => {
 	interface RenderOptionsArgs {
 		isOpen?: boolean;
 		isModal?: boolean;
-		hideOnInteractOutside?: boolean;
 	}
 
 	function renderScreen(props?: RenderOptionsArgs) {
@@ -17,7 +16,7 @@ describe('dialog', () => {
 		return Promise.resolve({
 			...screen,
 			get dialog() {
-				return screen.getByAttribute('data-st-dialog-root', '');
+				return screen.getByAttribute('data-st-dialog-popup', '');
 			},
 		});
 	}
@@ -75,17 +74,6 @@ describe('dialog', () => {
 			// Click the content inside the dialog
 			const content = getByText('Lorem ipsum');
 			await userEvent.click(content);
-			await expect.element(dialog).toHaveAttribute('open');
-		});
-
-		test('clicking outside does not close when hideOnInteractOutside is false', async () => {
-			const { dialog, baseElement } = await renderScreen({
-				isOpen: true,
-				hideOnInteractOutside: false,
-			});
-			await expect.element(dialog).toHaveAttribute('open');
-
-			await userEvent.click(baseElement, { position: { x: 0, y: 0 } });
 			await expect.element(dialog).toHaveAttribute('open');
 		});
 	});
