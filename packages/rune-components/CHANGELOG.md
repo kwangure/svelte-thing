@@ -1,5 +1,11 @@
 # @svelte-thing/rune-components
 
+## 0.0.14
+
+### Patch Changes
+
+-   03ff2ce: Decompose dialog into subcomponents
+
 ## 0.0.13
 
 ### Patch Changes

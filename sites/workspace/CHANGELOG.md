@@ -1,5 +1,13 @@
 # workspace-site
 
+## 0.0.22
+
+### Patch Changes
+
+-   Updated dependencies [03ff2ce]
+    -   @svelte-thing/rune-components@0.0.14
+    -   @svelte-thing/css@0.0.2
+
 ## 0.0.21
 
 ### Patch Changes
