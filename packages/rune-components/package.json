@@ -117,6 +117,7 @@
 	"dependencies": {
 		"@svelte-thing/component-utils": "^0.0.9",
 		"@svelte-thing/dom-event": "^0.0.5",
+		"esm-env": "^1.0.0",
 		"uid": "^2.0.2"
 	},
 	"devDependencies": {

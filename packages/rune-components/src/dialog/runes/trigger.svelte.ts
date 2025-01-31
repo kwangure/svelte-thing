@@ -23,7 +23,7 @@ export function createDialogTrigger(config: CreateDialogTriggerConfig) {
 				return 'dialog' as const;
 			},
 			get ['popovertarget']() {
-				return dialog.ids.popup;
+				return dialog.isModal ? undefined : dialog.ids.popup;
 			},
 			onclick() {
 				dialog.setIsOpen(!dialog.isOpen);
