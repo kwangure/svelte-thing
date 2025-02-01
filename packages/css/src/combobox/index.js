@@ -1,3 +1,4 @@
+import '../layers.css';
 import './button.css';
 import './controls.css';
 import './input.css';
