@@ -14,15 +14,13 @@
 		children?: Snippet<[DialogRoot]>;
 	}
 
-	const { children, isModal, isOpen }: Props = $props();
+	const { children, isOpen }: Props = $props();
 
 	const dialog = setDialogContext({
-		isModal,
 		isOpen,
 	} satisfies NullablyRequired<CreateDialogRootConfig>);
 
 	watch(() => isOpen, dialog.setIsOpen, skip(1));
-	watch(() => isModal, dialog.setIsModal, skip(1));
 </script>
 
 {@render children?.(dialog)}

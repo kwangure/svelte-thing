@@ -7,7 +7,6 @@ import Dialog from './dialog.svelte';
 describe('dialog', () => {
 	interface RenderOptionsArgs {
 		isOpen?: boolean;
-		isModal?: boolean;
 	}
 
 	function renderScreen(props?: RenderOptionsArgs) {
@@ -38,35 +37,7 @@ describe('dialog', () => {
 		});
 	});
 
-	describe('Modal behavior', () => {
-		test('dialog has modal attribute when isModal is true', async () => {
-			const { dialog } = await renderScreen({ isModal: true });
-			await expect.element(dialog).toHaveAttribute('data-st-modal');
-		});
-
-		test('dialog does not have modal attribute when isModal is false', async () => {
-			const { dialog } = await renderScreen({ isModal: false });
-			await expect.element(dialog).not.toHaveAttribute('data-st-modal');
-		});
-	});
-
-	describe('Click outside behavior', () => {
-		test.todo(
-			'clicking outside non-modal dialog closes it by default',
-			async () => {
-				// We need to add CSS to tests so that the backdrop is clickable
-				const { dialog, baseElement } = await renderScreen({
-					isOpen: true,
-				});
-				await expect.element(dialog).toHaveAttribute('open');
-
-				await userEvent.click(baseElement, {
-					position: { x: 0, y: 0 },
-				});
-				await expect.element(dialog).not.toHaveAttribute('open');
-			},
-		);
-
+	describe('Click behavior', () => {
 		test('clicking inside does not close dialog', async () => {
 			const { dialog, getByText } = await renderScreen({ isOpen: true });
 			await expect.element(dialog).toHaveAttribute('open');
@@ -88,14 +59,6 @@ describe('dialog', () => {
 			await expect.element(dialog).toHaveAttribute('aria-hidden');
 			await expect.element(dialog).toHaveAttribute('inert');
 			await expect.element(dialog).not.toHaveAttribute('open');
-		});
-
-		test('changing isModal updates data-st-modal attribute', async () => {
-			const { dialog, rerender } = await renderScreen({ isModal: true });
-			await expect.element(dialog).toHaveAttribute('data-st-modal');
-
-			await rerender({ isModal: false });
-			await expect.element(dialog).not.toHaveAttribute('data-st-modal');
 		});
 	});
 });

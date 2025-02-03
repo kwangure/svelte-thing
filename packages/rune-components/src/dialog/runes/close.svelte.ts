@@ -16,6 +16,12 @@ export function createDialogClose(config: CreateDialogCloseConfig) {
 			get ['aria-label']() {
 				return 'Close dialog';
 			},
+			get ['popovertarget']() {
+				return dialog.isModal ? undefined : dialog.ids.popup;
+			},
+			get ['popovertargetaction']() {
+				return dialog.isModal ? undefined : 'hide';
+			},
 			onclick() {
 				dialog.setIsOpen(false);
 			},

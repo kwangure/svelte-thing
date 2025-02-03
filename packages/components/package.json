@@ -10,6 +10,9 @@
 	},
 	"wireit": {
 		"build": {
+			"dependencies": [
+				"../../packages/component-utils:build"
+			],
 			"command": "svelte-package -i ./src --tsconfig ./tsconfig.build.json",
 			"files": [
 				"src/**/*.{css,js,svelte,ts}",
@@ -132,12 +135,12 @@
 		"uid": "^2.0.2"
 	},
 	"peerDependencies": {
-		"svelte": "^5.0.0"
+		"svelte": "^5.19.0"
 	},
 	"devDependencies": {
 		"@sveltejs/package": "^2.3.5",
-		"publint": "^0.2.11",
-		"svelte": "^5.0.0",
+		"publint": "^0.3.2",
+		"svelte": "^5.19.0",
 		"svelte-check": "^4.0.5",
 		"typescript": "^5.6.0"
 	},
