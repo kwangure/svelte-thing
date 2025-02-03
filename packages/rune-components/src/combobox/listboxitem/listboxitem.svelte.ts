@@ -1,23 +1,23 @@
-import type { ComboboxOption, ComboboxRoot } from './root.svelte.js';
+import type { Option, TRoot } from '../root/root.svelte.js';
 import type { RuneComponent } from '../../types.js';
 
-export interface CreateComboboxListboxItemConfig<TValue> {
-	combobox: ComboboxRoot<TValue>;
-	item: ComboboxOption<TValue>;
+export interface CreateListboxItemConfig<TValue> {
+	root: TRoot<TValue>;
+	item: Option<TValue>;
 }
 
-export type ComboboxListboxItem = ReturnType<typeof createListboxItem>;
+export type TListboxItem = ReturnType<typeof createListboxItem>;
 
 export function createListboxItem<TValue>(
-	config: CreateComboboxListboxItemConfig<TValue>,
+	config: CreateListboxItemConfig<TValue>,
 ) {
-	const { combobox } = config;
-	const isFocused = $derived(config.item.key === combobox.activeItem?.key);
-	const isSelected = $derived(config.item.key === combobox.value?.key);
+	const { root } = config;
+	const isFocused = $derived(config.item.key === root.activeItem?.key);
+	const isSelected = $derived(config.item.key === root.value?.key);
 
 	return {
 		action(element) {
-			const unsub1 = combobox.onSetActiveItem((value) => {
+			const unsub1 = root.onSetActiveItem((value) => {
 				if (Object.is(config.item, value)) {
 					element.scrollIntoView({ block: 'nearest' });
 				}
@@ -39,8 +39,8 @@ export function createListboxItem<TValue>(
 			},
 			role: 'option',
 			onclick() {
-				combobox.setValue(config.item);
-				combobox.close();
+				root.setValue(config.item);
+				root.close();
 			},
 			get ['data-active-item']() {
 				return isFocused || undefined;

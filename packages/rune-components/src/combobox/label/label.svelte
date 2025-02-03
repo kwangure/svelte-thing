@@ -1,17 +1,15 @@
 <script lang="ts">
 	import type { HTMLLabelAttributes } from 'svelte/elements';
 	import type { NullablyRequired } from '../../types.js';
-	import {
-		createComboboxLabel,
-		getComboboxContext,
-		type CreateComboboxLabelConfig,
-	} from '../runes';
+	import type { TRoot } from '../root/root.svelte.js';
+	import { createLabel, type CreateLabelConfig } from './label.svelte.js';
+	import { getRootContext } from '../context.js';
 	import { mergeProps } from '@svelte-thing/component-utils';
 
 	const { children, ...restProps }: HTMLLabelAttributes = $props();
-	const combobox = getComboboxContext();
-	const label = createComboboxLabel({ combobox } satisfies NullablyRequired<
-		CreateComboboxLabelConfig<unknown>
+	const root = getRootContext<TRoot<unknown>>();
+	const label = createLabel({ root } satisfies NullablyRequired<
+		CreateLabelConfig<unknown>
 	>);
 </script>
 

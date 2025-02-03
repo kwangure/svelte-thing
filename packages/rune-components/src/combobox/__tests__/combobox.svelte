@@ -1,8 +1,8 @@
 <script lang="ts">
 	import * as Combobox from '../index.js';
-	import type { ComboboxOption } from '../../runes';
+	import type { Option } from '../root/root.svelte.js';
 
-	interface FruitOption extends ComboboxOption<Fruit> {
+	interface FruitOption extends Option<Fruit> {
 		key: string;
 	}
 
@@ -16,7 +16,7 @@
 
 	const { isOpen, options: fruits, value }: Props = $props();
 
-	function options({ inputValue }: Combobox.GetOptionsArg) {
+	function options({ inputValue }: { readonly inputValue: string }) {
 		return fruits.filter((fruit) =>
 			fruit.value.toLowerCase().includes(inputValue.toLowerCase()),
 		);
@@ -24,15 +24,15 @@
 </script>
 
 <Combobox.Root {isOpen} {value} {options}>
-	{#snippet children(combobox)}
+	{#snippet children(root)}
 		<Combobox.Label>Favorite Fruits</Combobox.Label>
 		<Combobox.Controls>
 			<Combobox.Input />
-			<Combobox.Button />
+			<Combobox.Trigger />
 		</Combobox.Controls>
-		{#if combobox.isOpen}
+		{#if root.isOpen}
 			<Combobox.Listbox>
-				{#each combobox.options as option}
+				{#each root.options as option}
 					<Combobox.ListboxItem item={option}>
 						{option.value}
 					</Combobox.ListboxItem>

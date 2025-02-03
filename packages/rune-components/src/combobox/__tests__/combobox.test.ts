@@ -1,11 +1,11 @@
-import type { ComboboxOption } from '../../runes/root.svelte.js';
+import type { Option } from '../root/root.svelte.js';
 import { describe, expect, test } from 'vitest';
 import { userEvent } from '@vitest/browser/context';
-import { render } from '../../../testing/util.js';
+import { render } from '../../testing/util.js';
 import Combobox from './combobox.svelte';
 
 describe('combobox', () => {
-	interface Fruit extends ComboboxOption<string> {
+	interface Fruit extends Option<string> {
 		key: string;
 	}
 
@@ -33,7 +33,7 @@ describe('combobox', () => {
 
 		return {
 			...screen,
-			get button() {
+			get trigger() {
 				return screen.getByRole('button');
 			},
 			get combobox() {
@@ -108,14 +108,14 @@ describe('combobox', () => {
 	});
 
 	describe('When focus is not on the combobox', () => {
-		test('Clicking the button opens the popup and focuses the input', async () => {
-			const { button, combobox, listbox } = await renderScreen({
+		test('Clicking the trigger opens the popup and focuses the input', async () => {
+			const { trigger, combobox, listbox } = await renderScreen({
 				shouldFocus: false,
 			});
 			await expect(listbox.query()).not.toBeInTheDocument();
 			await expect.element(combobox).not.toHaveFocus();
 
-			await button.click();
+			await trigger.click();
 			await expect.element(listbox).toBeInTheDocument();
 			await expect.element(combobox).toHaveFocus();
 		});

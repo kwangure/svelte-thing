@@ -1,17 +1,15 @@
 <script lang="ts">
 	import type { HTMLInputAttributes } from 'svelte/elements';
 	import type { NullablyRequired } from '../../types.js';
-	import {
-		createComboboxInput,
-		getComboboxContext,
-		type CreateComboboxInputConfig,
-	} from '../runes';
+	import type { TRoot } from '../root/root.svelte.js';
+	import { createInput, type CreateInputConfig } from './input.svelte.js';
+	import { getRootContext } from '../context.js';
 	import { mergeProps } from '@svelte-thing/component-utils';
 
 	const props: HTMLInputAttributes = $props();
-	const combobox = getComboboxContext();
-	const input = createComboboxInput({ combobox } satisfies NullablyRequired<
-		CreateComboboxInputConfig<unknown>
+	const root = getRootContext<TRoot<unknown>>();
+	const input = createInput({ root } satisfies NullablyRequired<
+		CreateInputConfig<unknown>
 	>);
 </script>
 

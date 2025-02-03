@@ -1,23 +1,21 @@
-import type { ComboboxRoot } from './root.svelte.js';
+import type { TRoot } from '../root/root.svelte.js';
 import type { RuneComponent } from '../../types.js';
 import { cancelEvent } from '@svelte-thing/dom-event';
 
-export interface CreateComboboxNextConfig<TValue> {
-	combobox: ComboboxRoot<TValue>;
+export interface CreateNextConfig<TValue> {
+	root: TRoot<TValue>;
 }
 
-export type ComboboxNext = ReturnType<typeof createComboboxNext>;
+export type TNext = ReturnType<typeof createNext>;
 
-export function createComboboxNext<TValue>(
-	config: CreateComboboxNextConfig<TValue>,
-) {
-	const { combobox } = config;
+export function createNext<TValue>(config: CreateNextConfig<TValue>) {
+	const { root } = config;
 
 	return {
 		props: {
 			'data-st-combobox-next-button': '',
 			get ['aria-controls']() {
-				return combobox.ids.listbox;
+				return root.ids.listbox;
 			},
 			get ['aria-label']() {
 				return 'Next';
@@ -26,7 +24,7 @@ export function createComboboxNext<TValue>(
 				cancelEvent(event);
 			},
 			onclick() {
-				combobox.setNextItemActive();
+				root.setNextItemActive();
 			},
 			type: 'button',
 		},

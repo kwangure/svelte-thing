@@ -1,18 +1,19 @@
 <script lang="ts">
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 	import type { NullablyRequired } from '../../types.js';
+	import type { TRoot } from '../root/root.svelte.js';
 	import {
-		createComboboxPrevious,
-		getComboboxContext,
-		type CreateComboboxPreviousConfig,
-	} from '../runes';
+		createPrevious,
+		type CreatePreviousConfig,
+	} from './previous.svelte.js';
+	import { getRootContext } from '../context.js';
 	import { mergeProps } from '@svelte-thing/component-utils';
 
 	const { ...restProps }: HTMLButtonAttributes = $props();
-	const combobox = getComboboxContext();
-	const previous = createComboboxPrevious({
-		combobox,
-	} satisfies NullablyRequired<CreateComboboxPreviousConfig<unknown>>);
+	const root = getRootContext<TRoot<unknown>>();
+	const previous = createPrevious({
+		root,
+	} satisfies NullablyRequired<CreatePreviousConfig<unknown>>);
 </script>
 
 <button {...mergeProps(previous.props, restProps)}>

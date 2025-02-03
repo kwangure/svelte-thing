@@ -3,44 +3,38 @@ import { mergeActions } from '@svelte-thing/component-utils';
 import { onclickoutside } from '../../actions/onclickoutside.js';
 import { uid } from 'uid';
 
-export interface CreateComboboxRootConfig<TValue> {
+export interface CreateRootConfig<TValue> {
 	hasInputCompletion?: false;
 	includesBaseElement?: boolean;
 	isOpen?: boolean;
-	options: ComboboxGetOptions<TValue>;
+	options: GetOptions<TValue>;
 	optionToString?: (selectedValue: TValue) => string;
-	value?: ComboboxOption<TValue>;
+	value?: Option<TValue>;
 }
 
-export type ComboboxGetOptions<TValue> = (
-	args: ComboboxGetOptionsArg,
-) => ComboboxOption<TValue>[];
+export type GetOptions<TValue> = (args: GetOptionsArg) => Option<TValue>[];
 
-export interface ComboboxGetOptionsArg {
+export interface GetOptionsArg {
 	readonly inputValue: string;
 }
 
-export interface ComboboxOption<TValue> {
+export interface Option<TValue> {
 	key: string;
 	value: TValue;
 }
 
-export type ComboboxRoot<TValue> = ReturnType<
-	typeof createComboboxRoot<TValue>
->;
+export type TRoot<TValue = unknown> = ReturnType<typeof createRoot<TValue>>;
 
-export type ComboboxVisualFocus = 'listbox' | 'input';
+export type VisualFocus = 'listbox' | 'input';
 
-export function createComboboxRoot<TValue>(
-	config: CreateComboboxRootConfig<TValue>,
-) {
+export function createRoot<TValue>(config: CreateRootConfig<TValue>) {
 	let inputValue = $state('');
 	let isOpen = $state(config.isOpen ?? false);
-	let value = $state<ComboboxOption<TValue> | undefined>(config.value);
-	let visualFocus = $state<ComboboxVisualFocus>(isOpen ? 'listbox' : 'input');
+	let value = $state<Option<TValue> | undefined>(config.value);
+	let visualFocus = $state<VisualFocus>(isOpen ? 'listbox' : 'input');
 
 	let getOptions = config.options;
-	let options = $state([] as ComboboxOption<TValue>[]);
+	let options = $state([] as Option<TValue>[]);
 	let hasFiltering = $state(false);
 	setOptions();
 
@@ -49,7 +43,7 @@ export function createComboboxRoot<TValue>(
 	);
 	const activeItem = $derived(options[activeItemIndex]);
 
-	type OptionListener = (arg: ComboboxOption<TValue> | undefined) => void;
+	type OptionListener = (arg: Option<TValue> | undefined) => void;
 	const setActiveItemListeners = new Set<OptionListener>();
 	const setIsOpenListeners = new Set<(arg: boolean) => void>();
 	const setValueListeners = new Set<OptionListener>();
@@ -142,7 +136,7 @@ export function createComboboxRoot<TValue>(
 			setActiveItemIndex(-1);
 		},
 		close,
-		onSetActiveItem(fn: (arg: ComboboxOption<TValue> | undefined) => void) {
+		onSetActiveItem(fn: (arg: Option<TValue> | undefined) => void) {
 			setActiveItemListeners.add(fn);
 			return () => setActiveItemListeners.delete(fn);
 		},
@@ -150,7 +144,7 @@ export function createComboboxRoot<TValue>(
 			setIsOpenListeners.add(fn);
 			return () => setIsOpenListeners.delete(fn);
 		},
-		onSetValue(fn: (arg: ComboboxOption<TValue> | undefined) => void) {
+		onSetValue(fn: (arg: Option<TValue> | undefined) => void) {
 			setValueListeners.add(fn);
 			return () => setValueListeners.delete(fn);
 		},
@@ -177,7 +171,7 @@ export function createComboboxRoot<TValue>(
 				activeItemIndex <= minValue ? maxValue : activeItemIndex - 1,
 			);
 		},
-		setValue(v: ComboboxOption<TValue> | undefined) {
+		setValue(v: Option<TValue> | undefined) {
 			value = v;
 			for (const fn of setValueListeners) {
 				fn(value);
@@ -185,7 +179,7 @@ export function createComboboxRoot<TValue>(
 			setInputValue(valueToString());
 			setActiveItemIndex(options.findIndex((o) => o.key === v?.key));
 		},
-		setOptions(g: ComboboxGetOptions<TValue>) {
+		setOptions(g: GetOptions<TValue>) {
 			getOptions = g;
 			setOptions();
 			const activeItemKey = activeItem?.key;

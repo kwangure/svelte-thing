@@ -1,12 +1,10 @@
 <script module>
-	import type { CreateComboboxRootConfig, ComboboxRoot } from '../runes';
+	import type { CreateRootConfig, TRoot } from './root.svelte.js';
 
 	type DivAttributes = Omit<HTMLAttributes<HTMLDivElement>, 'children'>;
 
-	interface Props<TValue>
-		extends CreateComboboxRootConfig<TValue>,
-			DivAttributes {
-		children: Snippet<[ComboboxRoot<TValue>]>;
+	interface Props<TValue> extends CreateRootConfig<TValue>, DivAttributes {
+		children: Snippet<[TRoot<TValue>]>;
 	}
 </script>
 
@@ -16,7 +14,8 @@
 	import type { Snippet } from 'svelte';
 	import { skip, watch } from '@svelte-thing/component-utils/reactivity';
 	import { mergeProps } from '@svelte-thing/component-utils';
-	import { setComboboxContext } from '../runes';
+	import { createRoot } from './root.svelte.js';
+	import { setRootContext } from '../context.js';
 
 	const {
 		children,
@@ -28,32 +27,34 @@
 		value,
 		...restProps
 	}: Props<TValue> = $props();
-	const combobox = setComboboxContext<TValue>({
-		hasInputCompletion,
-		includesBaseElement,
-		isOpen,
-		options,
-		optionToString,
-		value,
-	} satisfies NullablyRequired<CreateComboboxRootConfig<TValue>>);
+	const root = setRootContext(
+		createRoot({
+			hasInputCompletion,
+			includesBaseElement,
+			isOpen,
+			options,
+			optionToString,
+			value,
+		} satisfies NullablyRequired<CreateRootConfig<TValue>>),
+	);
 
 	watch(
 		() => isOpen,
-		(i) => (i ? combobox.open() : combobox.close()),
+		(i) => (i ? root.open() : root.close()),
 		skip(1),
 	);
 	watch(
 		() => options,
-		(o) => combobox.setOptions(o),
+		(o) => root.setOptions(o),
 		skip(1),
 	);
 	watch(
 		() => value,
-		(v) => combobox.setValue(v),
+		(v) => root.setValue(v),
 		skip(1),
 	);
 </script>
 
-<div {...mergeProps(combobox.props, restProps)} use:combobox.action>
-	{@render children(combobox)}
+<div {...mergeProps(root.props, restProps)} use:root.action>
+	{@render children(root)}
 </div>
