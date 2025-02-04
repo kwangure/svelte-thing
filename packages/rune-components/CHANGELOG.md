@@ -1,5 +1,12 @@
 # @svelte-thing/rune-components
 
+## 0.0.15
+
+### Patch Changes
+
+-   6255857: Split modal and non-modal dialog sub-component
+-   b9869d9: Improve Combobox and Dialog external API
+
 ## 0.0.14
 
 ### Patch Changes

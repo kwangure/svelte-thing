@@ -1,5 +1,11 @@
 # @svelte-thing/css
 
+## 0.0.3
+
+### Patch Changes
+
+-   6255857: Split modal and non-modal dialog sub-component
+
 ## 0.0.2
 
 ### Patch Changes
