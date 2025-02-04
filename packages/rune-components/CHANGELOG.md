@@ -1,5 +1,11 @@
 # @svelte-thing/rune-components
 
+## 0.0.17
+
+### Patch Changes
+
+-   Fix .d.ts component/rune conflicts
+
 ## 0.0.16
 
 ### Patch Changes
