@@ -88,24 +88,14 @@
 			"types": "./dist/types.d.ts"
 		},
 		"./combobox": {
-			"types": "./dist/combobox/components/index.d.ts",
-			"svelte": "./dist/combobox/components/index.js",
-			"default": "./dist/combobox/components/index.js"
-		},
-		"./combobox/runes": {
-			"types": "./dist/combobox/runes/index.d.ts",
-			"svelte": "./dist/combobox/runes/index.js",
-			"default": "./dist/combobox/runes/index.js"
+			"types": "./dist/combobox/index.d.ts",
+			"svelte": "./dist/combobox/index.js",
+			"default": "./dist/combobox/index.js"
 		},
 		"./dialog": {
-			"types": "./dist/dialog/components/index.d.ts",
-			"svelte": "./dist/dialog/components/index.js",
-			"default": "./dist/dialog/components/index.js"
-		},
-		"./dialog/runes": {
-			"types": "./dist/dialog/runes/index.d.ts",
-			"svelte": "./dist/dialog/runes/index.js",
-			"default": "./dist/dialog/runes/index.js"
+			"types": "./dist/dialog/index.d.ts",
+			"svelte": "./dist/dialog/index.js",
+			"default": "./dist/dialog/index.js"
 		}
 	},
 	"files": [
