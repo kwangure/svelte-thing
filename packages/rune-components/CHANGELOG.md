@@ -1,5 +1,11 @@
 # @svelte-thing/rune-components
 
+## 0.0.16
+
+### Patch Changes
+
+-   Bump @svelte/package to fix dialog root `any` type issue
+
 ## 0.0.15
 
 ### Patch Changes
