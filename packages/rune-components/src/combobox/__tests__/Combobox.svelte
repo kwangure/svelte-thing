@@ -1,6 +1,6 @@
 <script lang="ts">
 	import * as Combobox from '../index.js';
-	import type { Option } from '../root/root.svelte.js';
+	import type { Option } from '../root/createRoot.svelte.js';
 
 	interface FruitOption extends Option<Fruit> {
 		key: string;

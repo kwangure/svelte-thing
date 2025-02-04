@@ -1,8 +1,8 @@
-import type { Option } from '../root/root.svelte.js';
+import type { Option } from '../root/createRoot.svelte.js';
 import { describe, expect, test } from 'vitest';
 import { userEvent } from '@vitest/browser/context';
 import { render } from '../../testing/util.js';
-import Combobox from './combobox.svelte';
+import Combobox from './Combobox.svelte';
 
 describe('combobox', () => {
 	interface Fruit extends Option<string> {

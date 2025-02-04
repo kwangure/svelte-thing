@@ -1,8 +1,11 @@
 <script lang="ts">
 	import type { HTMLLabelAttributes } from 'svelte/elements';
 	import type { NullablyRequired } from '../../types.js';
-	import type { TRoot } from '../root/root.svelte.js';
-	import { createLabel, type CreateLabelConfig } from './label.svelte.js';
+	import type { TRoot } from '../root/createRoot.svelte.js';
+	import {
+		createLabel,
+		type CreateLabelConfig,
+	} from './createLabel.svelte.js';
 	import { getRootContext } from '../context.js';
 	import { mergeProps } from '@svelte-thing/component-utils';
 

@@ -1,18 +1,21 @@
 <script lang="ts">
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 	import type { NullablyRequired } from '../../types.js';
-	import type { TRoot } from '../root/root.svelte.js';
-	import { createClose, type CreateCloseConfig } from './close.svelte.js';
+	import {
+		createTrigger,
+		type CreateTriggerConfig,
+	} from './createTrigger.svelte.js';
 	import { getRootContext } from '../context.js';
 	import { mergeProps } from '@svelte-thing/component-utils';
+	import type { TRoot } from '../root/createRoot.svelte.js';
 
 	const { children, ...restProps }: HTMLButtonAttributes = $props();
 	const root = getRootContext<TRoot>();
-	const close = createClose({
+	const trigger = createTrigger({
 		root,
-	} satisfies NullablyRequired<CreateCloseConfig>);
+	} satisfies NullablyRequired<CreateTriggerConfig>);
 </script>
 
-<button {...mergeProps(close.props, restProps)}>
+<button {...mergeProps(trigger.props, restProps)}>
 	{@render children?.()}
 </button>

@@ -1,14 +1,13 @@
-import type { TRoot } from '../root/root.svelte.js';
+import type { TRoot } from '../root/createRoot.svelte.js';
 import type { RuneComponent } from '../../types.js';
-import { isClickInsideRect } from '../../actions/onclickoutside.js';
 
-export interface CreateModalPopupConfig {
+export interface CreateNonModalPopupConfig {
 	root: TRoot;
 }
 
-export type TModalPopup = ReturnType<typeof createModalPopup>;
+export type TNonModalPopup = ReturnType<typeof createNonModalPopup>;
 
-export function createModalPopup(config: CreateModalPopupConfig) {
+export function createNonModalPopup(config: CreateNonModalPopupConfig) {
 	const { root } = config;
 	let element: HTMLDialogElement | undefined;
 
@@ -16,16 +15,16 @@ export function createModalPopup(config: CreateModalPopupConfig) {
 		if (!element) return;
 
 		if (root.isOpen) {
-			element.showModal();
-		} else if (element.matches('[open]')) {
-			element.close();
+			element.showPopover();
+		} else {
+			element.hidePopover();
 		}
 	}
 
 	return {
 		action(node) {
 			element = node as unknown as HTMLDialogElement;
-			root.setIsModal(true);
+			root.setIsModal(false);
 			toggleDialog();
 			const unsubscribeOpen = root.onSetIsOpen(toggleDialog);
 			return {
@@ -36,9 +35,9 @@ export function createModalPopup(config: CreateModalPopupConfig) {
 			};
 		},
 		props: {
-			'aria-modal': 'true',
+			'aria-modal': 'false',
 			'data-st-dialog-popup': '',
-			'data-st-modal': true,
+			'data-st-modal': false,
 			get ['aria-hidden']() {
 				return !root.isOpen || undefined;
 			},
@@ -49,18 +48,11 @@ export function createModalPopup(config: CreateModalPopupConfig) {
 				return !root.isOpen || undefined;
 			},
 			id: root.ids.popup,
-			onclose() {
-				if (root.isOpen) {
-					root.setIsOpen(false);
-				}
-			},
-			onclick(event: MouseEvent) {
-				if (
-					root.isOpen &&
-					element &&
-					!isClickInsideRect(event, element)
-				) {
-					root.setIsOpen(false);
+			popover: 'auto',
+			ontoggle(event) {
+				const isOpen = event.newState === 'open';
+				if (root.isOpen !== isOpen) {
+					root.setIsOpen(isOpen);
 				}
 			},
 		},

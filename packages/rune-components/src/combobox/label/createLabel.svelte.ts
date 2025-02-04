@@ -1,5 +1,5 @@
 import type { RuneComponent } from '../../types.js';
-import type { TRoot } from '../root/root.svelte.js';
+import type { TRoot } from '../root/createRoot.svelte.js';
 
 export interface CreateLabelConfig<TValue> {
 	root: TRoot<TValue>;

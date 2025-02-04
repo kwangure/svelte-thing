@@ -2,7 +2,7 @@ import { describe } from 'vitest';
 import { render } from '../../testing/util.js';
 import { expect, test } from 'vitest';
 import { userEvent } from '@vitest/browser/context';
-import Dialog from './dialog.svelte';
+import Dialog from './Dialog.svelte';
 
 describe('dialog', () => {
 	interface RenderOptionsArgs {

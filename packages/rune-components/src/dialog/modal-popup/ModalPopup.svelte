@@ -1,19 +1,19 @@
 <script lang="ts">
 	import type { HTMLDialogAttributes } from 'svelte/elements';
 	import type { NullablyRequired } from '../../types.js';
-	import type { TRoot } from '../root/root.svelte.js';
+	import type { TRoot } from '../root/createRoot.svelte.js';
 	import {
-		createNonModalPopup,
-		type CreateNonModalPopupConfig,
-	} from './non-modal-popup.svelte.js';
+		createModalPopup,
+		type CreateModalPopupConfig,
+	} from './createModalPopup.svelte.js';
 	import { getRootContext } from '../context.js';
 	import { mergeProps } from '@svelte-thing/component-utils';
 
 	const { children, ...restProps }: HTMLDialogAttributes = $props();
 	const root = getRootContext<TRoot>();
-	const popup = createNonModalPopup({
+	const popup = createModalPopup({
 		root,
-	} satisfies NullablyRequired<CreateNonModalPopupConfig>);
+	} satisfies NullablyRequired<CreateModalPopupConfig>);
 </script>
 
 <dialog {...mergeProps(popup.props, restProps)} use:popup.action>

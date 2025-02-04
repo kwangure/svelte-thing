@@ -1,5 +1,5 @@
 <script module>
-	import type { CreateRootConfig, TRoot } from './root.svelte.js';
+	import type { CreateRootConfig, TRoot } from './createRoot.svelte.js';
 
 	type DivAttributes = Omit<HTMLAttributes<HTMLDivElement>, 'children'>;
 
@@ -14,7 +14,7 @@
 	import type { Snippet } from 'svelte';
 	import { skip, watch } from '@svelte-thing/component-utils/reactivity';
 	import { mergeProps } from '@svelte-thing/component-utils';
-	import { createRoot } from './root.svelte.js';
+	import { createRoot } from './createRoot.svelte.js';
 	import { setRootContext } from '../context.js';
 
 	const {

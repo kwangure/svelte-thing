@@ -1,4 +1,4 @@
-import type { TRoot } from '../root/root.svelte.js';
+import type { TRoot } from '../root/createRoot.svelte.js';
 import {
 	cancelEvent,
 	encodeKeys,

@@ -1,13 +1,14 @@
-import type { TRoot } from '../root/root.svelte.js';
+import type { TRoot } from '../root/createRoot.svelte.js';
 import type { RuneComponent } from '../../types.js';
+import { isClickInsideRect } from '../../actions/onclickoutside.js';
 
-export interface CreateNonModalPopupConfig {
+export interface CreateModalPopupConfig {
 	root: TRoot;
 }
 
-export type TNonModalPopup = ReturnType<typeof createNonModalPopup>;
+export type TModalPopup = ReturnType<typeof createModalPopup>;
 
-export function createNonModalPopup(config: CreateNonModalPopupConfig) {
+export function createModalPopup(config: CreateModalPopupConfig) {
 	const { root } = config;
 	let element: HTMLDialogElement | undefined;
 
@@ -15,16 +16,16 @@ export function createNonModalPopup(config: CreateNonModalPopupConfig) {
 		if (!element) return;
 
 		if (root.isOpen) {
-			element.showPopover();
-		} else {
-			element.hidePopover();
+			element.showModal();
+		} else if (element.matches('[open]')) {
+			element.close();
 		}
 	}
 
 	return {
 		action(node) {
 			element = node as unknown as HTMLDialogElement;
-			root.setIsModal(false);
+			root.setIsModal(true);
 			toggleDialog();
 			const unsubscribeOpen = root.onSetIsOpen(toggleDialog);
 			return {
@@ -35,9 +36,9 @@ export function createNonModalPopup(config: CreateNonModalPopupConfig) {
 			};
 		},
 		props: {
-			'aria-modal': 'false',
+			'aria-modal': 'true',
 			'data-st-dialog-popup': '',
-			'data-st-modal': false,
+			'data-st-modal': true,
 			get ['aria-hidden']() {
 				return !root.isOpen || undefined;
 			},
@@ -48,11 +49,18 @@ export function createNonModalPopup(config: CreateNonModalPopupConfig) {
 				return !root.isOpen || undefined;
 			},
 			id: root.ids.popup,
-			popover: 'auto',
-			ontoggle(event) {
-				const isOpen = event.newState === 'open';
-				if (root.isOpen !== isOpen) {
-					root.setIsOpen(isOpen);
+			onclose() {
+				if (root.isOpen) {
+					root.setIsOpen(false);
+				}
+			},
+			onclick(event: MouseEvent) {
+				if (
+					root.isOpen &&
+					element &&
+					!isClickInsideRect(event, element)
+				) {
+					root.setIsOpen(false);
 				}
 			},
 		},

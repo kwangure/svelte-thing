@@ -1,30 +1,30 @@
-import type { TRoot } from '../root/root.svelte.js';
+import type { TRoot } from '../root/createRoot.svelte.js';
 import type { RuneComponent } from '../../types.js';
 import { cancelEvent } from '@svelte-thing/dom-event';
 
-export interface CreatePreviousConfig<TValue> {
+export interface CreateNextConfig<TValue> {
 	root: TRoot<TValue>;
 }
 
-export type TPrevious = ReturnType<typeof createPrevious>;
+export type TNext = ReturnType<typeof createNext>;
 
-export function createPrevious<TValue>(config: CreatePreviousConfig<TValue>) {
+export function createNext<TValue>(config: CreateNextConfig<TValue>) {
 	const { root } = config;
 
 	return {
 		props: {
-			'data-st-combobox-previous-button': '',
+			'data-st-combobox-next-button': '',
 			get ['aria-controls']() {
 				return root.ids.listbox;
 			},
 			get ['aria-label']() {
-				return 'Previous';
+				return 'Next';
 			},
 			onmousedown(event: Event) {
 				cancelEvent(event);
 			},
 			onclick() {
-				root.setPreviousItemActive();
+				root.setNextItemActive();
 			},
 			type: 'button',
 		},

@@ -1,14 +1,14 @@
 <script lang="ts">
 	import type { HTMLLiAttributes } from 'svelte/elements';
 	import type { NullablyRequired } from '../../types.js';
-	import type { Option } from '../root/root.svelte.js';
+	import type { Option } from '../root/createRoot.svelte.js';
 	import type { Snippet } from 'svelte';
-	import type { TRoot } from '../root/root.svelte.js';
+	import type { TRoot } from '../root/createRoot.svelte.js';
 	import {
 		createListboxItem,
 		type TListboxItem,
 		type CreateListboxItemConfig,
-	} from './listboxitem.svelte.js';
+	} from './createListboxItem.svelte.js';
 	import { getRootContext } from '../context.js';
 	import { mergeProps } from '@svelte-thing/component-utils';
 

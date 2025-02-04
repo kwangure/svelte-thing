@@ -4,11 +4,11 @@
 	Dialog presents a dialog box or modal.
 -->
 <script lang="ts">
-	import type { CreateRootConfig, TRoot } from './root.svelte.js';
+	import type { CreateRootConfig, TRoot } from './createRoot.svelte.js';
 	import type { Snippet } from 'svelte';
 	import type { NullablyRequired } from '../../types.js';
 	import { skip, watch } from '@svelte-thing/component-utils/reactivity';
-	import { createRoot } from './root.svelte.js';
+	import { createRoot } from './createRoot.svelte.js';
 	import { setRootContext } from '../context.js';
 
 	interface Props extends CreateRootConfig {
