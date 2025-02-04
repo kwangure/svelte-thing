@@ -1,13 +1,14 @@
 import { DEV } from 'esm-env';
 import { uid } from 'uid';
+import type { RuneComponent } from '../../types.js';
 
-export interface CreateDialogRootConfig {
+export interface CreateRootConfig {
 	isOpen?: boolean;
 }
 
-export type DialogRoot = ReturnType<typeof createDialogRoot>;
+export type TRoot = ReturnType<typeof createRoot>;
 
-export function createDialogRoot(config?: CreateDialogRootConfig) {
+export function createRoot(config?: CreateRootConfig) {
 	let isModal = $state<boolean>();
 	let isOpen = $state(config?.isOpen ?? false);
 	const setIsOpenListeners = new Set<(isOpen: boolean) => void>();
@@ -30,11 +31,16 @@ export function createDialogRoot(config?: CreateDialogRootConfig) {
 		},
 		setIsOpen(v: boolean | undefined) {
 			isOpen = v ?? false;
-			for (const fn of setIsOpenListeners) fn(isOpen);
+			for (const fn of setIsOpenListeners) {
+				fn(isOpen);
+			}
 		},
 		onSetIsOpen(fn: (isOpen: boolean) => void) {
 			setIsOpenListeners.add(fn);
 			return () => setIsOpenListeners.delete(fn);
 		},
-	};
+		props: {
+			'data-st-dialog-root': '',
+		},
+	} satisfies RuneComponent<'div'>;
 }

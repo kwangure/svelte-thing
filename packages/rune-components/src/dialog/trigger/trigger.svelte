@@ -2,17 +2,18 @@
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 	import type { NullablyRequired } from '../../types.js';
 	import {
-		createDialogTrigger,
-		getDialogContext,
-		type CreateDialogTriggerConfig,
-	} from '../runes';
+		createTrigger,
+		type CreateTriggerConfig,
+	} from './trigger.svelte.js';
+	import { getRootContext } from '../context.js';
 	import { mergeProps } from '@svelte-thing/component-utils';
+	import type { TRoot } from '../root/root.svelte.js';
 
 	const { children, ...restProps }: HTMLButtonAttributes = $props();
-	const dialog = getDialogContext();
-	const trigger = createDialogTrigger({
-		dialog,
-	} satisfies NullablyRequired<CreateDialogTriggerConfig>);
+	const root = getRootContext<TRoot>();
+	const trigger = createTrigger({
+		root,
+	} satisfies NullablyRequired<CreateTriggerConfig>);
 </script>
 
 <button {...mergeProps(trigger.props, restProps)}>

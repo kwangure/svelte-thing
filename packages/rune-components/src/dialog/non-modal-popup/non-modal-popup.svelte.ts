@@ -1,22 +1,20 @@
-import type { DialogRoot } from './root.svelte.js';
+import type { TRoot } from '../root/root.svelte.js';
 import type { RuneComponent } from '../../types.js';
 
-export interface CreateNonModalDialogPopupConfig {
-	dialog: DialogRoot;
+export interface CreateNonModalPopupConfig {
+	root: TRoot;
 }
 
-export type NonModalDialogPopup = ReturnType<typeof createNonModalDialogPopup>;
+export type TNonModalPopup = ReturnType<typeof createNonModalPopup>;
 
-export function createNonModalDialogPopup(
-	config: CreateNonModalDialogPopupConfig,
-) {
-	const { dialog } = config;
+export function createNonModalPopup(config: CreateNonModalPopupConfig) {
+	const { root } = config;
 	let element: HTMLDialogElement | undefined;
 
 	function toggleDialog() {
 		if (!element) return;
 
-		if (dialog.isOpen) {
+		if (root.isOpen) {
 			element.showPopover();
 		} else {
 			element.hidePopover();
@@ -26,9 +24,9 @@ export function createNonModalDialogPopup(
 	return {
 		action(node) {
 			element = node as unknown as HTMLDialogElement;
-			dialog.setIsModal(false);
+			root.setIsModal(false);
 			toggleDialog();
-			const unsubscribeOpen = dialog.onSetIsOpen(toggleDialog);
+			const unsubscribeOpen = root.onSetIsOpen(toggleDialog);
 			return {
 				destroy() {
 					unsubscribeOpen();
@@ -41,20 +39,20 @@ export function createNonModalDialogPopup(
 			'data-st-dialog-popup': '',
 			'data-st-modal': false,
 			get ['aria-hidden']() {
-				return !dialog.isOpen || undefined;
+				return !root.isOpen || undefined;
 			},
 			get ['data-st-open']() {
-				return dialog.isOpen;
+				return root.isOpen;
 			},
 			get inert() {
-				return !dialog.isOpen || undefined;
+				return !root.isOpen || undefined;
 			},
-			id: dialog.ids.popup,
+			id: root.ids.popup,
 			popover: 'auto',
 			ontoggle(event) {
 				const isOpen = event.newState === 'open';
-				if (dialog.isOpen !== isOpen) {
-					dialog.setIsOpen(isOpen);
+				if (root.isOpen !== isOpen) {
+					root.setIsOpen(isOpen);
 				}
 			},
 		},

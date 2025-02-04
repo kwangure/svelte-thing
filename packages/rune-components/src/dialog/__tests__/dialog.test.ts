@@ -1,5 +1,5 @@
 import { describe } from 'vitest';
-import { render } from '../../../testing/util.js';
+import { render } from '../../testing/util.js';
 import { expect, test } from 'vitest';
 import { userEvent } from '@vitest/browser/context';
 import Dialog from './dialog.svelte';
