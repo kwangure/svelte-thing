@@ -1,11 +1,13 @@
 import { chain } from './chain.js';
 import type { Action } from 'svelte/action';
 
-export type ActionArg = Action | null | undefined;
+export type ActionArg<T> = Action<T> | null | undefined;
 
-export function mergeActions(...actions: ActionArg[]) {
+export function mergeActions<T extends HTMLElement>(
+	...actions: ActionArg<T>[]
+) {
 	/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-	return (node: HTMLElement, params?: any) => {
+	return (node: T, params?: any) => {
 		/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
 		const updates: ((arg: any) => void)[] = [];
 		const destroys: (() => void)[] = [];
