@@ -1,5 +1,5 @@
-import { chain } from './chain.js';
 import type { Action } from 'svelte/action';
+import { chain } from './chain.js';
 
 export type ActionArg<T> = Action<T> | null | undefined;
 
