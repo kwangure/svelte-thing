@@ -7,7 +7,7 @@
 	}
 
 	@media (prefers-color-scheme: dark) {
-		:root {
+		:where(:root) {
 			--st-color-preference-light: initial;
 			--st-color-preference-dark: ;
 		}
