@@ -7,14 +7,12 @@
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		:root {
+		:where(:root) {
 			--st-motion-no-preference: initial;
 			--st-motion-reduce: ;
 		}
 	}
-}
 
-@layer utilities {
 	.no-preference {
 		--st-motion-no-preference: ;
 		--st-motion-reduce: initial;
