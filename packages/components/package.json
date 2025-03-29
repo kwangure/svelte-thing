@@ -1,6 +1,6 @@
 {
 	"name": "@svelte-thing/components",
-	"version": "0.0.44",
+	"version": "0.0.45",
 	"scripts": {
 		"build": "wireit",
 		"build:dev": "wireit",
@@ -83,10 +83,6 @@
 			"svelte": "./dist/creators/index.js",
 			"default": "./dist/creators/index.js"
 		},
-		"./css/*": {
-			"svelte": "./dist/css/*.css",
-			"default": "./dist/css/*.css"
-		},
 		"./dom": {
 			"types": "./dist/dom/dom.d.ts",
 			"default": "./dist/dom/dom.js"
@@ -130,7 +126,7 @@
 	],
 	"dependencies": {
 		"@mdi/js": "^7.2.96",
-		"@svelte-thing/component-utils": "^0.0.9",
+		"@svelte-thing/component-utils": "^0.0.10",
 		"esm-env": "^1.0.0",
 		"uid": "^2.0.2"
 	},
