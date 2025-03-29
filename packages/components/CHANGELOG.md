@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.46
+
+### Patch Changes
+
+-   691dcb2: Update @svelte-thing/component-utils imports
+
 ## 0.0.45
 
 ### Patch Changes
