@@ -1,5 +1,12 @@
 # @svelte-thing/component-utils
 
+## 0.0.10
+
+### Patch Changes
+
+-   874f89e: Add object type utils
+-   d118361: Capture node type in `mergeActions`
+
 ## 0.0.9
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @svelte-thing/css
 
+## 0.0.4
+
+### Patch Changes
+
+-   c8275b9: Use correct dark mode specificity
+
 ## 0.0.3
 
 ### Patch Changes
