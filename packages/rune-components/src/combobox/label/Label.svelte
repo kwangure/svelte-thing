@@ -7,7 +7,7 @@
 		type CreateLabelConfig,
 	} from './createLabel.svelte.js';
 	import { getRootContext } from '../context.js';
-	import { mergeProps } from '@svelte-thing/component-utils';
+	import { mergeProps } from '@svelte-thing/component-utils/svelte';
 
 	const { children, ...restProps }: HTMLLabelAttributes = $props();
 	const root = getRootContext<TRoot<unknown>>();

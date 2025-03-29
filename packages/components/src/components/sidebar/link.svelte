@@ -2,7 +2,7 @@
 	import type { HTMLAnchorAttributes } from 'svelte/elements';
 	import type { Snippet } from 'svelte';
 	import { createHide, getSidebarContext } from './sidebar.svelte.js';
-	import { mergeProps } from '@svelte-thing/component-utils';
+	import { mergeProps } from '@svelte-thing/component-utils/svelte';
 
 	interface Props extends HTMLAnchorAttributes {
 		href: string;

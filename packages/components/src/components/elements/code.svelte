@@ -6,7 +6,7 @@
 		createCopier,
 		type LineInterval,
 	} from '../../creators/copy.svelte.js';
-	import { skip, watch } from '@svelte-thing/component-utils/reactivity';
+	import { skip, watch } from '@svelte-thing/component-utils/svelte';
 
 	interface Props extends HTMLAttributes<HTMLElement> {
 		lines: { color: string; segment: string }[][];

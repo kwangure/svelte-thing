@@ -7,7 +7,7 @@
 		type CreateTriggerConfig,
 	} from './createTrigger.svelte.js';
 	import { getRootContext } from '../context.js';
-	import { mergeProps } from '@svelte-thing/component-utils';
+	import { mergeProps } from '@svelte-thing/component-utils/svelte';
 
 	const { ...restProps }: HTMLButtonAttributes = $props();
 	const root = getRootContext<TRoot<unknown>>();

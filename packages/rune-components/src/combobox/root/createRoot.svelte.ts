@@ -1,5 +1,5 @@
 import type { RuneComponent } from '../../types.js';
-import { mergeActions } from '@svelte-thing/component-utils';
+import { mergeActions } from '@svelte-thing/component-utils/svelte';
 import { onclickoutside } from '../../actions/onclickoutside.js';
 import { uid } from 'uid';
 

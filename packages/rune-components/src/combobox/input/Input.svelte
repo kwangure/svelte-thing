@@ -7,7 +7,7 @@
 		type CreateInputConfig,
 	} from './createInput.svelte.js';
 	import { getRootContext } from '../context.js';
-	import { mergeProps } from '@svelte-thing/component-utils';
+	import { mergeProps } from '@svelte-thing/component-utils/svelte';
 
 	const props: HTMLInputAttributes = $props();
 	const root = getRootContext<TRoot<unknown>>();

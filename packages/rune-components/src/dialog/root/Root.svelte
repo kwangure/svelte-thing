@@ -7,7 +7,7 @@
 	import type { CreateRootConfig, TRoot } from './createRoot.svelte.js';
 	import type { Snippet } from 'svelte';
 	import type { NullablyRequired } from '../../types.js';
-	import { skip, watch } from '@svelte-thing/component-utils/reactivity';
+	import { skip, watch } from '@svelte-thing/component-utils/svelte';
 	import { createRoot } from './createRoot.svelte.js';
 	import { setRootContext } from '../context.js';
 

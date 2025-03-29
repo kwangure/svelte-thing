@@ -12,8 +12,11 @@
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { NullablyRequired } from '../../types.js';
 	import type { Snippet } from 'svelte';
-	import { skip, watch } from '@svelte-thing/component-utils/reactivity';
-	import { mergeProps } from '@svelte-thing/component-utils';
+	import {
+		mergeProps,
+		skip,
+		watch,
+	} from '@svelte-thing/component-utils/svelte';
 	import { createRoot } from './createRoot.svelte.js';
 	import { setRootContext } from '../context.js';
 

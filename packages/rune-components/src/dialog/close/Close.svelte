@@ -7,7 +7,7 @@
 		type CreateCloseConfig,
 	} from './createClose.svelte.js';
 	import { getRootContext } from '../context.js';
-	import { mergeProps } from '@svelte-thing/component-utils';
+	import { mergeProps } from '@svelte-thing/component-utils/svelte';
 
 	const { children, ...restProps }: HTMLButtonAttributes = $props();
 	const root = getRootContext<TRoot>();

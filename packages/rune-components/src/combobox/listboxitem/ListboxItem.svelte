@@ -10,7 +10,7 @@
 		type CreateListboxItemConfig,
 	} from './createListboxItem.svelte.js';
 	import { getRootContext } from '../context.js';
-	import { mergeProps } from '@svelte-thing/component-utils';
+	import { mergeProps } from '@svelte-thing/component-utils/svelte';
 
 	interface Props extends Omit<HTMLLiAttributes, 'children'> {
 		children?: Snippet<[TListboxItem]>;

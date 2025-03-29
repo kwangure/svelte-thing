@@ -7,7 +7,7 @@
 		type CreateModalPopupConfig,
 	} from './createModalPopup.svelte.js';
 	import { getRootContext } from '../context.js';
-	import { mergeProps } from '@svelte-thing/component-utils';
+	import { mergeProps } from '@svelte-thing/component-utils/svelte';
 
 	const { children, ...restProps }: HTMLDialogAttributes = $props();
 	const root = getRootContext<TRoot>();

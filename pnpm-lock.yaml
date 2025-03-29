@@ -67,8 +67,8 @@ importers:
         specifier: ^7.2.96
         version: 7.3.67
       '@svelte-thing/component-utils':
-        specifier: ^0.0.9
-        version: 0.0.9(svelte@5.19.6)
+        specifier: ^0.0.10
+        version: 0.0.10(svelte@5.19.6)
       esm-env:
         specifier: ^1.0.0
         version: 1.2.1
@@ -119,8 +119,8 @@ importers:
   packages/rune-components:
     dependencies:
       '@svelte-thing/component-utils':
-        specifier: ^0.0.9
-        version: 0.0.9(svelte@5.19.6)
+        specifier: ^0.0.10
+        version: 0.0.10(svelte@5.19.6)
       '@svelte-thing/dom-event':
         specifier: ^0.0.5
         version: 0.0.5
@@ -686,10 +686,10 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@svelte-thing/component-utils@0.0.9':
-    resolution: {integrity: sha512-igZ9aNHeP0V16bKMC52WSgD4ftJ9qdKlreLLYXEctEtrBDQ42yrABp+RMOLB1aIlEAnu/fN7Z0A+Z9MhA8TWCg==}
+  '@svelte-thing/component-utils@0.0.10':
+    resolution: {integrity: sha512-gtVybuta5ds3ZN9Qz+M9fMp88cBPGndZqqKley3IOQPb4wz/VlNJuIsvintWGyNmwL2R6PNQvSzmg0VYIeHNkg==}
     peerDependencies:
-      svelte: ^5.0.0
+      svelte: ^5.19.0
 
   '@svelte-thing/dom-event@0.0.5':
     resolution: {integrity: sha512-e2dBoa6U8NJxUxnlmqvjJEH431BH32Obtjlxw/HPf1JwDRCr1YqmMEezJ4xvePelyIzViqvyQ7Xu68m+pzx/cg==}
@@ -3238,7 +3238,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.29.1':
     optional: true
 
-  '@svelte-thing/component-utils@0.0.9(svelte@5.19.6)':
+  '@svelte-thing/component-utils@0.0.10(svelte@5.19.6)':
     dependencies:
       esm-env: 1.2.1
       svelte: 5.19.6
