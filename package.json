@@ -74,10 +74,10 @@
 		}
 	},
 	"devDependencies": {
-		"@changesets/cli": "^2.26.2",
-		"eslint": "^9.17.0",
-		"prettier": "^3.1.0",
-		"wireit": "^0.10.0"
+		"@changesets/cli": "catalog:",
+		"eslint": "catalog:",
+		"prettier": "catalog:",
+		"wireit": "catalog:"
 	},
 	"type": "module"
 }
