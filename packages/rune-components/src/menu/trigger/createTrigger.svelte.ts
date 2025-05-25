@@ -6,18 +6,9 @@ export interface CreateTriggerConfig {
 }
 
 export function createTrigger({ root }: CreateTriggerConfig) {
-	let element = $state<HTMLButtonElement | null>(null);
 	return {
-		action(node) {
-			element = node;
-			root.button = node;
-			return {
-				destroy() {
-					root.button = null;
-					element = null;
-				},
-			};
-		},
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
+		action(_node) {},
 		props: {
 			'data-st-menu-trigger-button': '',
 			// @ts-expect-error not yet added to Svelte types
@@ -27,28 +18,20 @@ export function createTrigger({ root }: CreateTriggerConfig) {
 			type: 'button',
 			style: `anchor-name: --anchor-${root.ids.trigger};`,
 			onkeydown(event) {
-				const key = event.key;
+				const button = event.currentTarget;
+				// @ts-expect-error not yet added to TypeScript types
+				const popover = button.commandForElement as HTMLUListElement;
 
-				switch (key) {
-					case ' ':
+				switch (event.key) {
 					case 'ArrowDown':
 					case 'Down':
-						// @ts-expect-error not yet added to TypeScript types
-						element?.commandForElement.showPopover();
-						break;
-
-					case 'Esc':
-					case 'Escape':
-						// @ts-expect-error not yet added to TypeScript types
-						element?.commandForElement.hidePopover();
+						popover.showPopover();
 						break;
 
 					case 'Up':
 					case 'ArrowUp':
-						// @ts-expect-error not yet added to TypeScript types
-						element?.commandForElement.showPopover();
+						popover.showPopover();
 						root.setFocusToLastMenuitem();
-
 						break;
 
 					default:

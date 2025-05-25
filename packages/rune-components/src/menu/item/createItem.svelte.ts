@@ -8,91 +8,32 @@ export interface CreateItemConfig {
 
 export function createItem(config: CreateItemConfig) {
 	const { root } = config;
-	const key = uid();
-	let element = $state<HTMLLIElement | null>(null);
+	const id = uid();
 
 	return {
-		action(node) {
-			element = node;
-			root.itemKeys.add(key);
+		action(_node) {
+			root.itemKeys.add(id);
 
 			return {
 				destroy() {
-					root.itemKeys.delete(key);
+					root.itemKeys.delete(id);
 				},
 			};
 		},
 		props: {
 			'data-st-menu-item': true,
 			get ['data-active-item']() {
-				return root.activeKey === key;
+				return root.activeKey === id;
 			},
-			'data-key': key,
+			id: id,
 			role: 'menuitem',
-			get tabindex() {
-				return root.activeKey === key ? 0 : -1;
-			},
-			onclick() {
-				element?.closest<HTMLElement>('[role="menu"]')?.hidePopover();
-			},
-			onkeydown(event) {
-				const char = event.key;
-
-				if (event.ctrlKey || event.altKey || event.metaKey) {
-					return;
-				}
-
-				if (event.shiftKey && event.key === 'Tab') {
-					element
-						?.closest<HTMLElement>('[role="menu"]')
-						?.hidePopover();
-				} else {
-					switch (char) {
-						case ' ':
-						case 'Enter':
-						case 'Esc':
-						case 'Escape':
-							element
-								?.closest<HTMLElement>('[role="menu"]')
-								?.hidePopover();
-							root.button?.focus();
-							// debugger;
-							break;
-
-						case 'Up':
-						case 'ArrowUp':
-							root.setFocusToPreviousMenuitem();
-							break;
-
-						case 'ArrowDown':
-						case 'Down':
-							root.setFocusToNextMenuitem();
-							break;
-
-						case 'Home':
-						case 'PageUp':
-							root.setFocusToFirstMenuitem();
-							break;
-
-						case 'End':
-						case 'PageDown':
-							root.setFocusToLastMenuitem();
-							break;
-
-						case 'Tab':
-							element
-								?.closest<HTMLElement>('[role="menu"]')
-								?.hidePopover();
-							root.button?.focus();
-							break;
-
-						default:
-							break;
-					}
-				}
+			onclick(event) {
+				event.currentTarget
+					.closest<HTMLElement>('[popover]')
+					?.hidePopover();
 			},
 			onmouseover() {
-				root.activeKey = key;
+				root.activeKey = id;
 			},
 		},
 	} satisfies RuneComponent<'li'>;

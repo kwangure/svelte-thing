@@ -30,10 +30,4 @@
 			flip-block flip-inline;
 		z-index: 100000;
 	}
-	ul:popover-open {
-		border: 1px solid red !important;
-	}
-	ul:not(:popover-open) {
-		border: 1px solid blue !important;
-	}
 </style>

@@ -18,9 +18,3 @@
 <button {...mergeProps(trigger.props, restProps)} use:trigger.action>
 	{@render children?.()}
 </button>
-
-<style>
-	button:focus {
-		border: 3px solid red;
-	}
-</style>
