@@ -96,6 +96,11 @@
 			"types": "./dist/dialog/index.d.ts",
 			"svelte": "./dist/dialog/index.js",
 			"default": "./dist/dialog/index.js"
+		},
+		"./menu": {
+			"types": "./dist/menu/index.d.ts",
+			"svelte": "./dist/menu/index.js",
+			"default": "./dist/menu/index.js"
 		}
 	},
 	"files": [
