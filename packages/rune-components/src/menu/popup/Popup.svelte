@@ -17,17 +17,3 @@
 <ul {...mergeProps(popup.props, restProps)}>
 	{@render children?.()}
 </ul>
-
-<style>
-	ul {
-		position: absolute;
-		inset: auto;
-		left: anchor(left);
-		top: anchor(bottom);
-		position-try-fallbacks:
-			flip-block,
-			flip-inline,
-			flip-block flip-inline;
-		z-index: 100000;
-	}
-</style>
