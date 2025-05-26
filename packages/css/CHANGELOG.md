@@ -1,5 +1,11 @@
 # @svelte-thing/css
 
+## 0.0.6
+
+### Patch Changes
+
+- 3c17d38: Refine menu CSS
+
 ## 0.0.5
 
 ### Patch Changes

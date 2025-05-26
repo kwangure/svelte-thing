@@ -1,5 +1,11 @@
 # @svelte-thing/rune-components
 
+## 0.0.21
+
+### Patch Changes
+
+- 3c17d38: Refine menu CSS
+
 ## 0.0.20
 
 ### Patch Changes
