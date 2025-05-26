@@ -2,6 +2,7 @@
 	import '@svelte-thing/css/base';
 	import '@svelte-thing/css/combobox';
 	import '@svelte-thing/css/dialog';
+	import '@svelte-thing/css/menu';
 
 	import {
 		Darkmode,
@@ -65,6 +66,9 @@
 					Dialog
 				</Sidebar.Link>
 			</Sidebar.Item>
+			<Sidebar.Link href="/menu" aria-current={pathname === `/menu`}>
+				Menu
+			</Sidebar.Link>
 		</Sidebar.Section>
 	</Sidebar.Root>
 	<Shell.Main>

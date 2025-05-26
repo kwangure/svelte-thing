@@ -61,7 +61,7 @@
 				<Combobox.Label>Fruits</Combobox.Label>
 				<Combobox.Controls>
 					<Combobox.Input />
-					<Combobox.Button />
+					<Combobox.Trigger />
 				</Combobox.Controls>
 				{#if combobox.isOpen}
 					<Combobox.Listbox>

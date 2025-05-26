@@ -125,20 +125,20 @@
 		"!**/*.test.d.ts"
 	],
 	"dependencies": {
-		"@mdi/js": "^7.2.96",
-		"@svelte-thing/component-utils": "^0.0.10",
-		"esm-env": "^1.0.0",
-		"uid": "^2.0.2"
+		"@mdi/js": "catalog:",
+		"@svelte-thing/component-utils": "catalog:",
+		"esm-env": "catalog:",
+		"uid": "catalog:"
 	},
 	"peerDependencies": {
 		"svelte": "^5.19.0"
 	},
 	"devDependencies": {
-		"@sveltejs/package": "^2.3.5",
-		"publint": "^0.3.2",
-		"svelte": "^5.19.0",
-		"svelte-check": "^4.0.5",
-		"typescript": "^5.6.0"
+		"@sveltejs/package": "catalog:",
+		"publint": "catalog:",
+		"svelte": "catalog:",
+		"svelte-check": "catalog:",
+		"typescript": "catalog:"
 	},
 	"type": "module"
 }

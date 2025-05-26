@@ -2,12 +2,12 @@
 	"name": "config",
 	"private": true,
 	"dependencies": {
-		"eslint-config-prettier": "^9.1.0",
-		"eslint-plugin-svelte": "^2.46.1",
-		"globals": "^13.23.0",
-		"prettier-plugin-svelte": "^3.2.7",
-		"svelte": "^5.19.0",
-		"typescript-eslint": "^8.19.0"
+		"eslint-config-prettier": "catalog:",
+		"eslint-plugin-svelte": "catalog:",
+		"globals": "catalog:",
+		"prettier-plugin-svelte": "catalog:",
+		"svelte": "catalog:",
+		"typescript-eslint": "catalog:"
 	},
 	"type": "module"
 }

@@ -1,5 +1,5 @@
 @layer component {
-	[data-st-dialog-trigger-button] {
+	[data-st-menu-trigger-button] {
 		align-items: center;
 		justify-content: center;
 		--_background-color-dark: var(--st-color-preference-dark)
@@ -23,7 +23,7 @@
 			color 0.25s ease;
 	}
 
-	[data-st-dialog-trigger-button]:hover {
+	[data-st-menu-trigger-button]:hover {
 		--_background-color-dark: var(--st-color-preference-dark)
 			var(--st-color-neutral-700);
 		background-color: var(

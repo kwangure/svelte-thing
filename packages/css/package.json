@@ -37,10 +37,13 @@
 		},
 		"./combobox": {
 			"default": "./src/combobox/index.js"
+		},
+		"./menu": {
+			"default": "./src/menu/index.js"
 		}
 	},
 	"devDependencies": {
-		"publint": "^0.2.12"
+		"publint": "catalog:"
 	},
 	"type": "module"
 }

@@ -68,16 +68,16 @@
 		"!**/*.test.d.ts"
 	],
 	"dependencies": {
-		"esm-env": "^1.0.0"
+		"esm-env": "catalog:"
 	},
 	"peerDependencies": {
 		"svelte": "^5.19.0"
 	},
 	"devDependencies": {
-		"publint": "^0.3.2",
-		"svelte": "^5.19.0",
-		"typescript": "^5.6.0",
-		"vitest": "^3.0.4"
+		"publint": "catalog:",
+		"svelte": "catalog:",
+		"typescript": "catalog:",
+		"vitest": "catalog:"
 	},
 	"type": "module"
 }

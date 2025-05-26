@@ -1,0 +1,43 @@
+@layer component {
+	[data-st-menu-item] {
+		align-items: center;
+		border-radius: var(--st-size-1);
+		display: grid;
+		grid-column: 1 / -1;
+		grid-template-columns: subgrid;
+		gap: var(--st-size-3);
+		outline: none;
+		padding-block: var(--st-size-1);
+		padding-inline: var(--st-size-2);
+	}
+
+	[data-st-menu-item]:hover {
+		--_background-color-dark: var(--st-color-preference-dark)
+			var(--st-color-neutral-700);
+		background-color: var(
+			--_background-color-dark,
+			var(--st-color-neutral-200)
+		);
+	}
+
+	[data-st-menu-item][data-active-item='true'],
+	[data-st-menu-item]:focus {
+		--_background-color-dark: var(--st-color-preference-dark)
+			var(--st-color-blue-200);
+		background-color: var(
+			--_background-color-dark,
+			var(--st-color-blue-100)
+		);
+		--_color-dark: var(--st-color-preference-dark) var(--st-color-blue-700);
+		color: var(--_color-dark, var(--st-color-blue-600));
+	}
+
+	[data-st-menu-item][data-active-item='true']:hover {
+		--_background-color-dark: var(--st-color-preference-dark)
+			var(--st-color-blue-100);
+		background-color: var(
+			--_background-color-dark,
+			var(--st-color-blue-200)
+		);
+	}
+}
