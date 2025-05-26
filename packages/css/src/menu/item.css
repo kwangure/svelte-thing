@@ -20,8 +20,7 @@
 		);
 	}
 
-	[data-st-menu-item][data-active-item='true'],
-	[data-st-menu-item]:focus {
+	[data-st-menu-item][data-active-item='true'] {
 		--_background-color-dark: var(--st-color-preference-dark)
 			var(--st-color-blue-200);
 		background-color: var(
@@ -30,14 +29,5 @@
 		);
 		--_color-dark: var(--st-color-preference-dark) var(--st-color-blue-700);
 		color: var(--_color-dark, var(--st-color-blue-600));
-	}
-
-	[data-st-menu-item][data-active-item='true']:hover {
-		--_background-color-dark: var(--st-color-preference-dark)
-			var(--st-color-blue-100);
-		background-color: var(
-			--_background-color-dark,
-			var(--st-color-blue-200)
-		);
 	}
 }
