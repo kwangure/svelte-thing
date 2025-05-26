@@ -1,6 +1,6 @@
 {
 	"name": "workspace-site",
-	"version": "0.0.28",
+	"version": "0.0.29",
 	"private": true,
 	"scripts": {
 		"build": "wireit",
@@ -81,10 +81,10 @@
 	"dependencies": {
 		"@content-thing/memdb": "catalog:",
 		"@mdi/js": "catalog:",
-		"@svelte-thing/component-utils": "catalog:",
+		"@svelte-thing/component-utils": "^0.0.10",
 		"@svelte-thing/components": "workspace:^",
 		"@svelte-thing/css": "workspace:^",
-		"@svelte-thing/dom-event": "catalog:",
+		"@svelte-thing/dom-event": "^0.0.5",
 		"@svelte-thing/rune-components": "workspace:^"
 	},
 	"devDependencies": {

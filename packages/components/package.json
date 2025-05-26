@@ -126,7 +126,7 @@
 	],
 	"dependencies": {
 		"@mdi/js": "catalog:",
-		"@svelte-thing/component-utils": "catalog:",
+		"@svelte-thing/component-utils": "^0.0.10",
 		"esm-env": "catalog:",
 		"uid": "catalog:"
 	},

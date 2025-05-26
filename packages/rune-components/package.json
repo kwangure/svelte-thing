@@ -1,6 +1,6 @@
 {
 	"name": "@svelte-thing/rune-components",
-	"version": "0.0.19",
+	"version": "0.0.20",
 	"scripts": {
 		"build": "wireit",
 		"build:dev": "wireit",
@@ -110,8 +110,8 @@
 		"!**/*.test.d.ts"
 	],
 	"dependencies": {
-		"@svelte-thing/component-utils": "catalog:",
-		"@svelte-thing/dom-event": "catalog:",
+		"@svelte-thing/component-utils": "^0.0.10",
+		"@svelte-thing/dom-event": "^0.0.5",
 		"esm-env": "catalog:",
 		"uid": "catalog:"
 	},

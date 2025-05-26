@@ -15,12 +15,6 @@ catalogs:
     '@mdi/js':
       specifier: ^7.4.47
       version: 7.4.47
-    '@svelte-thing/component-utils':
-      specifier: ^0.0.10
-      version: 0.0.10
-    '@svelte-thing/dom-event':
-      specifier: ^0.0.5
-      version: 0.0.5
     '@sveltejs/adapter-auto':
       specifier: ^6.0.1
       version: 6.0.1
@@ -157,7 +151,7 @@ importers:
         specifier: 'catalog:'
         version: 7.4.47
       '@svelte-thing/component-utils':
-        specifier: 'catalog:'
+        specifier: ^0.0.10
         version: 0.0.10(svelte@5.33.2)
       esm-env:
         specifier: 'catalog:'
@@ -209,10 +203,10 @@ importers:
   packages/rune-components:
     dependencies:
       '@svelte-thing/component-utils':
-        specifier: 'catalog:'
+        specifier: ^0.0.10
         version: 0.0.10(svelte@5.33.2)
       '@svelte-thing/dom-event':
-        specifier: 'catalog:'
+        specifier: ^0.0.5
         version: 0.0.5
       esm-env:
         specifier: 'catalog:'
@@ -264,7 +258,7 @@ importers:
         specifier: 'catalog:'
         version: 7.4.47
       '@svelte-thing/component-utils':
-        specifier: 'catalog:'
+        specifier: ^0.0.10
         version: 0.0.10(svelte@5.33.2)
       '@svelte-thing/components':
         specifier: workspace:^
@@ -273,7 +267,7 @@ importers:
         specifier: workspace:^
         version: link:../../packages/css
       '@svelte-thing/dom-event':
-        specifier: 'catalog:'
+        specifier: ^0.0.5
         version: 0.0.5
       '@svelte-thing/rune-components':
         specifier: workspace:^
