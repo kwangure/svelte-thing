@@ -1,5 +1,11 @@
 # @svelte-thing/css
 
+## 0.0.7
+
+### Patch Changes
+
+- Fix dialog box shadow
+
 ## 0.0.6
 
 ### Patch Changes
