@@ -1,5 +1,11 @@
 # @svelte-thing/rune-components
 
+## 0.0.22
+
+### Patch Changes
+
+- Don't scroll on Arrow Key when menu is open.
+
 ## 0.0.21
 
 ### Patch Changes

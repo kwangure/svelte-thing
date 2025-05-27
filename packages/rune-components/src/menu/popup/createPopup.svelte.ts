@@ -1,5 +1,6 @@
 import type { RuneComponent } from '../../types';
 import type { TRoot } from '../root/createRoot.svelte';
+import { cancelEvent } from '@svelte-thing/dom-event';
 
 export interface CreatePopupConfig {
 	root: TRoot;
@@ -30,21 +31,25 @@ export function createPopup(config: CreatePopupConfig) {
 					case 'ArrowDown':
 					case 'Down':
 						root.setFocusToNextMenuitem();
+						cancelEvent(event);
 						break;
 
 					case 'Up':
 					case 'ArrowUp':
 						root.setFocusToPreviousMenuitem();
+						cancelEvent(event);
 						break;
 
 					case 'Home':
 					case 'PageUp':
 						root.setFocusToFirstMenuitem();
+						cancelEvent(event);
 						break;
 
 					case 'End':
 					case 'PageDown':
 						root.setFocusToLastMenuitem();
+						cancelEvent(event);
 						break;
 
 					default:
