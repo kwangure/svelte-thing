@@ -26,6 +26,7 @@
 			transition:
 				color 0.125s ease-in,
 				background-color 0.125s ease-in-out;
+			user-select: none;
 		}
 		button:hover {
 			--_background-color-dark: var(--st-color-preference-dark)
