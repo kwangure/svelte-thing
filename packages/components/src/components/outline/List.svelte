@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { TocEntry } from './types';
-	import Heading from './heading.svelte';
+	import Heading from './Heading.svelte';
 
 	interface Props {
 		activeTarget: string | undefined;

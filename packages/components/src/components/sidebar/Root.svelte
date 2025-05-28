@@ -3,7 +3,7 @@
 	import { createHide, getSidebarContext } from './sidebar.svelte.js';
 	import { focustrap } from '../../actions';
 	import { mdiClose } from '@mdi/js';
-	import Icon from '../icon/simple.svelte';
+	import Icon from '../icon/Simple.svelte';
 
 	interface Props {
 		children: Snippet;

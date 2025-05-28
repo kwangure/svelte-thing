@@ -4,10 +4,10 @@
 	// @ts-expect-error requires svelte-kit
 	import { afterNavigate } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import List from './list.svelte';
 	// @ts-expect-error requires svelte-kit
 	import { page } from '$app/stores';
 	import { on } from 'svelte/events';
+	import List from './List.svelte';
 
 	interface Props {
 		toc: TocEntry[];

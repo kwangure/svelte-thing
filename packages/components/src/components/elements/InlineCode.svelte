@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { HTMLAttributes } from 'svelte/elements';
-	import Token from '../token.svelte';
+	import Token from '../Token.svelte';
 
 	interface Props extends HTMLAttributes<HTMLElement> {
 		attributes?: Record<string, unknown>;

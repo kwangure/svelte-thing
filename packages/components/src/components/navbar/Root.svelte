@@ -5,7 +5,7 @@
 		getSidebarContext,
 	} from '../sidebar/sidebar.svelte.js';
 	import { mdiMenu } from '@mdi/js';
-	import Icon from '../icon/simple.svelte';
+	import Icon from '../icon/Simple.svelte';
 
 	interface Props {
 		showOpen?: boolean;
