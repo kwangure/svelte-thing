@@ -1,5 +1,11 @@
 # @svelte-thing/css
 
+## 0.0.8
+
+### Patch Changes
+
+- Update icon button border
+
 ## 0.0.7
 
 ### Patch Changes
