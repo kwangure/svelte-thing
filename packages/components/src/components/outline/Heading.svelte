@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { TocEntry } from './types';
 	import { Item } from '../sidebar/index.js';
-	import Link from './link.svelte';
-	import List from './list.svelte';
+	import Link from './Link.svelte';
+	import List from './List.svelte';
 
 	interface Props {
 		self: TocEntry;

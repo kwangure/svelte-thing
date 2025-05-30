@@ -1,23 +1,30 @@
 <script lang="ts">
-	import type { HTMLButtonAttributes } from 'svelte/elements';
-	import Icon from './simple.svelte';
+	import type { HTMLAnchorAttributes } from 'svelte/elements';
+	import Icon from './Simple.svelte';
 
-	interface Props extends HTMLButtonAttributes {
+	interface Props extends HTMLAnchorAttributes {
 		label: string;
 		path: string;
 	}
 
-	const { label, path, title, ...restProps }: Props = $props();
+	const {
+		label,
+		path,
+		target,
+		title,
+		rel = target === '_blank' ? 'noopener' : undefined,
+		...restProps
+	}: Props = $props();
 </script>
 
-<button {...restProps} title={title ?? label}>
+<a {...restProps} title={title ?? label} {target} {rel}>
 	<Icon {path} />
 	<span class="sr-only">{label}</span>
-</button>
+</a>
 
 <style>
 	@layer component {
-		button {
+		a {
 			align-items: center;
 			border-radius: var(--st-size-1);
 			display: flex;
@@ -27,7 +34,7 @@
 				color 0.125s ease-in,
 				background-color 0.125s ease-in-out;
 		}
-		button:hover {
+		a:hover {
 			--_background-color-dark: var(--st-color-preference-dark)
 				var(--st-color-neutral-700);
 			background-color: var(

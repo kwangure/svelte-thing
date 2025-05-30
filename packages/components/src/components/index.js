@@ -1,4 +1,4 @@
-export { default as Darkmode } from './darkmode.svelte';
+export { default as Darkmode } from './Darkmode.svelte';
 export * as Elements from './elements/index.js';
 export * as Form from './form/index.js';
 export * as Icon from './icon/index.js';
@@ -7,5 +7,5 @@ export * as Navbar from './navbar/index.js';
 export * as Outline from './outline/index.js';
 export * as Shell from './shell/index.js';
 export * as Sidebar from './sidebar/index.js';
-export { default as Textarea } from './textarea.svelte';
-export { default as Token } from './token.svelte';
+export { default as Textarea } from './Textarea.svelte';
+export { default as Token } from './Token.svelte';

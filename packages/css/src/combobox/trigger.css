@@ -1,5 +1,5 @@
 @layer component {
-	[data-st-dialog-trigger-button] {
+	[data-st-combobox-trigger-button] {
 		align-items: center;
 		justify-content: center;
 		--_background-color-dark: var(--st-color-preference-dark)
@@ -8,7 +8,7 @@
 			--_background-color-dark,
 			var(--st-color-neutral-100)
 		);
-		border-radius: var(--st-size-0_5);
+		border-radius: 0 var(--st-size-0_5) var(--st-size-0_5) 0;
 		--_border-color-dark: var(--st-color-preference-dark)
 			var(--st-color-neutral-500);
 		border: 1px solid var(--_border-color-dark, var(--st-color-neutral-300));
@@ -24,12 +24,14 @@
 			color 0.25s ease;
 	}
 
-	[data-st-dialog-trigger-button]:hover {
+	div:hover:has(> [data-st-combobox-trigger-button])
+		[data-st-combobox-trigger-button],
+	div:focus-within:has(> [data-st-combobox-trigger-button])
+		[data-st-combobox-button] {
+		--_color-dark: var(--st-color-preference-dark) inherit;
+		color: var(--_color-dark, hsl(225deg 100% 55%));
 		--_background-color-dark: var(--st-color-preference-dark)
-			var(--st-color-neutral-700);
-		background-color: var(
-			--_background-color-dark,
-			var(--st-color-neutral-200)
-		);
+			hsl(225deg 100% 60%);
+		background-color: var(--_background-color-dark, hsl(215deg 100% 90%));
 	}
 }

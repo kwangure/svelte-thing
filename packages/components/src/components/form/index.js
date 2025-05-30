@@ -1,2 +1,2 @@
-export { default as Fieldset } from './fieldset.svelte';
-export { default as Root } from './form.svelte';
+export { default as Fieldset } from './Fieldset.svelte';
+export { default as Root } from './Form.svelte';
