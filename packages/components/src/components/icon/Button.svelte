@@ -19,14 +19,22 @@
 	@layer component {
 		button {
 			align-items: center;
-			border-radius: var(--st-size-1);
-			display: flex;
 			justify-content: center;
+			--_background-color-dark: var(--st-color-preference-dark)
+				var(--st-color-neutral-800);
+			background-color: var(
+				--_background-color-dark,
+				var(--st-color-neutral-100)
+			);
+			border: 1px solid var(--st-border-color-0);
+			color: inherit;
+			display: inline-flex;
 			padding: var(--st-size-2);
-			transition:
-				color 0.125s ease-in,
-				background-color 0.125s ease-in-out;
+			border-radius: var(--st-size-1);
 			user-select: none;
+			transition:
+				background-color 0.25s ease,
+				color 0.25s ease;
 		}
 		button:hover {
 			--_background-color-dark: var(--st-color-preference-dark)

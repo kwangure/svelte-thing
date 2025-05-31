@@ -1,28 +1,109 @@
 @layer base {
 	:where(:root) {
 		--st-color-black: rgb(0 0 0);
-		--st-color-blue-50: #eff6ff;
-		--st-color-blue-100: #dbeafe;
-		--st-color-blue-200: #bfdbfe;
-		--st-color-blue-300: #93c5fd;
-		--st-color-blue-400: #60a5fa;
-		--st-color-blue-500: #3b82f6;
-		--st-color-blue-600: #2563eb;
-		--st-color-blue-700: #1d4ed8;
-		--st-color-blue-800: #1e40af;
-		--st-color-blue-900: #1e3a8a;
-		--st-color-blue-950: #172554;
-		--st-color-neutral-50: #fafafa;
-		--st-color-neutral-100: #f5f5f5;
-		--st-color-neutral-200: #e5e5e5;
-		--st-color-neutral-300: #d4d4d4;
-		--st-color-neutral-400: #a3a3a3;
-		--st-color-neutral-500: #737373;
-		--st-color-neutral-600: #525252;
-		--st-color-neutral-700: #404040;
-		--st-color-neutral-800: #262626;
-		--st-color-neutral-900: #171717;
-		--st-color-neutral-950: #0a0a0a;
 		--st-color-white: rgb(255 255 255);
+
+		/* Tailwind Slate */
+		--st-color-neutral-50: oklch(98.4% 0.003 247.858);
+		--st-color-neutral-100: oklch(96.8% 0.007 247.896);
+		--st-color-neutral-200: oklch(92.9% 0.013 255.508);
+		--st-color-neutral-300: oklch(86.9% 0.022 252.894);
+		--st-color-neutral-400: oklch(70.4% 0.04 256.788);
+		--st-color-neutral-500: oklch(55.4% 0.046 257.417);
+		--st-color-neutral-600: oklch(44.6% 0.043 257.281);
+		--st-color-neutral-700: oklch(37.2% 0.044 257.287);
+		--st-color-neutral-800: oklch(27.9% 0.041 260.031);
+		--st-color-neutral-900: oklch(20.8% 0.042 265.755);
+		--st-color-neutral-950: oklch(12.9% 0.042 264.695);
+
+		/* Tailwind Blue */
+		--st-color-primary-50: oklch(97% 0.014 254.604);
+		--st-color-primary-100: oklch(93.2% 0.032 255.585);
+		--st-color-primary-200: oklch(88.2% 0.059 254.128);
+		--st-color-primary-300: oklch(80.9% 0.105 251.813);
+		--st-color-primary-400: oklch(70.7% 0.165 254.624);
+		--st-color-primary-500: oklch(62.3% 0.214 259.815);
+		--st-color-primary-600: oklch(54.6% 0.245 262.881);
+		--st-color-primary-700: oklch(48.8% 0.243 264.376);
+		--st-color-primary-800: oklch(42.4% 0.199 265.638);
+		--st-color-primary-900: oklch(37.9% 0.146 265.522);
+		--st-color-primary-950: oklch(28.2% 0.091 267.935);
+
+		/* Tailwind Purple */
+		--st-color-1-50: oklch(97.7% 0.014 308.299);
+		--st-color-1-100: oklch(94.6% 0.033 307.174);
+		--st-color-1-200: oklch(90.2% 0.063 306.703);
+		--st-color-1-300: oklch(82.7% 0.119 306.383);
+		--st-color-1-400: oklch(71.4% 0.203 305.504);
+		--st-color-1-500: oklch(62.7% 0.265 303.9);
+		--st-color-1-600: oklch(55.8% 0.288 302.321);
+		--st-color-1-700: oklch(49.6% 0.265 301.924);
+		--st-color-1-800: oklch(43.8% 0.218 303.724);
+		--st-color-1-900: oklch(38.1% 0.176 304.987);
+		--st-color-1-950: oklch(29.1% 0.149 302.717);
+
+		/* Tailwind Rose */
+		--st-color-2-50: oklch(96.9% 0.015 12.422);
+		--st-color-2-100: oklch(94.1% 0.03 12.58);
+		--st-color-2-200: oklch(89.2% 0.058 10.001);
+		--st-color-2-300: oklch(81% 0.117 11.638);
+		--st-color-2-400: oklch(71.2% 0.194 13.428);
+		--st-color-2-500: oklch(64.5% 0.246 16.439);
+		--st-color-2-600: oklch(58.6% 0.253 17.585);
+		--st-color-2-700: oklch(51.4% 0.222 16.935);
+		--st-color-2-800: oklch(45.5% 0.188 13.697);
+		--st-color-2-900: oklch(41% 0.159 10.272);
+		--st-color-2-950: oklch(27.1% 0.105 12.094);
+
+		--_surface-color-0-dark: var(--st-color-preference-dark)
+			var(--st-color-neutral-950);
+		--st-surface-color-0: var(
+			--_surface-color-0-dark,
+			var(--st-color-neutral-100)
+		);
+		--_surface-color-1-dark: var(--st-color-preference-dark)
+			var(--st-color-neutral-900);
+		--st-surface-color-1: var(
+			--_surface-color-1-dark,
+			var(--st-color-neutral-200)
+		);
+		--_surface-color-2-dark: var(--st-color-preference-dark)
+			var(--st-color-neutral-800);
+		--st-surface-color-2: var(
+			--_surface-color-2-dark,
+			var(--st-color-neutral-300)
+		);
+
+		--_font-color-0-dark: var(--st-color-preference-dark)
+			var(--st-color-neutral-100);
+		--st-font-color-0: var(
+			--_font-color-0-dark,
+			var(--st-color-neutral-950)
+		);
+		--_font-color-1-dark: var(--st-color-preference-dark)
+			var(--st-color-neutral-200);
+		--st-font-color-1: var(
+			--_font-color-1-dark,
+			var(--st-color-neutral-900)
+		);
+		--_font-color-2-dark: var(--st-color-preference-dark)
+			var(--st-color-neutral-300);
+		--st-font-color-2: var(
+			--_font-color-2-dark,
+			var(--st-color-neutral-800)
+		);
+
+		--_border-color-0-dark: var(--st-color-preference-dark)
+			oklch(0.29 0.03 267.27);
+		--st-border-color-0: var(
+			--_border-color-0-dark,
+			oklch(0.83 0.02 268.29)
+		);
+		--_border-color-1-dark: var(--st-color-preference-dark)
+			oklch(0.37 0.05 266.59);
+		--st-border-color-1: var(
+			--_border-color-1-dark,
+			oklch(0.75 0.05 267.67)
+		);
 	}
 }

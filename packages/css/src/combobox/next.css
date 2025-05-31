@@ -1,4 +1,24 @@
 @layer component {
+	[data-st-combobox-next-button] {
+		align-items: center;
+		justify-content: center;
+		--_background-color-dark: var(--st-color-preference-dark)
+			var(--st-color-neutral-800);
+		background-color: var(
+			--_background-color-dark,
+			var(--st-color-neutral-100)
+		);
+		border: 1px solid var(--st-border-color-0);
+		color: inherit;
+		display: inline-flex;
+		border-radius: var(--st-size-1);
+		height: var(--st-size-8);
+		width: var(--st-size-8);
+		user-select: none;
+		transition:
+			background-color 0.25s ease,
+			color 0.25s ease;
+	}
 	div:hover:has(> [data-st-combobox-next-button])
 		[data-st-combobox-next-button],
 	div:focus-within:has(> [data-st-combobox-next-button])
@@ -8,19 +28,5 @@
 		--_background-color-dark: var(--st-color-preference-dark)
 			hsl(225deg 100% 60%);
 		background-color: var(--_background-color-dark, hsl(215deg 100% 90%));
-		transition:
-			background-color 0.25s ease,
-			color 0.25s ease;
-	}
-	[data-st-combobox-next-button] {
-		align-items: center;
-		justify-content: center;
-		background-color: transparent;
-		color: inherit;
-		display: flex;
-		height: var(--st-size-8);
-		width: var(--st-size-8);
-		border-radius: 0 var(--st-size-0_5) var(--st-size-0_5) 0;
-		user-select: none;
 	}
 }

@@ -9,9 +9,7 @@
 			var(--st-color-neutral-100)
 		);
 		border-radius: var(--st-size-0_5);
-		--_border-color-dark: var(--st-color-preference-dark)
-			var(--st-color-neutral-500);
-		border: 1px solid var(--_border-color-dark, var(--st-color-neutral-300));
+		border: 1px solid var(--st-border-color-0);
 		color: inherit;
 		display: inline-flex;
 		padding: 0 var(--st-size-4);

@@ -36,7 +36,7 @@
 <div class="wrapper">
 	<Dialog.Root>
 		<Dialog.Trigger>Open Dialog</Dialog.Trigger>
-		<Dialog.Popup>
+		<Dialog.ModalPopup>
 			<Combobox.Root {options} optionToString={(option) => option.title}>
 				{#snippet children(combobox)}
 					<div class="input">
@@ -86,7 +86,7 @@
 					{/if}
 				{/snippet}
 			</Combobox.Root>
-		</Dialog.Popup>
+		</Dialog.ModalPopup>
 	</Dialog.Root>
 </div>
 

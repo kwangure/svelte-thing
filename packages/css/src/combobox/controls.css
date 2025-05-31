@@ -1,8 +1,6 @@
 @layer component {
 	[data-st-combobox-controls] {
-		--_border-color-dark: var(--st-color-preference-dark)
-			var(--st-color-neutral-600);
-		border: 1px solid var(--_border-color-dark, var(--st-color-neutral-300));
+		border: 1px solid var(--st-border-color-0);
 		border-radius: var(--st-size-1);
 		display: flex;
 		transition:
