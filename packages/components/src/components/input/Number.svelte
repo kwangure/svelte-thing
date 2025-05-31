@@ -13,8 +13,7 @@
 <style>
 	@layer component {
 		input {
-			--_border-color-dark: var(--st-color-preference-dark) #474b50;
-			border: 1px solid var(--_border-color-dark, #c3c3c3);
+			border: 1px solid var(--st-border-color-0);
 			border-radius: var(--st-size-1);
 			outline: 0;
 			padding-block: var(--st-size-1);

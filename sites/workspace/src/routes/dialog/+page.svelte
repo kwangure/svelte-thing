@@ -53,7 +53,7 @@
 		color: inherit;
 		text-decoration: none;
 		transition: all 0.2s ease;
-		border: 1px solid #e2e8f0;
+		border: 1px solid var(--st-border-color-0);
 	}
 
 	.example-card:hover {

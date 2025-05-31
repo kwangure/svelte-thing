@@ -5,17 +5,8 @@
 	}
 
 	body {
-		--_background-color: white;
-		--_background-color-dark: var(--st-color-preference-dark)
-			var(--st-color-neutral-800);
-		background-color: var(
-			--_background-color-dark,
-			var(--_background-color)
-		);
-		--_color: var(--st-color-neutral-700);
-		--_color-dark: var(--st-color-preference-dark)
-			var(--st-color-neutral-200);
-		color: var(--_color-dark, var(--_color));
+		background-color: var(--st-surface-color-0);
+		color: var(--st-font-color-0);
 		font-family: Arial, Helvetica, sans-serif;
 		transition:
 			background-color 0.3s ease,
