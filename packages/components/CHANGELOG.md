@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.48
+
+### Patch Changes
+
+- b29ca57: Refine CSS theme
+
 ## 0.0.47
 
 ### Patch Changes
