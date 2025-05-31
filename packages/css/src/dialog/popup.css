@@ -10,8 +10,7 @@
 		animation: var(--st-motion-no-preference) slide-out-down 0.5s
 			cubic-bezier(0.25, 0, 0.3, 1) forwards;
 		animation-timing-function: cubic-bezier(0.5, -0.5, 0.1, 1.5);
-		--_background-color-dark: var(--st-color-preference-dark) #222;
-		background-color: var(--_background-color-dark, #fff);
+		background-color: var(--st-surface-color-0);
 		border: 1px solid transparent;
 		border-block-start: var(--st-color-preference-dark) 1px solid #394047;
 		border-radius: var(--st-size-1);

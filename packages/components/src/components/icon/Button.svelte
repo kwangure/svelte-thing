@@ -20,12 +20,7 @@
 		button {
 			align-items: center;
 			justify-content: center;
-			--_background-color-dark: var(--st-color-preference-dark)
-				var(--st-color-neutral-800);
-			background-color: var(
-				--_background-color-dark,
-				var(--st-color-neutral-100)
-			);
+			background-color: var(--st-surface-color-1);
 			border: 1px solid var(--st-border-color-0);
 			color: inherit;
 			display: inline-flex;
@@ -37,11 +32,11 @@
 				color 0.25s ease;
 		}
 		button:hover {
-			--_background-color-dark: var(--st-color-preference-dark)
-				var(--st-color-neutral-700);
-			background-color: var(
-				--_background-color-dark,
-				var(--st-color-neutral-200)
+			--background-color-mix: var(--st-color-preference-dark) white;
+			background-color: color-mix(
+				in lch,
+				var(--st-surface-color-1) 80%,
+				var(--background-color-mix, rgba(0, 0, 0, 0.1))
 			);
 		}
 	}
