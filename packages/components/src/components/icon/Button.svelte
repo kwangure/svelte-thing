@@ -10,7 +10,7 @@
 	const { label, path, title, ...restProps }: Props = $props();
 </script>
 
-<button {...restProps} title={title ?? label}>
+<button data-st-icon-button {...restProps} title={title ?? label}>
 	<Icon {path} />
 	<span class="sr-only">{label}</span>
 </button>
@@ -32,7 +32,8 @@
 				color 0.25s ease;
 		}
 		button:hover {
-			--background-color-mix: var(--st-color-preference-dark) white;
+			--background-color-mix: var(--st-color-preference-dark)
+				rgba(255, 255, 255, 0.5);
 			background-color: color-mix(
 				in lch,
 				var(--st-surface-color-1) 80%,
