@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.50
+
+### Patch Changes
+
+- c83ece2: Improve button hover background
+
 ## 0.0.49
 
 ### Patch Changes
