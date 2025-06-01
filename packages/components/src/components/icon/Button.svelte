@@ -36,7 +36,7 @@
 			background-color: color-mix(
 				in lch,
 				var(--st-surface-color-1) 80%,
-				var(--background-color-mix, rgba(0, 0, 0, 0.1))
+				var(--background-color-mix, rgba(0, 0, 0, 0.25))
 			);
 		}
 	}
