@@ -1,5 +1,11 @@
 # @svelte-thing/css
 
+## 0.0.12
+
+### Patch Changes
+
+- ca54fa1: Share common trigger styles
+
 ## 0.0.11
 
 ### Patch Changes

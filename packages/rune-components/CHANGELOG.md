@@ -1,5 +1,11 @@
 # @svelte-thing/rune-components
 
+## 0.0.23
+
+### Patch Changes
+
+- ca54fa1: Share common trigger styles
+
 ## 0.0.22
 
 ### Patch Changes

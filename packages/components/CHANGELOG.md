@@ -1,5 +1,12 @@
 # @svelte-thing/components
 
+## 0.0.51
+
+### Patch Changes
+
+- ca54fa1: Update <Icon.Link/> styles to match <Icon.Button/>
+- ca54fa1: Share common trigger styles
+
 ## 0.0.50
 
 ### Patch Changes
