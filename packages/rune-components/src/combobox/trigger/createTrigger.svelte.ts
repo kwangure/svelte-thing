@@ -13,6 +13,7 @@ export function createTrigger<TValue>(config: CreateTriggerConfig<TValue>) {
 	return {
 		props: {
 			'data-st-combobox-trigger-button': '',
+			'data-st-trigger-button': '',
 			get ['aria-controls']() {
 				return root.ids.listbox;
 			},

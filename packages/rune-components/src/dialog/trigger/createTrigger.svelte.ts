@@ -13,6 +13,7 @@ export function createTrigger(config: CreateTriggerConfig) {
 	return {
 		props: {
 			'data-st-dialog-trigger-button': '',
+			'data-st-trigger-button': '',
 			get ['aria-controls']() {
 				return root.ids.popup;
 			},

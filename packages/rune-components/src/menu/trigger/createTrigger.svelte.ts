@@ -11,6 +11,7 @@ export function createTrigger({ root }: CreateTriggerConfig) {
 		action(_node) {},
 		props: {
 			'data-st-menu-trigger-button': '',
+			'data-st-trigger-button': '',
 			// @ts-expect-error not yet added to Svelte types
 			commandfor: root.ids.popup,
 			command: 'toggle-popover',

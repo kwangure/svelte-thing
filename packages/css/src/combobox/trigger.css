@@ -1,36 +1,12 @@
 @layer component {
-	[data-st-combobox-trigger-button] {
-		align-items: center;
-		justify-content: center;
-		--_background-color-dark: var(--st-color-preference-dark)
-			var(--st-color-neutral-800);
-		background-color: var(
-			--_background-color-dark,
-			var(--st-color-neutral-100)
+	[data-st-combobox-controls]:hover [data-st-combobox-trigger-button],
+	[data-st-combobox-controls]:focus-within [data-st-combobox-trigger-button] {
+		--background-color-mix: var(--st-color-preference-dark)
+			rgba(255, 255, 255, 0.5);
+		background-color: color-mix(
+			in lch,
+			var(--st-surface-color-1) 80%,
+			var(--background-color-mix, rgba(0, 0, 0, 0.25))
 		);
-		--_border-color-dark: var(--st-color-preference-dark)
-			var(--st-color-neutral-500);
-		border: 1px solid var(--_border-color-dark, var(--st-color-neutral-300));
-		color: inherit;
-		display: inline-flex;
-		padding: 0 var(--st-size-4);
-		border-radius: var(--st-size-1);
-		gap: var(--st-size-1_5);
-		height: var(--st-size-10);
-		user-select: none;
-		transition:
-			background-color 0.25s ease,
-			color 0.25s ease;
-	}
-
-	div:hover:has(> [data-st-combobox-trigger-button])
-		[data-st-combobox-trigger-button],
-	div:focus-within:has(> [data-st-combobox-trigger-button])
-		[data-st-combobox-button] {
-		--_color-dark: var(--st-color-preference-dark) inherit;
-		color: var(--_color-dark, hsl(225deg 100% 55%));
-		--_background-color-dark: var(--st-color-preference-dark)
-			hsl(225deg 100% 60%);
-		background-color: var(--_background-color-dark, hsl(215deg 100% 90%));
 	}
 }
