@@ -6,6 +6,8 @@ export interface CreatePopupConfig {
 	root: TRoot;
 }
 
+export type TPopup = ReturnType<typeof createPopup>;
+
 export function createPopup(config: CreatePopupConfig) {
 	const { root } = config;
 	return {

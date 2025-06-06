@@ -6,6 +6,8 @@ export interface CreateItemConfig {
 	root: TRoot;
 }
 
+export type TItem = ReturnType<typeof createItem>;
+
 export function createItem(config: CreateItemConfig) {
 	const { root } = config;
 	const id = uid();

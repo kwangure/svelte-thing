@@ -5,6 +5,8 @@ export interface CreateTriggerConfig {
 	root: TRoot;
 }
 
+export type TTrigger = ReturnType<typeof createTrigger>;
+
 export function createTrigger({ root }: CreateTriggerConfig) {
 	return {
 		// eslint-disable-next-line @typescript-eslint/no-empty-function

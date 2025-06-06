@@ -1,5 +1,11 @@
 # @svelte-thing/rune-components
 
+## 0.0.24
+
+### Patch Changes
+
+- Export Menu create factories
+
 ## 0.0.23
 
 ### Patch Changes
