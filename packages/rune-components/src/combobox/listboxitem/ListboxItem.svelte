@@ -15,10 +15,15 @@
 	interface Props extends Omit<HTMLLiAttributes, 'children'> {
 		children?: Snippet<[TListboxItem]>;
 		item: Option<unknown>;
+		root?: TRoot;
 	}
 
-	const { children, item, ...restProps }: Props = $props();
-	const root = getRootContext<TRoot<unknown>>();
+	const {
+		children,
+		item,
+		root = getRootContext(),
+		...restProps
+	}: Props = $props();
 	const listboxItem = createListboxItem({
 		root,
 		get item() {

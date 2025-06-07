@@ -9,9 +9,11 @@
 	import { getRootContext } from '../context.js';
 	import { mergeProps } from '@svelte-thing/component-utils/svelte';
 
-	const { children, ...restProps }: HTMLAttributes<HTMLUListElement> =
-		$props();
-	const root = getRootContext<TRoot<unknown>>();
+	interface Props extends HTMLAttributes<HTMLUListElement> {
+		root?: TRoot;
+	}
+
+	const { children, root = getRootContext(), ...restProps }: Props = $props();
 	const listbox = createListbox({
 		root,
 	} satisfies NullablyRequired<CreateListboxConfig<unknown>>);

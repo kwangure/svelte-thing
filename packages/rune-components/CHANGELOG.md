@@ -1,5 +1,11 @@
 # @svelte-thing/rune-components
 
+## 0.0.25
+
+### Patch Changes
+
+- Allow `root` configuration in components
+
 ## 0.0.24
 
 ### Patch Changes

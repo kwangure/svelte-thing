@@ -2,12 +2,16 @@
 	import type { CreateItemConfig } from './createItem.svelte.js';
 	import type { HTMLLiAttributes } from 'svelte/elements';
 	import type { NullablyRequired } from '../../types.js';
+	import type { TRoot } from '../root/createRoot.svelte.js';
 	import { mergeProps } from '@svelte-thing/component-utils/svelte';
 	import { createItem } from './createItem.svelte.js';
 	import { getRootContext } from '../context.js';
 
-	const { children, ...restProps }: HTMLLiAttributes = $props();
-	const root = getRootContext();
+	interface Props extends HTMLLiAttributes {
+		root?: TRoot;
+	}
+
+	const { children, root = getRootContext(), ...restProps }: Props = $props();
 	const item = createItem({
 		root,
 	} satisfies NullablyRequired<CreateItemConfig>);

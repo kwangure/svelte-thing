@@ -6,8 +6,11 @@
 	import { getRootContext } from '../context.js';
 	import { mergeProps } from '@svelte-thing/component-utils/svelte';
 
-	const { ...restProps }: HTMLButtonAttributes = $props();
-	const root = getRootContext<TRoot<unknown>>();
+	interface Props extends HTMLButtonAttributes {
+		root?: TRoot;
+	}
+
+	const { root = getRootContext(), ...restProps }: Props = $props();
 	const next = createNext({ root } satisfies NullablyRequired<
 		CreateNextConfig<unknown>
 	>);

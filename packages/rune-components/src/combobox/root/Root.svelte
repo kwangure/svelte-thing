@@ -4,7 +4,7 @@
 	type DivAttributes = Omit<HTMLAttributes<HTMLDivElement>, 'children'>;
 
 	interface Props<TValue> extends CreateRootConfig<TValue>, DivAttributes {
-		children: Snippet<[TRoot<TValue>]>;
+		children: Snippet<[TRoot]>;
 	}
 </script>
 

@@ -9,11 +9,14 @@
 	import { getRootContext } from '../context.js';
 	import { mergeProps } from '@svelte-thing/component-utils/svelte';
 
-	const props: HTMLInputAttributes = $props();
-	const root = getRootContext<TRoot<unknown>>();
+	interface Props extends HTMLInputAttributes {
+		root?: TRoot;
+	}
+
+	const { root = getRootContext(), ...restProps }: Props = $props();
 	const input = createInput({ root } satisfies NullablyRequired<
 		CreateInputConfig<unknown>
 	>);
 </script>
 
-<input {...mergeProps(input.props, props)} use:input.action />
+<input {...mergeProps(input.props, restProps)} use:input.action />

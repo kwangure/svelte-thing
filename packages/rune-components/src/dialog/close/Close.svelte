@@ -9,8 +9,11 @@
 	import { getRootContext } from '../context.js';
 	import { mergeProps } from '@svelte-thing/component-utils/svelte';
 
-	const { children, ...restProps }: HTMLButtonAttributes = $props();
-	const root = getRootContext<TRoot>();
+	interface Props extends HTMLButtonAttributes {
+		root?: TRoot;
+	}
+
+	const { children, root = getRootContext(), ...restProps }: Props = $props();
 	const close = createClose({
 		root,
 	} satisfies NullablyRequired<CreateCloseConfig>);

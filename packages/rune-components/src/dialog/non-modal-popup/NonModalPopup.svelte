@@ -9,8 +9,11 @@
 	import { getRootContext } from '../context.js';
 	import { mergeProps } from '@svelte-thing/component-utils/svelte';
 
-	const { children, ...restProps }: HTMLDialogAttributes = $props();
-	const root = getRootContext<TRoot>();
+	interface Props extends HTMLDialogAttributes {
+		root?: TRoot;
+	}
+
+	const { children, root = getRootContext(), ...restProps }: Props = $props();
 	const popup = createNonModalPopup({
 		root,
 	} satisfies NullablyRequired<CreateNonModalPopupConfig>);

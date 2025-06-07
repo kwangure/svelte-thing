@@ -9,8 +9,11 @@
 	import { getRootContext } from '../context.js';
 	import { mergeProps } from '@svelte-thing/component-utils/svelte';
 
-	const { children, ...restProps }: HTMLLabelAttributes = $props();
-	const root = getRootContext<TRoot<unknown>>();
+	interface Props extends HTMLLabelAttributes {
+		root?: TRoot;
+	}
+
+	const { children, root = getRootContext(), ...restProps }: Props = $props();
 	const label = createLabel({ root } satisfies NullablyRequired<
 		CreateLabelConfig<unknown>
 	>);
