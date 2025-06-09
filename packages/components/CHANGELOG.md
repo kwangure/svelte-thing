@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.52
+
+### Patch Changes
+
+- Add line-height to list items
+
 ## 0.0.51
 
 ### Patch Changes

@@ -5,3 +5,11 @@
 </script>
 
 <li {...restProps}>{@render children?.()}</li>
+
+<style>
+	@layer component {
+		li {
+			line-height: var(--st-size-7);
+		}
+	}
+</style>

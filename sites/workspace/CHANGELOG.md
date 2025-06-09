@@ -1,5 +1,12 @@
 # workspace-site
 
+## 0.0.41
+
+### Patch Changes
+
+- Updated dependencies
+    - @svelte-thing/components@0.0.52
+
 ## 0.0.40
 
 ### Patch Changes
