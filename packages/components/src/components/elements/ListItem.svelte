@@ -9,7 +9,7 @@
 <style>
 	@layer component {
 		li {
-			line-height: var(--st-size-7);
+			line-height: 2;
 		}
 	}
 </style>

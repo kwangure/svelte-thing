@@ -1,6 +1,6 @@
 {
 	"name": "workspace-site",
-	"version": "0.0.41",
+	"version": "0.0.42",
 	"private": true,
 	"scripts": {
 		"build": "wireit",

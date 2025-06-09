@@ -1,5 +1,11 @@
 # @svelte-thing/components
 
+## 0.0.53
+
+### Patch Changes
+
+- Change line-height for prose
+
 ## 0.0.52
 
 ### Patch Changes
